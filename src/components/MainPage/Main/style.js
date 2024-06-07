@@ -16,6 +16,7 @@ export const mainTitle = css`
     font-size: 44px;
     font-weight: 700;
     text-align: center;
+    cursor: default;
 `;
 
 export const searchBox = css`
@@ -43,7 +44,6 @@ export const bannerBox = css`
     height: 500px;
     margin-top: 64px;
     border-radius: 15px;
-    /* background-color: black; */
     overflow: hidden;
 `;
 
@@ -78,11 +78,166 @@ export const bannerTitle = css`
     position: absolute;
     display: flex;
     align-items: center;
+    cursor: default;
+
     & > h1 {
         font-size: 40px;
         font-weight: 600;
         color: white;
         padding-left: 50px;
         padding-top: 50px;
+    }
+`;
+
+export const togetherLayout = css`
+    width: 1136px;
+    height: 250px;
+    overflow: scroll;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    display: flex;
+    flex-direction: column;
+`;
+
+export const togetherBox = css`
+    box-sizing: border-box;
+    border: 1px solid #dbdbdb;
+    border-radius: 15px;
+    width: 300px;
+    height: 250px;
+    overflow: hidden;
+`;
+
+export const togetherImg = css`
+    width: 100%;
+    height: 50%;
+`;
+
+export const newPostTitle = css`
+    margin-top: 64px;
+`;
+
+export const postLayout = css`
+    width: 1136px;
+    height: 300px;
+`;
+
+export const postBox = css`
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    border: 1px solid #dbdbdb;
+`;
+
+export const postHeader = css`
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+export const category = css`
+    width: auto;
+    height: auto;
+    margin-right: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: rgb(154, 154, 154);
+    background-color: rgb(248, 248, 248);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const profileBox = css`
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+`;
+
+export const profileImg = css`
+    box-sizing: border-box;
+    width: 43px;
+    height: 43px;
+    overflow: hidden;
+    border-radius: 50px;
+    border: 1px solid #dbdbdb;
+    margin-left: 10px;
+`;
+
+export const infoBox = css`
+    width: 100px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding-left: 10px;
+`;
+
+export const nickname = css`
+    font-size: 14px;
+    font-weight: 700;
+    color: #252525;
+`;
+
+export const time = css`
+    font-size: 13px;
+    color: #6a6a6a6a;
+`;
+
+export const postMain = css`
+    box-sizing: border-box;
+    width: 100%;
+    height: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+`;
+
+export const content = css`
+    width: 60%;
+    height: 90%;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const postImg = css`
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+`;
+export const postFooter = css`
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        font-size: 15px;
+        color: #919191;
+    }
+
+    & > div:nth-of-type(2) {
+        box-sizing: border-box;
+        border-right: 1px solid #dbdbdb;
+        border-left: 1px solid #dbdbdb;
     }
 `;
