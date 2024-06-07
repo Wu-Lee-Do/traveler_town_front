@@ -67,7 +67,16 @@ function Main() {
             </div>
             <div css={s.newPostTitle}>
                 <h1>최신 여행 동행</h1>
-                <div></div>
+            </div>
+            <div css={s.togetherLayout}>
+                <div css={s.viewBox}>
+                    <div css={s.togetherBox}>1</div>
+                    <div css={s.togetherBox}>2</div>
+                    <div css={s.togetherBox}>3</div>
+                    <div css={s.togetherBox}></div>
+                    <div css={s.togetherBox}></div>
+                    <div css={s.togetherBox}></div>
+                </div>
             </div>
             <div css={s.newPostTitle}>
                 <h1>최신 여행 포스트</h1>

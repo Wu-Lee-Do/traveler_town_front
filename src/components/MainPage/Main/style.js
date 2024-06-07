@@ -90,6 +90,27 @@ export const bannerTitle = css`
     }
 `;
 
+export const togetherLayout = css`
+    width: 1136px;
+    height: 250px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const viewBox = css`
+    width: 1920px;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+`;
+
+export const togetherBox = css`
+    width: 300px;
+    height: 250px;
+    background-color: gray;
+`;
+
 export const newPostTitle = css`
     margin-top: 64px;
 `;
