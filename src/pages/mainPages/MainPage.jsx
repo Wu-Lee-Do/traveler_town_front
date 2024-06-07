@@ -1,12 +1,12 @@
-import React from "react";
 import PageLayout from "../../components/PageLayout/PageLayout";
 import Header from "../../components/MainPage/Header/Header";
+import Main from "../../components/MainPage/Main/Main";
 
 function MainPage() {
     return (
         <PageLayout>
             <Header />
-            <div>메인페이지 입니다.</div>
+            <Main />
         </PageLayout>
     );
 }
