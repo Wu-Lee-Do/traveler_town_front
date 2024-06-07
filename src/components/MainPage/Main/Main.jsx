@@ -9,8 +9,9 @@ import banner2 from "../../../assets/banner2.jpg";
 import banner3 from "../../../assets/banner3.jpeg";
 import defaultImg from "../../../assets/defaultImg.webp";
 import usa from "../../../assets/usa.webp";
+import swiss from "../../../assets/스위스.jpeg";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination, Navigation, FreeMode } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -69,14 +70,40 @@ function Main() {
                 <h1>최신 여행 동행</h1>
             </div>
             <div css={s.togetherLayout}>
-                <div css={s.viewBox}>
-                    <div css={s.togetherBox}>1</div>
-                    <div css={s.togetherBox}>2</div>
-                    <div css={s.togetherBox}>3</div>
-                    <div css={s.togetherBox}></div>
-                    <div css={s.togetherBox}></div>
-                    <div css={s.togetherBox}></div>
-                </div>
+                <Swiper
+                    slidesPerView={4}
+                    spaceBetween={10}
+                    freeMode={true}
+                    modules={[FreeMode]}
+                    className="mySwiper"
+                >
+                    <SwiperSlide>
+                        <div css={s.togetherBox}>
+                            <div css={s.togetherImg}>
+                                <img src={swiss} alt="" />
+                            </div>
+                            <div>
+                                <div>스위스 갈 사람 구해요!!</div>
+                                <div>닉네임</div>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div css={s.togetherBox}>2</div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div css={s.togetherBox}>3</div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div css={s.togetherBox}>4</div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div css={s.togetherBox}>5</div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div css={s.togetherBox}>6</div>
+                    </SwiperSlide>
+                </Swiper>
             </div>
             <div css={s.newPostTitle}>
                 <h1>최신 여행 포스트</h1>

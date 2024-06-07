@@ -44,7 +44,6 @@ export const bannerBox = css`
     height: 500px;
     margin-top: 64px;
     border-radius: 15px;
-    /* background-color: black; */
     overflow: hidden;
 `;
 
@@ -94,21 +93,25 @@ export const togetherLayout = css`
     width: 1136px;
     height: 250px;
     overflow: scroll;
+    ::-webkit-scrollbar {
+        display: none;
+    }
     display: flex;
     flex-direction: column;
 `;
 
-export const viewBox = css`
-    width: 1920px;
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-`;
-
 export const togetherBox = css`
+    box-sizing: border-box;
+    border: 1px solid #dbdbdb;
+    border-radius: 15px;
     width: 300px;
     height: 250px;
-    background-color: gray;
+    overflow: hidden;
+`;
+
+export const togetherImg = css`
+    width: 100%;
+    height: 50%;
 `;
 
 export const newPostTitle = css`
