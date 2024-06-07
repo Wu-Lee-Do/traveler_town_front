@@ -1,10 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { IoSearchOutline } from "react-icons/io5";
+import { BiSolidComment } from "react-icons/bi";
+import { FaHeart, FaBookmark } from "react-icons/fa";
+
 import banner1 from "../../../assets/banner1.jpg";
 import banner2 from "../../../assets/banner2.jpg";
 import banner3 from "../../../assets/banner3.jpeg";
 import defaultImg from "../../../assets/defaultImg.webp";
+import usa from "../../../assets/usa.webp";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
@@ -61,9 +65,16 @@ function Main() {
                     </Swiper>
                 </div>
             </div>
+            <div css={s.newPostTitle}>
+                <h1>최신 여행 동행</h1>
+                <div></div>
+            </div>
+            <div css={s.newPostTitle}>
+                <h1>최신 여행 포스트</h1>
+            </div>
             <div css={s.postLayout}>
                 <Swiper
-                    slidesPerView={3}
+                    slidesPerView={2}
                     spaceBetween={10}
                     modules={[Navigation]}
                     className="mySwiper"
@@ -73,19 +84,43 @@ function Main() {
                     <SwiperSlide>
                         <div css={s.postBox}>
                             <div css={s.postHeader}>
-                                <div css={s.profileImg}>
-                                    <img src={defaultImg} alt="" />
+                                <div css={s.profileBox}>
+                                    <div css={s.profileImg}>
+                                        <img src={defaultImg} alt="" />
+                                    </div>
+                                    <div css={s.infoBox}>
+                                        <div css={s.nickname}>닉네임</div>
+                                        <div css={s.time}>3분전</div>
+                                    </div>
                                 </div>
-                                <div css={s.nickname}>닉네임</div>
+                                <div css={s.category}>미국</div>
                             </div>
                             <div css={s.postMain}>
-                                <span>게시글입니다.</span>
-                                <div>이미지</div>
+                                <div css={s.content}>
+                                    <span>
+                                        Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Neque rerum mollitia
+                                        repudiandae nulla, dolores unde
+                                        corrupti, nesciunt sed numquam error
+                                        magnam blanditiis laboriosam ut minima
+                                        incidunt facilis, deserunt ipsum
+                                        repellat.
+                                    </span>
+                                </div>
+                                <div css={s.postImg}>
+                                    <img src={usa} alt="" />
+                                </div>
                             </div>
                             <div css={s.postFooter}>
-                                <div>댓글</div>
-                                <div>좋아요</div>
-                                <div>북마크</div>
+                                <div>
+                                    <BiSolidComment />
+                                </div>
+                                <div>
+                                    <FaHeart />
+                                </div>
+                                <div>
+                                    <FaBookmark />
+                                </div>
                             </div>
                         </div>
                     </SwiperSlide>
