@@ -16,6 +16,7 @@ export const mainTitle = css`
     font-size: 44px;
     font-weight: 700;
     text-align: center;
+    cursor: default;
 `;
 
 export const searchBox = css`
@@ -78,6 +79,8 @@ export const bannerTitle = css`
     position: absolute;
     display: flex;
     align-items: center;
+    cursor: default;
+
     & > h1 {
         font-size: 40px;
         font-weight: 600;
@@ -85,4 +88,46 @@ export const bannerTitle = css`
         padding-left: 50px;
         padding-top: 50px;
     }
+`;
+
+export const postLayout = css`
+    width: 1136px;
+    height: 300px;
+    margin-top: 64px;
+    /* background-color: gray; */
+`;
+
+export const postBox = css`
+    width: 100%;
+    height: 100%;
+    background-color: skyblue;
+    border-radius: 15px;
+`;
+
+export const postHeader = css`
+    width: 100%;
+    height: 20%;
+    background-color: blue;
+`;
+
+export const profileImg = css`
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50px;
+    border: 1px solid #dbdbdb;
+`;
+
+export const nickname = css``;
+
+export const postMain = css`
+    width: 100%;
+    height: 60%;
+    background-color: red;
+`;
+export const postFooter = css`
+    width: 100%;
+    height: 20%;
+    background-color: coral;
 `;

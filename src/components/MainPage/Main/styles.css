@@ -37,3 +37,10 @@ body {
     height: 100%;
     object-fit: cover;
 }
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    color: #dbdbdb;
+    font-size: 30px;
+    
+}
