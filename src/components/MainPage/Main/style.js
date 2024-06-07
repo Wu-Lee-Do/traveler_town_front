@@ -13,7 +13,7 @@ export const mainTitle = css`
     width: 1136px;
     height: 65px;
     margin-top: 48px;
-    font-size: 54px;
+    font-size: 44px;
     font-weight: 700;
     text-align: center;
 `;
@@ -34,6 +34,7 @@ export const searchBox = css`
         border: none;
         outline: none;
         padding-left: 10px;
+        font-size: 16px;
     }
 `;
 
@@ -42,7 +43,7 @@ export const bannerBox = css`
     height: 500px;
     margin-top: 64px;
     border-radius: 15px;
-    background-color: black;
+    /* background-color: black; */
     overflow: hidden;
 `;
 
@@ -66,10 +67,13 @@ export const bannerTitle = css`
     background: linear-gradient(
         to bottom,
         rgba(20, 20, 20, 0) 10%,
-        rgba(20, 20, 20, 0.35) 25%,
-        rgba(20, 20, 20, 0.5) 50%,
-        rgba(20, 20, 20, 0.65) 75%,
-        rgba(20, 20, 20, 0.7) 100%
+        rgba(20, 20, 20, 0.05) 15%,
+        rgba(20, 20, 20, 0.1) 20%,
+        rgba(20, 20, 20, 0.15) 25%,
+        rgba(20, 20, 20, 0.2) 35%,
+        rgba(20, 20, 20, 0.25) 50%,
+        rgba(20, 20, 20, 0.3) 75%,
+        rgba(20, 20, 20, 0.35) 100%
     );
     position: absolute;
     display: flex;

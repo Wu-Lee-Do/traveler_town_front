@@ -18,10 +18,9 @@ export const navBox = css`
 `;
 
 export const logo = css`
-    width: auto;
+    width: 73.52px;
     height: 60px;
     display: flex;
-    justify-content: center;
     align-items: center;
     font-size: 30px;
     font-weight: 600;
@@ -36,8 +35,13 @@ export const menu = css`
     width: 400px;
     height: 60px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+
+    & > div {
+        font-size: 18px;
+        font-weight: 700;
+    }
 `;
 
 export const login = css`
