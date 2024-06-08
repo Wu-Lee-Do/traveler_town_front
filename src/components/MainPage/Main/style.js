@@ -114,6 +114,48 @@ export const togetherImg = css`
     height: 50%;
 `;
 
+export const toProfileImg = css`
+    box-sizing: border-box;
+    width: 38px;
+    height: 38px;
+    overflow: hidden;
+    border-radius: 50px;
+    border: 1px solid #dbdbdb;
+    margin-left: 10px;
+    margin-right: 10px;
+`;
+
+export const togetherInfo = css`
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+
+    & > div:nth-of-type(1) {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        justify-content: start;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #252525;
+    }
+
+    & > div:nth-of-type(2) {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        & > div:nth-of-type(1) {
+            display: flex;
+            align-items: center;
+        }
+    }
+`;
+
 export const newPostTitle = css`
     margin-top: 64px;
 `;
