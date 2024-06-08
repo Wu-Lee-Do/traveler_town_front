@@ -82,9 +82,19 @@ function Main() {
                             <div css={s.togetherImg}>
                                 <img src={swiss} alt="" />
                             </div>
-                            <div>
+                            <div css={s.togetherInfo}>
                                 <div>스위스 갈 사람 구해요!!</div>
-                                <div>닉네임</div>
+                                <div>
+                                    <div>
+                                        <div css={s.toProfileImg}>
+                                            <img src={defaultImg} alt="" />
+                                        </div>
+                                        <div css={s.nickname}>
+                                            닉네임 • 20대 • 남자
+                                        </div>
+                                    </div>
+                                    <div css={s.category}>스위스</div>
+                                </div>
                             </div>
                         </div>
                     </SwiperSlide>
