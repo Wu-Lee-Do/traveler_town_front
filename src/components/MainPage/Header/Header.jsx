@@ -1,10 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import logo from "../../../assets/logo.png";
+import { useEffect, useState } from "react";
 
 function Header() {
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const updateScroll = () => {
+        setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+    };
+    useEffect(() => {
+        window.addEventListener("scroll", updateScroll);
+    });
     return (
-        <div css={s.header}>
+        <div css={s.header(scrollPosition)}>
             <div css={s.navBox}>
                 <div css={s.logo}>
                     <img src={logo} alt="" />

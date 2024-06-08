@@ -1,12 +1,15 @@
 import { css } from "@emotion/react";
 
-export const header = css`
-    margin-top: 8px;
+export const header = (scrollPosition) => css`
+    position: fixed;
+    z-index: 999;
     width: 100%;
-    height: 60px;
+    height: 68px;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: ${scrollPosition > 10 ? "1px solid #dbdbdb" : "none"};
 `;
 
 export const navBox = css`

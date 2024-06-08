@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 export const main = css`
     width: 100%;
     height: auto;
+    padding-top: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
