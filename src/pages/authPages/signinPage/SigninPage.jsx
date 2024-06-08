@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 
-import logo from "../../../assets/logo.png";
-
 function SigninPage() {
     return (
         <div css={s.layout}>

@@ -27,7 +27,7 @@ export const logo = css`
     align-items: center;
     font-size: 30px;
     font-weight: 600;
-    cursor: default;
+    cursor: pointer;
 
     & > img {
         width: 50px;

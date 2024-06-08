@@ -17,6 +17,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
+import Footer from "../../components/MainPage/Footer/Footer";
 
 function MainPage() {
     return (
@@ -184,6 +185,7 @@ function MainPage() {
                     </SwiperSlide>
                 </Swiper>
             </div>
+            <Footer />
         </div>
     );
 }

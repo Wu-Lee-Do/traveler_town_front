@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    height: 520px;
+    height: 90%;
     padding-top: 68px;
     display: flex;
     justify-content: center;
@@ -11,7 +11,7 @@ export const layout = css`
 
 export const loginBox = css`
     width: 500px;
-    height: 450px;
+    height: 500px;
     margin-top: 30px;
     border: 1px solid #dbdbdb;
     border-radius: 15px;
@@ -30,7 +30,6 @@ export const title = css`
     justify-content: center;
     align-items: center;
     cursor: default;
-
 `;
 
 export const inputBox = css`
