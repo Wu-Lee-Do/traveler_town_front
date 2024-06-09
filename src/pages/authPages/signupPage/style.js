@@ -9,9 +9,9 @@ export const layout = css`
     align-items: center;
 `;
 
-export const loginBox = css`
+export const signinBox = css`
     width: 500px;
-    height: 500px;
+    height: 600px;
     margin-top: 30px;
     border: 1px solid #dbdbdb;
     border-radius: 15px;
@@ -39,12 +39,6 @@ export const inputBox = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    & > div:nth-of-type(3) {
-        font-size: 16px;
-        text-decoration: underline;
-        cursor: pointer;
-    }
 
     & > div {
         width: 100%;
