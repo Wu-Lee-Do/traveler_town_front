@@ -60,6 +60,10 @@ export const inputBox = css`
             outline: none;
             margin-top: 8px;
             margin-bottom: 16px;
+
+            &:focus {
+                border: 2px solid rgb(44, 89, 129);
+            }
         }
     }
 `;
