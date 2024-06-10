@@ -44,6 +44,6 @@ export const inputIcon = (type) => {
     return css`
         margin-right: 10px;
         font-size: 20px;
-        color: white;
+        color: red;
     `;
 };

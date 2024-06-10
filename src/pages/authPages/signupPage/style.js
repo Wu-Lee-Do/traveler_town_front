@@ -1,9 +1,11 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    position: relative;
     width: 100%;
     height: 90%;
-    padding-top: 68px;
+    top: 98px;
+    /* padding-top: 68px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +13,7 @@ export const layout = css`
 
 export const signinBox = css`
     width: 500px;
-    height: 700px;
+    height: auto;
     margin-top: 30px;
     border: 1px solid #dbdbdb;
     border-radius: 15px;
@@ -23,7 +25,7 @@ export const signinBox = css`
 
 export const title = css`
     width: 100%;
-    height: 20%;
+    height: 100px;
     font-size: 35px;
     font-weight: 600;
     display: flex;
@@ -34,7 +36,7 @@ export const title = css`
 
 export const inputBox = css`
     width: 400px;
-    height: 60%;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,7 +55,7 @@ export const inputBox = css`
 
 export const buttonBox = css`
     width: 100%;
-    height: 20%;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
