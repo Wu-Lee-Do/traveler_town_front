@@ -11,7 +11,7 @@ export const layout = css`
 
 export const signinBox = css`
     width: 500px;
-    height: 600px;
+    height: 700px;
     margin-top: 30px;
     border: 1px solid #dbdbdb;
     border-radius: 15px;
@@ -23,7 +23,7 @@ export const signinBox = css`
 
 export const title = css`
     width: 100%;
-    height: 25%;
+    height: 20%;
     font-size: 35px;
     font-weight: 600;
     display: flex;
@@ -34,7 +34,7 @@ export const title = css`
 
 export const inputBox = css`
     width: 400px;
-    height: 50%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,29 +48,12 @@ export const inputBox = css`
             font-weight: 600;
             cursor: default;
         }
-        & > input {
-            box-sizing: border-box;
-            border: 2px solid #c0c0c0;
-            border-radius: 4px;
-            width: 100%;
-            height: 48px;
-            padding: 4px 4px 4px 8px;
-            font-size: 14px;
-            font-weight: 400;
-            outline: none;
-            margin-top: 8px;
-            margin-bottom: 16px;
-
-            &:focus {
-                border: 2px solid rgb(44, 89, 129);
-            }
-        }
     }
 `;
 
 export const buttonBox = css`
     width: 100%;
-    height: 25%;
+    height: 20%;
     display: flex;
     justify-content: center;
     align-items: center;

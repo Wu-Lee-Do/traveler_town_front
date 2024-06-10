@@ -14,8 +14,8 @@ function SigninPage() {
                 <div css={s.title}>로그인</div>
                 <div css={s.inputBox}>
                     <div>
-                        <div>이메일 주소</div>
-                        <input type="text" placeholder="이메일" />
+                        <div>아이디</div>
+                        <input type="text" placeholder="아이디" />
                     </div>
                     <div>
                         <div>패스워드</div>
