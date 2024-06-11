@@ -74,7 +74,7 @@ function SignupPage() {
                 console.log(response);
                 if (response.status === 201) {
                     alert("회원가입이 완료되었습니다.");
-                    navigate("/signin");
+                    navigate("/auth/signin");
                 }
             })
             .catch((error) => {

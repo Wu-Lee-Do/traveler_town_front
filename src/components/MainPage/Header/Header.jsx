@@ -24,7 +24,11 @@ function Header() {
     };
 
     const handleLoginClick = () => {
-        navigate("/signin");
+        navigate("/auth/signin");
+    };
+
+    const handleProfileClick = () => {
+        navigate("/account/mypage");
     };
 
     return (
@@ -41,9 +45,9 @@ function Header() {
                     <div>맛집</div>
                 </div>
                 {!!principalData ? (
-                    <div css={s.profileBox}>
+                    <div css={s.profileBox} onClick={handleProfileClick}>
                         <img src={profileImg} alt="" />
-                        {principalData.data.nickname}님
+                        {principalData.data.nickname}
                     </div>
                 ) : (
                     <div css={s.login} onClick={handleLoginClick}>

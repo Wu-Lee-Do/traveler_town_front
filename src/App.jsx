@@ -4,6 +4,7 @@ import PageLayout from "./components/PageLayout/PageLayout";
 import AuthRoute from "./routes/AuthRoute";
 import MainRoute from "./routes/MainRoute";
 import { getPricipalRequest } from "./apis/auth/authApi";
+import AccountRoute from "./routes/AccountRoute";
 
 function App() {
     const principalQuery = useQuery(["principalQuery"], getPricipalRequest, {
@@ -18,13 +19,12 @@ function App() {
             console.log(error);
         },
     });
-    
+
     return (
         <>
             <PageLayout>
                 <Header />
                 <MainRoute />
-                <AuthRoute />
             </PageLayout>
         </>
     );

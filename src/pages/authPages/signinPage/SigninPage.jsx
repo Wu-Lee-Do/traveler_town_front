@@ -15,7 +15,7 @@ function SigninPage() {
     console.log(principalData);
 
     const handleSignupClick = () => {
-        navigate("/signup");
+        navigate("/auth/signup");
     };
 
     const handleSigninClick = () => {

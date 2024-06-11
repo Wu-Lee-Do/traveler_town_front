@@ -7,7 +7,7 @@ export const header = (scrollPosition) => css`
     height: 68px;
     background-color: white;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     border-bottom: ${scrollPosition > 10 ? "1px solid #dbdbdb" : "none"};
 `;
@@ -78,13 +78,14 @@ export const login = css`
 `;
 
 export const profileBox = css`
-    width: auto;
+    width: 73.52px;
     height: 42px;
     display: flex;
-    justify-content: space-around;
+    justify-content: end;
     align-items: center;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
 
     & > img {
         width: 35px;
