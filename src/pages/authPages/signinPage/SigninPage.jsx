@@ -22,10 +22,15 @@ function SigninPage() {
         signinRequest({
             username,
             password,
-        }).then((response) => {
-            const accessToken = response.data;
-            localStorage.setItem("AccessToken", accessToken);
-        });
+        })
+            .then((response) => {
+                const accessToken = response.data;
+                localStorage.setItem("AccessToken", accessToken);
+                navigate("/");
+            })
+            .catch((error) => {
+                alert(error.response.data);
+            });
     };
 
     return (

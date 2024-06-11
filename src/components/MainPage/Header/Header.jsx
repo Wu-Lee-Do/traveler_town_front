@@ -3,10 +3,14 @@ import * as s from "./style";
 import logo from "../../../assets/logo.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "react-query";
 
 function Header() {
     const navigate = useNavigate();
     const [scrollPosition, setScrollPosition] = useState(0);
+    const queryClient = useQueryClient();
+    const principalData = queryClient.getQueryData("principalQuery");
+
     const updateScroll = () => {
         setScrollPosition(window.scrollY || document.documentElement.scrollTop);
     };
@@ -35,9 +39,13 @@ function Header() {
                     <div>관광지</div>
                     <div>맛집</div>
                 </div>
-                <div css={s.login} onClick={handleLoginClick}>
-                    로그인
-                </div>
+                {!!principalData ? (
+                    <div>로그인 되어있음</div>
+                ) : (
+                    <div css={s.login} onClick={handleLoginClick}>
+                        로그인
+                    </div>
+                )}
             </div>
         </div>
     );
