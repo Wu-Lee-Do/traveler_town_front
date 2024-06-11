@@ -7,7 +7,7 @@ export const header = (scrollPosition) => css`
     height: 68px;
     background-color: white;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     border-bottom: ${scrollPosition > 10 ? "1px solid #dbdbdb" : "none"};
 `;
@@ -74,5 +74,24 @@ export const login = css`
 
     &:hover {
         background-color: #000000d4;
+    }
+`;
+
+export const profileBox = css`
+    /* width: 73.52px; */
+    height: 42px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+
+    & > img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50px;
+        border: 1px solid #dbdbdb;
+        margin-right: 5px;
     }
 `;
