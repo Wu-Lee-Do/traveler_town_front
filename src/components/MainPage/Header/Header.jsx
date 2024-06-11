@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import logo from "../../../assets/logo.png";
+import profileImg from "../../../assets/defaultImg.webp";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
@@ -40,7 +41,10 @@ function Header() {
                     <div>맛집</div>
                 </div>
                 {!!principalData ? (
-                    <div>로그인 되어있음</div>
+                    <div css={s.profileBox}>
+                        <img src={profileImg} alt="" />
+                        {principalData.data.nickname}님
+                    </div>
                 ) : (
                     <div css={s.login} onClick={handleLoginClick}>
                         로그인
