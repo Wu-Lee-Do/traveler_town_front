@@ -26,7 +26,7 @@ function SigninPage() {
             .then((response) => {
                 const accessToken = response.data;
                 localStorage.setItem("AccessToken", accessToken);
-                navigate("/");
+                window.location.href = "/";
             })
             .catch((error) => {
                 alert(error.response.data);

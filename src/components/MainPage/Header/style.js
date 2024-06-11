@@ -78,7 +78,7 @@ export const login = css`
 `;
 
 export const profileBox = css`
-    width: 73.52px;
+    /* width: 73.52px; */
     height: 42px;
     display: flex;
     justify-content: end;
