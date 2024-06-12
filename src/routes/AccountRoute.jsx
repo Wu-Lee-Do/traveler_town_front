@@ -6,7 +6,7 @@ function AccountRoute() {
     return (
         <>
             <Routes>
-                <Route path="mypage" element={<AccountPage />} />
+                <Route path="/mypage/*" element={<AccountPage />} />
             </Routes>
         </>
     );

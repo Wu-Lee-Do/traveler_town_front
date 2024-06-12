@@ -28,7 +28,7 @@ function Header() {
     };
 
     const handleProfileClick = () => {
-        navigate("/account/mypage");
+        navigate("/account/mypage/info");
     };
 
     return (
