@@ -3,11 +3,14 @@ import * as s from "./style";
 import defaultImg from "../../../assets/defaultImg.webp";
 import { useQueryClient } from "react-query";
 import { instance } from "../../../apis/utils/instance";
-import { useNavigate } from "react-router-dom";
 import { useAuthCheck } from "../../../hooks/useAuthCheck";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import InfoComponent from "../../../components/AccountPage/InfoComponent/InfoComponent";
+import EditPasswordComponent from "../../../components/AccountPage/EditPasswordComponent/EditPasswordComponent";
 
 function AccountPage() {
     useAuthCheck();
+    const navigate = useNavigate();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
     console.log(principalData);
@@ -23,6 +26,14 @@ function AccountPage() {
         window.location.href = "/";
     };
 
+    const handleInfoClick = () => {
+        navigate("/account/mypage/info");
+    };
+
+    const handleEditPasswordClick = () => {
+        navigate("/account/mypage/edit");
+    };
+
     return (
         <div css={s.layout}>
             <div css={s.accountBox}>
@@ -31,9 +42,25 @@ function AccountPage() {
                         <img src={defaultImg} alt="" />
                         {principalData?.data.nickname}
                     </div>
-                    <div onClick={handleLogoutClick}>로그아웃</div>
+                    <div css={s.menuBox}>
+                        <div>
+                            <div onClick={handleInfoClick}>내 정보</div>
+                            <div onClick={handleEditPasswordClick}>
+                                비밀번호 변경
+                            </div>
+                        </div>
+                        <div onClick={handleLogoutClick}>로그아웃</div>
+                    </div>
                 </div>
-                <div css={s.mainBox}>right</div>
+                <div css={s.mainBox}>
+                    <Routes>
+                        <Route path="/info" element={<InfoComponent />} />
+                        <Route
+                            path="/edit"
+                            element={<EditPasswordComponent />}
+                        />
+                    </Routes>
+                </div>
             </div>
         </div>
     );

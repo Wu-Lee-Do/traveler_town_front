@@ -33,7 +33,7 @@ export const sideBar = css`
 export const profileBox = css`
     box-sizing: border-box;
     width: 100%;
-    height: 200px;
+    height: 35%;
     border-bottom: 2px solid #dbdbdb;
     display: flex;
     flex-direction: column;
@@ -48,6 +48,47 @@ export const profileBox = css`
         border-radius: 120px;
         border: 1px solid #dbdbdb;
         margin-bottom: 10px;
+    }
+`;
+
+export const menuBox = css`
+    width: 100%;
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div:nth-of-type(1) {
+        //메뉴 박스 css
+        font-size: 16px;
+        height: 12%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+
+        & > div {
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    & > div:nth-of-type(2) {
+        //로그아웃 버튼 css
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 `;
 
