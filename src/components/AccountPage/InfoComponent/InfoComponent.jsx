@@ -11,6 +11,7 @@ import {
 import { useEffect } from "react";
 
 function InfoComponent({ profileData }) {
+    console.log(profileData);
     const editSexMutation = useMutation({
         mutationKey: "editSexMutation",
         mutationFn: editSexRequest,
@@ -54,17 +55,37 @@ function InfoComponent({ profileData }) {
     const selectedSex = useReactSelect();
     const selectedAge = useReactSelect();
 
-    console.log(selectedSex?.option?.value);
-
-    useEffect(() => {
+    const handleSaveClick = () => {
+        if (
+            (selectedSex.option.value === 0) |
+            (selectedAge.option.value === 0)
+        ) {
+            alert("추가정보를 전부 기입해주세요");
+            return;
+        }
         editSexMutation.mutate({ sex: selectedSex?.option?.value });
-    }, [selectedSex.option]);
+        editAgeMutation.mutate({ age: selectedAge?.option?.value });
+        alert("저장되었습니다");
+    };
 
     useEffect(() => {
-        editAgeMutation.mutate({
-            age: selectedAge?.option?.value,
+        selectedSex.setValue({
+            value: profileData?.data.sex === 0 ? 0 : profileData?.data.sex,
+            label:
+                profileData?.data.sex === 1
+                    ? "남"
+                    : profileData?.data.sex === 2
+                    ? "여"
+                    : "선택",
         });
-    }, [selectedAge.option]);
+        selectedAge.setValue({
+            value: profileData?.data.age === 0 ? 0 : profileData?.data.age,
+            label:
+                profileData?.data.age === 0
+                    ? "선택"
+                    : `${profileData?.data.age}대`,
+        });
+    }, [profileData]);
 
     return (
         <div css={s.infoLayout}>
@@ -128,6 +149,9 @@ function InfoComponent({ profileData }) {
                             />
                         </div>
                     </div>
+                </div>
+                <div>
+                    <button onClick={handleSaveClick}>저장</button>
                 </div>
             </div>
         </div>

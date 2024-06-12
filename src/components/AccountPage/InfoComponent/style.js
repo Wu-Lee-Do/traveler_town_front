@@ -74,8 +74,9 @@ export const additionalInfoBox = css`
     width: 100%;
     height: 40%;
     display: flex;
-    justify-content: center;
-    align-items: start;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
     background-color: #fafafa;
 
     & > div {
@@ -94,6 +95,23 @@ export const additionalInfoBox = css`
             align-items: center;
             justify-content: space-between;
             font-size: 16px;
+        }
+    }
+
+    & > div:nth-of-type(2) {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+
+        & > button {
+            border: none;
+            background-color: transparent;
+            font-size: 15px;
+            cursor: pointer;
+
+            &:hover {
+                font-weight: 600;
+            }
         }
     }
 `;
