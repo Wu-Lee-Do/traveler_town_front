@@ -2,7 +2,8 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    padding-top: 80px;
+    height: 100%;
+    /* padding-top: 80px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,7 +12,7 @@ export const layout = css`
 
 export const accountBox = css`
     box-sizing: border-box;
-    overflow: hidden;
+    /* overflow: hidden; */
     width: 1136px;
     height: 80vh;
     border-radius: 15px;
@@ -25,6 +26,8 @@ export const sideBar = css`
     height: 100%;
     background-color: #fafafa;
     border-right: 2px solid #dbdbdb;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
