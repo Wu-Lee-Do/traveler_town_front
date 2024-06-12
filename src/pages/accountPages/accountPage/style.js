@@ -40,14 +40,14 @@ export const profileBox = css`
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
 
     & > img {
         box-sizing: border-box;
         width: 120px;
         border-radius: 120px;
         border: 1px solid #dbdbdb;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
 `;
 
@@ -92,4 +92,10 @@ export const menuBox = css`
     }
 `;
 
-export const mainBox = css``;
+export const mainBox = css`
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;

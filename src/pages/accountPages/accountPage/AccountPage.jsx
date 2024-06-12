@@ -9,7 +9,7 @@ import InfoComponent from "../../../components/AccountPage/InfoComponent/InfoCom
 import EditPasswordComponent from "../../../components/AccountPage/EditPasswordComponent/EditPasswordComponent";
 
 function AccountPage() {
-    useAuthCheck();
+    // useAuthCheck();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
@@ -54,7 +54,12 @@ function AccountPage() {
                 </div>
                 <div css={s.mainBox}>
                     <Routes>
-                        <Route path="/info" element={<InfoComponent />} />
+                        <Route
+                            path="/info"
+                            element={
+                                <InfoComponent profileData={principalData} />
+                            }
+                        />
                         <Route
                             path="/edit"
                             element={<EditPasswordComponent />}
