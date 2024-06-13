@@ -15,3 +15,7 @@ export const editImgRequest = async (data) => {
 export const sendMailRequest = async () => {
     return await instance.post("/mail/send");
 };
+
+export const editPasswordRequest = async (data) => {
+    return await instance.put("/account/password", data);
+};
