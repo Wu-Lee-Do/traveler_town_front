@@ -6,6 +6,7 @@ import { useReactSelect } from "../../../hooks/useReactSelect";
 import { useMutation } from "react-query";
 import {
     editAgeRequest,
+    editImgRequest,
     editSexRequest,
 } from "../../../apis/account/accountApi";
 import { useEffect, useRef, useState } from "react";
@@ -19,13 +20,18 @@ function InfoComponent({ profileData }) {
     const newImgRef = useRef();
     console.log(profileData);
 
-    const handleOnImgUrlChange = (e) => {
-        if (!!e.target) {
-            setImgUrl(() => e.target.value);
-        } else {
-            setImgUrl(() => e);
-        }
-    };
+    const editProfileImgMutation = useMutation({
+        mutationKey: "profileImgMutation",
+        mutationFn: editImgRequest,
+        onSuccess: (response) => {
+            console.log(response);
+            alert("프로필 이미지가 변경 되었습니다.");
+            window.location.replace("/account/mypage/info");
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
 
     const handleImgChange = (e) => {
         const files = Array.from(e.target.files);
@@ -36,7 +42,7 @@ function InfoComponent({ profileData }) {
             return;
         }
 
-        if (window.confirm("프로필 이미지를 업로드 하시겠습니까?")) {
+        if (window.confirm("프로필 이미지를 변경 하시겠습니까?")) {
             const storageRef = ref(
                 storage,
                 `user/profile_img/${uuid()}_${files[0].name}`
@@ -48,12 +54,12 @@ function InfoComponent({ profileData }) {
                 (error) => {},
                 () => {
                     getDownloadURL(storageRef).then((url) => {
-                        setImgUrl(() => url);
-                        console.log(url);
+                        editProfileImgMutation.mutate({
+                            profileImg: url,
+                        });
                     });
                 }
             );
-            alert("이미지가 업로드 되었습니다.");
         }
     };
 

@@ -31,6 +31,7 @@ export const profileBox = css`
     & > img {
         box-sizing: border-box;
         width: 120px;
+        height: 120px;
         border-radius: 120px;
         border: 1px solid #dbdbdb;
         margin-bottom: 15px;
