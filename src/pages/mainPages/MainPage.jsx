@@ -22,13 +22,14 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { searchCountryState } from "../../atoms/searchCountryAtom";
 import { useNavigate } from "react-router-dom";
+import { allCountryState } from "../../atoms/allCountryAtom";
 
 function MainPage() {
     const navigate = useNavigate();
     const [searchCountry, setSearchCountry] = useState("");
     const [searchCountryData, setSearchCountryData] =
         useRecoilState(searchCountryState);
-    const [allCountryData, setAllCountryData] = useState();
+    const [allCountryData, setAllCountryData] = useRecoilState(allCountryState);
 
     const handleSearchClick = () => {
         setSearchCountryData(
@@ -64,14 +65,15 @@ function MainPage() {
         <div css={s.main}>
             <h1 css={s.mainTitle}>여행자들을 위한 쉼터</h1>
             <div css={s.searchBox}>
-                <IoSearchOutline />
                 <input
                     type="text"
                     placeholder="어느 나라로 여행을 떠나시나요?"
                     value={searchCountry}
                     onChange={handleSearchOnChange}
                 />
-                <button onClick={handleSearchClick}>검색</button>
+                <button onClick={handleSearchClick}>
+                    <IoSearchOutline />
+                </button>
             </div>
             <div css={s.bannerBox}>
                 <div css={s.banner}>

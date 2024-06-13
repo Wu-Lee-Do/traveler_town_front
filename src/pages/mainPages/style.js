@@ -38,6 +38,13 @@ export const searchBox = css`
         padding-left: 10px;
         font-size: 16px;
     }
+
+    & > button {
+        border: none;
+        background-color: transparent;
+        font-size: 20px;
+        cursor: pointer;
+    }
 `;
 
 export const bannerBox = css`
