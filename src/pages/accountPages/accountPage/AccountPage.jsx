@@ -39,7 +39,7 @@ function AccountPage() {
             <div css={s.accountBox}>
                 <div css={s.sideBar}>
                     <div css={s.profileBox}>
-                        <img src={principalData.data.profileImg} alt="" />
+                        <img src={principalData?.data.profileImg} alt="" />
                         {principalData?.data.nickname}
                     </div>
                     <div css={s.menuBox}>

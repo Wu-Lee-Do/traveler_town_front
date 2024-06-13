@@ -7,3 +7,7 @@ export const editSexRequest = async (data) => {
 export const editAgeRequest = async (data) => {
     return await instance.put("/account/age", data);
 };
+
+export const editImgRequest = async (data) => {
+    return await instance.put("/account/img", data);
+};
