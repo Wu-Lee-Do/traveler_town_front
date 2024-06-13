@@ -5,15 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { RecoilRoot } from "recoil";
 
 const queryClient = new QueryClient(); // queryClient = 데이터가 저장되는 캐싱 공간
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <RecoilRoot>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </RecoilRoot>
     </QueryClientProvider>
 );
 

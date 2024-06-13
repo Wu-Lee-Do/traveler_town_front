@@ -18,17 +18,62 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
 import Footer from "../../components/MainPage/Footer/Footer";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { searchCountryState } from "../../atoms/searchCountryAtom";
+import { useNavigate } from "react-router-dom";
+import { allCountryState } from "../../atoms/allCountryAtom";
 
 function MainPage() {
+    const navigate = useNavigate();
+    const [searchCountry, setSearchCountry] = useState("");
+    const [searchCountryData, setSearchCountryData] =
+        useRecoilState(searchCountryState);
+    const [allCountryData, setAllCountryData] = useRecoilState(allCountryState);
+
+    const handleSearchClick = () => {
+        setSearchCountryData(
+            allCountryData.filter(
+                (country) => country.translations.kor.common === searchCountry
+            )
+        );
+        navigate("/country");
+    };
+
+    const handleSearchOnChange = (e) => {
+        setSearchCountry(() => e.target.value);
+    };
+
+    useEffect(() => {
+        const fetchSearch = async () => {
+            const fetchData = await fetch("https://restcountries.com/v3.1/all");
+            const response = await fetchData.json();
+
+            if (response.status !== 404) {
+                setAllCountryData(response);
+            }
+        };
+
+        try {
+            fetchSearch();
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
     return (
         <div css={s.main}>
             <h1 css={s.mainTitle}>여행자들을 위한 쉼터</h1>
             <div css={s.searchBox}>
-                <IoSearchOutline />
                 <input
                     type="text"
                     placeholder="어느 나라로 여행을 떠나시나요?"
+                    value={searchCountry}
+                    onChange={handleSearchOnChange}
                 />
+                <button onClick={handleSearchClick}>
+                    <IoSearchOutline />
+                </button>
             </div>
             <div css={s.bannerBox}>
                 <div css={s.banner}>
