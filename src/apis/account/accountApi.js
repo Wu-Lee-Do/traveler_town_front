@@ -11,3 +11,7 @@ export const editAgeRequest = async (data) => {
 export const editImgRequest = async (data) => {
     return await instance.put("/account/img", data);
 };
+
+export const sendMailRequest = async () => {
+    return await instance.post("/mail/send");
+};

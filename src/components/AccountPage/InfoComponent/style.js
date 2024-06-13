@@ -70,6 +70,10 @@ export const infoBox = css`
     }
 `;
 
+export const mailCheck = css`
+    color: green;
+`;
+
 export const additionalInfoBox = css`
     box-sizing: border-box;
     width: 100%;

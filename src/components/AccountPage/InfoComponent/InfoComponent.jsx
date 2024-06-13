@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import defaultImg from "../../../assets/defaultImg.webp";
 import Select from "react-select";
 import { useReactSelect } from "../../../hooks/useReactSelect";
 import { useMutation } from "react-query";
@@ -8,15 +7,15 @@ import {
     editAgeRequest,
     editImgRequest,
     editSexRequest,
+    sendMailRequest,
 } from "../../../apis/account/accountApi";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../apis/firebase/config/firebaseConfig";
 import { v4 as uuid } from "uuid";
+import { FaCheckCircle } from "react-icons/fa";
 
 function InfoComponent({ profileData }) {
-    const [newImgFile, setNewImgFile] = useState("");
-    const [imgUrl, setImgUrl] = useState("");
     const newImgRef = useRef();
     console.log(profileData);
 
@@ -62,6 +61,18 @@ function InfoComponent({ profileData }) {
             );
         }
     };
+
+    const sendMailMutation = useMutation({
+        mutationKey: "sendMailMutation",
+        mutationFn: sendMailRequest,
+        onSuccess: (response) => {
+            console.log(response);
+            alert("메일을 확인해 주세요");
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
 
     const editSexMutation = useMutation({
         mutationKey: "editSexMutation",
@@ -119,6 +130,10 @@ function InfoComponent({ profileData }) {
         alert("저장되었습니다");
     };
 
+    const handleSendMailClick = () => {
+        sendMailMutation.mutate();
+    };
+
     useEffect(() => {
         selectedSex.setValue({
             value: profileData?.data.sex === 0 ? 0 : profileData?.data.sex,
@@ -163,7 +178,17 @@ function InfoComponent({ profileData }) {
                     </div>
                     <div>
                         <div>{profileData?.data.email}</div>
-                        <button>인증하기</button>
+                        {profileData?.data.authorities.filter(
+                            (auth) => auth.authority === "ROLE_USER"
+                        ).length === 0 ? (
+                            <button onClick={handleSendMailClick}>
+                                인증하기
+                            </button>
+                        ) : (
+                            <div css={s.mailCheck}>
+                                <FaCheckCircle />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
