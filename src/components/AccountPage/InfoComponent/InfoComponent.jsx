@@ -8,10 +8,55 @@ import {
     editAgeRequest,
     editSexRequest,
 } from "../../../apis/account/accountApi";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../../../apis/firebase/config/firebaseConfig";
+import { v4 as uuid } from "uuid";
 
 function InfoComponent({ profileData }) {
+    const [newImgFile, setNewImgFile] = useState("");
+    const [imgUrl, setImgUrl] = useState("");
+    const newImgRef = useRef();
     console.log(profileData);
+
+    const handleOnImgUrlChange = (e) => {
+        if (!!e.target) {
+            setImgUrl(() => e.target.value);
+        } else {
+            setImgUrl(() => e);
+        }
+    };
+
+    const handleImgChange = (e) => {
+        const files = Array.from(e.target.files);
+        console.log(e.target.value);
+
+        if (files.length === 0) {
+            e.target.value = "";
+            return;
+        }
+
+        if (window.confirm("프로필 이미지를 업로드 하시겠습니까?")) {
+            const storageRef = ref(
+                storage,
+                `user/profile_img/${uuid()}_${files[0].name}`
+            );
+            const uploadTask = uploadBytesResumable(storageRef, files[0]);
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {},
+                (error) => {},
+                () => {
+                    getDownloadURL(storageRef).then((url) => {
+                        setImgUrl(() => url);
+                        console.log(url);
+                    });
+                }
+            );
+            alert("이미지가 업로드 되었습니다.");
+        }
+    };
+
     const editSexMutation = useMutation({
         mutationKey: "editSexMutation",
         mutationFn: editSexRequest,
@@ -92,7 +137,17 @@ function InfoComponent({ profileData }) {
             <h1>기본정보</h1>
             <div css={s.basicInfoBox}>
                 <div css={s.profileBox}>
-                    <img src={defaultImg} alt="" />
+                    <input
+                        type="file"
+                        ref={newImgRef}
+                        style={{ display: "none" }}
+                        onChange={handleImgChange}
+                    />
+                    <img
+                        src={profileData?.data.profileImg}
+                        alt=""
+                        onClick={() => newImgRef.current.click()}
+                    />
                     {profileData?.data.nickname}
                 </div>
                 <div css={s.infoBox}>
