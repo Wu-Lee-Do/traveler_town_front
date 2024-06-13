@@ -46,7 +46,7 @@ function Header() {
                 </div>
                 {!!principalData ? (
                     <div css={s.profileBox} onClick={handleProfileClick}>
-                        <img src={profileImg} alt="" />
+                        <img src={principalData.data.profileImg} alt="" />
                         {principalData.data.nickname}
                     </div>
                 ) : (
