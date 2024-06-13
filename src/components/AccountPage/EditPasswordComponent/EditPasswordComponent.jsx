@@ -4,12 +4,26 @@ import * as s from "./style";
 import AuthInput from "../../AuthInput/AuthInput";
 import { useInput } from "../../../hooks/useInput";
 import { useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { editPasswordRequest } from "../../../apis/account/accountApi";
+import { instance } from "../../../apis/utils/instance";
 
 function EditPasswordComponent() {
-    const [oldPassword, oldPasswordChange, oldPasswordMessage] =
-        useInput("oldPassword");
-    const [newPassword, newPasswordChange, newPasswordMessage] =
-        useInput("newPassword");
+    const queryClient = useQueryClient();
+    const [
+        oldPassword,
+        oldPasswordChange,
+        setOldPassword,
+        oldPasswordMessage,
+        setOldPasswordMessage,
+    ] = useInput("oldPassword");
+    const [
+        newPassword,
+        newPasswordChange,
+        setNewPassword,
+        newPasswordMessage,
+        setNewPasswordMessage,
+    ] = useInput("newPassword");
     const [checkNewPassword, checkNewPasswordChange] =
         useInput("checkPassword");
     const [checkNewPasswordMessage, setCheckNewPasswordMessage] =
@@ -37,6 +51,54 @@ function EditPasswordComponent() {
             });
         }
     }, [checkNewPassword, newPassword]);
+
+    const editPasswordMutation = useMutation({
+        mutationKey: "editPasswordMutation",
+        mutationFn: editPasswordRequest,
+        onSuccess: (response) => {
+            console.log(response);
+            alert("비밀번호가 변경 되었습니다.");
+            localStorage.removeItem("AccessToken");
+            instance.interceptors.request.use((config) => {
+                config.headers.Authorization = null;
+                return config;
+            });
+            queryClient.refetchQueries("principalQuery");
+            window.location.href = "/";
+        },
+        onError: (error) => {
+            if (error.response.status === 400) {
+                const errorMap = error.response.data;
+                const errorEntries = Object.entries(errorMap);
+                setOldPasswordMessage(null);
+                setNewPasswordMessage(null);
+                for (let [k, v] of errorEntries) {
+                    const message = {
+                        type: "error",
+                        text: v,
+                    };
+                    if (k === "oldPassword") {
+                        setOldPasswordMessage(() => {
+                            return setOldPasswordMessage(() => message);
+                        });
+                    }
+                    if (k === "newPassword") {
+                        setNewPasswordMessage(() => {
+                            return setNewPasswordMessage(() => message);
+                        });
+                    }
+                }
+            }
+        },
+    });
+
+    const handleEditPasswordSaveClick = () => {
+        editPasswordMutation.mutate({
+            oldPassword: oldPassword,
+            newPassword: newPassword,
+            newPasswordCheck: checkNewPassword,
+        });
+    };
 
     return (
         <div css={s.layout}>
@@ -72,7 +134,7 @@ function EditPasswordComponent() {
                     />
                 </div>
                 <div css={s.buttonBox}>
-                    <button>변경</button>
+                    <button onClick={handleEditPasswordSaveClick}>변경</button>
                 </div>
             </div>
         </div>

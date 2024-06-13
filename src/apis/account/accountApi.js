@@ -17,5 +17,5 @@ export const sendMailRequest = async () => {
 };
 
 export const editPasswordRequest = async (data) => {
-    return await instance.put("/account/password");
+    return await instance.put("/account/password", data);
 };
