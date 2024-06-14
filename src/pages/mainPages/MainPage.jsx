@@ -27,16 +27,9 @@ import { allCountryState } from "../../atoms/allCountryAtom";
 function MainPage() {
     const navigate = useNavigate();
     const [searchCountry, setSearchCountry] = useState("");
-    const [searchCountryData, setSearchCountryData] =
-        useRecoilState(searchCountryState);
-    const [allCountryData, setAllCountryData] = useRecoilState(allCountryState);
 
     const handleSearchClick = () => {
-        setSearchCountryData(
-            allCountryData.filter(
-                (country) => country.translations.kor.common === searchCountry
-            )
-        );
+   
         navigate("/country");
     };
 
@@ -44,22 +37,7 @@ function MainPage() {
         setSearchCountry(() => e.target.value);
     };
 
-    useEffect(() => {
-        const fetchSearch = async () => {
-            const fetchData = await fetch("https://restcountries.com/v3.1/all");
-            const response = await fetchData.json();
-
-            if (response.status !== 404) {
-                setAllCountryData(response);
-            }
-        };
-
-        try {
-            fetchSearch();
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
+    
 
     return (
         <div css={s.main}>
