@@ -80,3 +80,9 @@ export const infoBox = css`
         font-size: 32px;
     }
 `;
+
+export const touristAttractionLayout = css`
+    margin-top: 50px;
+    width: 100%;
+    height: 100%;
+`;
