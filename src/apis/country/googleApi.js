@@ -5,7 +5,7 @@ export const googleMapsSearchRequest = async (data) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "X-Goog-Api-Key": "AIzaSyBfW0NY0PPlXdijK-njQI4HbCDrDZwy5Ko",
+                "X-Goog-Api-Key": process.env.REACT_APP_GOOGLE_API_KEY,
                 Accept: "application/json",
             },
             body: JSON.stringify({
