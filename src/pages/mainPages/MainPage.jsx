@@ -18,26 +18,20 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
 import Footer from "../../components/MainPage/Footer/Footer";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { searchCountryState } from "../../atoms/searchCountryAtom";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { allCountryState } from "../../atoms/allCountryAtom";
 
 function MainPage() {
     const navigate = useNavigate();
     const [searchCountry, setSearchCountry] = useState("");
 
     const handleSearchClick = () => {
-   
-        navigate("/country");
+        navigate(`/country?search=${searchCountry}`);
     };
 
     const handleSearchOnChange = (e) => {
         setSearchCountry(() => e.target.value);
     };
-
-    
 
     return (
         <div css={s.main}>
