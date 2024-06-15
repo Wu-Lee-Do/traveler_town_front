@@ -7,11 +7,29 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
+import { useMutation } from "react-query";
+import { naverApiRequest } from "../../../apis/country/naverApi";
 
-function TouristAttractionComponent() {
+function TouristAttractionComponent({ touristAttractionData }) {
+    const naverApiMutation = useMutation({
+        mutationKey: "naverApiMutation",
+        mutationFn: naverApiRequest,
+        onSuccess: (response) => {
+            console.log(response);
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const handleSearchClick = () => {
+        naverApiMutation.mutate(touristAttractionData[0]?.displayName.text);
+    };
+
     return (
         <div css={s.layout}>
             <h1>관광지</h1>
+            <button onClick={handleSearchClick}>검색</button>
             <div css={s.attractionBox}>
                 <Swiper
                     slidesPerView={4}
@@ -20,24 +38,11 @@ function TouristAttractionComponent() {
                     modules={[FreeMode]}
                     className="mySwiper"
                 >
-                    <SwiperSlide>
-                        <div css={s.box}>1</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.box}>2</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.box}>3</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.box}>4</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.box}>5</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.box}>6</div>
-                    </SwiperSlide>
+                    {touristAttractionData?.map((data) => (
+                        <SwiperSlide>
+                            <div css={s.box}>{data?.displayName.text}</div>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
         </div>

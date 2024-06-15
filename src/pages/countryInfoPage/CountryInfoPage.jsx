@@ -15,25 +15,25 @@ function CountryInfoPage(props) {
     const [searchCountryData, setSearchCountryData] = useState();
     const [searchCountry, setSearchCountry] = useState("");
     const [countryImgUrl, setCountryImgUrl] = useState("");
-    const [touristAttraction, setTouristAttraction] = useState();
+    const [touristAttractionData, setTouristAttractionData] = useState();
 
     const googleSearchMutation = useMutation({
         mutationKey: "googleSearchMutation",
         mutationFn: googleMapsSearchRequest,
         onSuccess: (response) => {
             response.json().then((data) => {
-                setTouristAttraction(() => data.places);
+                setTouristAttractionData(() => data.places);
             });
         },
         onError: (error) => {
             console.log(error);
         },
     });
-    console.log(touristAttraction);
+    console.log(touristAttractionData);
 
-    // useEffect(() => {
-    //     googleSearchMutation.mutate(searchCountryData?.countryNameEng);
-    // }, [searchCountryData]);
+    useEffect(() => {
+        googleSearchMutation.mutate(searchCountryData?.countryNameEng);
+    }, [searchCountryData]);
 
     const searchCountryMutation = useMutation({
         mutationKey: "searchCountryMutation",
@@ -141,7 +141,9 @@ function CountryInfoPage(props) {
                     </div>
                 </div>
                 <div css={s.touristAttractionLayout}>
-                    <TouristAttractionComponent />
+                    <TouristAttractionComponent
+                        touristAttractionData={touristAttractionData}
+                    />
                 </div>
             </div>
         </div>
