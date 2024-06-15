@@ -7,12 +7,32 @@ import { useSearchParams } from "react-router-dom";
 import { searchCountryRequest } from "../../apis/country/countryApi";
 import { useMutation } from "react-query";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { googleMapsSearchRequest } from "../../apis/country/googleApi";
 
 function CountryInfoPage(props) {
     const [searchParams, setSearchParams] = useSearchParams();
     const [searchCountryData, setSearchCountryData] = useState();
     const [searchCountry, setSearchCountry] = useState("");
     const [countryImgUrl, setCountryImgUrl] = useState("");
+    const [touristAttraction, setTouristAttraction] = useState();
+
+    const googleSearchMutation = useMutation({
+        mutationKey: "googleSearchMutation",
+        mutationFn: googleMapsSearchRequest,
+        onSuccess: (response) => {
+            response.json().then((data) => {
+                setTouristAttraction(() => data.places);
+            });
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+    console.log(touristAttraction);
+
+    useEffect(() => {
+        googleSearchMutation.mutate(searchCountryData?.countryNameEng);
+    }, [searchCountryData]);
 
     const searchCountryMutation = useMutation({
         mutationKey: "searchCountryMutation",
@@ -24,8 +44,6 @@ function CountryInfoPage(props) {
             console.log(error);
         },
     });
-
-    console.log(searchCountryData);
 
     useEffect(() => {
         searchCountryMutation.mutate(searchParams.get("search"));
