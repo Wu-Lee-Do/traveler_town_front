@@ -8,6 +8,7 @@ import { searchCountryRequest } from "../../apis/country/countryApi";
 import { useMutation } from "react-query";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { googleMapsSearchRequest } from "../../apis/country/googleApi";
+import TouristAttractionComponent from "../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
 
 function CountryInfoPage(props) {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -30,9 +31,9 @@ function CountryInfoPage(props) {
     });
     console.log(touristAttraction);
 
-    useEffect(() => {
-        googleSearchMutation.mutate(searchCountryData?.countryNameEng);
-    }, [searchCountryData]);
+    // useEffect(() => {
+    //     googleSearchMutation.mutate(searchCountryData?.countryNameEng);
+    // }, [searchCountryData]);
 
     const searchCountryMutation = useMutation({
         mutationKey: "searchCountryMutation",
@@ -138,6 +139,9 @@ function CountryInfoPage(props) {
                             <div></div>
                         </div>
                     </div>
+                </div>
+                <div css={s.touristAttractionLayout}>
+                    <TouristAttractionComponent />
                 </div>
             </div>
         </div>
