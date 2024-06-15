@@ -55,13 +55,15 @@ export const countryLayout = css`
     padding-top: 50px;
     display: flex;
     justify-content: space-around;
-    background-color: aliceblue;
 `;
 
 export const imgBox = css`
     width: 35%;
     padding-left: 50px;
     height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     & > img {
         width: 100%;
