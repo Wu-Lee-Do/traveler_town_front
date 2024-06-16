@@ -2,8 +2,11 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     padding-top: 80px;
+    padding-bottom: 80px;
+
+    background-color: #fafafa;
 
     display: flex;
     flex-direction: column;
@@ -13,14 +16,14 @@ export const layout = css`
 
 export const infoLayout = css`
     width: 1136px;
-    height: 800px;
-    background-color: #fafafa;
+    /* height: 800px; */
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
 
 export const searchBox = css`
+    box-sizing: border-box;
     margin-top: 30px;
     width: 752px;
     height: 48px;
