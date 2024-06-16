@@ -11,6 +11,10 @@ import { useMutation } from "react-query";
 import { unsplashApiRequest } from "../../../apis/country/unsplashApi";
 import { useState } from "react";
 
+// 검색 키워드 국가 영문명 추가
+// 관광지 5개 따로 검색 구현
+// 검색된 이미지 없을시 빈 이미지 구현
+
 function TouristAttractionComponent({ touristAttractionData }) {
     const [imgUrl, setImgUrl] = useState();
     const unsplashApiMutation = useMutation({
