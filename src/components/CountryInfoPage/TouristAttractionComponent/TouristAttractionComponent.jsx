@@ -38,35 +38,6 @@ function TouristAttractionComponent({ touristAttractionData }) {
         }
     }, [touristAttractionData]);
 
-    // const [imgNum, setImgNum] = useState();
-
-    // const googleImgSearchMutation = useMutation({
-    //     mutationKey: "googleImgSearchMutation",
-    //     mutationFn: googleImgSearchRequest,
-    //     onSuccess: (response) => {
-    //         response.json().then((result) => {
-    //             console.log(result.photoUri);
-    //             setImgUrl((imgUrl) => [...imgUrl, result.photoUri]);
-    //         });
-    //     },
-    //     onError: (error) => {
-    //         console.log(error);
-    //     },
-    // });
-
-    // console.log(imgUrl);
-    // console.log(touristAttractionData);
-    // useEffect(() => {
-    //     if (touristAttractionData && touristAttractionData.length > 0) {
-    //         setImgUrl(() => []);
-    //         for (let i = 0; i < 5; i++) {
-    //             googleImgSearchMutation.mutate(
-    //                 touristAttractionData[i].photos[0].name
-    //             );
-    //         }
-    //     }
-    // }, [touristAttractionData]);
-
     return (
         <div css={s.layout}>
             <h1>관광지</h1>
@@ -80,9 +51,11 @@ function TouristAttractionComponent({ touristAttractionData }) {
                 >
                     {touristAttractionData?.map((data, index) => (
                         <SwiperSlide key={index}>
-                            <div css={s.box}>{data?.displayName.text}</div>
-                            <div>
-                                <img src={imgUrl[index]} alt="" />
+                            <div css={s.box}>
+                                <div css={s.imgBox}>
+                                    <img src={imgUrl[index]} alt="" />
+                                </div>
+                                <div css={s.displayName}>{data?.displayName.text}</div>
                             </div>
                         </SwiperSlide>
                     ))}
