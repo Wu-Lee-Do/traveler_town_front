@@ -9,19 +9,39 @@ export const layout = css`
     align-items: center;
 
     & > h1 {
-        width: 90%;
+        width: 100%;
     }
 `;
 
 export const attractionBox = css`
-    width: 90%;
-    /* background-color: #dbdbdb; */
+    width: 100%;
 `;
 
 export const box = css`
     box-sizing: border-box;
-    width: 300px;
-    height: 200px;
-    border: 2px solid #dbdbdb;
+    width: 270px;
+    height: 350px;
     border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export const imgBox = css`
+    width: 270px;
+    height: 270px;
+
+    & > img {
+        width: 100%;
+        border-radius: 15px;
+    }
+`;
+
+export const displayName = css`
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
 `;

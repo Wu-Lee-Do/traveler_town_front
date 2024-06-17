@@ -29,6 +29,7 @@ function CountryInfoPage(props) {
             console.log(error);
         },
     });
+
     console.log(touristAttractionData);
 
     useEffect(() => {
@@ -143,6 +144,7 @@ function CountryInfoPage(props) {
                 <div css={s.touristAttractionLayout}>
                     <TouristAttractionComponent
                         touristAttractionData={touristAttractionData}
+                        searchCountryData={searchCountryData}
                     />
                 </div>
             </div>
