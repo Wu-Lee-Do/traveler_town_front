@@ -15,7 +15,7 @@ export const googleMapsSearchRequest = async (data) => {
                     textQuery: `${data} tourist attraction`,
                     languageCode: "ko",
                     includedType: "tourist_attraction",
-                    pageSize: 5,
+                    pageSize: 10,
                 }),
             }
         );
