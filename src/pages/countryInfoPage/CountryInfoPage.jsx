@@ -29,6 +29,7 @@ function CountryInfoPage(props) {
             console.log(error);
         },
     });
+
     console.log(touristAttractionData);
 
     useEffect(() => {
