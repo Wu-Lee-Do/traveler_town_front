@@ -51,16 +51,18 @@ function CountryInfoPage(props) {
         searchCountryMutation.mutate(searchParams.get("search"));
     }, []);
 
-    const storage = getStorage();
-    getDownloadURL(
-        ref(storage, `country/${searchCountryData?.countryCode}.gif`)
-    )
-        .then((url) => {
-            setCountryImgUrl(url);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    useEffect(() => {
+        const storage = getStorage();
+        getDownloadURL(
+            ref(storage, `country/${searchCountryData?.countryCode}.gif`)
+        )
+            .then((url) => {
+                setCountryImgUrl(url);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [searchCountryData]);
 
     const handleSearchClick = () => {
         window.location.replace(`/country?search=${searchCountry}`);

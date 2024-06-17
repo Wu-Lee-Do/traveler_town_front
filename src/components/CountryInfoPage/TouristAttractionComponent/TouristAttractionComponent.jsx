@@ -7,18 +7,18 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
-import { useMutation } from "react-query";
 import { useEffect, useState } from "react";
 import { googleImgSearchRequest } from "../../../apis/country/googleApi";
+import StarRatingComponent from "../StarRatingComponent/StarRatingComponent";
 
-// 관광지 5개 따로 검색 구현
-// 검색된 이미지 없을시 빈 이미지 구현
+// 관광지 디테일 페이지 만들기
+// 이름 별점 주소 평점 사진 여러개
 
 function TouristAttractionComponent({ touristAttractionData }) {
     const [imgUrl, setImgUrl] = useState([]);
     const fetchImages = async () => {
         const promises = touristAttractionData
-            .slice(0, 5)
+            .slice(0, 10)
             .map((attraction, index) =>
                 googleImgSearchRequest(attraction.photos[0].name)
                     .then((response) => response.json())
@@ -30,7 +30,7 @@ function TouristAttractionComponent({ touristAttractionData }) {
         setImgUrl(results);
     };
 
-    console.log(imgUrl);
+    console.log(touristAttractionData);
 
     useEffect(() => {
         if (touristAttractionData && touristAttractionData.length > 0) {
@@ -55,7 +55,12 @@ function TouristAttractionComponent({ touristAttractionData }) {
                                 <div css={s.imgBox}>
                                     <img src={imgUrl[index]} alt="" />
                                 </div>
-                                <div css={s.displayName}>{data?.displayName.text}</div>
+                                <div css={s.displayName}>
+                                    {data?.displayName.text}
+                                    <StarRatingComponent
+                                        avrRate={data?.rating}
+                                    />
+                                </div>
                             </div>
                         </SwiperSlide>
                     ))}
