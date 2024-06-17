@@ -7,9 +7,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
-import { useMutation } from "react-query";
 import { useEffect, useState } from "react";
 import { googleImgSearchRequest } from "../../../apis/country/googleApi";
+import StarRatingComponent from "../StarRatingComponent/StarRatingComponent";
 
 // 관광지 5개 따로 검색 구현
 // 검색된 이미지 없을시 빈 이미지 구현
@@ -30,7 +30,7 @@ function TouristAttractionComponent({ touristAttractionData }) {
         setImgUrl(results);
     };
 
-    console.log(imgUrl);
+    console.log(touristAttractionData);
 
     useEffect(() => {
         if (touristAttractionData && touristAttractionData.length > 0) {
@@ -55,7 +55,12 @@ function TouristAttractionComponent({ touristAttractionData }) {
                                 <div css={s.imgBox}>
                                     <img src={imgUrl[index]} alt="" />
                                 </div>
-                                <div css={s.displayName}>{data?.displayName.text}</div>
+                                <div css={s.displayName}>
+                                    {data?.displayName.text}
+                                    <StarRatingComponent
+                                        avrRate={data?.rating}
+                                    />
+                                </div>
                             </div>
                         </SwiperSlide>
                     ))}

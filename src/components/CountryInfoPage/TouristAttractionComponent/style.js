@@ -30,10 +30,15 @@ export const box = css`
 export const imgBox = css`
     width: 270px;
     height: 270px;
+    transition: 0.2s ease-in-out;
 
     & > img {
         width: 100%;
         border-radius: 15px;
+    }
+
+    &:hover {
+        opacity: 0.7;
     }
 `;
 
