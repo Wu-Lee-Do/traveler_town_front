@@ -143,6 +143,7 @@ function CountryInfoPage(props) {
                 <div css={s.touristAttractionLayout}>
                     <TouristAttractionComponent
                         touristAttractionData={touristAttractionData}
+                        searchCountryData={searchCountryData}
                     />
                 </div>
             </div>

@@ -8,8 +8,9 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
 import { useMutation } from "react-query";
-import { unsplashApiRequest } from "../../../apis/country/unsplashApi";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { googleImgSearchRequest } from "../../../apis/country/googleApi";
 
 // 검색 키워드 국가 영문명 추가
 // 관광지 5개 따로 검색 구현
@@ -17,22 +18,25 @@ import { useState } from "react";
 
 function TouristAttractionComponent({ touristAttractionData }) {
     const [imgUrl, setImgUrl] = useState();
-    const unsplashApiMutation = useMutation({
-        mutationKey: "unsplashApiMutation",
-        mutationFn: unsplashApiRequest,
+
+    const googleImgSearchMutation = useMutation({
+        mutationKey: "googleImgSearchMutation",
+        mutationFn: googleImgSearchRequest,
         onSuccess: (response) => {
             response.json().then((result) => {
-                console.log(result);
-                setImgUrl(result.results[0]?.urls.regular);
+                console.log(result.photoUri);
             });
         },
         onError: (error) => {
             console.log(error);
         },
     });
+
     const handleSearchClick = () => {
-        unsplashApiMutation.mutate(touristAttractionData[0]?.displayName.text);
+        googleImgSearchMutation.mutate(touristAttractionData[0].photos[0].name);
     };
+
+    console.log(touristAttractionData);
 
     return (
         <div css={s.layout}>
