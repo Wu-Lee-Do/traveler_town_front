@@ -25,8 +25,19 @@ function MainPage() {
     const navigate = useNavigate();
     const [searchCountry, setSearchCountry] = useState("");
 
+    const activeEnter = (e) => {
+        if (e.key === "Enter") {
+            handleSearchClick();
+        }
+    };
+
     const handleSearchClick = () => {
-        navigate(`/country?search=${searchCountry}`);
+        if (searchCountry.length === 0) {
+            alert("검색할 국가를 입력해주세요.");
+            return;
+        } else {
+            navigate(`/country?search=${searchCountry}`);
+        }
     };
 
     const handleSearchOnChange = (e) => {
@@ -42,6 +53,7 @@ function MainPage() {
                     placeholder="어느 나라로 여행을 떠나시나요?"
                     value={searchCountry}
                     onChange={handleSearchOnChange}
+                    onKeyDown={(e) => activeEnter(e)}
                 />
                 <button onClick={handleSearchClick}>
                     <IoSearchOutline />

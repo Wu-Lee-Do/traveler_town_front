@@ -66,8 +66,19 @@ function CountryInfoPage(props) {
             });
     }, [searchCountryData]);
 
+    const activeEnter = (e) => {
+        if (e.key === "Enter") {
+            handleSearchClick();
+        }
+    };
+
     const handleSearchClick = () => {
-        window.location.replace(`/country?search=${searchCountry}`);
+        if (searchCountry.length === 0) {
+            alert("검색할 국가를 입력해주세요.");
+            return;
+        } else {
+            window.location.replace(`/country?search=${searchCountry}`);
+        }
     };
 
     const handleSearchOnChange = (e) => {
@@ -83,6 +94,7 @@ function CountryInfoPage(props) {
                         placeholder="어느 나라로 여행을 떠나시나요?"
                         value={searchCountry}
                         onChange={handleSearchOnChange}
+                        onKeyDown={(e) => activeEnter(e)}
                     />
                     <button onClick={handleSearchClick}>
                         <IoSearchOutline />
