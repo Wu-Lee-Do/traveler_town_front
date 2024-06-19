@@ -10,12 +10,15 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 import { googleImgSearchRequest } from "../../../apis/country/googleApi";
 import StarRatingComponent from "../StarRatingComponent/StarRatingComponent";
-
-// 관광지 디테일 페이지 만들기
-// 이름 별점 주소 평점 사진 여러개
+import { useRecoilState } from "recoil";
+import { selectedTouristAttractionState } from "../../../atoms/selectedTouristAttractionAtom";
+import { useNavigate } from "react-router-dom";
 
 function TouristAttractionComponent({ touristAttractionData }) {
+    const [selectedTouristAttraction, setSelectedTouristAttraction] =
+        useRecoilState(selectedTouristAttractionState);
     const [imgUrl, setImgUrl] = useState([]);
+    const navigate = useNavigate();
     const fetchImages = async () => {
         const promises = touristAttractionData
             .slice(0, 10)
@@ -38,6 +41,15 @@ function TouristAttractionComponent({ touristAttractionData }) {
         }
     }, [touristAttractionData]);
 
+    const handleBoxClick = (index) => {
+        console.log(touristAttractionData[index]);
+        setSelectedTouristAttraction(touristAttractionData[index]);
+        navigate(
+            `/touristAttraction?search=${touristAttractionData[index]?.displayName.text}`
+        );
+    };
+    console.log(touristAttractionData);
+
     return (
         <div css={s.layout}>
             <h1>관광지</h1>
@@ -51,7 +63,10 @@ function TouristAttractionComponent({ touristAttractionData }) {
                 >
                     {touristAttractionData?.map((data, index) => (
                         <SwiperSlide key={index}>
-                            <div css={s.box}>
+                            <div
+                                css={s.box}
+                                onClick={() => handleBoxClick(index)}
+                            >
                                 <div css={s.imgBox}>
                                     <img src={imgUrl[index]} alt="" />
                                 </div>
