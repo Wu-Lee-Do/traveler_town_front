@@ -9,7 +9,11 @@ import { useMutation } from "react-query";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 import TouristAttractionComponent from "../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
-import { googleTouristAttractionSearchRequest } from "../../apis/country/googleApi";
+import {
+    googleRestaurantSearchRequest,
+    googleTouristAttractionSearchRequest,
+} from "../../apis/country/googleApi";
+import RestaurantComponent from "../../components/CountryInfoPage/RestaurantComponent/RestaurantComponent";
 
 function CountryInfoPage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -17,6 +21,7 @@ function CountryInfoPage() {
     const [searchCountry, setSearchCountry] = useState("");
     const [countryImgUrl, setCountryImgUrl] = useState("");
     const [touristAttractionData, setTouristAttractionData] = useState();
+    const [restaurantData, setRestaurantData] = useState();
 
     const googleTouristAttractionSearchMutation = useMutation({
         mutationKey: "googleTouristAttractionSearchMutation",
@@ -31,8 +36,24 @@ function CountryInfoPage() {
         },
     });
 
+    const googleRestaurantSearchMutation = useMutation({
+        mutationKey: "googleRestaurantSearchMutation",
+        mutationFn: googleRestaurantSearchRequest,
+        onSuccess: (response) => {
+            response.json().then((data) => {
+                setRestaurantData(() => data.places);
+            });
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
     useEffect(() => {
         googleTouristAttractionSearchMutation.mutate(
+            searchCountryData?.countryNameEng
+        );
+        googleRestaurantSearchMutation.mutate(
             searchCountryData?.countryNameEng
         );
     }, [searchCountryData]);
@@ -163,8 +184,10 @@ function CountryInfoPage() {
                 <div css={s.touristAttractionLayout}>
                     <TouristAttractionComponent
                         touristAttractionData={touristAttractionData}
-                        searchCountryData={searchCountryData}
                     />
+                </div>
+                <div css={s.restaurantLayout}>
+                    <RestaurantComponent restaurantData={restaurantData} />
                 </div>
             </div>
         </div>
