@@ -3,17 +3,17 @@ import * as s from "./style";
 
 import { IoSearchOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { searchCountryRequest } from "../../apis/country/countryApi";
+import {useSearchParams } from "react-router-dom";
+import { searchCountryRequest } from "../../../apis/country/countryApi";
 import { useMutation } from "react-query";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
-import TouristAttractionComponent from "../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
+import TouristAttractionComponent from "../../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
 import {
     googleRestaurantSearchRequest,
     googleTouristAttractionSearchRequest,
-} from "../../apis/country/googleApi";
-import RestaurantComponent from "../../components/CountryInfoPage/RestaurantComponent/RestaurantComponent";
+} from "../../../apis/country/googleApi";
+import RestaurantComponent from "../../../components/CountryInfoPage/RestaurantComponent/RestaurantComponent";
 
 function CountryInfoPage() {
     const [searchParams, setSearchParams] = useSearchParams();
