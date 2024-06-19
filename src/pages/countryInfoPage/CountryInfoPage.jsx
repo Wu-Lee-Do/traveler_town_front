@@ -30,8 +30,6 @@ function CountryInfoPage(props) {
         },
     });
 
-    console.log(touristAttractionData);
-
     useEffect(() => {
         googleSearchMutation.mutate(searchCountryData?.countryNameEng);
     }, [searchCountryData]);
@@ -40,6 +38,10 @@ function CountryInfoPage(props) {
         mutationKey: "searchCountryMutation",
         mutationFn: searchCountryRequest,
         onSuccess: (response) => {
+            if (response.data === "") {
+                alert("검색결과가 존재하지 않습니다.");
+                window.location.replace("/");
+            }
             setSearchCountryData(() => response.data);
         },
         onError: (error) => {
