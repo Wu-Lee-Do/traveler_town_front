@@ -7,19 +7,25 @@ import { useSearchParams } from "react-router-dom";
 import { searchCountryRequest } from "../../apis/country/countryApi";
 import { useMutation } from "react-query";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { googleMapsSearchRequest } from "../../apis/country/googleApi";
-import TouristAttractionComponent from "../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
 
-function CountryInfoPage(props) {
+import TouristAttractionComponent from "../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
+import {
+    googleRestaurantSearchRequest,
+    googleTouristAttractionSearchRequest,
+} from "../../apis/country/googleApi";
+import RestaurantComponent from "../../components/CountryInfoPage/RestaurantComponent/RestaurantComponent";
+
+function CountryInfoPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [searchCountryData, setSearchCountryData] = useState();
     const [searchCountry, setSearchCountry] = useState("");
     const [countryImgUrl, setCountryImgUrl] = useState("");
     const [touristAttractionData, setTouristAttractionData] = useState();
+    const [restaurantData, setRestaurantData] = useState();
 
-    const googleSearchMutation = useMutation({
-        mutationKey: "googleSearchMutation",
-        mutationFn: googleMapsSearchRequest,
+    const googleTouristAttractionSearchMutation = useMutation({
+        mutationKey: "googleTouristAttractionSearchMutation",
+        mutationFn: googleTouristAttractionSearchRequest,
         onSuccess: (response) => {
             response.json().then((data) => {
                 setTouristAttractionData(() => data.places);
@@ -30,8 +36,26 @@ function CountryInfoPage(props) {
         },
     });
 
+    const googleRestaurantSearchMutation = useMutation({
+        mutationKey: "googleRestaurantSearchMutation",
+        mutationFn: googleRestaurantSearchRequest,
+        onSuccess: (response) => {
+            response.json().then((data) => {
+                setRestaurantData(() => data.places);
+            });
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
     useEffect(() => {
-        googleSearchMutation.mutate(searchCountryData?.countryNameEng);
+        googleTouristAttractionSearchMutation.mutate(
+            searchCountryData?.countryNameEng
+        );
+        googleRestaurantSearchMutation.mutate(
+            searchCountryData?.countryNameEng
+        );
     }, [searchCountryData]);
 
     const searchCountryMutation = useMutation({
@@ -160,8 +184,10 @@ function CountryInfoPage(props) {
                 <div css={s.touristAttractionLayout}>
                     <TouristAttractionComponent
                         touristAttractionData={touristAttractionData}
-                        searchCountryData={searchCountryData}
                     />
+                </div>
+                <div css={s.restaurantLayout}>
+                    <RestaurantComponent restaurantData={restaurantData} />
                 </div>
             </div>
         </div>
