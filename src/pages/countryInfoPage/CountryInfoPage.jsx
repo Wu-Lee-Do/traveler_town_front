@@ -7,19 +7,20 @@ import { useSearchParams } from "react-router-dom";
 import { searchCountryRequest } from "../../apis/country/countryApi";
 import { useMutation } from "react-query";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { googleMapsSearchRequest } from "../../apis/country/googleApi";
-import TouristAttractionComponent from "../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
 
-function CountryInfoPage(props) {
+import TouristAttractionComponent from "../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
+import { googleTouristAttractionSearchRequest } from "../../apis/country/googleApi";
+
+function CountryInfoPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [searchCountryData, setSearchCountryData] = useState();
     const [searchCountry, setSearchCountry] = useState("");
     const [countryImgUrl, setCountryImgUrl] = useState("");
     const [touristAttractionData, setTouristAttractionData] = useState();
 
-    const googleSearchMutation = useMutation({
-        mutationKey: "googleSearchMutation",
-        mutationFn: googleMapsSearchRequest,
+    const googleTouristAttractionSearchMutation = useMutation({
+        mutationKey: "googleTouristAttractionSearchMutation",
+        mutationFn: googleTouristAttractionSearchRequest,
         onSuccess: (response) => {
             response.json().then((data) => {
                 setTouristAttractionData(() => data.places);
@@ -31,7 +32,9 @@ function CountryInfoPage(props) {
     });
 
     useEffect(() => {
-        googleSearchMutation.mutate(searchCountryData?.countryNameEng);
+        googleTouristAttractionSearchMutation.mutate(
+            searchCountryData?.countryNameEng
+        );
     }, [searchCountryData]);
 
     const searchCountryMutation = useMutation({

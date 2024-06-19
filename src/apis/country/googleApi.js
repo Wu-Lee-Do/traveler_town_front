@@ -1,4 +1,4 @@
-export const googleMapsSearchRequest = async (data) => {
+export const googleTouristAttractionSearchRequest = async (data) => {
     if (data.length === 0) {
         return;
     } else {
