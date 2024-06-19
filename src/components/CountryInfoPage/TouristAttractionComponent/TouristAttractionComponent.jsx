@@ -20,9 +20,9 @@ function TouristAttractionComponent({ touristAttractionData }) {
         const promises = touristAttractionData
             .slice(0, 10)
             .map((attraction, index) =>
-                googleImgSearchRequest(attraction.photos[0].name)
+                googleImgSearchRequest(attraction?.photos[0].name)
                     .then((response) => response.json())
-                    .then((result) => result.photoUri || "defaultImage.jpg")
+                    .then((result) => result?.photoUri || "defaultImage.jpg")
                     .catch(() => "defaultImage.jpg")
             );
 

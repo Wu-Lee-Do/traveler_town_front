@@ -30,8 +30,6 @@ function CountryInfoPage(props) {
         },
     });
 
-    console.log(touristAttractionData);
-
     useEffect(() => {
         googleSearchMutation.mutate(searchCountryData?.countryNameEng);
     }, [searchCountryData]);
@@ -40,6 +38,10 @@ function CountryInfoPage(props) {
         mutationKey: "searchCountryMutation",
         mutationFn: searchCountryRequest,
         onSuccess: (response) => {
+            if (response.data === "") {
+                alert("검색결과가 존재하지 않습니다.");
+                window.location.replace("/");
+            }
             setSearchCountryData(() => response.data);
         },
         onError: (error) => {
@@ -64,8 +66,19 @@ function CountryInfoPage(props) {
             });
     }, [searchCountryData]);
 
+    const activeEnter = (e) => {
+        if (e.key === "Enter") {
+            handleSearchClick();
+        }
+    };
+
     const handleSearchClick = () => {
-        window.location.replace(`/country?search=${searchCountry}`);
+        if (searchCountry.length === 0) {
+            alert("검색할 국가를 입력해주세요.");
+            return;
+        } else {
+            window.location.replace(`/country?search=${searchCountry}`);
+        }
     };
 
     const handleSearchOnChange = (e) => {
@@ -81,6 +94,7 @@ function CountryInfoPage(props) {
                         placeholder="어느 나라로 여행을 떠나시나요?"
                         value={searchCountry}
                         onChange={handleSearchOnChange}
+                        onKeyDown={(e) => activeEnter(e)}
                     />
                     <button onClick={handleSearchClick}>
                         <IoSearchOutline />
