@@ -9,9 +9,11 @@ import * as s from "./style";
 import StarRatingComponent from "../StarRatingComponent/StarRatingComponent";
 import { useEffect, useState } from "react";
 import { googleImgSearchRequest } from "../../../apis/country/googleApi";
+import { useNavigate } from "react-router-dom";
 
 function RestaurantComponent({ restaurantData }) {
     const [imgUrl, setImgUrl] = useState([]);
+    const navigate = useNavigate();
 
     const fetchImages = async () => {
         const promises = restaurantData.slice(0, 10).map((attraction, index) =>
@@ -25,13 +27,17 @@ function RestaurantComponent({ restaurantData }) {
         setImgUrl(results);
     };
 
-    console.log(restaurantData);
+    const handleBoxClick = (index) => {
+        console.log(restaurantData[index]?.id);
+        navigate(`/restaurant?search=${restaurantData[index]?.id}`);
+    };
 
     useEffect(() => {
         if (restaurantData && restaurantData.length > 0) {
             fetchImages();
         }
     }, [restaurantData]);
+    console.log(restaurantData);
 
     return (
         <div css={s.layout}>
@@ -46,7 +52,10 @@ function RestaurantComponent({ restaurantData }) {
                 >
                     {restaurantData?.map((data, index) => (
                         <SwiperSlide key={index}>
-                            <div css={s.box}>
+                            <div
+                                css={s.box}
+                                onClick={() => handleBoxClick(index)}
+                            >
                                 <div css={s.imgBox}>
                                     <img src={imgUrl[index]} alt="" />
                                 </div>

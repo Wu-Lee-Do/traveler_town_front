@@ -19,9 +19,9 @@ export const infoLayout = css`
     align-items: center;
 `;
 
-export const touristAttractionLayout = css`
+export const restaurantLayout = css`
     width: 100%;
-    height: 450px;
+    height: auto;
     padding-top: 50px;
     display: flex;
     justify-content: space-between;
@@ -30,7 +30,7 @@ export const touristAttractionLayout = css`
 export const infoBox = css`
     box-sizing: border-box;
     width: 25%;
-    height: auto;
+    height: 450px;
     border-radius: 15px;
     background-color: white;
     padding-left: 20px;
@@ -115,6 +115,3 @@ export const mapBox = css`
     border-radius: 10px;
     overflow: hidden;
 `;
-
-// 리뷰 구현
-// 지도 api 구현
