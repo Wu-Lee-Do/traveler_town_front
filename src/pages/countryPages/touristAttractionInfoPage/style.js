@@ -2,7 +2,6 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    /* height: 100%; */
     padding-top: 80px;
     padding-bottom: 80px;
 
@@ -10,13 +9,11 @@ export const layout = css`
 
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 `;
 
 export const infoLayout = css`
     width: 1136px;
-    /* height: 800px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,7 +31,6 @@ export const infoBox = css`
     box-sizing: border-box;
     width: 25%;
     height: auto;
-    /* border: 2px solid #dbdbdb; */
     border-radius: 15px;
     background-color: white;
     padding-left: 20px;
@@ -73,4 +69,23 @@ export const imgBox = css`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+
+export const detailInfoLayout = css`
+    width: 100%;
+    background-color: white;
+    margin-top: 60px;
+    border-radius: 15px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+    padding-left: 20px;
+    padding-bottom: 30px;
+
+    & > h2:nth-of-type(2) {
+        padding-top: 20px;
+    }
+`;
+
+export const detailInfoText = css`
+    font-size: 18px;
+    font-weight: 600;
 `;

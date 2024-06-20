@@ -124,6 +124,28 @@ function TouristAttractionInfoPage() {
                         </Swiper>
                     </div>
                 </div>
+                <div css={s.detailInfoLayout}>
+                    {!!placeData?.editorialSummary ? (
+                        <div>
+                            <h2>지역설명</h2>
+                            <div css={s.detailInfoText}>
+                                {placeData?.editorialSummary.text}
+                            </div>
+                        </div>
+                    ) : (
+                        ""
+                    )}
+                    {!!placeData?.formattedAddress ? (
+                        <div>
+                            <h2>주소</h2>
+                            <div css={s.detailInfoText}>
+                                {placeData?.formattedAddress}
+                            </div>
+                        </div>
+                    ) : (
+                        ""
+                    )}
+                </div>
             </div>
         </div>
     );
