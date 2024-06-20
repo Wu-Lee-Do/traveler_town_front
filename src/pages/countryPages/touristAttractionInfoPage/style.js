@@ -35,6 +35,10 @@ export const infoBox = css`
     background-color: white;
     padding-left: 20px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+
+    & > h1 {
+        margin-bottom: 10px;
+    }
 `;
 
 export const openInfo = css`
@@ -49,9 +53,11 @@ export const open = (open) => css`
 
 export const openInfoDetail = css`
     padding-left: 20px;
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
+    color: #333333;
+    line-height: 200%;
 `;
 
 export const imgLayout = css`
@@ -77,19 +83,38 @@ export const detailInfoLayout = css`
     margin-top: 60px;
     border-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
-    padding-left: 20px;
     padding-bottom: 30px;
+    display: flex;
+    justify-content: space-around;
+`;
 
-    & > h2:nth-of-type(2) {
-        padding-top: 20px;
-    }
+export const detailInfoBox = css`
+    width: 40%;
+    height: 500px;
 `;
 
 export const detailInfoText = css`
     font-size: 18px;
     font-weight: 600;
+    color: #333333;
 `;
 
-// 구글 연락처 웹사이트 가져오기
+export const a = css`
+    text-decoration: underline;
+    color: black;
+`;
+
+export const mapBox = css`
+    margin-top: 20px;
+    width: 50%;
+    height: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+`;
+
 // 리뷰 구현
 // 지도 api 구현

@@ -27,7 +27,7 @@ export const googlePlacesDetailRequest = async (data) => {
         return;
     } else {
         return await fetch(
-            `https://places.googleapis.com/v1/places/${data}?fields=displayName,formattedAddress,rating,regularOpeningHours,editorialSummary,reviews,photos&languageCode=ko`,
+            `https://places.googleapis.com/v1/places/${data}?fields=displayName,formattedAddress,rating,regularOpeningHours,editorialSummary,reviews,photos,websiteUri,internationalPhoneNumber,location&languageCode=ko`,
             {
                 method: "GET",
                 headers: {
