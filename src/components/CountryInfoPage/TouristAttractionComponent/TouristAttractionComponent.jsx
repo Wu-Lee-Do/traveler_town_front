@@ -10,15 +10,11 @@ import "./styles.css";
 import { useEffect, useState } from "react";
 import { googleImgSearchRequest } from "../../../apis/country/googleApi";
 import StarRatingComponent from "../StarRatingComponent/StarRatingComponent";
-import { useRecoilState } from "recoil";
-import { selectedTouristAttractionState } from "../../../atoms/selectedTouristAttractionAtom";
 import { useNavigate } from "react-router-dom";
 
 function TouristAttractionComponent({ touristAttractionData }) {
-    const [selectedTouristAttraction, setSelectedTouristAttraction] =
-        useRecoilState(selectedTouristAttractionState);
-    const [imgUrl, setImgUrl] = useState([]);
     const navigate = useNavigate();
+    const [imgUrl, setImgUrl] = useState([]);
     const fetchImages = async () => {
         const promises = touristAttractionData
             .slice(0, 10)
@@ -42,10 +38,9 @@ function TouristAttractionComponent({ touristAttractionData }) {
     }, [touristAttractionData]);
 
     const handleBoxClick = (index) => {
-        console.log(touristAttractionData[index]);
-        setSelectedTouristAttraction(touristAttractionData[index]);
+        console.log(touristAttractionData[index]?.id);
         navigate(
-            `/touristAttraction?search=${touristAttractionData[index]?.displayName.text}`
+            `/touristAttraction?search=${touristAttractionData[index]?.id}`
         );
     };
     console.log(touristAttractionData);

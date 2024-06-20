@@ -1,49 +1,59 @@
 /** @jsxImportSource @emotion/react */
 import { useSearchParams } from "react-router-dom";
 import * as s from "./style";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { selectedTouristAttractionState } from "../../../atoms/selectedTouristAttractionAtom";
+import { useEffect, useState } from "react";
+
+import { useQuery } from "react-query";
+import { googlePlacesDetailRequest } from "../../../apis/country/googleApi";
 import StarRatingComponent from "../../../components/CountryInfoPage/StarRatingComponent/StarRatingComponent";
 
 function TouristAttractionInfoPage() {
     const [searchParam, setSearchParam] = useSearchParams();
-    const [selectedTouristAttraction, setSelectedTouristAttraction] =
-        useRecoilState(selectedTouristAttractionState);
+    const [placeData, setPlaceData] = useState();
+    const placesId = searchParam.get("search");
+    const googlePlacesDetailQuery = useQuery(
+        ["googlePlacesDetailQuery", placesId],
+        () => googlePlacesDetailRequest(placesId),
+        {
+            retry: 2,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                response.json().then((result) => {
+                    setPlaceData(result);
+                });
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
     useEffect(() => {
         console.log(searchParam.get("search"));
-        console.log(selectedTouristAttraction);
-    }, []);
+        console.log(placeData);
+    }, [placeData]);
     return (
         <div css={s.layout}>
             <div css={s.infoLayout}>
                 <div css={s.touristAttractionLayout}>
-                    <h1>{selectedTouristAttraction?.displayName.text}</h1>
+                    <h1>{placeData?.displayName.text}</h1>
                     <div css={s.infoBox}>
-                        <StarRatingComponent
-                            avrRate={selectedTouristAttraction?.rating}
-                        />
+                        <StarRatingComponent avrRate={placeData?.rating} />
                     </div>
                     <div css={s.openInfo}>
-                        {!!selectedTouristAttraction.regularOpeningHours ? (
-                            <div
-                                css={s.openInfo(
-                                    selectedTouristAttraction
-                                        .regularOpeningHours.openNow
-                                )}
-                            >
-                                {selectedTouristAttraction.regularOpeningHours
-                                    .openNow === true
+                        <div css={s.open}>
+                            {!!placeData?.regularOpeningHours
+                                ? placeData?.regularOpeningHours.openNow ===
+                                  true
                                     ? "영업 중"
-                                    : "영업 시간 종료"}
-                            </div>
-                        ) : (
-                            ""
-                        )}
+                                    : "영업시간 종료"
+                                : ""}
+                        </div>
                         <ul css={s.openInfoDetail}>
-                            {!!selectedTouristAttraction.regularOpeningHours
-                                ? selectedTouristAttraction.regularOpeningHours.weekdayDescriptions.map(
-                                      (data) => <li>{data}</li>
+                            {!!placeData?.regularOpeningHours
+                                ? placeData?.regularOpeningHours.weekdayDescriptions.map(
+                                      (data, index) => (
+                                          <li key={index}>{data}</li>
+                                      )
                                   )
                                 : ""}
                         </ul>
