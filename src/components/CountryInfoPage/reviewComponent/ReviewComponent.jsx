@@ -9,8 +9,8 @@ function ReviewComponent({ reviews }) {
     return (
         <div css={s.layout}>
             <h2 css={s.title}>리뷰({reviews?.length})</h2>
-            {reviews?.map((review) => (
-                <div css={s.reviewLayout}>
+            {reviews?.map((review, index) => (
+                <div key={index} css={s.reviewLayout}>
                     <div css={s.profileBox}>
                         <div>
                             <img

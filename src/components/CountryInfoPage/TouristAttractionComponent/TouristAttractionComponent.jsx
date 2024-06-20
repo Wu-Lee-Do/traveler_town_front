@@ -43,7 +43,6 @@ function TouristAttractionComponent({ touristAttractionData }) {
             `/touristAttraction?search=${touristAttractionData[index]?.id}`
         );
     };
-    console.log(touristAttractionData);
 
     return (
         <div css={s.layout}>

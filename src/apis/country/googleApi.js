@@ -45,7 +45,7 @@ export const googleRestaurantSearchRequest = async (data) => {
         return;
     } else {
         return await fetch(
-            "https://places.googleapis.com/v1/places:searchText?fields=places.displayName,places.formattedAddress,places.googleMapsUri,places.websiteUri,places.regularOpeningHours,places.editorialSummary,places.reviews,places.photos,places.rating",
+            "https://places.googleapis.com/v1/places:searchText?fields=places.displayName,places.formattedAddress,places.googleMapsUri,places.websiteUri,places.regularOpeningHours,places.editorialSummary,places.reviews,places.photos,places.rating,places.id",
             {
                 method: "POST",
                 headers: {

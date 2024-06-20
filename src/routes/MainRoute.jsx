@@ -5,6 +5,7 @@ import AuthRoute from "../routes/AuthRoute";
 import AccountRoute from "../routes/AccountRoute";
 import CountryInfoPage from "../pages/countryPages/countryInfoPage/CountryInfoPage";
 import TouristAttractionInfoPage from "../pages/countryPages/touristAttractionInfoPage/TouristAttractionInfoPage";
+import RestaurantInfoPage from "../pages/countryPages/restaurantInfoPage/RestaurantInfoPage";
 
 function MainRoute() {
     return (
@@ -16,6 +17,7 @@ function MainRoute() {
                     path="/touristAttraction"
                     element={<TouristAttractionInfoPage />}
                 />
+                <Route path="/restaurant" element={<RestaurantInfoPage />} />
                 <Route path="/auth/*" element={<AuthRoute />} />
                 <Route path="/account/*" element={<AccountRoute />} />
             </Routes>
