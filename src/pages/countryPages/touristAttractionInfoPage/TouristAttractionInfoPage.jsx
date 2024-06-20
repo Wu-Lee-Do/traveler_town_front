@@ -125,26 +125,52 @@ function TouristAttractionInfoPage() {
                     </div>
                 </div>
                 <div css={s.detailInfoLayout}>
-                    {!!placeData?.editorialSummary ? (
-                        <div>
-                            <h2>지역설명</h2>
-                            <div css={s.detailInfoText}>
-                                {placeData?.editorialSummary.text}
+                    <div css={s.detailInfoBox}>
+                        {!!placeData?.editorialSummary ? (
+                            <div>
+                                <h2>지역설명</h2>
+                                <div css={s.detailInfoText}>
+                                    {placeData?.editorialSummary.text}
+                                </div>
                             </div>
-                        </div>
-                    ) : (
-                        ""
-                    )}
-                    {!!placeData?.formattedAddress ? (
-                        <div>
-                            <h2>주소</h2>
-                            <div css={s.detailInfoText}>
-                                {placeData?.formattedAddress}
+                        ) : (
+                            ""
+                        )}
+                        {!!placeData?.formattedAddress ? (
+                            <div>
+                                <h2>주소</h2>
+                                <div css={s.detailInfoText}>
+                                    {placeData?.formattedAddress}
+                                </div>
                             </div>
-                        </div>
-                    ) : (
-                        ""
-                    )}
+                        ) : (
+                            ""
+                        )}
+                        {!!placeData?.internationalPhoneNumber ? (
+                            <div>
+                                <h2>전화번호</h2>
+                                <div css={s.detailInfoText}>
+                                    {placeData?.internationalPhoneNumber}
+                                </div>
+                            </div>
+                        ) : (
+                            ""
+                        )}
+                        {!!placeData?.websiteUri ? (
+                            <h3>
+                                <a
+                                    css={s.a}
+                                    target="_blank"
+                                    href={placeData?.websiteUri}
+                                >
+                                    홈페이지
+                                </a>
+                            </h3>
+                        ) : (
+                            ""
+                        )}
+                    </div>
+                    <div css={s.mapBox}></div>
                 </div>
             </div>
         </div>
