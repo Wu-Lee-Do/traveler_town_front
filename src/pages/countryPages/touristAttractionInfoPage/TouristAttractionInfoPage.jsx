@@ -15,7 +15,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
-import GoogleMapsComponent from "../googleMapComponent/GoogleMapsComponent";
+import GoogleMapsComponent from "../../../components/CountryInfoPage/googleMapComponent/GoogleMapsComponent";
+import ReviewComponent from "../../../components/CountryInfoPage/reviewComponent/ReviewComponent";
 
 function TouristAttractionInfoPage() {
     const [searchParam, setSearchParam] = useSearchParams();
@@ -40,11 +41,6 @@ function TouristAttractionInfoPage() {
         }
     );
 
-    useEffect(() => {
-        console.log(searchParam.get("search"));
-        console.log(placeData);
-    }, [placeData]);
-
     const fetchImages = async () => {
         const allImagePromises = placeData.photos.slice(0, 10).map((photo) =>
             googleImgSearchRequest(photo.name)
@@ -62,8 +58,6 @@ function TouristAttractionInfoPage() {
             fetchImages();
         }
     }, [placeData]);
-
-    console.log(imgUrls);
 
     return (
         <div css={s.layout}>
@@ -176,6 +170,7 @@ function TouristAttractionInfoPage() {
                         />
                     </div>
                 </div>
+                <ReviewComponent reviews={placeData?.reviews} />
             </div>
         </div>
     );
