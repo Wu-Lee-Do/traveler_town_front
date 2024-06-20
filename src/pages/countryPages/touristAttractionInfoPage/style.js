@@ -89,3 +89,7 @@ export const detailInfoText = css`
     font-size: 18px;
     font-weight: 600;
 `;
+
+// 구글 연락처 웹사이트 가져오기
+// 리뷰 구현
+// 지도 api 구현
