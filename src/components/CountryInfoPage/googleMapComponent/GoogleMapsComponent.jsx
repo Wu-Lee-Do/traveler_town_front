@@ -13,7 +13,6 @@ function GoogleMapsComponent({ lat, lng }) {
     if (isNaN(location.lat) || isNaN(location.lng)) {
         return <div>Error: Invalid coordinates</div>;
     }
-    console.log(lat, lng);
     return (
         <div style={{ width: "100%", height: "100%" }}>
             <APIProvider
