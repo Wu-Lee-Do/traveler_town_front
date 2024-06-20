@@ -17,7 +17,7 @@ function GoogleMapsComponent({ lat, lng }) {
     return (
         <div style={{ width: "100%", height: "100%" }}>
             <APIProvider
-                apiKey={"AIzaSyBfW0NY0PPlXdijK-njQI4HbCDrDZwy5Ko"}
+                apiKey={process.env.REACT_APP_GOOGLE_API_KEY}
                 onLoad={() => console.log("Maps API has loaded.")}
             >
                 <Map
