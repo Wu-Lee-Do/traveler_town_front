@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { useSearchParams } from "react-router-dom";
 import * as s from "./style";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import { useQuery } from "react-query";
 import {
     googleImgSearchRequest,
@@ -11,12 +10,12 @@ import {
 import StarRatingComponent from "../../../components/CountryInfoPage/StarRatingComponent/StarRatingComponent";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import testImg from "../../../assets/banner1.jpg";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
+import GoogleMapsComponent from "../googleMapComponent/GoogleMapsComponent";
 
 function TouristAttractionInfoPage() {
     const [searchParam, setSearchParam] = useSearchParams();
@@ -170,7 +169,12 @@ function TouristAttractionInfoPage() {
                             ""
                         )}
                     </div>
-                    <div css={s.mapBox}></div>
+                    <div css={s.mapBox}>
+                        <GoogleMapsComponent
+                            lat={placeData?.location.latitude}
+                            lng={placeData?.location.longitude}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

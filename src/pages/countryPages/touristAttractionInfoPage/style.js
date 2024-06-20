@@ -85,6 +85,7 @@ export const detailInfoLayout = css`
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     padding-left: 20px;
     padding-bottom: 30px;
+    display: flex;
 `;
 
 export const detailInfoBox = css`
@@ -102,7 +103,10 @@ export const a = css`
     color: black;
 `;
 
-export const mapBox = css``;
+export const mapBox = css`
+    width: 400px;
+    height: 400px;
+`;
 
 // 리뷰 구현
 // 지도 api 구현
