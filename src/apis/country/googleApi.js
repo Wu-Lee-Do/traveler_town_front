@@ -3,7 +3,7 @@ export const googleTouristAttractionSearchRequest = async (data) => {
         return;
     } else {
         return await fetch(
-            "https://places.googleapis.com/v1/places:searchText?fields=places.displayName,places.formattedAddress,places.googleMapsUri,places.websiteUri,places.regularOpeningHours,places.editorialSummary,places.reviews,places.photos,places.rating",
+            "https://places.googleapis.com/v1/places:searchText?fields=places.displayName,places.formattedAddress,places.googleMapsUri,places.websiteUri,places.regularOpeningHours,places.editorialSummary,places.reviews,places.photos,places.rating,places.id",
             {
                 method: "POST",
                 headers: {
@@ -17,6 +17,24 @@ export const googleTouristAttractionSearchRequest = async (data) => {
                     includedType: "tourist_attraction",
                     pageSize: 10,
                 }),
+            }
+        );
+    }
+};
+
+export const googlePlacesDetailRequest = async (data) => {
+    if (data.length === 0) {
+        return;
+    } else {
+        return await fetch(
+            `https://places.googleapis.com/v1/places/${data}?fields=displayName,formattedAddress,rating,regularOpeningHours,editorialSummary,reviews,photos&languageCode=ko`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Goog-Api-Key": process.env.REACT_APP_GOOGLE_API_KEY,
+                    Accept: "application/json",
+                },
             }
         );
     }

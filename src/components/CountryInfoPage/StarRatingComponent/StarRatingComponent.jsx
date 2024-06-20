@@ -20,7 +20,7 @@ function StarRatingComponent({ avrRate }) {
     };
     useEffect(() => {
         setRatesResArr(calcStarRates);
-    }, []);
+    }, [avrRate]);
     return (
         <div css={s.layout}>
             {STAR_IDX_ARR.map((item, idx) => {
