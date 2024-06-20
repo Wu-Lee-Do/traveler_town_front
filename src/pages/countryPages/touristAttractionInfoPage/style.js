@@ -83,13 +83,14 @@ export const detailInfoLayout = css`
     margin-top: 60px;
     border-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
-    padding-left: 20px;
     padding-bottom: 30px;
     display: flex;
+    justify-content: space-around;
 `;
 
 export const detailInfoBox = css`
-    width: 45%;
+    width: 40%;
+    height: 500px;
 `;
 
 export const detailInfoText = css`
@@ -104,8 +105,15 @@ export const a = css`
 `;
 
 export const mapBox = css`
-    width: 400px;
-    height: 400px;
+    margin-top: 20px;
+    width: 50%;
+    height: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
 `;
 
 // 리뷰 구현
