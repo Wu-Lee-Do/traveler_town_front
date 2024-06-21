@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 
-import profileImg from "../../../assets/defaultImg.webp";
 import StarRatingComponent from "../StarRatingComponent/StarRatingComponent";
 
 function ReviewComponent({ reviews }) {

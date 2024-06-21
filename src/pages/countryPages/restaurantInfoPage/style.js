@@ -45,6 +45,7 @@ export const openInfo = css`
     margin-top: 10px;
     font-size: 18px;
     font-weight: 600;
+    height: 65%;
 `;
 
 export const open = (open) => css`
@@ -52,6 +53,8 @@ export const open = (open) => css`
 `;
 
 export const openInfoDetail = css`
+    height: 90%;
+    overflow: auto;
     padding-left: 20px;
     margin-top: 20px;
     font-size: 16px;
