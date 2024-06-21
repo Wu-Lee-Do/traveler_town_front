@@ -3,8 +3,33 @@ import * as s from "./style";
 import defaultImg from "../../../assets/스위스.jpeg";
 import defaultProfileImg from "../../../assets/defaultImg.webp";
 import { IoSearchOutline } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { getMustGoRestaurantAll } from "../../../apis/board/mustGoRestaurantApi";
+import BoardCardComponent from "../../../components/BoardPage/BoardCardComponent/BoardCardComponent";
 
 function MustGoRestaurantPage(props) {
+    const [ mustGoRestaurants, setMustGoRestaurants ] = useState([]);
+
+    const mustGoRestaurantsQuery = useQuery(
+        ["mustGoRestaurantsQuery"],
+        async () => await getMustGoRestaurantAll(),
+        {
+            retry : 0,
+            refetchOnWindowFocus: false,
+            onSuccess : (response) => {
+                setMustGoRestaurants(response.data);
+            },
+            onError : (error) => {
+                console.log(error);
+            }
+        }
+    )
+
+    useEffect(() => {
+        console.log(mustGoRestaurants);
+    }, [mustGoRestaurants])
+
     return (
         <div css={s.layout}>
             <div css={s.box}>
@@ -23,6 +48,21 @@ function MustGoRestaurantPage(props) {
                 </div>
                 <div css={s.listLayout}>
                     <div css={s.listWrap}>
+                        {
+                            mustGoRestaurants.map((data) => 
+                                <BoardCardComponent 
+                                    key={data.boardId} 
+                                    boardTitle={data.boardTitle}
+                                    boardContent={data.boardContent}
+                                    createDate={data.createDate}
+                                    updateDate={data.updateDate}
+                                    profileImg={data.profileImg}
+                                    nickname={data.nickname}
+                                />
+                            )
+                        }
+
+                        {/* 지우지 마세요 */}
                         <div css={s.boardCard}>
                             <div css={s.imgBox}>
                                 <img src={defaultImg} alt="" />
@@ -45,12 +85,6 @@ function MustGoRestaurantPage(props) {
                                 </div>
                             </div>
                         </div>
-                        <div css={s.boardCard}>1</div>
-                        <div css={s.boardCard}>1</div>
-                        <div css={s.boardCard}>1</div>
-                        <div css={s.boardCard}>1</div>
-                        <div css={s.boardCard}>1</div>
-                        <div css={s.boardCard}>1</div>
                     </div>
                 </div>
             </div>
