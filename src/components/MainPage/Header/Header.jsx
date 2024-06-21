@@ -4,6 +4,7 @@ import logo from "../../../assets/logo.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
+import { FaHeart } from "react-icons/fa";
 
 function Header() {
     const navigate = useNavigate();
@@ -44,8 +45,8 @@ function Header() {
                 <div css={s.menu}>
                     <div>동행</div>
                     <div>여행지</div>
-                    <div>관광지</div>
                     <div onClick={handleMustGoRestaurantClick}>맛집</div>
+                    <div>즐겨찾기</div>
                 </div>
                 {!!principalData ? (
                     <div css={s.profileBox} onClick={handleProfileClick}>
