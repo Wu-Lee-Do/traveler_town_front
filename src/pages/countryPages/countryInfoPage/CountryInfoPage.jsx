@@ -2,9 +2,17 @@
 import * as s from "./style";
 
 import { IoSearchOutline } from "react-icons/io5";
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+
 import { useEffect, useState } from "react";
-import {useSearchParams } from "react-router-dom";
-import { searchCountryRequest } from "../../../apis/country/countryApi";
+import { useSearchParams } from "react-router-dom";
+import {
+    addCountryBookmarkRequest,
+    getCountryBookmarkRequest,
+    removeCountryBookmarkRequest,
+    searchCountryRequest,
+} from "../../../apis/country/countryApi";
 import { useMutation } from "react-query";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
@@ -20,6 +28,8 @@ function CountryInfoPage() {
     const [searchCountryData, setSearchCountryData] = useState();
     const [searchCountry, setSearchCountry] = useState("");
     const [countryImgUrl, setCountryImgUrl] = useState("");
+    const [countryBookmarkList, setCountryBookmarkList] = useState([]);
+    const [bookmark, setBookmark] = useState();
     const [touristAttractionData, setTouristAttractionData] = useState();
     const [restaurantData, setRestaurantData] = useState();
 
@@ -49,14 +59,27 @@ function CountryInfoPage() {
         },
     });
 
-    useEffect(() => {
-        googleTouristAttractionSearchMutation.mutate(
-            searchCountryData?.countryNameEng
-        );
-        googleRestaurantSearchMutation.mutate(
-            searchCountryData?.countryNameEng
-        );
-    }, [searchCountryData]);
+    const getCountryBookmarkMutation = useMutation({
+        mutationKey: "getCountryBookmarkMutation",
+        mutationFn: getCountryBookmarkRequest,
+        onSuccess: (response) => {
+            setCountryBookmarkList(response.data);
+            console.log(response.data);
+            if (
+                !!response.data.filter(
+                    (bookmark) =>
+                        bookmark.countryCode === searchCountryData?.countryCode
+                )[0]
+            ) {
+                setBookmark(<FaHeart />);
+            } else {
+                setBookmark(<FaRegHeart />);
+            }
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
 
     const searchCountryMutation = useMutation({
         mutationKey: "searchCountryMutation",
@@ -73,22 +96,49 @@ function CountryInfoPage() {
         },
     });
 
-    useEffect(() => {
-        searchCountryMutation.mutate(searchParams.get("search"));
-    }, []);
+    const addCountryBookmarkMutation = useMutation({
+        mutationKey: "addCountryBookmarkMutation",
+        mutationFn: addCountryBookmarkRequest,
+        onSuccess: (response) => {
+            setBookmark(() => <FaHeart />);
+            getCountryBookmarkMutation.mutate();
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
 
-    useEffect(() => {
-        const storage = getStorage();
-        getDownloadURL(
-            ref(storage, `country/${searchCountryData?.countryCode}.gif`)
-        )
-            .then((url) => {
-                setCountryImgUrl(url);
-            })
-            .catch((error) => {
-                console.log(error);
+    const removeCountryBookmarkMutation = useMutation({
+        mutationKey: "removeCountryBookmarkMutation",
+        mutationFn: removeCountryBookmarkRequest,
+        onSuccess: (response) => {
+            setBookmark(() => <FaRegHeart />);
+            getCountryBookmarkMutation.mutate();
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const handleBookmarkButtonClick = () => {
+        if (
+            !!countryBookmarkList.filter(
+                (bookmark) =>
+                    bookmark.countryCode === searchCountryData?.countryCode
+            )[0]
+        ) {
+            removeCountryBookmarkMutation.mutate(
+                countryBookmarkList.filter(
+                    (bookmark) =>
+                        bookmark.countryCode === searchCountryData.countryCode
+                )[0].countryBookmarkId
+            );
+        } else {
+            addCountryBookmarkMutation.mutate({
+                countryCode: searchCountryData?.countryCode,
             });
-    }, [searchCountryData]);
+        }
+    };
 
     const activeEnter = (e) => {
         if (e.key === "Enter") {
@@ -108,6 +158,35 @@ function CountryInfoPage() {
     const handleSearchOnChange = (e) => {
         setSearchCountry(() => e.target.value);
     };
+    useEffect(() => {
+        googleTouristAttractionSearchMutation.mutate(
+            searchCountryData?.countryNameEng
+        );
+        googleRestaurantSearchMutation.mutate(
+            searchCountryData?.countryNameEng
+        );
+    }, [searchCountryData]);
+
+    useEffect(() => {
+        searchCountryMutation.mutate(searchParams.get("search"));
+    }, []);
+
+    useEffect(() => {
+        getCountryBookmarkMutation.mutate();
+    }, []);
+
+    useEffect(() => {
+        const storage = getStorage();
+        getDownloadURL(
+            ref(storage, `country/${searchCountryData?.countryCode}.gif`)
+        )
+            .then((url) => {
+                setCountryImgUrl(url);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [searchCountryData]);
 
     return (
         <div css={s.layout}>
@@ -129,7 +208,12 @@ function CountryInfoPage() {
                         <img src={countryImgUrl} alt="" />
                     </div>
                     <div css={s.infoBox}>
-                        <h1>{searchCountryData?.countryNameKor}</h1>
+                        <div css={s.titleBox}>
+                            <h1>{searchCountryData?.countryNameKor}</h1>
+                            <button onClick={handleBookmarkButtonClick}>
+                                {bookmark}
+                            </button>
+                        </div>
                         <span>{searchCountryData?.countryNameEng}</span>
                         <div>
                             <div>
