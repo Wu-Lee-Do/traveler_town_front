@@ -77,6 +77,7 @@ export const listHeader = css`
 
 export const listLayout = css`
     width: 100%;
+    height: auto;
     margin-top: 20px;
     display: flex;
     justify-content: center;

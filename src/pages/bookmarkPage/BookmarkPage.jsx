@@ -11,12 +11,13 @@ import {
     searchCountryRequest,
 } from "../../apis/country/countryApi";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 function BookmarkPage() {
     const [countryBookmarkList, setCountryBookmarkList] = useState();
     const [allCountryData, setAllCountryData] = useState();
     const [countryList, setCountryList] = useState();
-    const [countryImgUrls, setCountryImgUrls] = useState([]);
+    const navigate = useNavigate();
 
     const getCountryBookmarkQuery = useQuery(
         ["getCountryBookmarkQuery"],
@@ -79,8 +80,11 @@ function BookmarkPage() {
                         return acc;
                     }, [])
                 );
+                const sortedData = (await Promise.all(mergedData)).sort(
+                    (a, b) => new Date(b.createDate) - new Date(a.createDate)
+                );
 
-                setCountryList(await Promise.all(mergedData));
+                setCountryList(sortedData);
             } catch (error) {
                 console.log(error);
             }
@@ -92,6 +96,10 @@ function BookmarkPage() {
     }, [allCountryData, countryBookmarkList]);
 
     console.log(countryList);
+
+    const handleCountryCardClick = (country) => {
+        navigate(`/country?search=${country}`);
+    };
 
     return (
         <div css={s.layout}>
@@ -115,7 +123,14 @@ function BookmarkPage() {
                     <div css={s.listWrap}>
                         {countryList?.map((country, index) => (
                             <div key={index} css={s.countryCard}>
-                                <div css={s.imgBox}>
+                                <div
+                                    css={s.imgBox}
+                                    onClick={() =>
+                                        handleCountryCardClick(
+                                            country.countryNameKor
+                                        )
+                                    }
+                                >
                                     <img src={country.imageUrl} alt="" />
                                 </div>
                                 <div css={s.boardText}>
