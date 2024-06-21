@@ -5,6 +5,7 @@ export const infoLayout = css`
     height: 90%;
 
     & > h1 {
+        cursor: default;
         font-size: 20px;
     }
 `;
@@ -26,6 +27,7 @@ export const profileBox = css`
     align-items: center;
     font-size: 18px;
     font-weight: 500;
+    cursor: default;
 
     & > img {
         box-sizing: border-box;
@@ -34,6 +36,7 @@ export const profileBox = css`
         border-radius: 120px;
         border: 1px solid #dbdbdb;
         margin-bottom: 15px;
+        cursor: pointer;
     }
 `;
 
@@ -43,6 +46,7 @@ export const infoBox = css`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    cursor: default;
 
     & > div {
         width: 100%;
@@ -81,6 +85,8 @@ export const additionalInfoBox = css`
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    cursor: default;
+
 
     & > div {
         width: 100%;

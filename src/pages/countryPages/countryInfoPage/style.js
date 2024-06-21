@@ -2,38 +2,31 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    /* height: 100%; */
     padding-top: 80px;
     padding-bottom: 80px;
 
-    background-color: #fafafa;
-
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 `;
 
 export const infoLayout = css`
     width: 1136px;
-    /* height: 800px; */
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
 
 export const searchBox = css`
-    box-sizing: border-box;
     margin-top: 30px;
     width: 752px;
     height: 48px;
-    border: 2px solid #dbdbdb;
     border-radius: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    background-color: white;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
 
     & > input {
         width: 693px;
@@ -55,9 +48,12 @@ export const searchBox = css`
 export const countryLayout = css`
     width: 100%;
     height: auto;
-    padding-top: 50px;
+    margin-top: 50px;
+    padding: 40px 0;
     display: flex;
     justify-content: space-around;
+    border-radius: 15px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
 `;
 
 export const imgBox = css`
@@ -70,8 +66,6 @@ export const imgBox = css`
 
     & > img {
         width: 100%;
-        /* box-shadow: 0px 0px 10px #444444;
-        border: 1px solid #dbdbdb; */
     }
 `;
 

@@ -41,6 +41,7 @@ export const profileBox = css`
     justify-content: center;
     font-size: 18px;
     font-weight: 500;
+    cursor: default;
 
     & > img {
         box-sizing: border-box;
