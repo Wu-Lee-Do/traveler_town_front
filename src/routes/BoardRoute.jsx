@@ -10,6 +10,7 @@ function AuthRoute() {
                     path="/mustgorestaurant"
                     element={<MustGoRestaurantPage />}
                 />
+                <Route path="/bookmark" element={<></>} />
             </Routes>
         </>
     );

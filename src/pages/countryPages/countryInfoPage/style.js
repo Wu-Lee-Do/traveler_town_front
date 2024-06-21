@@ -71,10 +71,31 @@ export const imgBox = css`
 
 export const infoBox = css`
     width: 45%;
+`;
+
+export const titleBox = css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     & > h1 {
         margin: 0;
         font-size: 32px;
+    }
+
+    & > button {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        color: #333;
+        background-color: transparent;
+        box-sizing: border-box;
+        border: 2px solid #333;
+        border-radius: 50px;
+        cursor: pointer;
     }
 `;
 

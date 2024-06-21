@@ -39,7 +39,7 @@ export const logo = css`
 `;
 
 export const menu = css`
-    width: 400px;
+    width: 450px;
     height: 60px;
     display: flex;
     justify-content: space-between;
