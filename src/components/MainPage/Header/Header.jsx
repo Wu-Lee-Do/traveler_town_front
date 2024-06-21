@@ -35,6 +35,10 @@ function Header() {
         navigate("/board/mustgorestaurant");
     };
 
+    const handleBookmarkClick = () => {
+        navigate("/board/bookmark");
+    };
+
     return (
         <div css={s.header(scrollPosition)}>
             <div css={s.navBox}>
@@ -46,7 +50,7 @@ function Header() {
                     <div>동행</div>
                     <div>여행지</div>
                     <div onClick={handleMustGoRestaurantClick}>맛집</div>
-                    <div>즐겨찾기</div>
+                    <div onClick={handleBookmarkClick}>즐겨찾기</div>
                 </div>
                 {!!principalData ? (
                     <div css={s.profileBox} onClick={handleProfileClick}>

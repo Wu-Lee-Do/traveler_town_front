@@ -9,26 +9,26 @@ import { getMustGoRestaurantAll } from "../../../apis/board/mustGoRestaurantApi"
 import BoardCardComponent from "../../../components/BoardPage/BoardCardComponent/BoardCardComponent";
 
 function MustGoRestaurantPage(props) {
-    const [ mustGoRestaurants, setMustGoRestaurants ] = useState([]);
+    const [mustGoRestaurants, setMustGoRestaurants] = useState([]);
 
     const mustGoRestaurantsQuery = useQuery(
         ["mustGoRestaurantsQuery"],
         async () => await getMustGoRestaurantAll(),
         {
-            retry : 0,
+            retry: 0,
             refetchOnWindowFocus: false,
-            onSuccess : (response) => {
+            onSuccess: (response) => {
                 setMustGoRestaurants(response.data);
             },
-            onError : (error) => {
+            onError: (error) => {
                 console.log(error);
-            }
+            },
         }
-    )
+    );
 
     useEffect(() => {
         console.log(mustGoRestaurants);
-    }, [mustGoRestaurants])
+    }, [mustGoRestaurants]);
 
     return (
         <div css={s.layout}>
@@ -48,19 +48,17 @@ function MustGoRestaurantPage(props) {
                 </div>
                 <div css={s.listLayout}>
                     <div css={s.listWrap}>
-                        {
-                            mustGoRestaurants.map((data) => 
-                                <BoardCardComponent 
-                                    key={data.boardId} 
-                                    boardTitle={data.boardTitle}
-                                    boardContent={data.boardContent}
-                                    createDate={data.createDate}
-                                    updateDate={data.updateDate}
-                                    profileImg={data.profileImg}
-                                    nickname={data.nickname}
-                                />
-                            )
-                        }
+                        {mustGoRestaurants.map((data) => (
+                            <BoardCardComponent
+                                key={data.boardId}
+                                boardTitle={data.boardTitle}
+                                boardContent={data.boardContent}
+                                createDate={data.createDate}
+                                updateDate={data.updateDate}
+                                profileImg={data.profileImg}
+                                nickname={data.nickname}
+                            />
+                        ))}
 
                         {/* 지우지 마세요 */}
                         <div css={s.boardCard}>

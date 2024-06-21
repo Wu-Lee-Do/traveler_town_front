@@ -173,7 +173,7 @@ function CountryInfoPage() {
 
     useEffect(() => {
         getCountryBookmarkMutation.mutate();
-    }, []);
+    }, [searchCountryData]);
 
     useEffect(() => {
         const storage = getStorage();

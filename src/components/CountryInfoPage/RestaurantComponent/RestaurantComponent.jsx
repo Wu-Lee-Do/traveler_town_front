@@ -16,9 +16,9 @@ function RestaurantComponent({ restaurantData }) {
     const navigate = useNavigate();
 
     const fetchImages = async () => {
-        const promises = restaurantData.slice(0, 10).map((attraction, index) =>
-            googleImgSearchRequest(attraction?.photos[0].name)
-                .then((response) => response.json())
+        const promises = restaurantData?.slice(0, 10).map((attraction, index) =>
+            googleImgSearchRequest(attraction?.photos?.[0]?.name)
+                .then((response) => response?.json())
                 .then((result) => result?.photoUri || "defaultImage.jpg")
                 .catch(() => "defaultImage.jpg")
         );
