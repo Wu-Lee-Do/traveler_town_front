@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import logo from "../../../assets/logo.png";
-import profileImg from "../../../assets/defaultImg.webp";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";

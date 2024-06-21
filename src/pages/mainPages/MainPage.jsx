@@ -50,7 +50,7 @@ function MainPage() {
         } else if (type === "travel") {
             navigate("/");
         } else if (type === "mustgorestaurant") {
-            navigate("/board/mustgorestaurant");
+            window.location.replace("/board/mustgorestaurant");
         }
     };
 
