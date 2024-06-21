@@ -15,7 +15,6 @@ export const basicInfoBox = css`
     display: flex;
     justify-content: start;
     align-items: center;
-    background-color: #fafafa;
 `;
 
 export const profileBox = css`
@@ -30,8 +29,8 @@ export const profileBox = css`
 
     & > img {
         box-sizing: border-box;
-        width: 120px;
-        height: 120px;
+        width: 140px;
+        height: 140px;
         border-radius: 120px;
         border: 1px solid #dbdbdb;
         margin-bottom: 15px;
@@ -82,10 +81,9 @@ export const additionalInfoBox = css`
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    background-color: #fafafa;
 
     & > div {
-        width: 90%;
+        width: 100%;
         height: 50%;
 
         & > div:nth-of-type(1) {
