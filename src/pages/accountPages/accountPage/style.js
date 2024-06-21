@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 export const layout = css`
     width: 100%;
     height: 100%;
-    /* padding-top: 80px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,11 +11,10 @@ export const layout = css`
 
 export const accountBox = css`
     box-sizing: border-box;
-    /* overflow: hidden; */
     width: 1136px;
     height: 80vh;
     border-radius: 15px;
-    border: 2px solid #dbdbdb;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     display: flex;
 `;
 
@@ -24,8 +22,7 @@ export const sideBar = css`
     box-sizing: border-box;
     width: 20%;
     height: 100%;
-    background-color: #fafafa;
-    border-right: 2px solid #dbdbdb;
+    border-right: 1px solid #dbdbdb;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     display: flex;
@@ -37,7 +34,7 @@ export const profileBox = css`
     box-sizing: border-box;
     width: 100%;
     height: 35%;
-    border-bottom: 2px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
     display: flex;
     flex-direction: column;
     align-items: center;

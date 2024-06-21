@@ -11,13 +11,7 @@ function MustGoRestaurantPage(props) {
                 <div css={s.titleBox}>
                     <h1>맛집</h1>
                     <div css={s.searchBox}>
-                        <input
-                            type="text"
-                            placeholder="게시물 검색"
-                            // value={searchCountry}
-                            // onChange={handleSearchOnChange}
-                            // onKeyDown={(e) => activeEnter(e)}
-                        />
+                        <input type="text" placeholder="게시물 검색" />
                         <button>
                             <IoSearchOutline />
                         </button>

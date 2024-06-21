@@ -9,7 +9,10 @@ export const header = (scrollPosition) => css`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-bottom: ${scrollPosition > 10 ? "1px solid #dbdbdb" : "none"};
+    box-shadow: ${scrollPosition > 10
+        ? "0 2px 12px 0 rgba(0, 0, 0, 0.15);"
+        : "none"};
+    transition: 0.3s ease-in-out;
 `;
 
 export const navBox = css`

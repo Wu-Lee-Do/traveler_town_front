@@ -19,7 +19,6 @@ export const editBox = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #fafafa;
 `;
 
 export const inputBox = css`

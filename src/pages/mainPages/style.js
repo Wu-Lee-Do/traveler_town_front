@@ -23,7 +23,8 @@ export const mainTitle = css`
 export const searchBox = css`
     width: 752px;
     height: 48px;
-    border: 2px solid #dbdbdb;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     border-radius: 40px;
     display: flex;
     justify-content: center;
@@ -52,6 +53,7 @@ export const bannerBox = css`
     height: 500px;
     margin-top: 64px;
     border-radius: 15px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     overflow: hidden;
 `;
 
@@ -112,7 +114,7 @@ export const togetherBox = css`
     box-sizing: border-box;
     border: 1px solid #dbdbdb;
     border-radius: 15px;
-    width: 300px;
+    width: 100%;
     height: 250px;
     overflow: hidden;
 `;
@@ -166,6 +168,7 @@ export const togetherInfo = css`
 
 export const newPostTitle = css`
     margin-top: 64px;
+    cursor: default;
 `;
 
 export const postLayout = css`

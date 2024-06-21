@@ -30,7 +30,8 @@ export const searchBox = css`
     box-sizing: border-box;
     width: 300px;
     height: 48px;
-    border: 2px solid #dbdbdb;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     border-radius: 40px;
     display: flex;
     justify-content: center;
