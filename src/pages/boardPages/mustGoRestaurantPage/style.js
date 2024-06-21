@@ -19,6 +19,42 @@ export const box = css`
     }
 `;
 
+export const titleBox = css`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const searchBox = css`
+    box-sizing: border-box;
+    width: 300px;
+    height: 48px;
+    border: 2px solid #dbdbdb;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+
+    & > input {
+        width: 693px;
+        height: 19px;
+        border: none;
+        outline: none;
+        margin-left: 15px;
+        font-size: 16px;
+    }
+
+    & > button {
+        padding-right: 10px;
+        border: none;
+        background-color: transparent;
+        font-size: 20px;
+        cursor: pointer;
+    }
+`;
+
 export const listHeader = css`
     width: 100%;
     display: flex;
