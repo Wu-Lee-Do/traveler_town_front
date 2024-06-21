@@ -44,6 +44,16 @@ function MainPage() {
         setSearchCountry(() => e.target.value);
     };
 
+    const handleBannerClick = (type) => {
+        if (type === "together") {
+            navigate("/");
+        } else if (type === "travel") {
+            navigate("/");
+        } else if (type === "mustgorestaurant") {
+            navigate("/board/mustgorestaurant");
+        }
+    };
+
     return (
         <div css={s.main}>
             <h1 css={s.mainTitle}>여행자들을 위한 쉼터</h1>
@@ -77,6 +87,13 @@ function MainPage() {
                             <img src={banner1} alt="" />
                             <div css={s.bannerTitle}>
                                 <h1>지금 실시간으로 여행 동행을 찾아봐요</h1>
+                                <h3
+                                    onClick={() =>
+                                        handleBannerClick("together")
+                                    }
+                                >
+                                    함께 갈 동행 찾아보기 →
+                                </h3>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide>
@@ -85,12 +102,22 @@ function MainPage() {
                                 <h1>
                                     여행 준비 중이라면, 함께 이야기를 나눠요
                                 </h1>
+                                <h3 onClick={() => handleBannerClick("travel")}>
+                                    여행 이야기 공유하러 가기 →
+                                </h3>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide>
                             <img src={banner3} alt="" />
                             <div css={s.bannerTitle}>
                                 <h1>전 세계 맛집, 같이 공유해봐요</h1>
+                                <h3
+                                    onClick={() =>
+                                        handleBannerClick("mustgorestaurant")
+                                    }
+                                >
+                                    전 세계 맛집 구경하러 가기 →
+                                </h3>
                             </div>
                         </SwiperSlide>
                     </Swiper>
@@ -102,7 +129,7 @@ function MainPage() {
             <div css={s.togetherLayout}>
                 <Swiper
                     slidesPerView={4}
-                    spaceBetween={10}
+                    spaceBetween={15}
                     freeMode={true}
                     modules={[FreeMode]}
                     className="mySwiper"

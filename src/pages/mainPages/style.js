@@ -23,7 +23,6 @@ export const mainTitle = css`
 export const searchBox = css`
     width: 752px;
     height: 48px;
-    border: 1px solid #dbdbdb;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     border-radius: 40px;
     display: flex;
@@ -97,15 +96,25 @@ export const bannerTitle = css`
         padding-left: 50px;
         padding-top: 50px;
     }
+
+    & > h3 {
+        z-index: 999;
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        position: absolute;
+        bottom: 18px;
+        left: 50px;
+        text-decoration: underline;
+        text-underline-offset: 10px;
+        cursor: pointer;
+    }
 `;
 
 export const togetherLayout = css`
     width: 1136px;
-    height: 250px;
-    overflow: scroll;
-    ::-webkit-scrollbar {
-        display: none;
-    }
+    height: 275px;
+    padding: 0 30px;
     display: flex;
     flex-direction: column;
 `;
