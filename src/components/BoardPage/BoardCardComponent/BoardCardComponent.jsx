@@ -3,9 +3,10 @@ import * as s from "./style";
 import defaultImg from "../../../assets/usa.webp"
 import defaultprofileImg from "../../../assets/defaultImg.webp"
 
-function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, profileImg, nickname}) {
+function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, profileImg, nickname, countryNameKor}) {
   return (
     // 업로드 시간 배치 작업 필요
+    // props에 countryNameKor(나라 이름) 배치 작업 필요
     <div css={s.boardCard}>
       <div css={s.imgBox}>
           <img src={defaultImg} alt="" />
