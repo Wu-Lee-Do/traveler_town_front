@@ -5,11 +5,20 @@ import defaultProfileImg from "../../../assets/defaultImg.webp";
 import { IoSearchOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { getMustGoRestaurantAll } from "../../../apis/board/mustGoRestaurantApi";
+import { getMustGoRestaurantAll, getMustGoRestaurantAllBySearch } from "../../../apis/board/mustGoRestaurantApi";
 import BoardCardComponent from "../../../components/BoardPage/BoardCardComponent/BoardCardComponent";
+import BoardSearchComponent from "../../../components/BoardPage/BoardSearchComponent/BoardSearchComponent";
 
 function MustGoRestaurantPage(props) {
     const [mustGoRestaurants, setMustGoRestaurants] = useState([]);
+    const [boardTitle, setBoardTitle] = useState("");
+    const [searchState, setSearchState] = useState(false);
+
+    const searchKeyDown = (e) => {
+        if(e.key === "Enter") {
+            setSearchState(true);
+        }
+    }
 
     const mustGoRestaurantsQuery = useQuery(
         ["mustGoRestaurantsQuery"],
@@ -26,6 +35,25 @@ function MustGoRestaurantPage(props) {
         }
     );
 
+    const mustGoRestaurantsSearchQuery = useQuery(
+        ["mustGoRestaurantsSearchQuery", boardTitle],
+        async () => await getMustGoRestaurantAllBySearch({
+            boardTitle: boardTitle
+        }),
+        {
+            enabled: !!boardTitle && searchState,
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setMustGoRestaurants(response.data);
+                setSearchState(false);
+            },
+            onError: (error) => {
+                console.log(error);
+            }
+        }
+    );
+
     useEffect(() => {
         console.log(mustGoRestaurants);
     }, [mustGoRestaurants]);
@@ -36,10 +64,11 @@ function MustGoRestaurantPage(props) {
                 <div css={s.titleBox}>
                     <h1>맛집</h1>
                     <div css={s.searchBox}>
-                        <input type="text" placeholder="게시물 검색" />
+                        <BoardSearchComponent setSearchText={setBoardTitle} onKeyDown={searchKeyDown} placeholder={"게시물 검색"} onClick={() => setSearchState(true)} />
+                        {/* <input type="text" placeholder="게시물 검색"/>
                         <button>
                             <IoSearchOutline />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
                 <div css={s.listHeader}>
@@ -57,6 +86,7 @@ function MustGoRestaurantPage(props) {
                                 updateDate={data.updateDate}
                                 profileImg={data.profileImg}
                                 nickname={data.nickname}
+                                countryNameKor={data.countryNameKor}
                             />
                         ))}
 
