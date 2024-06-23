@@ -19,8 +19,11 @@ function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, p
               </div>
           </div>
           <div css={s.profileBox}>
-              <img src={profileImg} alt="" />
-              <div css={s.nickname}>{nickname}</div>
+              <div>
+                <img src={profileImg} alt="" />
+                <div css={s.nickname}>{nickname}</div>
+              </div>
+              <div css={s.category}>{countryNameKor}</div>
           </div>
       </div>
     </div>

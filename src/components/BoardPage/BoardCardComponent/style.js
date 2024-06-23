@@ -67,8 +67,14 @@ export const profileBox = css`
     height: 25%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
-    & > img {
+    & > div:nth-of-type(1) {
+        display: flex;
+        align-items: center;
+    }
+
+    & > div > img {
         width: 30px;
         height: 30px;
         margin-left: 20px;
@@ -79,4 +85,18 @@ export const profileBox = css`
 
 export const nickname = css`
     font-weight: 600;
+`;
+
+export const category = css`
+    width: auto;
+    height: auto;
+    margin-right: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: rgb(154, 154, 154);
+    background-color: rgb(248, 248, 248);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;

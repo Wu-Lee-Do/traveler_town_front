@@ -57,6 +57,7 @@ function MustGoRestaurantPage(props) {
                                 updateDate={data.updateDate}
                                 profileImg={data.profileImg}
                                 nickname={data.nickname}
+                                countryNameKor={data.countryNameKor}
                             />
                         ))}
 
