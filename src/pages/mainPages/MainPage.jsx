@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+
 import { IoSearchOutline } from "react-icons/io5";
 import { BiSolidComment } from "react-icons/bi";
 import { FaHeart, FaBookmark } from "react-icons/fa";
@@ -20,6 +21,7 @@ import "./styles.css";
 import Footer from "../../components/MainPage/Footer/Footer";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AlertComponent from "../../components/MainPage/alertComponent/AlertComponent";
 
 function MainPage() {
     const navigate = useNavigate();
@@ -312,6 +314,8 @@ function MainPage() {
                     </SwiperSlide>
                 </Swiper>
             </div>
+            
+            <AlertComponent />
             <Footer />
         </div>
     );
