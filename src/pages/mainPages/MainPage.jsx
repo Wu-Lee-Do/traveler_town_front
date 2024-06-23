@@ -124,7 +124,7 @@ function MainPage() {
                 </div>
             </div>
             <div css={s.newPostTitle}>
-                <h1>최신 여행 동행</h1>
+                <h1>최신 동행 포스트</h1>
             </div>
             <div css={s.togetherLayout}>
                 <Swiper
@@ -173,7 +173,7 @@ function MainPage() {
                 </Swiper>
             </div>
             <div css={s.newPostTitle}>
-                <h1>최신 여행 포스트</h1>
+                <h1>최신 여행지 포스트</h1>
             </div>
             <div css={s.postLayout}>
                 <Swiper
@@ -200,6 +200,77 @@ function MainPage() {
                             </div>
                             <div css={s.postMain}>
                                 <div css={s.content}>
+                                    <h3>여기가요</h3>
+                                    <span>
+                                        Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Neque rerum mollitia
+                                        repudiandae nulla, dolores unde
+                                        corrupti, nesciunt sed numquam error
+                                        magnam blanditiis laboriosam ut minima
+                                        incidunt facilis, deserunt ipsum
+                                        repellat.
+                                    </span>
+                                </div>
+                                <div css={s.postImg}>
+                                    <img src={usa} alt="" />
+                                </div>
+                            </div>
+                            <div css={s.postFooter}>
+                                <div>
+                                    <BiSolidComment />
+                                </div>
+                                <div>
+                                    <FaHeart />
+                                </div>
+                                <div>
+                                    <FaBookmark />
+                                </div>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div css={s.postBox}>포스트 박스2</div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div css={s.postBox}>포스트 박스3</div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div css={s.postBox}>포스트 박스4</div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div css={s.postBox}>포스트 박스5</div>
+                    </SwiperSlide>
+                </Swiper>
+            </div>
+            <div css={s.newRestaurantPost}>
+                <h1>최신 맛집 포스트</h1>
+            </div>
+            <div css={s.postLayout}>
+                <Swiper
+                    slidesPerView={2}
+                    spaceBetween={10}
+                    modules={[Navigation]}
+                    className="mySwiper"
+                    navigation={true}
+                    loop={true}
+                >
+                    <SwiperSlide>
+                        <div css={s.postBox}>
+                            <div css={s.postHeader}>
+                                <div css={s.profileBox}>
+                                    <div css={s.profileImg}>
+                                        <img src={defaultImg} alt="" />
+                                    </div>
+                                    <div css={s.infoBox}>
+                                        <div css={s.nickname}>닉네임</div>
+                                        <div css={s.time}>3분전</div>
+                                    </div>
+                                </div>
+                                <div css={s.category}>미국</div>
+                            </div>
+                            <div css={s.postMain}>
+                                <div css={s.content}>
+                                    <h3>여기가요</h3>
                                     <span>
                                         Lorem ipsum dolor sit amet consectetur
                                         adipisicing elit. Neque rerum mollitia

@@ -266,11 +266,26 @@ export const postMain = css`
 
 export const content = css`
     width: 60%;
-    height: 90%;
+    height: 100%;
     text-align: left;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+
+    & > h3 {
+        margin: 10px 0;
+    }
+
+    & > span {
+        height: 90px;
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        word-break: keep-all;
+    }
 `;
 
 export const postImg = css`
@@ -280,6 +295,12 @@ export const postImg = css`
     border-radius: 10px;
     overflow: hidden;
 `;
+
+export const newRestaurantPost = css`
+    margin-top: 64px;
+    cursor: default;
+`;
+
 export const postFooter = css`
     width: 100%;
     height: 15%;
