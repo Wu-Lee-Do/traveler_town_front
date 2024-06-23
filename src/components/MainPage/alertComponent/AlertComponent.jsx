@@ -35,8 +35,12 @@ function AlertComponent(props) {
                                 <div css={s.countryNameBox}>
                                     <h3>{data.country_nm}</h3>
                                 </div>
-                                <div css={s.category}>
-                                    <h3>{data.ctgy_nm}</h3>
+                                <div css={s.category(data.ctgy_nm)}>
+                                    <h3>
+                                        {data.ctgy_nm === null
+                                            ? ""
+                                            : `[${data.ctgy_nm}]`}
+                                    </h3>
                                 </div>
                             </div>
                             <h3 css={s.content}>{data.title}</h3>

@@ -52,14 +52,14 @@ export const countryNameBox = css`
     }
 `;
 
-export const category = css`
+export const category = (data) => css`
     width: 50px;
 
     & > h3 {
         margin: 7px 0;
         font-size: 20px;
         font-weight: 800;
-        color: white;
+        color: ${data === "주의" ? "rgb(191, 67, 35)" : "rgb(63, 109,174)"};
     }
 `;
 
