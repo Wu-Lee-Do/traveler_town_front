@@ -20,10 +20,14 @@ function App() {
 
     return (
         <>
-            <PageLayout>
-                <Header />
-                <MainRoute />
-            </PageLayout>
+            {principalQuery.isLoading ? (
+                <></>
+            ) : (
+                <PageLayout>
+                    <Header />
+                    <MainRoute />
+                </PageLayout>
+            )}
         </>
     );
 }

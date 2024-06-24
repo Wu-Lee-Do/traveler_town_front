@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import defaultImg from "../../../assets/defaultImg.webp";
 import { useQueryClient } from "react-query";
 import { instance } from "../../../apis/utils/instance";
 import { useAuthCheck } from "../../../hooks/useAuthCheck";
@@ -10,12 +9,11 @@ import EditPasswordComponent from "../../../components/AccountPage/EditPasswordC
 import { useEffect } from "react";
 
 function AccountPage() {
+    useAuthCheck();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
-    useEffect(() => {
-     
-    });
+    useEffect(() => {});
 
     const handleLogoutClick = () => {
         localStorage.removeItem("AccessToken");
@@ -35,7 +33,7 @@ function AccountPage() {
     const handleEditPasswordClick = () => {
         navigate("/account/mypage/edit");
     };
-//로그인 버그 잡기
+
     return (
         <div css={s.layout}>
             <div css={s.accountBox}>
