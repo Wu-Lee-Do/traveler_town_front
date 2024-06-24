@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import MustGoRestaurantPage from "../pages/boardPages/mustGoRestaurantPage/MustGoRestaurantPage";
+import MustGoRestaurantPage from "../pages/boardPages/mustGoRestaurantListPage/MustGoRestaurantPage";
 import BookmarkPage from "../pages/bookmarkPage/BookmarkPage";
 
 function AuthRoute() {
