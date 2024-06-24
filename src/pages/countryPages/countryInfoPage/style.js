@@ -71,12 +71,21 @@ export const imgBox = css`
 
 export const infoBox = css`
     width: 45%;
+
+    & > span {
+        cursor: default;
+    }
+
+    & > div > div > p {
+        cursor: default;
+    }
 `;
 
 export const titleBox = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: default;
 
     & > h1 {
         margin: 0;
@@ -109,4 +118,13 @@ export const restaurantLayout = css`
     margin-top: 50px;
     width: 100%;
     height: 100%;
+`;
+
+export const embassyLayout = css`
+    margin-top: 50px;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(191, 209, 224);
 `;
