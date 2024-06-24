@@ -21,3 +21,7 @@ export const removeCountryBookmarkRequest = async (data) => {
         `/country/removebookmark?countryBookmarkId=${data}`
     );
 };
+
+export const getCountryNameKorAndCountryCodeAllRequest = async () => {
+    return await instance.get("/country/getcountry");  
+};
