@@ -10,6 +10,7 @@ export const layout = css`
 
     & > h1 {
         width: 100%;
+        cursor: default;
     }
 `;
 

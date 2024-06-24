@@ -71,12 +71,21 @@ export const imgBox = css`
 
 export const infoBox = css`
     width: 45%;
+
+    & > span {
+        cursor: default;
+    }
+
+    & > div > div > p {
+        cursor: default;
+    }
 `;
 
 export const titleBox = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: default;
 
     & > h1 {
         margin: 0;
