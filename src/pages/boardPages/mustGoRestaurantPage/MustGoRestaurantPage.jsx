@@ -5,7 +5,10 @@ import defaultProfileImg from "../../../assets/defaultImg.webp";
 import { IoSearchOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { getMustGoRestaurantAll, getMustGoRestaurantAllBySearch } from "../../../apis/board/mustGoRestaurantApi";
+import {
+    getMustGoRestaurantAll,
+    getMustGoRestaurantAllBySearch,
+} from "../../../apis/board/mustGoRestaurantApi";
 import BoardCardComponent from "../../../components/BoardPage/BoardCardComponent/BoardCardComponent";
 import BoardSearchComponent from "../../../components/BoardPage/BoardSearchComponent/BoardSearchComponent";
 
@@ -15,10 +18,10 @@ function MustGoRestaurantPage(props) {
     const [searchState, setSearchState] = useState(false);
 
     const searchKeyDown = (e) => {
-        if(e.key === "Enter") {
+        if (e.key === "Enter") {
             setSearchState(true);
         }
-    }
+    };
 
     const mustGoRestaurantsQuery = useQuery(
         ["mustGoRestaurantsQuery"],
@@ -37,9 +40,10 @@ function MustGoRestaurantPage(props) {
 
     const mustGoRestaurantsSearchQuery = useQuery(
         ["mustGoRestaurantsSearchQuery", boardTitle],
-        async () => await getMustGoRestaurantAllBySearch({
-            boardTitle: boardTitle
-        }),
+        async () =>
+            await getMustGoRestaurantAllBySearch({
+                boardTitle: boardTitle,
+            }),
         {
             enabled: !!boardTitle && searchState,
             retry: 0,
@@ -50,7 +54,7 @@ function MustGoRestaurantPage(props) {
             },
             onError: (error) => {
                 console.log(error);
-            }
+            },
         }
     );
 
@@ -64,7 +68,12 @@ function MustGoRestaurantPage(props) {
                 <div css={s.titleBox}>
                     <h1>맛집</h1>
                     <div css={s.searchBox}>
-                        <BoardSearchComponent setSearchText={setBoardTitle} onKeyDown={searchKeyDown} placeholder={"게시물 검색"} onClick={() => setSearchState(true)} />
+                        <BoardSearchComponent
+                            setSearchText={setBoardTitle}
+                            onKeyDown={searchKeyDown}
+                            placeholder={"게시물 검색"}
+                            onClick={() => setSearchState(true)}
+                        />
                         {/* <input type="text" placeholder="게시물 검색"/>
                         <button>
                             <IoSearchOutline />

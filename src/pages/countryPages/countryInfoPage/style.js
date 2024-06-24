@@ -110,3 +110,12 @@ export const restaurantLayout = css`
     width: 100%;
     height: 100%;
 `;
+
+export const embassyLayout = css`
+    margin-top: 50px;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(191, 209, 224);
+`;
