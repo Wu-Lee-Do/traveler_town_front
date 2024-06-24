@@ -82,14 +82,17 @@ export const menuBox = css`
     & > div:nth-of-type(2) {
         //로그아웃 버튼 css
         height: 50px;
+        padding: 0px 16px;
+        border-radius: 30px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 16px;
+        font-size: 18px;
+        font-weight: 600;
 
         cursor: pointer;
         &:hover {
-            text-decoration: underline;
+            background-color: #f2f2f2;
         }
     }
 `;
