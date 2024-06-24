@@ -76,7 +76,13 @@ function AlertComponent(props) {
                                     </h3>
                                 </div>
                             </div>
-                            <h3 css={s.content}>{data.title}</h3>
+                            <a
+                                href={`https://www.0404.go.kr/dev/newest_view.mofa?id=${data?.sfty_notice_id}`}
+                                target="__blanck"
+                            >
+                                <h3 css={s.content}>{data.title}</h3>
+                            </a>
+
                             <p>{data.wrt_dt}</p>
                         </li>
                     ))}
