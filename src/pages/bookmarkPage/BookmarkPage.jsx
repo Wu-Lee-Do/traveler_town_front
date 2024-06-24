@@ -3,6 +3,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import * as s from "./style";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { useAuthCheck } from "../../hooks/useAuthCheck";
 import {
     addCountryBookmarkRequest,
     getCountryAllRequest,
@@ -14,15 +15,18 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
 function BookmarkPage() {
+    useAuthCheck();
     const [countryBookmarkList, setCountryBookmarkList] = useState();
     const [allCountryData, setAllCountryData] = useState();
     const [countryList, setCountryList] = useState();
+    const [categoryState, setCategoryState] = useState(1);
     const navigate = useNavigate();
 
     const getCountryBookmarkQuery = useQuery(
         ["getCountryBookmarkQuery"],
         getCountryBookmarkRequest,
         {
+            enabled: categoryState === 1,
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
@@ -38,6 +42,7 @@ function BookmarkPage() {
         ["getAllCountryQuery"],
         getCountryAllRequest,
         {
+            enabled: categoryState === 1,
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
@@ -90,15 +95,29 @@ function BookmarkPage() {
             }
         };
 
-        if (allCountryData?.length > 0 && countryBookmarkList?.length > 0) {
+        if (
+            allCountryData?.length > 0 &&
+            countryBookmarkList?.length > 0 &&
+            categoryState === 1
+        ) {
             fetchDataAndImages();
         }
-    }, [allCountryData, countryBookmarkList]);
+    }, [allCountryData, countryBookmarkList, categoryState]);
 
-    console.log(countryList);
+    useEffect(() => {
+        console.log(categoryState);
+        setCategoryState(1);
+    }, []);
 
     const handleCountryCardClick = (country) => {
         navigate(`/country?search=${country}`);
+    };
+
+    const handleCategoryClick = (category) => {
+        setCategoryState(category);
+        if (category !== 1) {
+            setCountryList([]);
+        }
     };
 
     return (
@@ -113,11 +132,11 @@ function BookmarkPage() {
                         </button>
                     </div>
                 </div>
-                <div css={s.listHeader}>
-                    <div>국가</div>
-                    <div>동행</div>
-                    <div>여행지</div>
-                    <div>맛집</div>
+                <div css={s.listHeader(categoryState)}>
+                    <div onClick={() => handleCategoryClick(1)}>국가</div>
+                    <div onClick={() => handleCategoryClick(2)}>동행</div>
+                    <div onClick={() => handleCategoryClick(3)}>여행지</div>
+                    <div onClick={() => handleCategoryClick(4)}>맛집</div>
                 </div>
                 <div css={s.listLayout}>
                     <div css={s.listWrap}>

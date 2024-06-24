@@ -314,7 +314,7 @@ function MainPage() {
                     </SwiperSlide>
                 </Swiper>
             </div>
-            
+
             <AlertComponent />
             <Footer />
         </div>

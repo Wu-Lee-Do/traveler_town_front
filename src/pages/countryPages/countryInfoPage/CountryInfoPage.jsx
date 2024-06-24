@@ -13,7 +13,7 @@ import {
     removeCountryBookmarkRequest,
     searchCountryRequest,
 } from "../../../apis/country/countryApi";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 import TouristAttractionComponent from "../../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
@@ -22,6 +22,8 @@ import {
     googleTouristAttractionSearchRequest,
 } from "../../../apis/country/googleApi";
 import RestaurantComponent from "../../../components/CountryInfoPage/RestaurantComponent/RestaurantComponent";
+import EmbassyComponent from "../../../components/CountryInfoPage/EmbassyComponent/EmbassyComponent";
+import { getEmbassyRequest } from "../../../apis/country/embassyApi";
 
 function CountryInfoPage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -32,6 +34,7 @@ function CountryInfoPage() {
     const [bookmark, setBookmark] = useState();
     const [touristAttractionData, setTouristAttractionData] = useState();
     const [restaurantData, setRestaurantData] = useState();
+    const [embassyList, setEmbassyList] = useState();
 
     const googleTouristAttractionSearchMutation = useMutation({
         mutationKey: "googleTouristAttractionSearchMutation",
@@ -119,6 +122,22 @@ function CountryInfoPage() {
             console.log(error);
         },
     });
+
+    const getEmbassyQuery = useQuery(
+        ["getEmbassyQuery", searchCountryData?.countryCode],
+        async () => await getEmbassyRequest(searchCountryData?.countryCode),
+        {
+            enabled: !!searchCountryData,
+            retry: 2,
+            onSuccess: (response) => {
+                console.log(response.data);
+                setEmbassyList(response.data);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
 
     const handleBookmarkButtonClick = () => {
         if (
@@ -273,6 +292,13 @@ function CountryInfoPage() {
                 <div css={s.restaurantLayout}>
                     <RestaurantComponent restaurantData={restaurantData} />
                 </div>
+                {!!embassyList ? (
+                    <div css={s.embassyLayout}>
+                        <EmbassyComponent embassyData={embassyList} />
+                    </div>
+                ) : (
+                    <></>
+                )}
             </div>
         </div>
     );

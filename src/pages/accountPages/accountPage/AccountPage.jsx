@@ -1,19 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import defaultImg from "../../../assets/defaultImg.webp";
 import { useQueryClient } from "react-query";
 import { instance } from "../../../apis/utils/instance";
 import { useAuthCheck } from "../../../hooks/useAuthCheck";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import InfoComponent from "../../../components/AccountPage/InfoComponent/InfoComponent";
 import EditPasswordComponent from "../../../components/AccountPage/EditPasswordComponent/EditPasswordComponent";
+import { useEffect } from "react";
 
 function AccountPage() {
-    // useAuthCheck();
+    useAuthCheck();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
-    console.log(principalData);
+    useEffect(() => {});
 
     const handleLogoutClick = () => {
         localStorage.removeItem("AccessToken");

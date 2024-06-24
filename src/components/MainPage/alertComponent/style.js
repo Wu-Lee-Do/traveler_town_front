@@ -3,8 +3,8 @@ import { css } from "@emotion/react";
 export const layout = css`
     margin-top: 64px;
     width: 100%;
-    height: 500px;
-    background-color: #fe7864;
+    height: 550px;
+    background-color: rgb(255, 245, 218);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,7 +12,7 @@ export const layout = css`
 
 export const newAlertPost = css`
     cursor: default;
-    color: white;
+    color: black;
 `;
 
 export const postBox = css`
@@ -33,11 +33,28 @@ export const post = css`
 
     & > p {
         margin: 0;
-        color: white;
+        color: black;
     }
 
     & > div {
         display: flex;
+    }
+
+    & > a {
+        text-decoration: none;
+    }
+`;
+
+export const imgBox = css`
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+
+    & > img {
+        width: 100%;
     }
 `;
 
@@ -48,7 +65,7 @@ export const countryNameBox = css`
         margin: 7px 0;
         font-size: 20px;
         font-weight: 800;
-        color: white;
+        color: black;
     }
 `;
 
@@ -67,5 +84,5 @@ export const content = css`
     margin: 7px 0;
     font-size: 20px;
     font-weight: 800;
-    color: white;
+    color: black;
 `;

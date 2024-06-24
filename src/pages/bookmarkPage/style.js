@@ -54,11 +54,16 @@ export const searchBox = css`
     }
 `;
 
-export const listHeader = css`
+export const listHeader = (state) => css`
     width: 100%;
     display: flex;
     align-items: center;
     margin: 30px 0;
+
+    & > div:nth-of-type(${state}) {
+        text-decoration: underline;
+        text-underline-offset: 5px;
+    }
 
     & > div {
         margin: 0 25px;
@@ -67,11 +72,6 @@ export const listHeader = css`
         font-size: 20px;
         font-weight: 600;
         cursor: pointer;
-
-        &:hover {
-            text-decoration: underline;
-            text-underline-offset: 5px;
-        }
     }
 `;
 

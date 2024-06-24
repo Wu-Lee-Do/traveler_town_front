@@ -20,12 +20,21 @@ function App() {
 
     return (
         <>
-            <PageLayout>
-                <Header />
-                <MainRoute />
-            </PageLayout>
+            {principalQuery.isLoading ? (
+                <></>
+            ) : (
+                <PageLayout>
+                    <Header />
+                    <MainRoute />
+                </PageLayout>
+            )}
         </>
     );
 }
 
 export default App;
+
+
+
+
+// 즐겨찾기 검색 구현
