@@ -7,13 +7,15 @@ import { useAuthCheck } from "../../../hooks/useAuthCheck";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import InfoComponent from "../../../components/AccountPage/InfoComponent/InfoComponent";
 import EditPasswordComponent from "../../../components/AccountPage/EditPasswordComponent/EditPasswordComponent";
+import { useEffect } from "react";
 
 function AccountPage() {
-    // useAuthCheck();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
-    console.log(principalData);
+    useEffect(() => {
+     
+    });
 
     const handleLogoutClick = () => {
         localStorage.removeItem("AccessToken");
@@ -33,7 +35,7 @@ function AccountPage() {
     const handleEditPasswordClick = () => {
         navigate("/account/mypage/edit");
     };
-
+//로그인 버그 잡기
     return (
         <div css={s.layout}>
             <div css={s.accountBox}>

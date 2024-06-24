@@ -3,6 +3,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import * as s from "./style";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { useAuthCheck } from "../../hooks/useAuthCheck";
 import {
     addCountryBookmarkRequest,
     getCountryAllRequest,
@@ -14,6 +15,7 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
 function BookmarkPage() {
+    useAuthCheck();
     const [countryBookmarkList, setCountryBookmarkList] = useState();
     const [allCountryData, setAllCountryData] = useState();
     const [countryList, setCountryList] = useState();
