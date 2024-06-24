@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const layout = css`
     margin-top: 64px;
     width: 100%;
-    height: 500px;
+    height: 550px;
     background-color: #fe7864;
     display: flex;
     flex-direction: column;
@@ -38,6 +38,19 @@ export const post = css`
 
     & > div {
         display: flex;
+    }
+`;
+
+export const imgBox = css`
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+
+    & > img {
+        width: 100%;
     }
 `;
 
