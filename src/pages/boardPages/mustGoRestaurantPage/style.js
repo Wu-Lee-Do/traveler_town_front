@@ -57,10 +57,16 @@ export const searchBox = css`
 export const listHeader = css`
     width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin: 30px 0;
 
     & > div {
+        display:flex;
+        justify-content: center;
+    }
+
+    & > div > div {
         margin: 0 25px;
         display: flex;
         justify-content: center;
@@ -71,6 +77,28 @@ export const listHeader = css`
         &:hover {
             text-decoration: underline;
             text-underline-offset: 5px;
+        }
+    }
+
+    & > button {
+        margin-right: 25px;
+        width: 50px;
+        height: 50px;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+        border: none;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color:white;
+        font-size: 20px;
+        font-weight: 800;
+        border-radius: 50%;
+        transition: all 0.3s;
+        cursor: pointer;
+
+        &: hover {
+            background-color: rgba(0, 0, 0, 0.1);
         }
     }
 `;

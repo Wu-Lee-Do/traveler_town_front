@@ -12,7 +12,8 @@ export const searchInput = css`
 export const searchButton = css`
     padding-right: 10px;
     border: none;
-    background-color: transparent;
+    
     font-size: 20px;
     cursor: pointer;
+    border-radius: 40px;
 `;

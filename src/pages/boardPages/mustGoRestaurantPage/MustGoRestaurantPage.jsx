@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import { getMustGoRestaurantAll, getMustGoRestaurantAllBySearch } from "../../../apis/board/mustGoRestaurantApi";
 import BoardCardComponent from "../../../components/BoardPage/BoardCardComponent/BoardCardComponent";
 import BoardSearchComponent from "../../../components/BoardPage/BoardSearchComponent/BoardSearchComponent";
+import { TfiWrite } from "react-icons/tfi";
 
 function MustGoRestaurantPage(props) {
     const [mustGoRestaurants, setMustGoRestaurants] = useState([]);
@@ -72,8 +73,11 @@ function MustGoRestaurantPage(props) {
                     </div>
                 </div>
                 <div css={s.listHeader}>
-                    <div>최신</div>
-                    <div>인기</div>
+                    <div>
+                        <div>최신</div>
+                        <div>인기</div>
+                    </div>
+                    <button><TfiWrite/></button>
                 </div>
                 <div css={s.listLayout}>
                     <div css={s.listWrap}>
