@@ -9,11 +9,13 @@ import { getMustGoRestaurantAll, getMustGoRestaurantAllBySearch } from "../../..
 import BoardCardComponent from "../../../components/BoardPage/BoardCardComponent/BoardCardComponent";
 import BoardSearchComponent from "../../../components/BoardPage/BoardSearchComponent/BoardSearchComponent";
 import { TfiWrite } from "react-icons/tfi";
+import { useNavigate } from "react-router-dom";
 
-function MustGoRestaurantPage(props) {
+function MustGoRestaurantListPage(props) {
     const [mustGoRestaurants, setMustGoRestaurants] = useState([]);
     const [boardTitle, setBoardTitle] = useState("");
     const [searchState, setSearchState] = useState(false);
+    const navigator = useNavigate();
 
     const searchKeyDown = (e) => {
         if(e.key === "Enter") {
@@ -77,7 +79,7 @@ function MustGoRestaurantPage(props) {
                         <div>최신</div>
                         <div>인기</div>
                     </div>
-                    <button><TfiWrite/></button>
+                    <button onClick={() => navigator("/board/mustgorestaurant/write")}><TfiWrite/></button>
                 </div>
                 <div css={s.listLayout}>
                     <div css={s.listWrap}>
@@ -124,4 +126,4 @@ function MustGoRestaurantPage(props) {
     );
 }
 
-export default MustGoRestaurantPage;
+export default MustGoRestaurantListPage;

@@ -1,7 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import MustGoRestaurantPage from "../pages/boardPages/mustGoRestaurantPage/MustGoRestaurantPage";
+import MustGoRestaurantListPage from "../pages/boardPages/mustGoRestaurantListPage/MustGoRestaurantListPage";
 import BookmarkPage from "../pages/bookmarkPage/BookmarkPage";
+import MustGoRestaurantWritePage from "../pages/boardPages/mustGoRestaurantWritePage/MustGoRestaurantWritePage";
 
 function AuthRoute() {
     return (
@@ -9,7 +10,11 @@ function AuthRoute() {
             <Routes>
                 <Route
                     path="/mustgorestaurant"
-                    element={<MustGoRestaurantPage />}
+                    element={<MustGoRestaurantListPage />}
+                />
+                <Route
+                    path="/mustgorestaurant/write"
+                    element={<MustGoRestaurantWritePage />}
                 />
                 <Route path="/bookmark" element={<BookmarkPage />} />
             </Routes>
