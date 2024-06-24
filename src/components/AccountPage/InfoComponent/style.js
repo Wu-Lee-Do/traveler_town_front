@@ -87,7 +87,6 @@ export const additionalInfoBox = css`
     align-items: center;
     cursor: default;
 
-
     & > div {
         width: 100%;
         height: 50%;
@@ -113,13 +112,20 @@ export const additionalInfoBox = css`
         align-items: center;
 
         & > button {
+            padding: 0px 16px;
+            height: 42px;
+            border-radius: 30px;
             border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: transparent;
-            font-size: 15px;
+            font-size: 20px;
+            font-weight: 600;
             cursor: pointer;
 
             &:hover {
-                font-weight: 600;
+                background-color: #f2f2f2;
             }
         }
     }
