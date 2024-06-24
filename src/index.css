@@ -19,3 +19,29 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
+
+.ql-editor {
+    height: auto;
+}
+
+.ql-toolbar {
+    border-radius: 20px 20px 0px 0px;
+}
+
+.ql-container.ql-snow {
+    border-radius: 0px 0px 20px 20px;
+    border: none;
+}
+
+.ql-toolbar.ql-snow {
+    border: none;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.ql-fill {
+    color: #fff;
+}
+
+.ql-editor.ql-blank {
+    border: none;
+}

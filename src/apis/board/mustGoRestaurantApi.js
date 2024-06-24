@@ -7,3 +7,7 @@ export const getMustGoRestaurantAll = async () => {
 export const getMustGoRestaurantAllBySearch = async (params) => {
     return await instance.get("/restaurant/board", {params});
 }
+
+export const addMustGoRestaurant = async (data) => {
+    return await instance.post("/restaurant/new", data);
+}

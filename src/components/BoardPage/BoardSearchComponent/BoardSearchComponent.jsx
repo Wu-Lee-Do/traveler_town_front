@@ -11,8 +11,8 @@ function BoardSearchComponent({setSearchText, onKeyDown, onClick, placeholder}) 
 
     return (
         <>
-            <input type="text" placeholder={placeholder} onChange={boardTitleOnChange} onKeyDown={onKeyDown}/>
-            <button onClick={onClick}>
+            <input type="text" placeholder={placeholder} onChange={boardTitleOnChange} onKeyDown={onKeyDown} css={s.searchInput}/>
+            <button onClick={onClick} css={s.searchButton}>
                 <IoSearchOutline />
             </button>
         </>

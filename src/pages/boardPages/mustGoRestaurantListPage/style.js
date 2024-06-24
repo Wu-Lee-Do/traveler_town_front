@@ -35,23 +35,6 @@ export const searchBox = css`
     justify-content: center;
     align-items: center;
     font-size: 20px;
-
-    & > input {
-        width: 693px;
-        height: 19px;
-        border: none;
-        outline: none;
-        margin-left: 15px;
-        font-size: 16px;
-    }
-
-    & > button {
-        padding-right: 10px;
-        border: none;
-        background-color: transparent;
-        font-size: 20px;
-        cursor: pointer;
-    }
 `;
 
 export const listHeader = css`
