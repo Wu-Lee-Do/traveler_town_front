@@ -4,6 +4,7 @@ import MustGoRestaurantListPage from "../pages/boardPages/mustGoRestaurantListPa
 
 import BookmarkPage from "../pages/bookmarkPage/BookmarkPage";
 import MustGoRestaurantWritePage from "../pages/boardPages/mustGoRestaurantWritePage/MustGoRestaurantWritePage";
+import BoardDetailPage from "../pages/boardPages/boardDetailPage/BoardDetailPage";
 
 function AuthRoute() {
     return (
@@ -16,6 +17,10 @@ function AuthRoute() {
                 <Route
                     path="/mustgorestaurant/write"
                     element={<MustGoRestaurantWritePage />}
+                />
+                <Route
+                    path="/mustgorestaurant/detail"
+                    element={<BoardDetailPage />}
                 />
                 <Route path="/bookmark" element={<BookmarkPage />} />
             </Routes>
