@@ -2,8 +2,8 @@
 import * as s from "./style";
 
 import { IoSearchOutline } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaRegBookmark } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -74,9 +74,9 @@ function CountryInfoPage() {
                         bookmark.countryCode === searchCountryData?.countryCode
                 )[0]
             ) {
-                setBookmark(<FaHeart />);
+                setBookmark(<FaBookmark />);
             } else {
-                setBookmark(<FaRegHeart />);
+                setBookmark(<FaRegBookmark />);
             }
         },
         onError: (error) => {
@@ -103,7 +103,7 @@ function CountryInfoPage() {
         mutationKey: "addCountryBookmarkMutation",
         mutationFn: addCountryBookmarkRequest,
         onSuccess: (response) => {
-            setBookmark(() => <FaHeart />);
+            setBookmark(() => <FaBookmark />);
             getCountryBookmarkMutation.mutate();
         },
         onError: (error) => {
@@ -115,7 +115,7 @@ function CountryInfoPage() {
         mutationKey: "removeCountryBookmarkMutation",
         mutationFn: removeCountryBookmarkRequest,
         onSuccess: (response) => {
-            setBookmark(() => <FaRegHeart />);
+            setBookmark(() => <FaRegBookmark />);
             getCountryBookmarkMutation.mutate();
         },
         onError: (error) => {

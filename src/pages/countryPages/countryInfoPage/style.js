@@ -99,10 +99,10 @@ export const titleBox = css`
         justify-content: center;
         align-items: center;
         font-size: 20px;
-        color: #333;
+        color: rgb(22, 68, 113);
         background-color: transparent;
         box-sizing: border-box;
-        border: 2px solid #333;
+        border: 2px solid rgb(22, 68, 113);
         border-radius: 50px;
         cursor: pointer;
     }
