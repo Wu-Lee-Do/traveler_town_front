@@ -25,7 +25,7 @@ function BoardQuillComponent({value, onChange, height, ref}) {
             value={value}
             style={{
                 width: "100%",
-                height: height,
+                height: `${height}px`,
                 borderRadius: 20,
                 border: "none"
             }}

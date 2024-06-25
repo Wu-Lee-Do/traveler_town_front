@@ -53,7 +53,7 @@ function BoardWriteComponent({setboardTitle, setCountryCode, quillValue, quillOn
         </div>
       </div>
       <div css={s.writeLayout}>
-        <BoardQuillComponent value={quillValue} onChange={quillOnChange} ref={quillRef}/>
+        <BoardQuillComponent value={quillValue} onChange={quillOnChange} ref={quillRef} height={600}/>
       </div>
     </>
   )

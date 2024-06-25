@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
     width: 100%;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
