@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 
 export const boardCard = css`
+    position: relative;
     width: 100%;
     height: 370px;
     background-color: white;
@@ -12,6 +13,24 @@ export const boardCard = css`
     &:hover {
         margin-top: -10px;
     }
+`;
+
+export const category = css`
+    position: absolute;
+    top: 15px;
+    right: 0;
+    width: auto;
+    height: 22.5px;
+    margin-right: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: rgb(154, 154, 154);
+    background-color: rgb(248, 248, 248);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 `;
 
 export const imgBox = css`
@@ -35,14 +54,18 @@ export const boardInfo = css`
 `;
 
 export const boardText = css`
+    position: relative;
     width: 100%;
     height: 75%;
 
     & > h3 {
-        height: 20%;
+        height: 22.5px;
         margin: 0;
         margin-bottom: 10px;
-        padding: 20px 0 0 20px;
+        padding: 20px 20px 0px 20px;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        white-space: normal; 
     }
 
     & > div {
@@ -51,12 +74,12 @@ export const boardText = css`
         color: #333333;
         font-size: 16px;
         overflow: hidden;
+        text-overflow: ellipsis; 
         white-space: normal;
-        text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
-        word-break: keep-all;
+        word-break: break-word;
     }
 `;
 
@@ -87,16 +110,4 @@ export const nickname = css`
     font-weight: 600;
 `;
 
-export const category = css`
-    width: auto;
-    height: auto;
-    margin-right: 15px;
-    padding: 5px;
-    border-radius: 10px;
-    font-size: 13px;
-    color: rgb(154, 154, 154);
-    background-color: rgb(248, 248, 248);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
+
