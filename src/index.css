@@ -25,11 +25,11 @@ code {
 }
 
 .ql-toolbar {
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 15px 15px 0px 0px;
 }
 
 .ql-container.ql-snow {
-    border-radius: 0px 0px 20px 20px;
+    border-radius: 0px 0px 15px 15px;
     border: none;
 }
 
