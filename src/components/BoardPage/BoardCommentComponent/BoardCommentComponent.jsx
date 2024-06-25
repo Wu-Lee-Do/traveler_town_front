@@ -111,7 +111,15 @@ function BoardCommentComponent(props) {
                     </div>
                 </div>
             </div>
-            <div css={s.commentWriteBox}>댓글작성</div>
+            <div css={s.commentWriteBox}>
+                <div css={s.profileBox}>
+                    <img src={defaultImg} alt="" />
+                    <div>동윤잉</div>
+                </div>
+                <div css={s.inputBox}>
+                    <input type="text" />
+                </div>
+            </div>
         </div>
     );
 }

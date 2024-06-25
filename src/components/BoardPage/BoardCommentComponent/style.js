@@ -59,9 +59,13 @@ export const info = css`
         align-items: center;
 
         & > div {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
         }
+    }
+
+    & > div:nth-of-type(2) {
+        font-size: 14px;
     }
 
     & > div > img {
@@ -81,8 +85,36 @@ export const comment = css`
 
 export const commentWriteBox = css`
     width: 100%;
-    height: 150px;
+    height: 170px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+
+    & > div > img {
+        box-sizing: border-box;
+        width: 25px;
+        border-radius: 15px;
+        border: 1px solid #dbdbdb;
+        margin-right: 5px;
+    }
+`;
+
+export const profileBox = css`
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+`;
+
+export const inputBox = css`
+    /* padding: 10px 10px; */
+    height: 100%;
+
+    & > input {
+        border: none;
+        width: 80%;
+        padding: 5px 10px 5px 10px;
+        background-color: gray;
+    }
 `;
