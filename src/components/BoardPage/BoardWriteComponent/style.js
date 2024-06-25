@@ -1,10 +1,17 @@
 import { css } from "@emotion/react";
 
-export const titleLayout = css`
+export const layout = css`
     padding: 20px;
     width: 100%;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
-    border-radius: 40px;
+    box-sizing: border-box;
+    border-radius: 15px;
+`;
+
+export const titleLayout = css`
+    padding: 20px;
+    width: 100%;
+    border-bottom: 1px solid #dbdbdb;
     box-sizing: border-box;
 `;
 
@@ -28,9 +35,8 @@ export const countriesLayout = css`
 export const countriesCard = css`
     padding: 10px;
     width: 230px;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
-    border-radius: 40px;
     box-sizing: border-box;
+    border-bottom: 1px solid #dbdbdb;
 `;
 
 export const submitButton = css`
