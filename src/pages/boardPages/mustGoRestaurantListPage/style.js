@@ -35,47 +35,21 @@ export const searchBox = css`
     justify-content: center;
     align-items: center;
     font-size: 20px;
-<<<<<<< 82-맛집-게시글-작성-페이지-구현
-=======
-
-    & > input {
-        width: 693px;
-        height: 19px;
-        border: none;
-        outline: none;
-        margin-left: 15px;
-        font-size: 16px;
-    }
-
-    & > button {
-        padding-right: 10px;
-        border: none;
-        background-color: transparent;
-        font-size: 20px;
-        cursor: pointer;
-    }
->>>>>>> main
 `;
 
 export const listHeader = css`
     width: 100%;
     display: flex;
-<<<<<<< 82-맛집-게시글-작성-페이지-구현
     justify-content: space-between;
-=======
->>>>>>> main
     align-items: center;
     margin: 30px 0;
 
     & > div {
-<<<<<<< 82-맛집-게시글-작성-페이지-구현
         display:flex;
         justify-content: center;
     }
 
     & > div > div {
-=======
->>>>>>> main
         margin: 0 25px;
         display: flex;
         justify-content: center;
@@ -88,7 +62,6 @@ export const listHeader = css`
             text-underline-offset: 5px;
         }
     }
-<<<<<<< 82-맛집-게시글-작성-페이지-구현
 
     & > button {
         margin-right: 25px;
@@ -111,8 +84,6 @@ export const listHeader = css`
             background-color: rgba(0, 0, 0, 0.1);
         }
     }
-=======
->>>>>>> main
 `;
 
 export const listLayout = css`
