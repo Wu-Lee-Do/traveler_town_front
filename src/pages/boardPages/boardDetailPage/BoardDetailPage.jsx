@@ -3,6 +3,7 @@ import * as s from "./style";
 
 import BoardDetailComponent from "../../../components/BoardPage/BoardDetailComponent/BoardDetailComponent";
 import defaultImg from "../../../assets/defaultImg.webp";
+import BoardCommentComponent from "../../../components/BoardPage/BoardCommentComponent/BoardCommentComponent";
 
 function BoardDetailPage(props) {
     return (
@@ -19,7 +20,9 @@ function BoardDetailPage(props) {
                     <div>
                         <BoardDetailComponent />
                     </div>
-                    <div>댓글 컴포넌트</div>
+                    <div>
+                        <BoardCommentComponent />
+                    </div>
                 </div>
             </div>
         </div>
