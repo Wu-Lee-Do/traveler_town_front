@@ -12,50 +12,39 @@ import {
 } from "../../../apis/board/mustGoRestaurantApi";
 import BoardSearchComponent from "../BoardSearchComponent/BoardSearchComponent";
 import BoardCardComponent from "../BoardCardComponent/BoardCardComponent";
+import {
+    getBoardsAll,
+    getBoardsAllBySearch,
+} from "../../../apis/board/boardApi";
 
 function BoardListPageComponent({ listTitle, boardCategoryId }) {
     const [mustGoRestaurants, setMustGoRestaurants] = useState([]);
-    const [boardTitle, setBoardTitle] = useState("");
+    const [searchText, setSearchText] = useState("");
     const [searchState, setSearchState] = useState(false);
     const [categoryState, setCategoryState] = useState(1);
     const navigate = useNavigate();
 
+    // 최신, 인기 리스트 분류 작업 필요
+
     const searchKeyDown = (e) => {
         if (e.key === "Enter") {
-            setSearchState(true);
-            setCategoryState(3);
+            // setSearchState(true);
+            // setCategoryState(3);
+            boardsAllBySearchQuery.refetch();
         }
     };
 
-    const mustGoRestaurantsQuery = useQuery(
-        ["mustGoRestaurantsQuery"],
-        async () => await getMustGoRestaurantAll(),
-        {
-            enabled: categoryState === 1,
-            retry: 0,
-            refetchOnWindowFocus: false,
-            onSuccess: (response) => {
-                setMustGoRestaurants(response.data);
-            },
-            onError: (error) => {
-                console.log(error);
-            },
-        }
-    );
-
-    const mustGoRestaurantsSearchQuery = useQuery(
-        ["mustGoRestaurantsSearchQuery", boardTitle],
+    const boardsAllQuery = useQuery(
+        ["boardsAllQuery"],
         async () =>
-            await getMustGoRestaurantAllBySearch({
-                boardTitle: boardTitle,
+            await getBoardsAll({
+                boardCategoryId: boardCategoryId,
             }),
         {
-            enabled: !!boardTitle && searchState,
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
                 setMustGoRestaurants(response.data);
-                setSearchState(false);
             },
             onError: (error) => {
                 console.log(error);
@@ -63,9 +52,24 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
         }
     );
 
-    useEffect(() => {
-        setCategoryState(1);
-    }, []);
+    const boardsAllBySearchQuery = useQuery(
+        ["boardsAllBySearchQuery"],
+        async () =>
+            await getBoardsAllBySearch({
+                boardCategoryId: boardCategoryId,
+                searchText: searchText,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setMustGoRestaurants(response.data);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
 
     const handleCategoryClick = (category) => {
         setCategoryState(category);
@@ -75,7 +79,8 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
     };
 
     const handleResetClick = () => {
-        setCategoryState(1);
+        setSearchText("");
+        boardsAllQuery.refetch();
     };
 
     return (
@@ -89,7 +94,8 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
                         </button>
                         <div css={s.searchBox}>
                             <BoardSearchComponent
-                                setSearchText={setBoardTitle}
+                                searchText={searchText}
+                                setSearchText={setSearchText}
                                 onKeyDown={searchKeyDown}
                                 placeholder={"게시물 검색"}
                                 onClick={() => setSearchState(true)}
