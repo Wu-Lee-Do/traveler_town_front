@@ -31,7 +31,7 @@ export const profileBox = css`
     display: flex;
     align-items: center;
     height: 38.5px;
-    font-size: 2em;
+    font-size: 1.3em;
     font-weight: 600;
 
     & > img {

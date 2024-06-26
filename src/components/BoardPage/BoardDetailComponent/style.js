@@ -39,17 +39,23 @@ export const boardDetailInfo = css`
 `;
 
 export const category = css`
+    cursor: pointer;
     width: auto;
     height: auto;
     margin-right: 15px;
     padding: 5px;
     border-radius: 10px;
-    font-size: 18px;
-    color: #333333;
+    font-size: 16px;
+    color: #9a9a9a;
     background-color: rgb(248, 248, 248);
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: rgba(228, 228, 228);
+    }
 `;
 
 export const date = css`

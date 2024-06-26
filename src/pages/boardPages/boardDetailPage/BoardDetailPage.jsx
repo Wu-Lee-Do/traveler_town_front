@@ -11,6 +11,7 @@ import { useState } from "react";
 function BoardDetailPage() {
     const params = useParams();
     const [boardData, setBoardData] = useState();
+
     const getBoardByBoardIdQuery = useQuery(
         ["getBoardByBoardIdQuery", params.boardId],
         () => getMustGoRestaurantByBoardId(params.boardId),

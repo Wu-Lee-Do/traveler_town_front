@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import defaultImg from "../../../assets/스위스.jpeg";
-import defaultProfileImg from "../../../assets/defaultImg.webp";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { TfiWrite } from "react-icons/tfi";
+import { FaPencilAlt } from "react-icons/fa";
+import { GrPowerReset } from "react-icons/gr";
+
 import { useNavigate } from "react-router-dom";
 import {
     getMustGoRestaurantAll,
@@ -17,11 +17,13 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
     const [mustGoRestaurants, setMustGoRestaurants] = useState([]);
     const [boardTitle, setBoardTitle] = useState("");
     const [searchState, setSearchState] = useState(false);
+    const [categoryState, setCategoryState] = useState(1);
     const navigate = useNavigate();
 
     const searchKeyDown = (e) => {
         if (e.key === "Enter") {
             setSearchState(true);
+            setCategoryState(3);
         }
     };
 
@@ -29,6 +31,7 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
         ["mustGoRestaurantsQuery"],
         async () => await getMustGoRestaurantAll(),
         {
+            enabled: categoryState === 1,
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
@@ -60,35 +63,51 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
         }
     );
 
+    useEffect(() => {
+        setCategoryState(1);
+    }, []);
+
+    const handleCategoryClick = (category) => {
+        setCategoryState(category);
+        if (category !== 1) {
+            setMustGoRestaurants([]);
+        }
+    };
+
+    const handleResetClick = () => {
+        setCategoryState(1);
+    };
+
     return (
         <div css={s.layout}>
             <div css={s.box}>
                 <div css={s.titleBox}>
                     <h1>{listTitle}</h1>
-                    <div css={s.searchBox}>
-                        <BoardSearchComponent
-                            setSearchText={setBoardTitle}
-                            onKeyDown={searchKeyDown}
-                            placeholder={"게시물 검색"}
-                            onClick={() => setSearchState(true)}
-                        />
-                        {/* <input type="text" placeholder="게시물 검색"/>
-                        <button>
-                            <IoSearchOutline />
-                        </button> */}
+                    <div>
+                        <button onClick={handleResetClick}>
+                            <GrPowerReset />
+                        </button>
+                        <div css={s.searchBox}>
+                            <BoardSearchComponent
+                                setSearchText={setBoardTitle}
+                                onKeyDown={searchKeyDown}
+                                placeholder={"게시물 검색"}
+                                onClick={() => setSearchState(true)}
+                            />
+                        </div>
                     </div>
                 </div>
-                <div css={s.listHeader}>
+                <div css={s.listHeader(categoryState)}>
                     <div>
-                        <div>최신</div>
-                        <div>인기</div>
+                        <div onClick={() => handleCategoryClick(1)}>최신</div>
+                        <div onClick={() => handleCategoryClick(2)}>인기</div>
                     </div>
                     <button
                         onClick={() =>
                             navigate("/board/mustgorestaurant/write")
                         }
                     >
-                        <TfiWrite />
+                        <FaPencilAlt />
                     </button>
                 </div>
                 <div css={s.listLayout}>

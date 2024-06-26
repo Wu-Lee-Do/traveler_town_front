@@ -140,4 +140,5 @@ export const submitButton = (commentInputValue) => css`
     align-items: center;
     transition: all 0.3s ease-in-out;
     color: ${commentInputValue.length === 0 ? "#eee" : "rgb(22, 68, 113)"};
+    cursor: ${commentInputValue.length === 0 ? "default" : "pointer"};
 `;
