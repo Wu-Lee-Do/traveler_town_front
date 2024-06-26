@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-export const layout = css `
+export const layout = css`
     width: 100%;
     height: auto;
     margin-bottom: 20px;
@@ -27,6 +27,7 @@ export const titleBox = css`
 export const contentBox = css`
     display: flex;
     width: 100%;
+    min-height: 700px;
     justify-content: center;
 
     & > div:nth-of-type(1) {

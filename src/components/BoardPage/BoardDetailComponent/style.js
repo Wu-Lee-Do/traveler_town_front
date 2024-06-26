@@ -6,7 +6,7 @@ export const layout = css`
 
 export const box = css`
     width: 100%;
-    height: 700px;
+    min-height: 700px;
     border-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     display: flex;
@@ -39,21 +39,26 @@ export const boardDetailInfo = css`
 `;
 
 export const category = css`
+    cursor: pointer;
     width: auto;
     height: auto;
     margin-right: 15px;
     padding: 5px;
     border-radius: 10px;
-    font-size: 18px;
-    color: #333333;
+    font-size: 16px;
+    color: #9a9a9a;
     background-color: rgb(248, 248, 248);
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: rgba(228, 228, 228);
+    }
 `;
 
 export const date = css`
     font-size: 18px;
     color: #333333;
 `;
-

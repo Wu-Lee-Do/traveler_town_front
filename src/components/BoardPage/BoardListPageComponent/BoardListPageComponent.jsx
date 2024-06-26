@@ -1,31 +1,37 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import defaultImg from "../../../assets/스위스.jpeg";
-import defaultProfileImg from "../../../assets/defaultImg.webp";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { TfiWrite } from "react-icons/tfi";
+import { FaPencilAlt } from "react-icons/fa";
+import { GrPowerReset } from "react-icons/gr";
+
 import { useNavigate } from "react-router-dom";
-import { getMustGoRestaurantAll, getMustGoRestaurantAllBySearch } from "../../../apis/board/mustGoRestaurantApi";
+import {
+    getMustGoRestaurantAll,
+    getMustGoRestaurantAllBySearch,
+} from "../../../apis/board/mustGoRestaurantApi";
 import BoardSearchComponent from "../BoardSearchComponent/BoardSearchComponent";
 import BoardCardComponent from "../BoardCardComponent/BoardCardComponent";
 
-function BoardListPageComponent({listTitle, boardCategoryId}) {
+function BoardListPageComponent({ listTitle, boardCategoryId }) {
     const [mustGoRestaurants, setMustGoRestaurants] = useState([]);
     const [boardTitle, setBoardTitle] = useState("");
     const [searchState, setSearchState] = useState(false);
-    const navigator = useNavigate();
+    const [categoryState, setCategoryState] = useState(1);
+    const navigate = useNavigate();
 
     const searchKeyDown = (e) => {
-        if(e.key === "Enter") {
+        if (e.key === "Enter") {
             setSearchState(true);
+            setCategoryState(3);
         }
-    }
+    };
 
     const mustGoRestaurantsQuery = useQuery(
         ["mustGoRestaurantsQuery"],
         async () => await getMustGoRestaurantAll(),
         {
+            enabled: categoryState === 1,
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
@@ -39,9 +45,10 @@ function BoardListPageComponent({listTitle, boardCategoryId}) {
 
     const mustGoRestaurantsSearchQuery = useQuery(
         ["mustGoRestaurantsSearchQuery", boardTitle],
-        async () => await getMustGoRestaurantAllBySearch({
-            boardTitle: boardTitle
-        }),
+        async () =>
+            await getMustGoRestaurantAllBySearch({
+                boardTitle: boardTitle,
+            }),
         {
             enabled: !!boardTitle && searchState,
             retry: 0,
@@ -52,35 +59,63 @@ function BoardListPageComponent({listTitle, boardCategoryId}) {
             },
             onError: (error) => {
                 console.log(error);
-            }
+            },
         }
     );
+
+    useEffect(() => {
+        setCategoryState(1);
+    }, []);
+
+    const handleCategoryClick = (category) => {
+        setCategoryState(category);
+        if (category !== 1) {
+            setMustGoRestaurants([]);
+        }
+    };
+
+    const handleResetClick = () => {
+        setCategoryState(1);
+    };
 
     return (
         <div css={s.layout}>
             <div css={s.box}>
                 <div css={s.titleBox}>
                     <h1>{listTitle}</h1>
-                    <div css={s.searchBox}>
-                        <BoardSearchComponent setSearchText={setBoardTitle} onKeyDown={searchKeyDown} placeholder={"게시물 검색"} onClick={() => setSearchState(true)} />
-                        {/* <input type="text" placeholder="게시물 검색"/>
-                        <button>
-                            <IoSearchOutline />
-                        </button> */}
+                    <div>
+                        <button onClick={handleResetClick}>
+                            <GrPowerReset />
+                        </button>
+                        <div css={s.searchBox}>
+                            <BoardSearchComponent
+                                setSearchText={setBoardTitle}
+                                onKeyDown={searchKeyDown}
+                                placeholder={"게시물 검색"}
+                                onClick={() => setSearchState(true)}
+                            />
+                        </div>
                     </div>
                 </div>
-                <div css={s.listHeader}>
+                <div css={s.listHeader(categoryState)}>
                     <div>
-                        <div>최신</div>
-                        <div>인기</div>
+                        <div onClick={() => handleCategoryClick(1)}>최신</div>
+                        <div onClick={() => handleCategoryClick(2)}>인기</div>
                     </div>
-                    <button onClick={() => navigator("/board/mustgorestaurant/write")}><TfiWrite/></button>
+                    <button
+                        onClick={() =>
+                            navigate("/board/mustgorestaurant/write")
+                        }
+                    >
+                        <FaPencilAlt />
+                    </button>
                 </div>
                 <div css={s.listLayout}>
                     <div css={s.listWrap}>
                         {mustGoRestaurants.map((data) => (
                             <BoardCardComponent
                                 key={data.boardId}
+                                boardId={data.boardId}
                                 boardTitle={data.boardTitle}
                                 boardContent={data.boardContent}
                                 createDate={data.createDate}
@@ -90,35 +125,11 @@ function BoardListPageComponent({listTitle, boardCategoryId}) {
                                 countryNameKor={data.countryNameKor}
                             />
                         ))}
-
-                        {/* 지우지 마세요 */}
-                        <div css={s.boardCard}>
-                            <div css={s.imgBox}>
-                                <img src={defaultImg} alt="" />
-                            </div>
-                            <div css={s.boardInfo}>
-                                <div css={s.boardText}>
-                                    <h3>스위스 맛집</h3>
-                                    <div>
-                                        Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing elit. Quod atque qui,
-                                        molestiae non sapiente error quidem
-                                        dolorem repellat veniam odio animi
-                                        obcaecati voluptatem aperiam magnam cum
-                                        tempore molestias provident esse.
-                                    </div>
-                                </div>
-                                <div css={s.profileBox}>
-                                    <img src={defaultProfileImg} alt="" />
-                                    <div css={s.nickname}>nickname</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default BoardListPageComponent;

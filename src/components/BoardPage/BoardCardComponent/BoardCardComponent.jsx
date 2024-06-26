@@ -4,8 +4,10 @@ import defaultImg from "../../../assets/usa.webp";
 import defaultprofileImg from "../../../assets/defaultImg.webp";
 import { BiSolidComment } from "react-icons/bi";
 import { FaHeart, FaBookmark } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function BoardCardComponent({
+    boardId,
     boardTitle,
     boardContent,
     createDate,
@@ -16,6 +18,7 @@ function BoardCardComponent({
 }) {
     const imgTagRegex = /<img[^>]+src="([^">]+)"/i;
     const match = boardContent.match(imgTagRegex);
+    const navigate = useNavigate();
 
     const removeHtmlTags = (boardContent) => {
         return boardContent.replace(/<[^>]*>/g, "");
@@ -28,10 +31,14 @@ function BoardCardComponent({
         const day = String(date.getDate()).padStart(2, "0");
         return `${year}.${month}.${day}`;
     };
-
+  
+    const handleBoardCardClick = () => {
+        navigate(`/board/mustgorestaurant/${boardId}`);
+    };
+  
     return (
         // 업로드 시간 배치 작업 필요
-        <div css={s.boardCard}>
+        <div css={s.boardCard} onClick={handleBoardCardClick}>
             <div css={s.category}>{countryNameKor}</div>
             <div css={s.imgBox}>
                 <img src={match ? match[1] : defaultImg} alt="" />
