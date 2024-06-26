@@ -12,7 +12,7 @@ function AuthRoute() {
             <Routes>
                 <Route
                     path="/mustgorestaurant"
-                    element={<MustGoRestaurantListPage />}
+                    element={<MustGoRestaurantListPage boardCategoryId={1} />}
                 />
                 <Route
                     path="/mustgorestaurant/write"
