@@ -104,17 +104,40 @@ export const commentWriteBox = css`
 export const profileBox = css`
     display: flex;
     align-items: center;
-    padding: 10px 10px;
+    padding: 5px 10px;
 `;
 
 export const inputBox = css`
-    /* padding: 10px 10px; */
+    padding-left: 10px;
     height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 
-    & > input {
+    & > textarea {
+        resize: none;
+        width: 100%;
+        height: 88%;
         border: none;
-        width: 80%;
-        padding: 5px 10px 5px 10px;
-        background-color: gray;
+        border-top: 1px solid #dbdbdb;
+        padding-top: 3px;
+        &:focus {
+            outline: none;
+        }
     }
+`;
+
+export const submitButton = (commentInputValue) => css`
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    margin-right: 5px;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    color: ${commentInputValue.length === 0 ? "#eee" : "rgb(22, 68, 113)"};
 `;
