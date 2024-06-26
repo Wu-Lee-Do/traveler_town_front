@@ -3,12 +3,11 @@ import * as s from "./style";
 
 import defaultImg from "../../../assets/defaultImg.webp";
 import { FaArrowCircleUp } from "react-icons/fa";
-
 import { useEffect, useRef, useState } from "react";
 
 function BoardCommentComponent(props) {
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [commentInputValue, setCommentInputValue] = useState();
+    const [commentInputValue, setCommentInputValue] = useState("");
     const scrollRef = useRef(null);
     const updateScroll = () => {
         if (scrollRef.current) {

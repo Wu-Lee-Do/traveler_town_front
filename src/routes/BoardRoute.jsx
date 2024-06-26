@@ -19,7 +19,7 @@ function AuthRoute() {
                     element={<MustGoRestaurantWritePage />}
                 />
                 <Route
-                    path="/mustgorestaurant/detail"
+                    path="/mustgorestaurant/:boardId"
                     element={<BoardDetailPage />}
                 />
                 <Route path="/bookmark" element={<BookmarkPage />} />
