@@ -6,7 +6,7 @@ export const layout = css`
 
 export const box = css`
     width: 100%;
-    height: 700px;
+    min-height: 700px;
     border-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     display: flex;
@@ -56,4 +56,3 @@ export const date = css`
     font-size: 18px;
     color: #333333;
 `;
-
