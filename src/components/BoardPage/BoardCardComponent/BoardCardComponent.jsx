@@ -11,6 +11,14 @@ function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, p
     return boardContent.replace(/<[^>]*>/g, '');
   }
 
+  const dateString = (createDate) => {
+    const date = new Date(createDate);
+    const year = String(date.getFullYear()).slice(-2);
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  }
+
   return (
     // 업로드 시간 배치 작업 필요
     <div css={s.boardCard}>
@@ -25,13 +33,13 @@ function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, p
               <div>
                   {removeHtmlTags(boardContent)}
               </div>
+              <div>{dateString(createDate)}</div>
           </div>
           <div css={s.profileBox}>
               <div>
                 <img src={profileImg} alt="" />
                 <div css={s.nickname}>{nickname}</div>
               </div>
-              
           </div>
       </div>
     </div>

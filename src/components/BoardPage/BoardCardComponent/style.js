@@ -68,7 +68,7 @@ export const boardText = css`
         white-space: normal; 
     }
 
-    & > div {
+    & > div:nth-of-type(1) {
         height: 80px;
         padding: 0 20px;
         color: #333333;
@@ -80,6 +80,14 @@ export const boardText = css`
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         word-break: break-word;
+    }
+
+    & > div:nth-of-type(2) {
+        position: absolute;
+        right: 20px;
+        color: #bbb;
+        font-size: 14px;
+        font-weight: 600;
     }
 `;
 
