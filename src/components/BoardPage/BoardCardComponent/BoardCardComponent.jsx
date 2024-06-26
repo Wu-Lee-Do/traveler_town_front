@@ -2,6 +2,8 @@
 import * as s from "./style";
 import defaultImg from "../../../assets/usa.webp"
 import defaultprofileImg from "../../../assets/defaultImg.webp"
+import { BiSolidComment } from "react-icons/bi";
+import { FaHeart, FaBookmark } from "react-icons/fa";
 
 function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, profileImg, nickname, countryNameKor}) {
   const imgTagRegex = /<img[^>]+src="([^">]+)"/i;
@@ -9,6 +11,14 @@ function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, p
 
   const removeHtmlTags = (boardContent) => {
     return boardContent.replace(/<[^>]*>/g, '');
+  }
+
+  const dateString = (createDate) => {
+    const date = new Date(createDate);
+    const year = String(date.getFullYear()).slice(-2);
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
   }
 
   return (
@@ -25,13 +35,21 @@ function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, p
               <div>
                   {removeHtmlTags(boardContent)}
               </div>
+              <div>{dateString(createDate)}</div>
           </div>
           <div css={s.profileBox}>
               <div>
                 <img src={profileImg} alt="" />
                 <div css={s.nickname}>{nickname}</div>
               </div>
-              
+              <div>
+                <BiSolidComment/>
+                <span>?</span>
+                <FaHeart/>
+                <span>?</span>
+                <FaBookmark/>
+                <span>?</span>
+              </div>
           </div>
       </div>
     </div>

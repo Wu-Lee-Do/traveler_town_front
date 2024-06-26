@@ -9,7 +9,7 @@ export const boardCard = css`
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     transition: 0.2s ease-in-out;
     overflow: hidden;
-
+    cursor: pointer;
     &:hover {
         margin-top: -10px;
     }
@@ -68,7 +68,7 @@ export const boardText = css`
         white-space: normal; 
     }
 
-    & > div {
+    & > div:nth-of-type(1) {
         height: 80px;
         padding: 0 20px;
         color: #333333;
@@ -80,6 +80,14 @@ export const boardText = css`
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         word-break: break-word;
+    }
+
+    & > div:nth-of-type(2) {
+        position: absolute;
+        right: 20px;
+        color: #bbb;
+        font-size: 14px;
+        font-weight: 600;
     }
 `;
 
@@ -103,6 +111,21 @@ export const profileBox = css`
         margin-left: 20px;
         margin-right: 10px;
         border-radius: 15px;
+    }
+
+    & > div:nth-of-type(2) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+        height: 30px;
+        font-size: 20px;
+        color: #919191;
+
+        & > span {
+            color: black;
+            margin: 0 5px 0 0;
+        }
     }
 `;
 
