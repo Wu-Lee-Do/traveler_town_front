@@ -7,7 +7,9 @@ function BoardDetailComponent({
     countryNameKor,
     updateDate,
 }) {
-    const test = `<p>	<img src="https://firebasestorage.googleapis.com/v0/b/traveler-town.appspot.com/o/images%2Fboard%2Fc80485f0-2af1-4a46-8999-710e6f1bdd87%2F1719312855037?alt=media&token=155e95d1-311b-47bb-98d1-6ad9f3072cbe"/></p>`;
+    const handleCountryClick = () => {
+        window.location.replace(`/country?search=${countryNameKor}`);
+    };
 
     return (
         <div css={s.layout}>
@@ -15,7 +17,9 @@ function BoardDetailComponent({
                 <div css={s.boardInfo}>
                     <div>{boardTitle}</div>
                     <div css={s.boardDetailInfo}>
-                        <div css={s.category}>{countryNameKor}</div>
+                        <div css={s.category} onClick={handleCountryClick}>
+                            {countryNameKor}
+                        </div>
                         <div css={s.date}>{updateDate}</div>
                     </div>
                     <div>

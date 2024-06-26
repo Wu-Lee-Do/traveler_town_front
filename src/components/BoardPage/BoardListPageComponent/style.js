@@ -24,6 +24,31 @@ export const titleBox = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & > button {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border: none;
+            background-color: transparent;
+            font-size: 25px;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
 `;
 
 export const searchBox = css`
@@ -37,7 +62,7 @@ export const searchBox = css`
     font-size: 20px;
 `;
 
-export const listHeader = css`
+export const listHeader = (categoryState) => css`
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -45,8 +70,13 @@ export const listHeader = css`
     margin: 30px 0;
 
     & > div {
-        display:flex;
+        display: flex;
         justify-content: center;
+    }
+
+    & > div > div:nth-of-type(${categoryState}) {
+        text-decoration: underline;
+        text-underline-offset: 5px;
     }
 
     & > div > div {
@@ -56,15 +86,9 @@ export const listHeader = css`
         font-size: 20px;
         font-weight: 600;
         cursor: pointer;
-
-        &:hover {
-            text-decoration: underline;
-            text-underline-offset: 5px;
-        }
     }
 
     & > button {
-        margin-right: 25px;
         width: 50px;
         height: 50px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
@@ -73,14 +97,14 @@ export const listHeader = css`
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color:white;
+        background-color: white;
         font-size: 20px;
         font-weight: 800;
         border-radius: 50%;
-        transition: all 0.3s;
+        transition: all 0.3s ease-in-out;
         cursor: pointer;
 
-        &: hover {
+        &:hover {
             background-color: rgba(0, 0, 0, 0.1);
         }
     }

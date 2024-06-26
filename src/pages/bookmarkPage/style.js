@@ -56,6 +56,7 @@ export const searchBox = css`
 
 export const listHeader = (state) => css`
     width: 100%;
+    height: 50px;
     display: flex;
     align-items: center;
     margin: 30px 0;
