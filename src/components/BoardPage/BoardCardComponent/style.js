@@ -64,8 +64,8 @@ export const boardText = css`
         margin-bottom: 10px;
         padding: 20px 20px 0px 20px;
         overflow: hidden;
-        text-overflow: ellipsis; 
-        white-space: normal; 
+        text-overflow: ellipsis;
+        white-space: normal;
     }
 
     & > div:nth-of-type(1) {
@@ -74,7 +74,7 @@ export const boardText = css`
         color: #333333;
         font-size: 16px;
         overflow: hidden;
-        text-overflow: ellipsis; 
+        text-overflow: ellipsis;
         white-space: normal;
         display: -webkit-box;
         -webkit-line-clamp: 4;
@@ -132,5 +132,3 @@ export const profileBox = css`
 export const nickname = css`
     font-weight: 600;
 `;
-
-
