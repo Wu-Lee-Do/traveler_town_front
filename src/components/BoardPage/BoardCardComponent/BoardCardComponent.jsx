@@ -2,6 +2,8 @@
 import * as s from "./style";
 import defaultImg from "../../../assets/usa.webp"
 import defaultprofileImg from "../../../assets/defaultImg.webp"
+import { BiSolidComment } from "react-icons/bi";
+import { FaHeart, FaBookmark } from "react-icons/fa";
 
 function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, profileImg, nickname, countryNameKor}) {
   const imgTagRegex = /<img[^>]+src="([^">]+)"/i;
@@ -39,6 +41,14 @@ function BoardCardComponent({boardTitle, boardContent, createDate, updateDate, p
               <div>
                 <img src={profileImg} alt="" />
                 <div css={s.nickname}>{nickname}</div>
+              </div>
+              <div>
+                <BiSolidComment/>
+                <span>?</span>
+                <FaHeart/>
+                <span>?</span>
+                <FaBookmark/>
+                <span>?</span>
               </div>
           </div>
       </div>
