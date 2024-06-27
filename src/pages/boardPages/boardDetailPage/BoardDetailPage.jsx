@@ -3,10 +3,13 @@ import * as s from "./style";
 
 import BoardDetailComponent from "../../../components/BoardPage/BoardDetailComponent/BoardDetailComponent";
 import BoardCommentComponent from "../../../components/BoardPage/BoardCommentComponent/BoardCommentComponent";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { getBoardByBoardId } from "../../../apis/board/boardApi";
+import {
+    addBoardBookmark,
+    getBoardByBoardId,
+} from "../../../apis/board/boardApi";
 import { FaRegBookmark } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 
@@ -27,12 +30,27 @@ function BoardDetailPage() {
         }
     );
 
+    const addBoardBookmarkMutation = useMutation({
+        mutationKey: "addBoardBookmarkMutation",
+        mutationFn: addBoardBookmark,
+        onSuccess: (response) => {
+            console.log(response.data);
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const handleBookmarkOnClick = () => {
+        addBoardBookmarkMutation.mutate({ boardId: parseInt(params.boardId) });
+    };
+
     return (
         <div css={s.layout}>
             <div css={s.box}>
                 <div css={s.stickyLayout}>
                     <div css={s.stickyBox}>
-                        <button>
+                        <button onClick={handleBookmarkOnClick}>
                             <FaRegBookmark />
                             <span>24</span>
                         </button>
