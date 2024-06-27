@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    position: relative;
     width: 100%;
     height: auto;
     margin-bottom: 20px;
@@ -14,6 +15,59 @@ export const layout = css`
 export const box = css`
     width: 1136px;
     height: auto;
+    display: flex;
+`;
+
+export const stickyLayout = css`
+    position: sticky;
+    width: 110px;
+    height: 150px;
+    margin-right: 10px;
+    top: 120px;
+    margin-top: 80px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const stickyBox = css`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    & > button {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #f2f2f2;
+        }
+
+        & > span {
+            margin-top: 5px;
+            font-size: 16px;
+            color: #333333;
+        }
+    }
+
+    & > button:nth-of-type(1) {
+        box-sizing: border-box;
+        border-bottom: 1px solid #dbdbdb;
+    }
 `;
 
 export const titleBox = css`

@@ -7,6 +7,8 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { getBoardByBoardId } from "../../../apis/board/boardApi";
+import { FaRegBookmark } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 
 function BoardDetailPage() {
     const params = useParams();
@@ -28,24 +30,38 @@ function BoardDetailPage() {
     return (
         <div css={s.layout}>
             <div css={s.box}>
-                <div css={s.titleBox}>
-                    <h1>맛집</h1>
-                    <div css={s.profileBox}>
-                        <img src={boardData?.profileImg} alt="" />
-                        {boardData?.nickname}
+                <div css={s.stickyLayout}>
+                    <div css={s.stickyBox}>
+                        <button>
+                            <FaRegBookmark />
+                            <span>24</span>
+                        </button>
+                        <button>
+                            <FaRegHeart />
+                            <span>18</span>
+                        </button>
                     </div>
                 </div>
-                <div css={s.contentBox}>
-                    <div>
-                        <BoardDetailComponent
-                            boardTitle={boardData?.boardTitle}
-                            boardContent={boardData?.boardContent}
-                            countryNameKor={boardData?.countryNameKor}
-                            updateDate={boardData?.updateDate}
-                        />
+                <div>
+                    <div css={s.titleBox}>
+                        <h1>맛집</h1>
+                        <div css={s.profileBox}>
+                            <img src={boardData?.profileImg} alt="" />
+                            {boardData?.nickname}
+                        </div>
                     </div>
-                    <div>
-                        <BoardCommentComponent />
+                    <div css={s.contentBox}>
+                        <div>
+                            <BoardDetailComponent
+                                boardTitle={boardData?.boardTitle}
+                                boardContent={boardData?.boardContent}
+                                countryNameKor={boardData?.countryNameKor}
+                                updateDate={boardData?.updateDate}
+                            />
+                        </div>
+                        <div>
+                            <BoardCommentComponent />
+                        </div>
                     </div>
                 </div>
             </div>
