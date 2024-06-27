@@ -6,10 +6,6 @@ import { FaPencilAlt } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 
 import { useNavigate } from "react-router-dom";
-import {
-    getMustGoRestaurantAll,
-    getMustGoRestaurantAllBySearch,
-} from "../../../apis/board/mustGoRestaurantApi";
 import BoardSearchComponent from "../BoardSearchComponent/BoardSearchComponent";
 import BoardCardComponent from "../BoardCardComponent/BoardCardComponent";
 import {
@@ -24,12 +20,13 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
     const [categoryState, setCategoryState] = useState(1);
     const navigate = useNavigate();
 
-    // 최신, 인기 리스트 분류 작업 필요
-
     const searchKeyDown = (e) => {
         if (e.key === "Enter") {
-            // setSearchState(true);
-            boardsAllBySearchQuery.refetch();
+            if (searchText.length === 0) {
+                alert("검색어를 입력해주세요.");
+                return;
+            }
+            setSearchState(true);
         }
     };
 
@@ -61,9 +58,11 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
                 searchText: searchText,
             }),
         {
+            enabled: searchState === true,
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
+                setSearchState(false);
                 setCategoryState(3);
                 setMustGoRestaurants(response.data);
             },
@@ -73,6 +72,10 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
         }
     );
 
+    useEffect(() => {
+        setCategoryState(1);
+    }, []);
+    console.log(categoryState);
     const handleCategoryClick = (category) => {
         setCategoryState(category);
         if (category !== 1) {

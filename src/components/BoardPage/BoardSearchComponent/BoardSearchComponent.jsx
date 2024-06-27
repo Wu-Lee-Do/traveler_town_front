@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
 import * as s from "./style";
 import { IoSearchOutline } from "react-icons/io5";
 

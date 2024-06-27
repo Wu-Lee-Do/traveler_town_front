@@ -4,9 +4,9 @@ import * as s from "./style";
 import BoardDetailComponent from "../../../components/BoardPage/BoardDetailComponent/BoardDetailComponent";
 import BoardCommentComponent from "../../../components/BoardPage/BoardCommentComponent/BoardCommentComponent";
 import { useQuery } from "react-query";
-import { getMustGoRestaurantByBoardId } from "../../../apis/board/mustGoRestaurantApi";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { getBoardByBoardId } from "../../../apis/board/boardApi";
 
 function BoardDetailPage() {
     const params = useParams();
@@ -14,7 +14,7 @@ function BoardDetailPage() {
 
     const getBoardByBoardIdQuery = useQuery(
         ["getBoardByBoardIdQuery", params.boardId],
-        () => getMustGoRestaurantByBoardId(params.boardId),
+        () => getBoardByBoardId(params.boardId),
         {
             onSuccess: (response) => {
                 setBoardData(response.data);
