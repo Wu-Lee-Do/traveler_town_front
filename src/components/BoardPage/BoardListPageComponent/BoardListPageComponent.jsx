@@ -29,7 +29,6 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
     const searchKeyDown = (e) => {
         if (e.key === "Enter") {
             // setSearchState(true);
-            // setCategoryState(3);
             boardsAllBySearchQuery.refetch();
         }
     };
@@ -41,9 +40,11 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
                 boardCategoryId: boardCategoryId,
             }),
         {
+            enabled: categoryState === 1,
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
+                setCategoryState(1);
                 setMustGoRestaurants(response.data);
             },
             onError: (error) => {
@@ -63,6 +64,7 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
+                setCategoryState(3);
                 setMustGoRestaurants(response.data);
             },
             onError: (error) => {
