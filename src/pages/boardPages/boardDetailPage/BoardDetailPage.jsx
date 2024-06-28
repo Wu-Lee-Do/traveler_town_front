@@ -3,23 +3,30 @@ import * as s from "./style";
 
 import BoardDetailComponent from "../../../components/BoardPage/BoardDetailComponent/BoardDetailComponent";
 import BoardCommentComponent from "../../../components/BoardPage/BoardCommentComponent/BoardCommentComponent";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import {
     addBoardBookmark,
+    getBoardBookmark,
     getBoardByBoardId,
+    removeBoardBookmark,
 } from "../../../apis/board/boardApi";
 import { FaRegBookmark } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 
 function BoardDetailPage() {
     const params = useParams();
+    const boardId = parseInt(params.boardId);
     const [boardData, setBoardData] = useState();
+    const [userBoardBookmarkState, setUserBoardBookmarkState] = useState();
+    const queryClient = useQueryClient();
+    const principalData = queryClient.getQueryData("principalQuery");
 
     const getBoardByBoardIdQuery = useQuery(
-        ["getBoardByBoardIdQuery", params.boardId],
-        () => getBoardByBoardId(params.boardId),
+        ["getBoardByBoardIdQuery", boardId],
+        () => getBoardByBoardId(boardId),
         {
             onSuccess: (response) => {
                 setBoardData(response.data);
@@ -35,14 +42,59 @@ function BoardDetailPage() {
         mutationFn: addBoardBookmark,
         onSuccess: (response) => {
             console.log(response.data);
+            getBoardBookmarkQuery.refetch();
         },
         onError: (error) => {
             console.log(error);
         },
     });
 
+    const removeBoardBookmarkMutation = useMutation({
+        mutationKey: "removeBoardBookmarkMutation",
+        mutationFn: removeBoardBookmark,
+        onSuccess: (response) => {
+            console.log(response.data);
+            getBoardBookmarkQuery.refetch();
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const getBoardBookmarkQuery = useQuery(
+        [
+            "getBoardBookmarkQuery",
+            {
+                userId: principalData.data.userId,
+                boardId: boardId,
+            },
+        ],
+        () =>
+            getBoardBookmark({
+                userId: principalData.data.userId,
+                boardId: boardId,
+            }),
+        {
+            onSuccess: (response) => {
+                setUserBoardBookmarkState(response.data[0]);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
+    console.log(userBoardBookmarkState);
     const handleBookmarkOnClick = () => {
-        addBoardBookmarkMutation.mutate({ boardId: parseInt(params.boardId) });
+        if (!!userBoardBookmarkState) {
+            removeBoardBookmarkMutation.mutate(
+                userBoardBookmarkState?.boardBookmarkId
+            );
+        } else {
+            addBoardBookmarkMutation.mutate({
+                userId: principalData.data.userId,
+                boardId: boardId,
+            });
+        }
     };
 
     return (
@@ -51,7 +103,11 @@ function BoardDetailPage() {
                 <div css={s.stickyLayout}>
                     <div css={s.stickyBox}>
                         <button onClick={handleBookmarkOnClick}>
-                            <FaRegBookmark />
+                            {!!userBoardBookmarkState ? (
+                                <FaBookmark />
+                            ) : (
+                                <FaRegBookmark />
+                            )}
                             <span>24</span>
                         </button>
                         <button>

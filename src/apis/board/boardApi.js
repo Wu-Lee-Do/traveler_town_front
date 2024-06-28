@@ -16,6 +16,18 @@ export const addNewBoard = async (data) => {
     return await instance.post("/board/new", data);
 };
 
-export const addBoardBookmark = async (params) => {
-    return await instance.post("/board/bookmark/add", { params });
+export const addBoardBookmark = async (data) => {
+    return await instance.post("/board/bookmark/add", data);
+};
+
+export const getBoardBookmark = async (data) => {
+    return await instance.get(
+        `/board/bookmark/get?userId=${data.userId}&boardId=${data.boardId}`
+    );
+};
+
+export const removeBoardBookmark = async (data) => {
+    return await instance.delete(
+        `/board/bookmark/remove?boardBookmarkId=${data}`
+    );
 };
