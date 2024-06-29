@@ -15,3 +15,7 @@ export const getBoardByBoardId = async (boardId) => {
 export const addNewBoard = async (data) => {
     return await instance.post("/board/new", data);
 };
+
+export const updateBoard = async (data) => {
+    return await instance.put("/board/update", data);
+};
