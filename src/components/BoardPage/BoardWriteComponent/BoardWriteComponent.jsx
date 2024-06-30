@@ -2,7 +2,7 @@
 import { useQuery } from "react-query";
 import * as s from "./style";
 import { getCountryNameKorAndCountryCodeAllRequest } from "../../../apis/country/countryApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BoardQuillComponent from "../BoardQuillComponent/BoardQuillComponent";
 
 function BoardWriteComponent({
@@ -60,7 +60,7 @@ function BoardWriteComponent({
                     <div css={s.countriesCard}>
                         <input
                             type="text"
-                            value={countryCode}
+                            value={countryCode?.countryNameKor}
                             onChange={countryOnChange}
                             list="list"
                             id="countries"

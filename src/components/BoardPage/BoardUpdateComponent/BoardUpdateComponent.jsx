@@ -29,7 +29,10 @@ function BoardUpdateComponent({ updateTitle, boardCategoryId }) {
                 const data = response.data;
                 setBoardTitle(data.boardTitle);
                 setBoardContent(data.boardContent);
-                setCountryCode(data.countryCode);
+                setCountryCode({
+                    countryCode: data.countryCode,
+                    countryNameKor: data.countryNameKor,
+                });
                 console.log(data);
             },
             onError: (error) => {
@@ -92,7 +95,7 @@ function BoardUpdateComponent({ updateTitle, boardCategoryId }) {
         mutationFn: updateBoard,
         onSuccess: (response) => {
             alert("게시물 수정 성공");
-            navigator(`board/mustgorestaurant/${params.boardId}`);
+            navigator(`/board/mustgorestaurant/${params.boardId}`);
         },
         onError: (error) => {
             alert("게시물 수정 실패");
@@ -112,8 +115,6 @@ function BoardUpdateComponent({ updateTitle, boardCategoryId }) {
             });
         }
     };
-
-    useEffect(() => {}, []);
 
     return (
         <div css={s.layout}>
