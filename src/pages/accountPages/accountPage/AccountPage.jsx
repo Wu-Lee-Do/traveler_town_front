@@ -13,7 +13,6 @@ function AccountPage() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
-    useEffect(() => {});
 
     const handleLogoutClick = () => {
         localStorage.removeItem("AccessToken");
