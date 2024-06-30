@@ -5,6 +5,7 @@ import MustGoRestaurantListPage from "../pages/boardPages/mustGoRestaurantListPa
 import BookmarkPage from "../pages/bookmarkPage/BookmarkPage";
 import MustGoRestaurantWritePage from "../pages/boardPages/mustGoRestaurantWritePage/MustGoRestaurantWritePage";
 import BoardDetailPage from "../pages/boardPages/boardDetailPage/BoardDetailPage";
+import MustGoRestaurantUpdatePage from "../pages/boardPages/mustGoRestaurantUpdatePage/MustGoRestaurantUpdatePage";
 
 function AuthRoute() {
     return (
@@ -21,6 +22,10 @@ function AuthRoute() {
                 <Route
                     path="/mustgorestaurant/:boardId"
                     element={<BoardDetailPage />}
+                />
+                <Route
+                    path="/mustgorestaurant/:boardId/update"
+                    element={<MustGoRestaurantUpdatePage boardCategoryId={1} />}
                 />
                 <Route path="/bookmark" element={<BookmarkPage />} />
             </Routes>

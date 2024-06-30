@@ -1,15 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import * as s from "./style";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { useMutation, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import * as s from "./style";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import { storage } from "../../../apis/firebase/config/firebaseConfig";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { getBoardByBoardId, updateBoard } from "../../../apis/board/boardApi";
 import BoardWriteComponent from "../BoardWriteComponent/BoardWriteComponent";
-import { addNewBoard } from "../../../apis/board/boardApi";
 
-function BoardWritePageComponent({ writeTitle, boardCategoryId }) {
+function BoardUpdateComponent({ updateTitle, boardCategoryId }) {
     const [countryCode, setCountryCode] = useState({});
     const [boardTitle, setBoardTitle] = useState("");
     const [boardContent, setBoardContent] = useState("");
@@ -17,6 +17,33 @@ function BoardWritePageComponent({ writeTitle, boardCategoryId }) {
     const principalQueryState =
         useQueryClient().getQueryState("principalQuery");
     const navigator = useNavigate();
+    const params = useParams();
+
+    const getBoardByBoardIdQuery = useQuery(
+        ["getBoardByBoardIdQuery", params.boardId],
+        () => getBoardByBoardId(params.boardId),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                const data = response.data;
+                setBoardTitle(data.boardTitle);
+                setBoardContent(data.boardContent);
+                setCountryCode({
+                    countryCode: data.countryCode,
+                    countryNameKor: data.countryNameKor,
+                });
+                console.log(data);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
+
+    useEffect(() => {
+        console.log(countryCode);
+    }, [countryCode]);
 
     const quillOnChange = (value) => {
         setBoardContent(value);
@@ -63,30 +90,29 @@ function BoardWritePageComponent({ writeTitle, boardCategoryId }) {
         return boardContent;
     };
 
-    const addNewBoardMutation = useMutation({
-        mutationKey: "addNewBoardMutation",
-        mutationFn: addNewBoard,
+    const updateBoardMutation = useMutation({
+        mutationKey: "updateBoardMutation",
+        mutationFn: updateBoard,
         onSuccess: (response) => {
-            alert("게시물 작성 성공");
-            navigator("/board/mustgorestaurant");
+            alert("게시물 수정 성공");
+            navigator(`/board/mustgorestaurant/${params.boardId}`);
         },
         onError: (error) => {
-            alert("게시물 작성 실패");
+            alert("게시물 수정 실패");
         },
     });
 
     const submitButtonClick = async () => {
-        if (window.confirm("게시물을 작성하시겠습니까?")) {
-            const newBoardContent = await quillFileOnChange(boardContent);
-            addNewBoardMutation.mutate({
+        if (window.confirm("게시물을 수정하시겠습니까?")) {
+            const updateBoardContent = await quillFileOnChange(boardContent);
+            updateBoardMutation.mutate({
+                boardId: params.boardId,
                 boardCategoryId: boardCategoryId,
                 countryCode: countryCode.countryCode,
                 boardTitle,
-                boardContent: newBoardContent,
+                boardContent: updateBoardContent,
                 userId: principalQueryState.data?.data.userId,
             });
-            console.log(newBoardContent);
-            console.log(boardContent);
         }
     };
 
@@ -94,17 +120,19 @@ function BoardWritePageComponent({ writeTitle, boardCategoryId }) {
         <div css={s.layout}>
             <div css={s.box}>
                 <div css={s.titleBox}>
-                    <h1>{writeTitle}</h1>
+                    <h1>{updateTitle}</h1>
                 </div>
                 <div css={s.contentBox}>
                     <div>
                         <BoardWriteComponent
+                            boardTitle={boardTitle}
                             setboardTitle={setBoardTitle}
+                            countryCode={countryCode}
                             setCountryCode={setCountryCode}
                             quillValue={boardContent}
                             quillOnChange={quillOnChange}
                             fileRef={quillRef}
-                            buttonTitle={"작성하기"}
+                            buttonTitle={"수정하기"}
                             onClick={submitButtonClick}
                         />
                     </div>
@@ -115,4 +143,4 @@ function BoardWritePageComponent({ writeTitle, boardCategoryId }) {
     );
 }
 
-export default BoardWritePageComponent;
+export default BoardUpdateComponent;
