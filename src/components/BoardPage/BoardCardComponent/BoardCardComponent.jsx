@@ -14,6 +14,9 @@ function BoardCardComponent({
     profileImg,
     nickname,
     countryNameKor,
+    boardBookmarkCount,
+    boardLikeCount,
+    boardCommentCount,
 }) {
     const imgTagRegex = /<img[^>]+src="([^">]+)"/i;
     const match = boardContent.match(imgTagRegex);
@@ -55,11 +58,11 @@ function BoardCardComponent({
                     </div>
                     <div>
                         <BiSolidComment />
-                        <span>?</span>
+                        <span>{boardCommentCount}</span>
                         <FaHeart />
-                        <span>?</span>
+                        <span>{boardLikeCount}</span>
                         <FaBookmark />
-                        <span>?</span>
+                        <span>{boardBookmarkCount}</span>
                     </div>
                 </div>
             </div>

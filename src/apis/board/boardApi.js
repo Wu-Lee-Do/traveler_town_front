@@ -18,6 +18,7 @@ export const addNewBoard = async (data) => {
 
 export const updateBoard = async (data) => {
     return await instance.put("/board/update", data);
+};
 
 export const addBoardBookmark = async (data) => {
     return await instance.post("/board/bookmark/add", data);
