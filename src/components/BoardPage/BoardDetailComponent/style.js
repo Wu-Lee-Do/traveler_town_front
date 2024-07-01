@@ -26,6 +26,7 @@ export const boardHeader = css`
 
     & > div:nth-of-type(1) {
         width: 100%;
+        overflow-wrap: break-word;
         font-size: 28px;
         font-weight: 500;
         padding: 20px 0;

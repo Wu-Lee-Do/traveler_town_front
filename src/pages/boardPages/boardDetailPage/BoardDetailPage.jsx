@@ -136,7 +136,7 @@ function BoardDetailPage() {
                                 updateDate={boardData?.updateDate}
                             />
                         </div>
-                        <div>
+                        <div css={s.commentLayout}>
                             <BoardCommentComponent
                                 boardId={boardData?.boardId}
                             />

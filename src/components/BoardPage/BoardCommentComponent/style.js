@@ -32,7 +32,7 @@ export const titled = (scrollPosition) => css`
 `;
 
 export const boxLayout = css`
-    height: 465px;
+    height: 500px;
     width: 310px;
     display: flex;
     flex-direction: column;
@@ -91,7 +91,7 @@ export const commentWriteBox = css`
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 170px;
+    height: 110px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
@@ -123,7 +123,7 @@ export const inputBox = css`
     & > textarea {
         resize: none;
         width: 100%;
-        height: 100px;
+        height: 60px;
         border: none;
         border-top: 1px solid #dbdbdb;
         padding-top: 10px;

@@ -25,7 +25,7 @@ export const stickyLayout = css`
     width: 60px;
     height: 130px;
     margin-right: 5px;
-    top: 120px;
+    top: 75px;
     margin-top: 80px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     border-radius: 15px;
@@ -73,7 +73,7 @@ export const stickyBox = css`
 `;
 
 export const titleBox = css`
-    width: 70%;
+    width: 725px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -107,14 +107,19 @@ export const contentBox = css`
 
     & > div:nth-of-type(1) {
         width: 70%;
-        min-height: 700px;
+        min-height: 670px;
         margin-right: 15px;
     }
 
     & > div:nth-of-type(2) {
         width: 310px;
-        height: 700px;
+        height: 670px;
         border-radius: 15px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     }
+`;
+
+export const commentLayout = css`
+    position: sticky;
+    top: 75px;
 `;
