@@ -9,7 +9,7 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { getBoardByBoardId, updateBoard } from "../../../apis/board/boardApi";
 import BoardWriteComponent from "../BoardWriteComponent/BoardWriteComponent";
 
-function BoardUpdateComponent({ updateTitle, boardCategoryId }) {
+function BoardUpdateComponent({ updateTitle, boardCategoryId, detailUrl }) {
     const [countryCode, setCountryCode] = useState({});
     const [boardTitle, setBoardTitle] = useState("");
     const [boardContent, setBoardContent] = useState("");
@@ -95,7 +95,7 @@ function BoardUpdateComponent({ updateTitle, boardCategoryId }) {
         mutationFn: updateBoard,
         onSuccess: (response) => {
             alert("게시물 수정 성공");
-            navigator(`/board/mustgorestaurant/${params.boardId}`);
+            navigator(`/board/${detailUrl}/${params.boardId}`);
         },
         onError: (error) => {
             alert("게시물 수정 실패");

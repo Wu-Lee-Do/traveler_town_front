@@ -31,6 +31,10 @@ function Header() {
         navigate("/account/mypage/info");
     };
 
+    const handleTravelClick = () => {
+        navigate("/board/travel");
+    };
+
     const handleMustGoRestaurantClick = () => {
         navigate("/board/mustgorestaurant");
     };
@@ -48,7 +52,7 @@ function Header() {
                 </div>
                 <div css={s.menu}>
                     <div>동행</div>
-                    <div>여행지</div>
+                    <div onClick={handleTravelClick}>여행지</div>
                     <div onClick={handleMustGoRestaurantClick}>맛집</div>
                     <div onClick={handleBookmarkClick}>즐겨찾기</div>
                 </div>

@@ -1,14 +1,15 @@
 /** @jsxImportSource @emotion/react */
+
 import BoardUpdateComponent from "../../../components/BoardPage/BoardUpdateComponent/BoardUpdateComponent";
 
-function MustGoRestaurantUpdatePage({ boardCategoryId }) {
+function TravelUpdatePage({ boardCategoryId }) {
     return (
         <BoardUpdateComponent
-            updateTitle={"맛집 게시글 수정"}
+            updateTitle={"여행지 게시글 수정"}
             boardCategoryId={boardCategoryId}
-            detailUrl={"mustgorestaurant"}
+            detailUrl={"travel"}
         />
     );
 }
 
-export default MustGoRestaurantUpdatePage;
+export default TravelUpdatePage;

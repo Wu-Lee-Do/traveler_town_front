@@ -13,7 +13,12 @@ import {
     getBoardsAllBySearch,
 } from "../../../apis/board/boardApi";
 
-function BoardListPageComponent({ listTitle, boardCategoryId }) {
+function BoardListPageComponent({
+    listTitle,
+    boardCategoryId,
+    writeUrl,
+    detailUrl,
+}) {
     const [mustGoRestaurants, setMustGoRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [searchState, setSearchState] = useState(false);
@@ -119,9 +124,7 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
                         <div onClick={() => handleCategoryClick(2)}>인기</div>
                     </div>
                     <button
-                        onClick={() =>
-                            navigate("/board/mustgorestaurant/write")
-                        }
+                        onClick={() => navigate(`/board/${writeUrl}/write`)}
                     >
                         <FaPencilAlt />
                     </button>
@@ -142,6 +145,7 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
                                 boardBookmarkCount={data.boardBookmarkCount}
                                 boardCommentCount={data.boardCommentCount}
                                 boardLikeCount={data.boardLikeCount}
+                                detailUrl={detailUrl}
                             />
                         ))}
                     </div>

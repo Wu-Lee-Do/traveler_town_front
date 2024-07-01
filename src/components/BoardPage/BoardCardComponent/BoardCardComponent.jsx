@@ -17,6 +17,7 @@ function BoardCardComponent({
     boardBookmarkCount,
     boardLikeCount,
     boardCommentCount,
+    detailUrl,
 }) {
     const imgTagRegex = /<img[^>]+src="([^">]+)"/i;
     const match = boardContent.match(imgTagRegex);
@@ -35,7 +36,7 @@ function BoardCardComponent({
     };
 
     const handleBoardCardClick = () => {
-        navigate(`/board/mustgorestaurant/${boardId}`);
+        navigate(`/board/${detailUrl}/${boardId}`);
     };
 
     return (
