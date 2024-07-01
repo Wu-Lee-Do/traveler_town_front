@@ -9,6 +9,9 @@ import MustGoRestaurantUpdatePage from "../pages/boardPages/mustGoRestaurantUpda
 import TravelListPage from "../pages/boardPages/travelListPage/TravelListPage";
 import TravelWritePage from "../pages/boardPages/travelWritePage/TravelWritePage";
 import TravelUpdatePage from "../pages/boardPages/travelUpdatePage/TravelUpdatePage";
+import TogetherListPage from "../pages/boardPages/togetherListPage/TogetherListPage";
+import TogetherWritePage from "../pages/boardPages/togetherWritePage/TogetherWritePage";
+import TogetherUpdatePage from "../pages/boardPages/togetherUpdatePage/TogetherUpdatePage";
 
 function AuthRoute() {
     return (
@@ -43,6 +46,19 @@ function AuthRoute() {
                 <Route
                     path="/travel/:boardId"
                     element={<BoardDetailPage title={"여행지"} />}
+                />
+                <Route
+                    path="/together"
+                    element={<TogetherListPage boardCategoryId={3} />}
+                />
+                <Route path="/together/write" element={<TogetherWritePage />} />
+                <Route
+                    path="/together/:boardId"
+                    element={<TogetherUpdatePage boardCategoryId={3} />}
+                />
+                <Route
+                    path="/together/:boardId"
+                    element={<BoardDetailPage title={"동행"} />}
                 />
             </Routes>
         </>
