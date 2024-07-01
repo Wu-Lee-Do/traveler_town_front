@@ -39,3 +39,15 @@ export const removeBoardBookmark = async (data) => {
         `/board/bookmark/remove?boardBookmarkId=${data}`
     );
 };
+
+export const addBoardLike = async (data) => {
+    return await instance.post("/like/new", data);
+};
+
+export const getBoardLike = async (data) => {
+    return await instance.get(`/like/all?boardId=${data}`);
+};
+
+export const removeBoardLike = async (data) => {
+    return await instance.delete(`/like/remove?boardLikeId=${data}`);
+};
