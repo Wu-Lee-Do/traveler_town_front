@@ -20,6 +20,10 @@ export const updateBoard = async (data) => {
     return await instance.put("/board/update", data);
 };
 
+export const removeBoard = async (data) => {
+    return await instance.delete(`/board/remove?boardId=${data}`);
+};
+
 export const addBoardBookmark = async (data) => {
     return await instance.post("/board/bookmark/add", data);
 };
