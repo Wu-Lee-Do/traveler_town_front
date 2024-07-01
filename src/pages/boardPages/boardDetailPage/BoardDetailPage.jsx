@@ -16,7 +16,7 @@ import { FaRegBookmark } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 
-function BoardDetailPage() {
+function BoardDetailPage({ title }) {
     const params = useParams();
     const boardId = parseInt(params.boardId);
     const [boardData, setBoardData] = useState();
@@ -119,7 +119,7 @@ function BoardDetailPage() {
                 </div>
                 <div>
                     <div css={s.titleBox}>
-                        <h1>맛집</h1>
+                        <h1>{title}</h1>
                         <div css={s.profileBox}>
                             <img src={boardData?.profileImg} alt="" />
                             {boardData?.nickname}

@@ -1,14 +1,14 @@
 import BoardListPageComponent from "../../../components/BoardPage/BoardListPageComponent/BoardListPageComponent";
 
-function MustGoRestaurantListPage({ boardCategoryId }) {
+function TravelListPage({ boardCategoryId }) {
     return (
         <BoardListPageComponent
-            listTitle={"맛집"}
+            listTitle={"여행지"}
             boardCategoryId={boardCategoryId}
-            writeUrl={"mustgorestaurant"}
-            detailUrl={"mustgorestaurant"}
+            writeUrl={"travel"}
+            detailUrl={"travel"}
         />
     );
 }
 
-export default MustGoRestaurantListPage;
+export default TravelListPage;
