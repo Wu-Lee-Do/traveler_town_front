@@ -137,7 +137,9 @@ function BoardDetailPage() {
                             />
                         </div>
                         <div>
-                            <BoardCommentComponent />
+                            <BoardCommentComponent
+                                boardId={boardData?.boardId}
+                            />
                         </div>
                     </div>
                 </div>

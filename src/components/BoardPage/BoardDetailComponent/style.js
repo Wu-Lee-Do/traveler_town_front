@@ -11,7 +11,6 @@ export const box = css`
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
 `;
 
 export const boardInfo = css`

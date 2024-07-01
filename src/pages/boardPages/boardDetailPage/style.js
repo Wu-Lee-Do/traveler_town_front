@@ -14,15 +14,17 @@ export const layout = css`
 
 export const box = css`
     width: 1136px;
+    margin-bottom: 50px;
     height: auto;
     display: flex;
+    justify-content: space-around;
 `;
 
 export const stickyLayout = css`
     position: sticky;
-    width: 110px;
-    height: 150px;
-    margin-right: 10px;
+    width: 60px;
+    height: 130px;
+    margin-right: 5px;
     top: 120px;
     margin-top: 80px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
@@ -99,15 +101,18 @@ export const profileBox = css`
 
 export const contentBox = css`
     display: flex;
-    width: 100%;
+    width: 1050px;
+    min-height: 700px;
     justify-content: space-between;
 
     & > div:nth-of-type(1) {
         width: 70%;
+        min-height: 700px;
+        margin-right: 15px;
     }
 
     & > div:nth-of-type(2) {
-        width: 29%;
+        width: 310px;
         height: 700px;
         border-radius: 15px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
