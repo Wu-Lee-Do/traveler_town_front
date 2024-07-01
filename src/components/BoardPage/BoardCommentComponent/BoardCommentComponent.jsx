@@ -29,7 +29,6 @@ function BoardCommentComponent({ boardId }) {
         {
             enabled: !!boardId,
             onSuccess: (response) => {
-                console.log(response.data);
                 setCommentData(response.data);
             },
             onError: (error) => {
@@ -65,7 +64,6 @@ function BoardCommentComponent({ boardId }) {
     }, []);
 
     const handleCommentInputOnChange = (e) => {
-        console.log(e.target.value);
         setCommentInputValue(() => e.target.value);
     };
 

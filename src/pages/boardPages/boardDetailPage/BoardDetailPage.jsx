@@ -8,11 +8,14 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import {
     addBoardBookmark,
+    addBoardLike,
     getBoardBookmark,
     getBoardByBoardId,
+    getBoardLike,
     removeBoardBookmark,
+    removeBoardLike,
 } from "../../../apis/board/boardApi";
-import { FaRegBookmark } from "react-icons/fa";
+import { FaHeart, FaRegBookmark } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 
@@ -21,6 +24,8 @@ function BoardDetailPage({ title }) {
     const boardId = parseInt(params.boardId);
     const [boardData, setBoardData] = useState();
     const [userBoardBookmarkState, setUserBoardBookmarkState] = useState();
+    const [userBoardLikeData, setUserBoardLikeData] = useState();
+    const [userBoardLikeState, setUserBoardLikeState] = useState();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
 
@@ -29,7 +34,6 @@ function BoardDetailPage({ title }) {
         () => getBoardByBoardId(boardId),
         {
             onSuccess: (response) => {
-                console.log(response.data);
                 setBoardData(response.data);
             },
             onError: (error) => {
@@ -42,7 +46,6 @@ function BoardDetailPage({ title }) {
         mutationKey: "addBoardBookmarkMutation",
         mutationFn: addBoardBookmark,
         onSuccess: (response) => {
-            console.log(response.data);
             getBoardBookmarkQuery.refetch();
         },
         onError: (error) => {
@@ -54,7 +57,6 @@ function BoardDetailPage({ title }) {
         mutationKey: "removeBoardBookmarkMutation",
         mutationFn: removeBoardBookmark,
         onSuccess: (response) => {
-            console.log(response.data);
             getBoardBookmarkQuery.refetch();
         },
         onError: (error) => {
@@ -77,6 +79,7 @@ function BoardDetailPage({ title }) {
             }),
         {
             onSuccess: (response) => {
+                console.log(response.data);
                 setUserBoardBookmarkState(response.data[0]);
             },
             onError: (error) => {
@@ -84,7 +87,66 @@ function BoardDetailPage({ title }) {
             },
         }
     );
-    console.log(userBoardBookmarkState);
+
+    const getBoardLikeQuery = useQuery(
+        ["getBoardLikeQuery", boardId],
+        () => getBoardLike(boardId),
+        {
+            onSuccess: (response) => {
+                if (
+                    !!response.data.filter(
+                        (like) => like.userId === principalData.data.userId
+                    )[0]
+                ) {
+                    setUserBoardLikeState(() => true);
+                    setUserBoardLikeData(() => response.data);
+                } else {
+                    setUserBoardLikeState(() => false);
+                }
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
+
+    const addBoardLikeMutation = useMutation({
+        mutationKey: "addBoardLikeMutation",
+        mutationFn: addBoardLike,
+        onSuccess: (response) => {
+            getBoardLikeQuery.refetch();
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const removeBoardLikeMutation = useMutation({
+        mutationKey: "removeBoardLikeMutation",
+        mutationFn: removeBoardLike,
+        onSuccess: (response) => {
+            getBoardLikeQuery.refetch();
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const handleLikeOnClick = () => {
+        if (userBoardLikeState === false) {
+            addBoardLikeMutation.mutate({
+                boardId: boardData.boardId,
+                userId: principalData.data.userId,
+            });
+        } else {
+            removeBoardLikeMutation.mutate(
+                userBoardLikeData?.filter(
+                    (like) => like.userId === principalData?.data.userId
+                )[0].boardLikeId
+            );
+        }
+    };
+
     const handleBookmarkOnClick = () => {
         if (!!userBoardBookmarkState) {
             removeBoardBookmarkMutation.mutate(
@@ -111,9 +173,9 @@ function BoardDetailPage({ title }) {
                             )}
                             <span>24</span>
                         </button>
-                        <button>
-                            <FaRegHeart />
-                            <span>18</span>
+                        <button onClick={handleLikeOnClick}>
+                            {userBoardLikeState ? <FaHeart /> : <FaRegHeart />}
+                            <span>{userBoardLikeData?.length}</span>
                         </button>
                     </div>
                 </div>

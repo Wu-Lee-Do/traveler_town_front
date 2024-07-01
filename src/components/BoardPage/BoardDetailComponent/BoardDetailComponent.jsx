@@ -19,7 +19,6 @@ function BoardDetailComponent({
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
     const navigate = useNavigate();
-    console.log(boardId);
 
     const removeBoardMutation = useMutation({
         mutationKey: "removeBoardMutation",
