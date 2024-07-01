@@ -124,7 +124,7 @@ export const profileBox = css`
 
         & > span {
             color: black;
-            margin: 0 5px 0 0;
+            margin: 0 5px 0 0px;
         }
     }
 `;

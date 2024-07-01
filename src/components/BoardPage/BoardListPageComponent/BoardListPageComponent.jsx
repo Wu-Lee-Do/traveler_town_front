@@ -41,6 +41,7 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
+                console.log(response);
                 setCategoryState(1);
                 setMustGoRestaurants(response.data);
             },
@@ -82,6 +83,10 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
             setMustGoRestaurants([]);
         }
     };
+
+    useEffect(() => {
+        console.log(mustGoRestaurants);
+    }, [mustGoRestaurants]);
 
     const handleResetClick = () => {
         setSearchText("");
@@ -134,6 +139,9 @@ function BoardListPageComponent({ listTitle, boardCategoryId }) {
                                 profileImg={data.profileImg}
                                 nickname={data.nickname}
                                 countryNameKor={data.countryNameKor}
+                                boardBookmarkCount={data.boardBookmarkCount}
+                                boardCommentCount={data.boardCommentCount}
+                                boardLikeCount={data.boardLikeCount}
                             />
                         ))}
                     </div>
