@@ -1,7 +1,8 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    width: 100%;
+    position: relative;
+    width: 310px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -10,7 +11,7 @@ export const layout = css`
 export const titled = (scrollPosition) => css`
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
-    height: 80px;
+    height: 60px;
     margin: 0;
     padding: 0;
     position: sticky;
@@ -31,17 +32,19 @@ export const titled = (scrollPosition) => css`
 `;
 
 export const boxLayout = css`
-    height: auto;
+    height: 500px;
+    width: 310px;
     display: flex;
     flex-direction: column;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-wrap: break-word;
 `;
 
 export const box = css`
     height: auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 0 15px;
     padding: 10px 0;
     border-bottom: 1px solid #dbdbdb;
 `;
@@ -57,6 +60,7 @@ export const info = css`
     & > div {
         display: flex;
         align-items: center;
+        padding: 10px;
 
         & > div {
             font-size: 16px;
@@ -78,14 +82,16 @@ export const info = css`
 `;
 
 export const comment = css`
-    width: 100%;
+    width: auto;
     height: auto;
-    padding-top: 10px;
+    padding: 10px;
 `;
 
 export const commentWriteBox = css`
+    position: absolute;
+    bottom: 0;
     width: 100%;
-    height: 170px;
+    height: 110px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
@@ -117,10 +123,10 @@ export const inputBox = css`
     & > textarea {
         resize: none;
         width: 100%;
-        height: 88%;
+        height: 60px;
         border: none;
         border-top: 1px solid #dbdbdb;
-        padding-top: 3px;
+        padding-top: 10px;
         &:focus {
             outline: none;
         }

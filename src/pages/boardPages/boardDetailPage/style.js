@@ -14,16 +14,18 @@ export const layout = css`
 
 export const box = css`
     width: 1136px;
+    margin-bottom: 50px;
     height: auto;
     display: flex;
+    justify-content: space-around;
 `;
 
 export const stickyLayout = css`
     position: sticky;
-    width: 110px;
-    height: 150px;
-    margin-right: 10px;
-    top: 120px;
+    width: 60px;
+    height: 130px;
+    margin-right: 5px;
+    top: 75px;
     margin-top: 80px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     border-radius: 15px;
@@ -71,7 +73,7 @@ export const stickyBox = css`
 `;
 
 export const titleBox = css`
-    width: 70%;
+    width: 725px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -99,17 +101,25 @@ export const profileBox = css`
 
 export const contentBox = css`
     display: flex;
-    width: 100%;
+    width: 1050px;
+    min-height: 700px;
     justify-content: space-between;
 
     & > div:nth-of-type(1) {
         width: 70%;
+        min-height: 670px;
+        margin-right: 15px;
     }
 
     & > div:nth-of-type(2) {
-        width: 29%;
-        height: 700px;
+        width: 310px;
+        height: 670px;
         border-radius: 15px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     }
+`;
+
+export const commentLayout = css`
+    position: sticky;
+    top: 75px;
 `;

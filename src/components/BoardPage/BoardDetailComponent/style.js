@@ -11,7 +11,6 @@ export const box = css`
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
 `;
 
 export const boardInfo = css`
@@ -27,6 +26,7 @@ export const boardHeader = css`
 
     & > div:nth-of-type(1) {
         width: 100%;
+        overflow-wrap: break-word;
         font-size: 28px;
         font-weight: 500;
         padding: 20px 0;
