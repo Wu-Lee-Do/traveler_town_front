@@ -119,12 +119,12 @@ export const profileBox = css`
         align-items: center;
         margin-right: 20px;
         height: 30px;
-        font-size: 20px;
+        font-size: 16px;
         color: #919191;
 
         & > span {
-            color: black;
-            margin: 0 5px 0 0px;
+            color: #333;
+            margin: 0 10px 0 5px;
         }
     }
 `;

@@ -34,6 +34,10 @@ export const getBoardBookmark = async (data) => {
     );
 };
 
+export const getBoardBookmarkAll = async (data) => {
+    return await instance.get(`/board/bookmark/all?boardId=${data}`);
+};
+
 export const removeBoardBookmark = async (data) => {
     return await instance.delete(
         `/board/bookmark/remove?boardBookmarkId=${data}`
