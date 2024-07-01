@@ -29,6 +29,7 @@ function BoardDetailPage() {
         () => getBoardByBoardId(boardId),
         {
             onSuccess: (response) => {
+                console.log(response.data);
                 setBoardData(response.data);
             },
             onError: (error) => {
@@ -127,6 +128,8 @@ function BoardDetailPage() {
                     <div css={s.contentBox}>
                         <div>
                             <BoardDetailComponent
+                                boardId={boardData?.boardId}
+                                userId={boardData?.userId}
                                 boardTitle={boardData?.boardTitle}
                                 boardContent={boardData?.boardContent}
                                 countryNameKor={boardData?.countryNameKor}
