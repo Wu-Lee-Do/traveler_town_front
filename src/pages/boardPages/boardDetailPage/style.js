@@ -50,8 +50,9 @@ export const stickyBox = css`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-size: 20px;
+        font-size: 18px;
         border: none;
+        color: #919191;
         background-color: transparent;
         cursor: pointer;
 
@@ -61,7 +62,7 @@ export const stickyBox = css`
 
         & > span {
             margin-top: 5px;
-            font-size: 16px;
+            font-size: 14px;
             color: #333333;
         }
     }
