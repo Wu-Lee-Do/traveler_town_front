@@ -34,6 +34,12 @@ export const getBoardBookmark = async (data) => {
     );
 };
 
+export const getBoardBookmarkAllByCategoryId = async (data) => {
+    return await instance.get(
+        `/board/bookmark/getAll?boardCategoryId=${data.boardCategoryId}&userId=${data.userId}`
+    );
+};
+
 export const getBoardBookmarkAll = async (data) => {
     return await instance.get(`/board/bookmark/all?boardId=${data}`);
 };

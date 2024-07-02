@@ -2,24 +2,27 @@
 import { IoSearchOutline } from "react-icons/io5";
 import * as s from "./style";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useAuthCheck } from "../../hooks/useAuthCheck";
 import {
-    addCountryBookmarkRequest,
     getCountryAllRequest,
     getCountryBookmarkRequest,
-    removeCountryBookmarkRequest,
-    searchCountryRequest,
 } from "../../apis/country/countryApi";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
+import { getBoardBookmarkAllByCategoryId } from "../../apis/board/boardApi";
+import BoardCardComponent from "../../components/BoardPage/BoardCardComponent/BoardCardComponent";
 
 function BookmarkPage() {
     useAuthCheck();
     const [countryBookmarkList, setCountryBookmarkList] = useState();
+    const [boardBookmarkList, setBoardBookmarkList] = useState();
     const [allCountryData, setAllCountryData] = useState();
     const [countryList, setCountryList] = useState();
     const [categoryState, setCategoryState] = useState(1);
+    const [boardCategoryId, setBoardCategoryId] = useState();
+    const queryClient = useQueryClient();
+    const principalData = queryClient.getQueryData("principalQuery");
     const navigate = useNavigate();
 
     const getCountryBookmarkQuery = useQuery(
@@ -47,6 +50,30 @@ function BookmarkPage() {
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
                 setAllCountryData(response.data);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
+
+    const getBoardBookmarkAllByCategoryIdQuery = useQuery(
+        [
+            "getBoardBookmarkAllByCategoryIdQuery",
+            {
+                boardCategoryId: boardCategoryId,
+                userId: principalData.data.userId,
+            },
+        ],
+        () =>
+            getBoardBookmarkAllByCategoryId({
+                boardCategoryId: boardCategoryId,
+                userId: principalData.data.userId,
+            }),
+        {
+            onSuccess: (response) => {
+                console.log(response.data);
+                setBoardBookmarkList(response.data);
             },
             onError: (error) => {
                 console.log(error);
@@ -102,6 +129,7 @@ function BookmarkPage() {
         ) {
             fetchDataAndImages();
         }
+        getBoardBookmarkAllByCategoryIdQuery.refetch();
     }, [allCountryData, countryBookmarkList, categoryState]);
 
     useEffect(() => {
@@ -115,8 +143,12 @@ function BookmarkPage() {
 
     const handleCategoryClick = (category) => {
         setCategoryState(category);
-        if (category !== 1) {
+        if (category === 4) {
             setCountryList([]);
+            setBoardCategoryId(1);
+        } else if (category === 3) {
+            setCountryList([]);
+            setBoardCategoryId(2);
         }
     };
 
@@ -140,23 +172,41 @@ function BookmarkPage() {
                 </div>
                 <div css={s.listLayout}>
                     <div css={s.listWrap}>
-                        {countryList?.map((country, index) => (
-                            <div key={index} css={s.countryCard}>
-                                <div
-                                    css={s.imgBox}
-                                    onClick={() =>
-                                        handleCountryCardClick(
-                                            country.countryNameKor
-                                        )
-                                    }
-                                >
-                                    <img src={country.imageUrl} alt="" />
-                                </div>
-                                <div css={s.boardText}>
-                                    <h3>{country.countryNameKor}</h3>
-                                </div>
-                            </div>
-                        ))}
+                        {categoryState === 1
+                            ? countryList?.map((country, index) => (
+                                  <div key={index} css={s.countryCard}>
+                                      <div
+                                          css={s.imgBox}
+                                          onClick={() =>
+                                              handleCountryCardClick(
+                                                  country.countryNameKor
+                                              )
+                                          }
+                                      >
+                                          <img src={country.imageUrl} alt="" />
+                                      </div>
+                                      <div css={s.boardText}>
+                                          <h3>{country.countryNameKor}</h3>
+                                      </div>
+                                  </div>
+                              ))
+                            : boardBookmarkList?.map((board, index) => (
+                                  <BoardCardComponent
+                                      key={index}
+                                      boardId={board.boardId}
+                                      boardTitle={board.boardTitle}
+                                      boardContent={board.boardContent}
+                                      createDate={board.createDate}
+                                      nickname={board.nickname}
+                                      profileImg={board.profileImg}
+                                      boardBookmarkCount={
+                                          board.boardBookmarkCount
+                                      }
+                                      boardLikeCount={board.boardLikeCount}
+                                      countryNameKor={board.countryNameKor}
+                                      detailUrl={"mustgorestaurant"}
+                                  />
+                              ))}
                     </div>
                 </div>
             </div>
