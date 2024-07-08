@@ -204,3 +204,4 @@ export const profileBox = css`
 export const nickname = css`
     font-weight: 600;
 `;
+

@@ -170,6 +170,16 @@ function BoardListPageComponent({
                                 boardCommentCount={data.boardCommentCount}
                                 boardLikeCount={data.boardLikeCount}
                                 detailUrl={detailUrl}
+                                sex={
+                                    boardCategoryId === 3
+                                        ? principalData?.data.sex
+                                        : ""
+                                }
+                                age={
+                                    boardCategoryId === 3
+                                        ? principalData?.data.age
+                                        : ""
+                                }
                             />
                         ))}
                     </div>
