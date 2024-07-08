@@ -62,13 +62,13 @@ function BookmarkPage() {
             "getBoardBookmarkAllByCategoryIdQuery",
             {
                 boardCategoryId: boardCategoryId,
-                userId: principalData.data.userId,
+                userId: principalData?.data.userId,
             },
         ],
         () =>
             getBoardBookmarkAllByCategoryId({
                 boardCategoryId: boardCategoryId,
-                userId: principalData.data.userId,
+                userId: principalData?.data.userId,
             }),
         {
             onSuccess: (response) => {

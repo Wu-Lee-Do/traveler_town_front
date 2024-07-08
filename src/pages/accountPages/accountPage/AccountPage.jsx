@@ -6,7 +6,6 @@ import { useAuthCheck } from "../../../hooks/useAuthCheck";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import InfoComponent from "../../../components/AccountPage/InfoComponent/InfoComponent";
 import EditPasswordComponent from "../../../components/AccountPage/EditPasswordComponent/EditPasswordComponent";
-import { useEffect } from "react";
 
 function AccountPage() {
     useAuthCheck();

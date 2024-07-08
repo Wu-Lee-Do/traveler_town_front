@@ -53,7 +53,7 @@ function AuthRoute() {
                 />
                 <Route path="/together/write" element={<TogetherWritePage />} />
                 <Route
-                    path="/together/:boardId"
+                    path="/together/:boardId/update"
                     element={<TogetherUpdatePage boardCategoryId={3} />}
                 />
                 <Route
