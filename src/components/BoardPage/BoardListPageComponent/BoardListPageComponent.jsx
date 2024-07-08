@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { FaPencilAlt } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 
@@ -19,10 +19,12 @@ function BoardListPageComponent({
     writeUrl,
     detailUrl,
 }) {
-    const [mustGoRestaurants, setMustGoRestaurants] = useState([]);
+    const [boardDataList, setBoardDataList] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [searchState, setSearchState] = useState(false);
     const [categoryState, setCategoryState] = useState(1);
+    const queryClient = useQueryClient();
+    const principalData = queryClient.getQueryData("principalQuery");
     const navigate = useNavigate();
 
     const searchKeyDown = (e) => {
@@ -46,9 +48,8 @@ function BoardListPageComponent({
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                console.log(response);
                 setCategoryState(1);
-                setMustGoRestaurants(response.data);
+                setBoardDataList(response.data);
             },
             onError: (error) => {
                 console.log(error);
@@ -70,7 +71,7 @@ function BoardListPageComponent({
             onSuccess: (response) => {
                 setSearchState(false);
                 setCategoryState(3);
-                setMustGoRestaurants(response.data);
+                setBoardDataList(response.data);
             },
             onError: (error) => {
                 console.log(error);
@@ -81,22 +82,47 @@ function BoardListPageComponent({
     useEffect(() => {
         setCategoryState(1);
     }, []);
-    console.log(categoryState);
+
     const handleCategoryClick = (category) => {
         setCategoryState(category);
         if (category !== 1) {
-            setMustGoRestaurants([]);
+            setBoardDataList([]);
         }
     };
-
-    useEffect(() => {
-        console.log(mustGoRestaurants);
-    }, [mustGoRestaurants]);
 
     const handleResetClick = () => {
         setSearchText("");
         boardsAllQuery.refetch();
     };
+
+    const handleWriteClick = () => {
+        if (
+            principalData?.data.authorities.filter(
+                (auth) => auth.authority === "ROLE_USER"
+            ).length === 1
+        ) {
+            if (boardCategoryId === 1 || boardCategoryId === 2) {
+                navigate(`/board/${writeUrl}/write`);
+            } else if (boardCategoryId === 3) {
+                if (
+                    principalData?.data.age === 0 ||
+                    principalData?.data.sex === 0
+                ) {
+                    alert(
+                        "동행 게시물은 추가 정보 입력을 해야 작성하실 수 있습니다."
+                    );
+                    window.location.replace("/account/mypage/info");
+                } else {
+                    navigate(`/board/${writeUrl}/write`);
+                }
+            }
+        } else {
+            alert("게시물을 작성하기 위해서는 이메일 인증이 필요합니다.");
+            window.location.replace("/account/mypage/info");
+        }
+    };
+
+    console.log(boardCategoryId);
 
     return (
         <div css={s.layout}>
@@ -123,15 +149,13 @@ function BoardListPageComponent({
                         <div onClick={() => handleCategoryClick(1)}>최신</div>
                         <div onClick={() => handleCategoryClick(2)}>인기</div>
                     </div>
-                    <button
-                        onClick={() => navigate(`/board/${writeUrl}/write`)}
-                    >
+                    <button onClick={handleWriteClick}>
                         <FaPencilAlt />
                     </button>
                 </div>
                 <div css={s.listLayout}>
                     <div css={s.listWrap}>
-                        {mustGoRestaurants.map((data) => (
+                        {boardDataList.map((data) => (
                             <BoardCardComponent
                                 key={data.boardId}
                                 boardId={data.boardId}
