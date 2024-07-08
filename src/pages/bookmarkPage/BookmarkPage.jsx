@@ -203,6 +203,9 @@ function BookmarkPage() {
                                           board.boardBookmarkCount
                                       }
                                       boardLikeCount={board.boardLikeCount}
+                                      boardCommentCount={
+                                          board.boardCommentCount
+                                      }
                                       countryNameKor={board.countryNameKor}
                                       detailUrl={"mustgorestaurant"}
                                   />
