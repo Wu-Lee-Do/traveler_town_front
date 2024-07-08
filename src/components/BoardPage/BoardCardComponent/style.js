@@ -132,3 +132,9 @@ export const profileBox = css`
 export const nickname = css`
     font-weight: 600;
 `;
+
+export const profileDetailInfo = css`
+    font-size: 14px;
+`;
+
+// 나이 성별 스타일 조정중

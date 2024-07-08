@@ -18,6 +18,8 @@ function BoardCardComponent({
     boardLikeCount,
     boardCommentCount,
     detailUrl,
+    sex,
+    age,
 }) {
     const imgTagRegex = /<img[^>]+src="([^">]+)"/i;
     const match = boardContent.match(imgTagRegex);
@@ -56,6 +58,10 @@ function BoardCardComponent({
                     <div>
                         <img src={profileImg} alt="" />
                         <div css={s.nickname}>{nickname}</div>
+                        <div css={s.profileDetailInfo}>
+                            <div>{sex === 1 ? "남자" : "여자"}</div>
+                            <div>{age}대</div>
+                        </div>
                     </div>
                     <div>
                         <BiSolidComment />
