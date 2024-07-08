@@ -108,7 +108,9 @@ function BoardListPageComponent({
                     principalData?.data.age === 0 ||
                     principalData?.data.sex === 0
                 ) {
-                    alert("동행 게시물은 추가 정보 입력을 해야 작성하실 수 있습니다.");
+                    alert(
+                        "동행 게시물은 추가 정보 입력을 해야 작성하실 수 있습니다."
+                    );
                     window.location.replace("/account/mypage/info");
                 } else {
                     navigate(`/board/${writeUrl}/write`);

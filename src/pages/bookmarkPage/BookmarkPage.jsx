@@ -21,6 +21,7 @@ function BookmarkPage() {
     const [countryList, setCountryList] = useState();
     const [categoryState, setCategoryState] = useState(1);
     const [boardCategoryId, setBoardCategoryId] = useState();
+    const [detailUrl, setDetailUrl] = useState();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
     const navigate = useNavigate();
@@ -145,10 +146,16 @@ function BookmarkPage() {
         setCategoryState(category);
         if (category === 4) {
             setCountryList([]);
+            setDetailUrl("mustgorestaurant");
             setBoardCategoryId(1);
         } else if (category === 3) {
             setCountryList([]);
+            setDetailUrl("travel");
             setBoardCategoryId(2);
+        } else if (category === 2) {
+            setCountryList([]);
+            setDetailUrl("together");
+            setBoardCategoryId(3);
         }
     };
 
@@ -207,7 +214,7 @@ function BookmarkPage() {
                                           board.boardCommentCount
                                       }
                                       countryNameKor={board.countryNameKor}
-                                      detailUrl={"mustgorestaurant"}
+                                      detailUrl={detailUrl}
                                   />
                               ))}
                     </div>
