@@ -68,7 +68,13 @@ function BoardWritePageComponent({ writeTitle, boardCategoryId }) {
         mutationFn: addNewBoard,
         onSuccess: (response) => {
             alert("게시물 작성 성공");
-            navigator("/board/mustgorestaurant");
+            if (boardCategoryId === 1) {
+                navigator("/board/mustgorestaurant");
+            } else if (boardCategoryId === 2) {
+                navigator("/board/travel");
+            } else if (boardCategoryId === 3) {
+                navigator("/board/together");
+            }
         },
         onError: (error) => {
             alert("게시물 작성 실패");

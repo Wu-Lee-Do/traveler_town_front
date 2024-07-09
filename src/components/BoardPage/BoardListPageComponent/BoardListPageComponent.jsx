@@ -48,6 +48,7 @@ function BoardListPageComponent({
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
+                console.log(response.data);
                 setCategoryState(1);
                 setBoardDataList(response.data);
             },
@@ -170,16 +171,8 @@ function BoardListPageComponent({
                                 boardCommentCount={data.boardCommentCount}
                                 boardLikeCount={data.boardLikeCount}
                                 detailUrl={detailUrl}
-                                sex={
-                                    boardCategoryId === 3
-                                        ? principalData?.data.sex
-                                        : ""
-                                }
-                                age={
-                                    boardCategoryId === 3
-                                        ? principalData?.data.age
-                                        : ""
-                                }
+                                sex={boardCategoryId === 3 ? data.sex : ""}
+                                age={boardCategoryId === 3 ? data.age : ""}
                             />
                         ))}
                     </div>
