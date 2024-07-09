@@ -126,6 +126,7 @@ function SignupPage() {
                             value={username}
                             onChange={usernameChange}
                             message={usernameMessage}
+                            maxLength={14}
                         />
                     </div>
                     <div>
@@ -137,6 +138,7 @@ function SignupPage() {
                             value={nickname}
                             onChange={nicknameChange}
                             message={nicknameMessage}
+                            maxLength={12}
                         />
                     </div>
                     <div>

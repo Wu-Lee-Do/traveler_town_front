@@ -108,7 +108,7 @@ export const profileBox = css`
     & > div > img {
         width: 30px;
         height: 30px;
-        margin-left: 20px;
+        margin-left: 10px;
         margin-right: 10px;
         border-radius: 15px;
     }
@@ -130,7 +130,10 @@ export const profileBox = css`
 `;
 
 export const nickname = css`
+    max-width: 70px;
+    font-size: 14px;
     font-weight: 600;
+    color: #333;
 `;
 
 export const profileDetailInfo = css`
