@@ -58,10 +58,14 @@ function BoardCardComponent({
                     <div>
                         <img src={profileImg} alt="" />
                         <div css={s.nickname}>{nickname}</div>
-                        <div css={s.profileDetailInfo}>
-                            <div>{sex === 1 ? "남자" : "여자"}</div>
-                            <div>{age}대</div>
-                        </div>
+                        {detailUrl === "together" ? (
+                            <div css={s.profileDetailInfo}>
+                                <div>{sex === 1 ? "• 남자" : "• 여자"}</div>
+                                <div>• {age}대</div>
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <div>
                         <BiSolidComment />

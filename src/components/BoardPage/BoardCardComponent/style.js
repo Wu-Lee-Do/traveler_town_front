@@ -134,7 +134,11 @@ export const nickname = css`
 `;
 
 export const profileDetailInfo = css`
+    width: 78px;
+    margin-left: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 14px;
+    color: #aaa;
 `;
-
-// 나이 성별 스타일 조정중
