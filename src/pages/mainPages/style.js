@@ -341,4 +341,5 @@ export const dropAnimation = (index) => css`
     opacity: 0;
     animation: ${drop} 0.5s forwards;
     animation-delay: ${index * 0.1}s;
+    white-space: pre;
 `;
