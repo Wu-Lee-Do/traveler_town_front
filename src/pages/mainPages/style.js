@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
 export const main = css`
     width: 100%;
@@ -323,4 +323,22 @@ export const postFooter = css`
         border-right: 1px solid #dbdbdb;
         border-left: 1px solid #dbdbdb;
     }
+`;
+
+export const drop = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+export const dropAnimation = (index) => css`
+    display: inline-block;
+    opacity: 0;
+    animation: ${drop} 0.5s forwards;
+    animation-delay: ${index * 0.1}s;
 `;
