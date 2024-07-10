@@ -19,13 +19,31 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./styles.css";
 import Footer from "../../components/MainPage/Footer/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../components/MainPage/alertComponent/AlertComponent";
 
 function MainPage() {
     const navigate = useNavigate();
     const [searchCountry, setSearchCountry] = useState("");
+    const [animatedText, setAnimatedText] = useState([]);
+    const text = "여행자들을 위한 쉼터";
+
+    useEffect(() => {
+        let animationTimeouts = [];
+        text.split("").forEach((char, index) => {
+            animationTimeouts.push(
+                setTimeout(() => {
+                    setAnimatedText((prev) => [...prev, char]);
+                }, index * 100)
+            ); // 100ms 간격으로 글자 애니메이션
+        });
+
+        // Cleanup function to clear timeouts if the component unmounts
+        return () => {
+            animationTimeouts.forEach((timeout) => clearTimeout(timeout));
+        };
+    }, [text]);
 
     const activeEnter = (e) => {
         if (e.key === "Enter") {
@@ -58,7 +76,13 @@ function MainPage() {
 
     return (
         <div css={s.main}>
-            <h1 css={s.mainTitle}>여행자들을 위한 쉼터</h1>
+            <h1 css={s.mainTitle}>
+                {animatedText.map((char, index) => (
+                    <span key={index} css={s.dropAnimation(index)}>
+                        {char}
+                    </span>
+                ))}
+            </h1>
             <div css={s.searchBox}>
                 <input
                     type="text"
