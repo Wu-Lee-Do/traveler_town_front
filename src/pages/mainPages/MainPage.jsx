@@ -29,8 +29,11 @@ function MainPage() {
     const navigate = useNavigate();
     const [searchCountry, setSearchCountry] = useState("");
     const [animatedText, setAnimatedText] = useState([]);
-    const [togetherDataList, setTogetherDataList] = useState([]);
-    const [travelDataList, setTravelDataList] = useState([]);
+    const [togetherBoardList, setTogetherBoardList] = useState([]);
+    const [travelBoardList, setTravelBoardList] = useState([]);
+    const [mustGoRestaurantBoardList, setMustGoRestaurantBoardList] = useState(
+        []
+    );
     const text = "여행자들을 위한 쉼터";
 
     const getTogetherBoardListQuery = useQuery(
@@ -43,7 +46,7 @@ function MainPage() {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                setTogetherDataList(
+                setTogetherBoardList(
                     response.data
                         .sort(
                             (a, b) =>
@@ -69,7 +72,32 @@ function MainPage() {
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
                 console.log(response.data);
-                setTravelDataList(
+                setTravelBoardList(
+                    response.data
+                        .sort(
+                            (a, b) =>
+                                new Date(b.createDate) - new Date(a.createDate)
+                        )
+                        .slice(0, 6)
+                );
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        }
+    );
+    const getMustGoRestaurantBoardListQuery = useQuery(
+        ["getMustGoRestaurantBoardListQuery"],
+        async () =>
+            await getBoardsAll({
+                boardCategoryId: 1,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                console.log(response.data);
+                setMustGoRestaurantBoardList(
                     response.data
                         .sort(
                             (a, b) =>
@@ -101,16 +129,6 @@ function MainPage() {
 
     const handleSearchOnChange = (e) => {
         setSearchCountry(() => e.target.value);
-    };
-
-    const handleBannerClick = (type) => {
-        if (type === "together") {
-            navigate("/");
-        } else if (type === "travel") {
-            navigate("/");
-        } else if (type === "mustgorestaurant") {
-            window.location.replace("/board/mustgorestaurant");
-        }
     };
 
     const getTimeDifference = (dateString) => {
@@ -249,9 +267,16 @@ function MainPage() {
                     modules={[FreeMode, Autoplay]}
                     className="mySwiper"
                 >
-                    {togetherDataList?.map((data) => (
+                    {togetherBoardList?.map((data) => (
                         <SwiperSlide key={data?.boardId}>
-                            <div css={s.togetherBox}>
+                            <div
+                                css={s.togetherBox}
+                                onClick={() =>
+                                    window.location.replace(
+                                        `/board/together/${data?.boardId}`
+                                    )
+                                }
+                            >
                                 <div css={s.togetherImg}>
                                     <img src={swiss} alt="" />
                                 </div>
@@ -301,9 +326,16 @@ function MainPage() {
                     modules={[FreeMode, Autoplay]}
                     className="mySwiper"
                 >
-                    {travelDataList?.map((data) => (
+                    {travelBoardList?.map((data) => (
                         <SwiperSlide key={data?.boardId}>
-                            <div css={s.postBox}>
+                            <div
+                                css={s.postBox}
+                                onClick={() =>
+                                    window.location.replace(
+                                        `/board/travel/${data?.boardId}`
+                                    )
+                                }
+                            >
                                 <div css={s.postHeader}>
                                     <div css={s.profileBox}>
                                         <div css={s.profileImg}>
@@ -366,67 +398,76 @@ function MainPage() {
                 <Swiper
                     slidesPerView={2}
                     spaceBetween={10}
-                    modules={[Navigation]}
+                    autoplay={{
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[FreeMode, Autoplay]}
                     className="mySwiper"
-                    navigation={true}
-                    loop={true}
                 >
-                    <SwiperSlide>
-                        <div css={s.postBox}>
-                            <div css={s.postHeader}>
-                                <div css={s.profileBox}>
-                                    <div css={s.profileImg}>
-                                        <img src={defaultImg} alt="" />
+                    {mustGoRestaurantBoardList?.map((data) => (
+                        <SwiperSlide key={data?.boardId}>
+                            <div
+                                css={s.postBox}
+                                onClick={() =>
+                                    window.location.replace(
+                                        `/board/mustgorestaurant/${data?.boardId}`
+                                    )
+                                }
+                            >
+                                <div css={s.postHeader}>
+                                    <div css={s.profileBox}>
+                                        <div css={s.profileImg}>
+                                            <img
+                                                src={data?.profileImg}
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div css={s.infoBox}>
+                                            <div css={s.nickname}>
+                                                {data?.nickname}
+                                            </div>
+                                            <div css={s.time}>
+                                                {getTimeDifference(
+                                                    data?.createDate
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div css={s.infoBox}>
-                                        <div css={s.nickname}>닉네임</div>
-                                        <div css={s.time}>3분전</div>
+                                    <div css={s.category}>
+                                        {data?.countryNameKor}
                                     </div>
                                 </div>
-                                <div css={s.category}>미국</div>
-                            </div>
-                            <div css={s.postMain}>
-                                <div css={s.content}>
-                                    <h3>여기가요</h3>
-                                    <span>
-                                        Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit. Neque rerum mollitia
-                                        repudiandae nulla, dolores unde
-                                        corrupti, nesciunt sed numquam error
-                                        magnam blanditiis laboriosam ut minima
-                                        incidunt facilis, deserunt ipsum
-                                        repellat.
-                                    </span>
+                                <div css={s.postMain}>
+                                    <div css={s.content}>
+                                        <h3>{data?.boardTitle}</h3>
+                                        <span
+                                            dangerouslySetInnerHTML={{
+                                                __html: data?.boardContent,
+                                            }}
+                                        ></span>
+                                    </div>
+                                    <div css={s.postImg}>
+                                        <img src={usa} alt="" />
+                                    </div>
                                 </div>
-                                <div css={s.postImg}>
-                                    <img src={usa} alt="" />
-                                </div>
-                            </div>
-                            <div css={s.postFooter}>
-                                <div>
-                                    <BiSolidComment />
-                                </div>
-                                <div>
-                                    <FaHeart />
-                                </div>
-                                <div>
-                                    <FaBookmark />
+                                <div css={s.postFooter}>
+                                    <div>
+                                        <BiSolidComment />
+                                        <span>{data?.boardCommentCount}</span>
+                                    </div>
+                                    <div>
+                                        <FaHeart />
+                                        <span>{data?.boardLikeCount}</span>
+                                    </div>
+                                    <div>
+                                        <FaBookmark />
+                                        <span>{data?.boardBookmarkCount}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.postBox}>포스트 박스2</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.postBox}>포스트 박스3</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.postBox}>포스트 박스4</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.postBox}>포스트 박스5</div>
-                    </SwiperSlide>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
 

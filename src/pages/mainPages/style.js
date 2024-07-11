@@ -131,6 +131,7 @@ export const togetherBox = css`
     width: 100%;
     height: 250px;
     overflow: hidden;
+    cursor: pointer;
 `;
 
 export const togetherImg = css`
@@ -196,6 +197,7 @@ export const postBox = css`
     height: 100%;
     border-radius: 15px;
     border: 1px solid #dbdbdb;
+    cursor: pointer;
 `;
 
 export const postHeader = css`
