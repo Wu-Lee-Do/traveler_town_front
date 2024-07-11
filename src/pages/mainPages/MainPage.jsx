@@ -152,6 +152,26 @@ function MainPage() {
         }
     };
 
+    const extractImageSrcAndRemoveTag = (htmlContent) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, "text/html");
+        const imgTags = doc.querySelectorAll("img");
+
+        let imgSrc = "";
+        if (imgTags.length > 0) {
+            imgSrc = imgTags[0].getAttribute("src");
+            for (let i = 1; i < imgTags.length; i++) {
+                imgTags[i].remove();
+            }
+        }
+        doc.querySelectorAll("img").forEach((img) => img.remove());
+
+        return {
+            content: doc.body.innerHTML,
+            imgSrc: imgSrc,
+        };
+    };
+
     useEffect(() => {
         let animationTimeouts = [];
         text.split("").forEach((char, index) => {
@@ -364,12 +384,27 @@ function MainPage() {
                                         <h3>{data?.boardTitle}</h3>
                                         <span
                                             dangerouslySetInnerHTML={{
-                                                __html: data?.boardContent,
+                                                __html: extractImageSrcAndRemoveTag(
+                                                    data?.boardContent
+                                                ).content,
                                             }}
                                         ></span>
                                     </div>
                                     <div css={s.postImg}>
-                                        <img src={usa} alt="" />
+                                        {!!extractImageSrcAndRemoveTag(
+                                            data?.boardContent
+                                        ).imgSrc ? (
+                                            <img
+                                                src={
+                                                    extractImageSrcAndRemoveTag(
+                                                        data?.boardContent
+                                                    ).imgSrc
+                                                }
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <></>
+                                        )}
                                     </div>
                                 </div>
                                 <div css={s.postFooter}>
@@ -443,12 +478,27 @@ function MainPage() {
                                         <h3>{data?.boardTitle}</h3>
                                         <span
                                             dangerouslySetInnerHTML={{
-                                                __html: data?.boardContent,
+                                                __html: extractImageSrcAndRemoveTag(
+                                                    data?.boardContent
+                                                ).content,
                                             }}
                                         ></span>
                                     </div>
                                     <div css={s.postImg}>
-                                        <img src={usa} alt="" />
+                                        {!!extractImageSrcAndRemoveTag(
+                                            data?.boardContent
+                                        ).imgSrc ? (
+                                            <img
+                                                src={
+                                                    extractImageSrcAndRemoveTag(
+                                                        data?.boardContent
+                                                    ).imgSrc
+                                                }
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <></>
+                                        )}
                                     </div>
                                 </div>
                                 <div css={s.postFooter}>
