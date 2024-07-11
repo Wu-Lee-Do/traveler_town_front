@@ -30,10 +30,11 @@ function MainPage() {
     const [searchCountry, setSearchCountry] = useState("");
     const [animatedText, setAnimatedText] = useState([]);
     const [togetherDataList, setTogetherDataList] = useState([]);
+    const [travelDataList, setTravelDataList] = useState([]);
     const text = "여행자들을 위한 쉼터";
 
-    const getTogetherDataListQuery = useQuery(
-        ["getTogetherDataListQuery"],
+    const getTogetherBoardListQuery = useQuery(
+        ["getTogetherBoardListQuery"],
         async () =>
             await getBoardsAll({
                 boardCategoryId: 3,
@@ -50,7 +51,32 @@ function MainPage() {
                         )
                         .slice(0, 6)
                 );
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        }
+    );
+
+    const getTravelBoardListQuery = useQuery(
+        ["getTravelBoardListQuery"],
+        async () =>
+            await getBoardsAll({
+                boardCategoryId: 2,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
                 console.log(response.data);
+                setTravelDataList(
+                    response.data
+                        .sort(
+                            (a, b) =>
+                                new Date(b.createDate) - new Date(a.createDate)
+                        )
+                        .slice(0, 6)
+                );
             },
             error: (error) => {
                 console.log(error);
@@ -84,6 +110,27 @@ function MainPage() {
             navigate("/");
         } else if (type === "mustgorestaurant") {
             window.location.replace("/board/mustgorestaurant");
+        }
+    };
+
+    const getTimeDifference = (dateString) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const differenceInMilliseconds = now - date;
+        const differenceInMinutes = Math.floor(
+            differenceInMilliseconds / (1000 * 60)
+        );
+
+        if (differenceInMinutes < 1) {
+            return "방금";
+        } else if (differenceInMinutes < 60) {
+            return `${differenceInMinutes}분 전`;
+        } else if (differenceInMinutes < 1440) {
+            const differenceInHours = Math.floor(differenceInMinutes / 60);
+            return `${differenceInHours}시간 전`;
+        } else {
+            const differenceInDays = Math.floor(differenceInMinutes / 1440);
+            return `${differenceInDays}일 전`;
         }
     };
 
@@ -145,7 +192,9 @@ function MainPage() {
                                 <h1>지금 실시간으로 여행 동행을 찾아봐요</h1>
                                 <h3
                                     onClick={() =>
-                                        handleBannerClick("together")
+                                        window.location.replace(
+                                            "/board/together"
+                                        )
                                     }
                                 >
                                     함께 갈 동행 찾아보기 →
@@ -158,7 +207,11 @@ function MainPage() {
                                 <h1>
                                     여행 준비 중이라면, 함께 이야기를 나눠요
                                 </h1>
-                                <h3 onClick={() => handleBannerClick("travel")}>
+                                <h3
+                                    onClick={() =>
+                                        window.location.replace("/board/travel")
+                                    }
+                                >
                                     여행 이야기 공유하러 가기 →
                                 </h3>
                             </div>
@@ -169,7 +222,9 @@ function MainPage() {
                                 <h1>전 세계 맛집, 같이 공유해봐요</h1>
                                 <h3
                                     onClick={() =>
-                                        handleBannerClick("mustgorestaurant")
+                                        window.location.replace(
+                                            "/board/mustgorestaurant"
+                                        )
                                     }
                                 >
                                     전 세계 맛집 구경하러 가기 →
@@ -239,67 +294,69 @@ function MainPage() {
                 <Swiper
                     slidesPerView={2}
                     spaceBetween={10}
-                    modules={[Navigation]}
+                    autoplay={{
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[FreeMode, Autoplay]}
                     className="mySwiper"
-                    navigation={true}
-                    loop={true}
                 >
-                    <SwiperSlide>
-                        <div css={s.postBox}>
-                            <div css={s.postHeader}>
-                                <div css={s.profileBox}>
-                                    <div css={s.profileImg}>
-                                        <img src={defaultImg} alt="" />
+                    {travelDataList?.map((data) => (
+                        <SwiperSlide key={data?.boardId}>
+                            <div css={s.postBox}>
+                                <div css={s.postHeader}>
+                                    <div css={s.profileBox}>
+                                        <div css={s.profileImg}>
+                                            <img
+                                                src={data?.profileImg}
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div css={s.infoBox}>
+                                            <div css={s.nickname}>
+                                                {data?.nickname}
+                                            </div>
+                                            <div css={s.time}>
+                                                {getTimeDifference(
+                                                    data?.createDate
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div css={s.infoBox}>
-                                        <div css={s.nickname}>닉네임</div>
-                                        <div css={s.time}>3분전</div>
+                                    <div css={s.category}>
+                                        {data?.countryNameKor}
                                     </div>
                                 </div>
-                                <div css={s.category}>미국</div>
-                            </div>
-                            <div css={s.postMain}>
-                                <div css={s.content}>
-                                    <h3>여기가요</h3>
-                                    <span>
-                                        Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit. Neque rerum mollitia
-                                        repudiandae nulla, dolores unde
-                                        corrupti, nesciunt sed numquam error
-                                        magnam blanditiis laboriosam ut minima
-                                        incidunt facilis, deserunt ipsum
-                                        repellat.
-                                    </span>
+                                <div css={s.postMain}>
+                                    <div css={s.content}>
+                                        <h3>{data?.boardTitle}</h3>
+                                        <span
+                                            dangerouslySetInnerHTML={{
+                                                __html: data?.boardContent,
+                                            }}
+                                        ></span>
+                                    </div>
+                                    <div css={s.postImg}>
+                                        <img src={usa} alt="" />
+                                    </div>
                                 </div>
-                                <div css={s.postImg}>
-                                    <img src={usa} alt="" />
-                                </div>
-                            </div>
-                            <div css={s.postFooter}>
-                                <div>
-                                    <BiSolidComment />
-                                </div>
-                                <div>
-                                    <FaHeart />
-                                </div>
-                                <div>
-                                    <FaBookmark />
+                                <div css={s.postFooter}>
+                                    <div>
+                                        <BiSolidComment />
+                                        <span>{data?.boardCommentCount}</span>
+                                    </div>
+                                    <div>
+                                        <FaHeart />
+                                        <span>{data?.boardLikeCount}</span>
+                                    </div>
+                                    <div>
+                                        <FaBookmark />
+                                        <span>{data?.boardBookmarkCount}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.postBox}>포스트 박스2</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.postBox}>포스트 박스3</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.postBox}>포스트 박스4</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.postBox}>포스트 박스5</div>
-                    </SwiperSlide>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
             <div css={s.newRestaurantPost}>

@@ -331,7 +331,13 @@ export const postFooter = css`
         height: 100%;
         width: 100%;
         font-size: 15px;
-        color: #919191;
+        color: #6a6a6a;
+
+        & > span {
+            margin-left: 3px;
+            font-weight: 900;
+            font-size: 13px;
+        }
     }
 
     & > div:nth-of-type(2) {
