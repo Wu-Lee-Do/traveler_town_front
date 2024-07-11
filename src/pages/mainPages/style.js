@@ -131,6 +131,7 @@ export const togetherBox = css`
     width: 100%;
     height: 250px;
     overflow: hidden;
+    cursor: pointer;
 `;
 
 export const togetherImg = css`
@@ -196,6 +197,7 @@ export const postBox = css`
     height: 100%;
     border-radius: 15px;
     border: 1px solid #dbdbdb;
+    cursor: pointer;
 `;
 
 export const postHeader = css`
@@ -248,9 +250,20 @@ export const infoBox = css`
 `;
 
 export const nickname = css`
+    max-width: 100px;
     font-size: 14px;
     font-weight: 700;
     color: #252525;
+`;
+
+export const profileDetailInfo = css`
+    width: 78px;
+    margin-left: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #aaa;
 `;
 
 export const time = css`
@@ -320,7 +333,13 @@ export const postFooter = css`
         height: 100%;
         width: 100%;
         font-size: 15px;
-        color: #919191;
+        color: #6a6a6a;
+
+        & > span {
+            margin-left: 3px;
+            font-weight: 900;
+            font-size: 13px;
+        }
     }
 
     & > div:nth-of-type(2) {
