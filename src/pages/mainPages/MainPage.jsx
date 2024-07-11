@@ -22,27 +22,41 @@ import Footer from "../../components/MainPage/Footer/Footer";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../components/MainPage/alertComponent/AlertComponent";
+import { useQuery } from "react-query";
+import { getBoardsAll } from "../../apis/board/boardApi";
 
 function MainPage() {
     const navigate = useNavigate();
     const [searchCountry, setSearchCountry] = useState("");
     const [animatedText, setAnimatedText] = useState([]);
+    const [togetherDataList, setTogetherDataList] = useState([]);
     const text = "여행자들을 위한 쉼터";
 
-    useEffect(() => {
-        let animationTimeouts = [];
-        text.split("").forEach((char, index) => {
-            animationTimeouts.push(
-                setTimeout(() => {
-                    setAnimatedText((prev) => [...prev, char]);
-                }, index * 100)
-            );
-        });
-
-        return () => {
-            animationTimeouts.forEach((timeout) => clearTimeout(timeout));
-        };
-    }, [text]);
+    const getTogetherDataListQuery = useQuery(
+        ["getTogetherDataListQuery"],
+        async () =>
+            await getBoardsAll({
+                boardCategoryId: 3,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setTogetherDataList(
+                    response.data
+                        .sort(
+                            (a, b) =>
+                                new Date(b.createDate) - new Date(a.createDate)
+                        )
+                        .slice(0, 6)
+                );
+                console.log(response.data);
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        }
+    );
 
     const activeEnter = (e) => {
         if (e.key === "Enter") {
@@ -72,6 +86,21 @@ function MainPage() {
             window.location.replace("/board/mustgorestaurant");
         }
     };
+
+    useEffect(() => {
+        let animationTimeouts = [];
+        text.split("").forEach((char, index) => {
+            animationTimeouts.push(
+                setTimeout(() => {
+                    setAnimatedText((prev) => [...prev, char]);
+                }, index * 100)
+            );
+        });
+
+        return () => {
+            animationTimeouts.forEach((timeout) => clearTimeout(timeout));
+        };
+    }, [text]);
 
     return (
         <div css={s.main}>
@@ -155,48 +184,52 @@ function MainPage() {
             </div>
             <div css={s.togetherLayout}>
                 <Swiper
-                    slidesPerView={4}
+                    slidesPerView={3}
                     spaceBetween={15}
                     freeMode={true}
-                    modules={[FreeMode]}
+                    autoplay={{
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[FreeMode, Autoplay]}
                     className="mySwiper"
                 >
-                    <SwiperSlide>
-                        <div css={s.togetherBox}>
-                            <div css={s.togetherImg}>
-                                <img src={swiss} alt="" />
-                            </div>
-                            <div css={s.togetherInfo}>
-                                <div>스위스 갈 사람 구해요!!</div>
-                                <div>
+                    {togetherDataList?.map((data) => (
+                        <SwiperSlide key={data?.boardId}>
+                            <div css={s.togetherBox}>
+                                <div css={s.togetherImg}>
+                                    <img src={swiss} alt="" />
+                                </div>
+                                <div css={s.togetherInfo}>
+                                    <div>{data?.boardTitle}</div>
                                     <div>
-                                        <div css={s.toProfileImg}>
-                                            <img src={defaultImg} alt="" />
+                                        <div>
+                                            <div css={s.toProfileImg}>
+                                                <img
+                                                    src={data?.profileImg}
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div css={s.nickname}>
+                                                {data?.nickname}
+                                            </div>
+                                            <div css={s.profileDetailInfo}>
+                                                <div>
+                                                    {data?.sex === 1
+                                                        ? "• 남자"
+                                                        : "• 여자"}
+                                                </div>
+                                                <div>• {data?.age}대</div>
+                                            </div>
                                         </div>
-                                        <div css={s.nickname}>
-                                            닉네임 • 20대 • 남자
+                                        <div css={s.category}>
+                                            {data?.countryNameKor}
                                         </div>
                                     </div>
-                                    <div css={s.category}>스위스</div>
                                 </div>
                             </div>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.togetherBox}>2</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.togetherBox}>3</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.togetherBox}>4</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.togetherBox}>5</div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div css={s.togetherBox}>6</div>
-                    </SwiperSlide>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
             <div css={s.newPostTitle}>

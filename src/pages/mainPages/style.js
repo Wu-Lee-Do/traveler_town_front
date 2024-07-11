@@ -248,9 +248,20 @@ export const infoBox = css`
 `;
 
 export const nickname = css`
+    max-width: 100px;
     font-size: 14px;
     font-weight: 700;
     color: #252525;
+`;
+
+export const profileDetailInfo = css`
+    width: 78px;
+    margin-left: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #aaa;
 `;
 
 export const time = css`
