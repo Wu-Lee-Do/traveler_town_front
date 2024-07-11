@@ -36,10 +36,9 @@ function MainPage() {
                 setTimeout(() => {
                     setAnimatedText((prev) => [...prev, char]);
                 }, index * 100)
-            ); // 100ms 간격으로 글자 애니메이션
+            );
         });
 
-        // Cleanup function to clear timeouts if the component unmounts
         return () => {
             animationTimeouts.forEach((timeout) => clearTimeout(timeout));
         };
@@ -77,11 +76,13 @@ function MainPage() {
     return (
         <div css={s.main}>
             <h1 css={s.mainTitle}>
-                {animatedText.map((char, index) => (
-                    <span key={index} css={s.dropAnimation(index)}>
-                        {char}
-                    </span>
-                ))}
+                <div>
+                    {animatedText.map((char, index) => (
+                        <span key={index} css={s.dropAnimation(index)}>
+                            {char}
+                        </span>
+                    ))}
+                </div>
             </h1>
             <div css={s.searchBox}>
                 <input

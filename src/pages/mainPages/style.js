@@ -16,8 +16,13 @@ export const mainTitle = css`
     margin-top: 48px;
     font-size: 44px;
     font-weight: 700;
-    text-align: center;
+    display: flex;
+    justify-content: center;
     cursor: default;
+
+    & > div {
+        width: 365px;
+    }
 `;
 
 export const searchBox = css`
