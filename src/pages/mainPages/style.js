@@ -126,7 +126,7 @@ export const togetherLayout = css`
 
 export const togetherBox = css`
     box-sizing: border-box;
-    border: 1px solid #dbdbdb;
+    border: 1.5px solid #dbdbdb;
     border-radius: 15px;
     width: 100%;
     height: 250px;
@@ -196,7 +196,7 @@ export const postBox = css`
     width: 100%;
     height: 100%;
     border-radius: 15px;
-    border: 1px solid #dbdbdb;
+    border: 1.5px solid #dbdbdb;
     cursor: pointer;
 `;
 
@@ -278,8 +278,8 @@ export const postMain = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
+    border-top: 1.5px solid #dbdbdb;
+    border-bottom: 1.5px solid #dbdbdb;
 `;
 
 export const content = css`
@@ -344,8 +344,8 @@ export const postFooter = css`
 
     & > div:nth-of-type(2) {
         box-sizing: border-box;
-        border-right: 1px solid #dbdbdb;
-        border-left: 1px solid #dbdbdb;
+        border-right: 1.5px solid #dbdbdb;
+        border-left: 1.5px solid #dbdbdb;
     }
 `;
 
