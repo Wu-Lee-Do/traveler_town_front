@@ -50,7 +50,12 @@ function BoardListPageComponent({
             onSuccess: (response) => {
                 console.log(response.data);
                 setCategoryState(1);
-                setBoardDataList(response.data);
+                setBoardDataList(
+                    response.data.sort(
+                        (a, b) =>
+                            new Date(b.createDate) - new Date(a.createDate)
+                    )
+                );
             },
             onError: (error) => {
                 console.log(error);
@@ -72,7 +77,12 @@ function BoardListPageComponent({
             onSuccess: (response) => {
                 setSearchState(false);
                 setCategoryState(3);
-                setBoardDataList(response.data);
+                setBoardDataList(
+                    response.data.sort(
+                        (a, b) =>
+                            new Date(b.createDate) - new Date(a.createDate)
+                    )
+                );
             },
             onError: (error) => {
                 console.log(error);
@@ -86,8 +96,12 @@ function BoardListPageComponent({
 
     const handleCategoryClick = (category) => {
         setCategoryState(category);
-        if (category !== 1) {
-            setBoardDataList([]);
+        if (category === 2) {
+            setBoardDataList((prevList) =>
+                [...prevList].sort(
+                    (a, b) => b.boardLikeCount - a.boardLikeCount
+                )
+            );
         }
     };
 
@@ -122,8 +136,6 @@ function BoardListPageComponent({
             window.location.replace("/account/mypage/info");
         }
     };
-
-    console.log(boardCategoryId);
 
     return (
         <div css={s.layout}>
