@@ -63,6 +63,27 @@ function BoardDetailComponent({
         }
     };
 
+    const getTimeDifference = (dateString) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const differenceInMilliseconds = now - date;
+        const differenceInMinutes = Math.floor(
+            differenceInMilliseconds / (1000 * 60)
+        );
+
+        if (differenceInMinutes < 1) {
+            return "방금";
+        } else if (differenceInMinutes < 60) {
+            return `${differenceInMinutes}분 전`;
+        } else if (differenceInMinutes < 1440) {
+            const differenceInHours = Math.floor(differenceInMinutes / 60);
+            return `${differenceInHours}시간 전`;
+        } else {
+            const differenceInDays = Math.floor(differenceInMinutes / 1440);
+            return `${differenceInDays}일 전`;
+        }
+    };
+
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
@@ -95,7 +116,7 @@ function BoardDetailComponent({
                         <div css={s.category} onClick={handleCountryClick}>
                             {countryNameKor}
                         </div>
-                        <div css={s.date}>{updateDate}</div>
+                        <div css={s.date}>{getTimeDifference(updateDate)}</div>
                     </div>
                     <div>
                         <div

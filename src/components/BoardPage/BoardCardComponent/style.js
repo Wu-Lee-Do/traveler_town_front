@@ -62,7 +62,7 @@ export const boardText = css`
         height: 22.5px;
         margin: 0;
         margin-bottom: 10px;
-        padding: 20px 20px 0px 20px;
+        padding: 20px 80px 0px 20px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
@@ -85,6 +85,7 @@ export const boardText = css`
     & > div:nth-of-type(2) {
         position: absolute;
         right: 20px;
+        top: 20px;
         color: #bbb;
         font-size: 14px;
         font-weight: 600;
@@ -117,7 +118,7 @@ export const profileBox = css`
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 20px;
+        margin-right: 10px;
         height: 30px;
         font-size: 16px;
         color: #919191;
