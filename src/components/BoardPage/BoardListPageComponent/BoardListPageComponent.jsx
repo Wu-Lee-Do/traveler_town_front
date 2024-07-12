@@ -48,7 +48,6 @@ function BoardListPageComponent({
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                console.log(response.data);
                 setCategoryState(1);
                 setBoardDataList(
                     response.data.sort(

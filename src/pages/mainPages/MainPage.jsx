@@ -71,7 +71,6 @@ function MainPage() {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                console.log(response.data);
                 setTravelBoardList(
                     response.data
                         .sort(
@@ -96,7 +95,6 @@ function MainPage() {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                console.log(response.data);
                 setMustGoRestaurantBoardList(
                     response.data
                         .sort(
