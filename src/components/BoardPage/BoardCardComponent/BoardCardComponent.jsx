@@ -29,12 +29,33 @@ function BoardCardComponent({
         return boardContent.replace(/<[^>]*>/g, "");
     };
 
-    const dateString = (createDate) => {
-        const date = new Date(createDate);
-        const year = String(date.getFullYear()).slice(-2);
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-        return `${year}.${month}.${day}`;
+    // const dateString = (createDate) => {
+    //     const date = new Date(createDate);
+    //     const year = String(date.getFullYear()).slice(-2);
+    //     const month = String(date.getMonth() + 1).padStart(2, "0");
+    //     const day = String(date.getDate()).padStart(2, "0");
+    //     return `${year}.${month}.${day}`;
+    // };
+
+    const getTimeDifference = (dateString) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const differenceInMilliseconds = now - date;
+        const differenceInMinutes = Math.floor(
+            differenceInMilliseconds / (1000 * 60)
+        );
+
+        if (differenceInMinutes < 1) {
+            return "방금";
+        } else if (differenceInMinutes < 60) {
+            return `${differenceInMinutes}분 전`;
+        } else if (differenceInMinutes < 1440) {
+            const differenceInHours = Math.floor(differenceInMinutes / 60);
+            return `${differenceInHours}시간 전`;
+        } else {
+            const differenceInDays = Math.floor(differenceInMinutes / 1440);
+            return `${differenceInDays}일 전`;
+        }
     };
 
     const handleBoardCardClick = () => {
@@ -52,7 +73,7 @@ function BoardCardComponent({
                 <div css={s.boardText}>
                     <h3>{boardTitle}</h3>
                     <div>{removeHtmlTags(boardContent)}</div>
-                    <div>{dateString(createDate)}</div>
+                    <div>{getTimeDifference(createDate)}</div>
                 </div>
                 <div css={s.profileBox}>
                     <div>
