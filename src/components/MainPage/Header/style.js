@@ -1,4 +1,16 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
+
+export const drop = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const header = (scrollPosition) => css`
     position: fixed;
@@ -13,6 +25,8 @@ export const header = (scrollPosition) => css`
         ? "0 2px 12px 0 rgba(0, 0, 0, 0.15);"
         : "none"};
     transition: 0.3s ease-in-out;
+    opacity: 0;
+    animation: ${drop} 1.5s forwards;
 `;
 
 export const navBox = css`

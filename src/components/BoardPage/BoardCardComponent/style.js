@@ -4,7 +4,7 @@ export const boardCard = css`
     position: relative;
     width: 100%;
     height: 370px;
-    background-color: white;
+    background-color: #fafafa;
     border-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     transition: 0.2s ease-in-out;
