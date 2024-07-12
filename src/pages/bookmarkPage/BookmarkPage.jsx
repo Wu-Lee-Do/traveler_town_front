@@ -34,7 +34,12 @@ function BookmarkPage() {
             retry: 0,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
-                setCountryBookmarkList(response.data);
+                setCountryBookmarkList(
+                    response.data.sort(
+                        (a, b) =>
+                            new Date(b.createDate) - new Date(a.createDate)
+                    )
+                );
             },
             onError: (error) => {
                 console.log(error);
@@ -73,8 +78,12 @@ function BookmarkPage() {
             }),
         {
             onSuccess: (response) => {
-                console.log(response.data);
-                setBoardBookmarkList(response.data);
+                setBoardBookmarkList(
+                    response.data.sort(
+                        (a, b) =>
+                            new Date(b.createDate) - new Date(a.createDate)
+                    )
+                );
             },
             onError: (error) => {
                 console.log(error);
