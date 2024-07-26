@@ -8,6 +8,7 @@ import { storage } from "../../../apis/firebase/config/firebaseConfig";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import BoardWriteComponent from "../BoardWriteComponent/BoardWriteComponent";
 import { addNewBoard } from "../../../apis/board/boardApi";
+import BoardWriteSideComponent from "../BoardWriteSideComponent/BoardWriteSideComponent";
 
 function BoardWritePageComponent({ writeTitle, boardCategoryId }) {
     const [countryCode, setCountryCode] = useState({});
@@ -114,7 +115,9 @@ function BoardWritePageComponent({ writeTitle, boardCategoryId }) {
                             onClick={submitButtonClick}
                         />
                     </div>
-                    <div>아이디어 구상중...</div>
+                    <div>
+                        <BoardWriteSideComponent country={countryCode} />
+                    </div>
                 </div>
             </div>
         </div>
