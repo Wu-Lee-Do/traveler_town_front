@@ -2,7 +2,7 @@
 import { useQuery } from "react-query";
 import * as s from "./style";
 import { getCountryNameKorAndCountryCodeAllRequest } from "../../../apis/country/countryApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BoardQuillComponent from "../BoardQuillComponent/BoardQuillComponent";
 
 function BoardWriteComponent({

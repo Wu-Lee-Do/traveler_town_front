@@ -28,13 +28,13 @@ export const contentBox = css`
     display: flex;
     width: 100%;
     min-height: 700px;
-    justify-content: center;
+    justify-content: space-between;
 
     & > div:nth-of-type(1) {
         width: 70%;
     }
 
     & > div:nth-of-type(2) {
-        width: 30%;
+        width: 28%;
     }
 `;
