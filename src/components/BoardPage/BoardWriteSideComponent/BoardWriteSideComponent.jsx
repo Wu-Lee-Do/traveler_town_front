@@ -82,9 +82,7 @@ function BoardWriteSideComponent({ country }) {
             </div>
         </div>
     ) : (
-        <div>
-            <h1>국가를 선택해 주세요!</h1>
-        </div>
+        <></>
     );
 }
 
