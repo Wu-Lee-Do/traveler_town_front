@@ -4,6 +4,8 @@ import defaultImg from "../../../assets/usa.webp";
 import { BiSolidComment } from "react-icons/bi";
 import { FaHeart, FaBookmark } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 function BoardCardComponent({
     boardId,
@@ -14,6 +16,7 @@ function BoardCardComponent({
     profileImg,
     nickname,
     countryNameKor,
+    countryCode,
     boardBookmarkCount,
     boardLikeCount,
     boardCommentCount,
@@ -23,6 +26,7 @@ function BoardCardComponent({
 }) {
     const imgTagRegex = /<img[^>]+src="([^">]+)"/i;
     const match = boardContent.match(imgTagRegex);
+    const [imgUrl, setImgUrl] = useState();
     const navigate = useNavigate();
 
     const removeHtmlTags = (boardContent) => {
@@ -62,11 +66,22 @@ function BoardCardComponent({
         navigate(`/board/${detailUrl}/${boardId}`);
     };
 
+    useEffect(() => {
+        const storage = getStorage();
+        getDownloadURL(ref(storage, `country/${countryCode}.gif`))
+            .then((url) => {
+                setImgUrl(url);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [countryCode]);
+
     return (
         <div css={s.boardCard} onClick={handleBoardCardClick}>
             <div css={s.category}>{countryNameKor}</div>
             <div css={s.imgBox}>
-                <img src={match ? match[1] : defaultImg} alt="" />
+                <img src={match ? match[1] : imgUrl} alt="" />
             </div>
 
             <div css={s.boardInfo}>
