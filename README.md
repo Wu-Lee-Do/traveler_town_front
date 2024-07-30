@@ -190,14 +190,9 @@
 3. 작업을 완료하면 각자의 생성한 브랜치에서 코드를 push합니다.
 4. PR(Pull Request) 을 오픈합니다.
 
--   PR(pull request)을 오픈하면, 팀장이 코드를 확인하고 승인합니다.
+-   PR(pull request)을 오픈하면, 본인이 코드를 확인하고 승인합니다.
 
--   코드 리뷰 & 승인은 팀장이 일임했지만, 팀원들의 코드 스타일은 다같이 공유하며 서로 잘 이해할 수 있도록 다 같이 정리하는 시간을 가지도록 하였습니다.
-
-*   컨펌 담당
-    -   지언 : <code>동윤</code>
-    -   현욱 : <code>동윤</code>
-    -   종현 : <code>동윤</code>
+-   팀원간의 코드 스타일은 다같이 공유하며 서로 잘 이해할 수 있도록 다 같이 정리하는 시간을 가지도록 하였습니다.
 
 5. PR이 merge되어 close 되면 해당 이슈는 자동으로 Done상태로 변경됩니다.
 
@@ -382,7 +377,7 @@
 <p>
 <img src="https://img.shields.io/badge/Git-181717?style=for-the-badge&logo=Git&logoColor=white"/>
 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"/>
-<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
+<img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white">
 </p>
 
 ### 5. Library
