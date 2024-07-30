@@ -132,11 +132,21 @@ export const togetherBox = css`
     height: 250px;
     overflow: hidden;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 export const togetherImg = css`
-    width: 100%;
+    width: 60%;
     height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+        height: 100%;
+    }
 `;
 
 export const toProfileImg = css`
