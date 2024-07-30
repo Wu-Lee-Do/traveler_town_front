@@ -1,6 +1,4 @@
-<div align="center">
-    <h1>Traveler Town</h1>
-</div>
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=300&section=header&text=Traveler%20Town&fontSize=100)
 
 # 🔖 목차
 
@@ -20,11 +18,7 @@
 >
 > ## [🛠 개발 도구](#-개발-도구-1)
 >
-> ## [📆 프로젝트 일정](#-프로젝트-일정-1)
->
-> ## [📄 API 명세서&ERD 설계도](#-api-명세서erd-설계도-1)
->
-> ## [📋 메뉴 구조도](#-메뉴-구조도-1)
+> ## [📄 ERD 설계도](#-erd-설계도-1)
 >
 > ## [🖥 화면 구현](#-화면-구현-1)
 >
@@ -419,7 +413,6 @@
 | 모듈 이름                                                                   | 용도                                       |
 | --------------------------------------------------------------------------- | ------------------------------------------ |
 | emotion/react, emotion/styled                                               | 리액트 내 css 적용                         |
-| portone/browser-sdk                                                         | QR 코드로 결제 기능 구현                   |
 | react-google-maps/api                                                       | 구글 맵을 불러와 화면에 구현               |
 | testing-library/jest-dom, testing-library/react, testing-library/user-event | 리액트 dom 테스트                          |
 | axios                                                                       | 서버로 요청을 보내 통신                    |
@@ -428,12 +421,10 @@
 | react-icons                                                                 | 리액트 아이콘을 불러와 사용                |
 | react-query                                                                 | 서버 데이터 동기화(fetching, caching) 지원 |
 | react-select                                                                | select 요소를 쉽게 사용                    |
-| react-switch                                                                | 토글 기능 스위치 구현                      |
 | react, react-scripts                                                        | 리액트 라이브러리 적용                     |
-| recharts                                                                    | 가져온 데이터를 차트로 시각화하는 역할     |
+| react-quill                                                                 | 게시물 작성에 사용                         |
 | recoil                                                                      | 전역 상태 관리                             |
 | styled-reset                                                                | 초기 CSS 스타일 재설정                     |
-| sweetalert2                                                                 | 알림창 구현                                |
 | uuid                                                                        | 고유 아이디 값을 생성하는 함수 제공        |
 | web-vitals                                                                  | 사용자의 웹 바이탈 항목 측정               |
 
@@ -444,44 +435,9 @@
 <br/>
 <br/>
 
-## 📆 프로젝트 일정
-
-![스크린샷 2024-05-07 오전 11 43 01](https://github.com/Novel-Ideas/gumeonggage-front/assets/106566223/2dcefa79-71da-4f61-ab5a-dba055d17ad4)
-![스크린샷 2024-05-07 오전 11 43 05](https://github.com/Novel-Ideas/gumeonggage-front/assets/106566223/dba81999-e57a-40ee-a4fe-b4b2a2702241)
-
-<p align="right" dir="auto">
-<a href="https://github.com/Novel-Ideas/gumeonggage-front">TOP 🔼</a>
-</p>
-
-<br/>
-<br/>
-
-## 📄 API 명세서&ERD 설계도
-
-### 🛰 API 명세서
-
-https://mangrove-comic-a17.notion.site/da55c3b2cb47486eb592dbc297ae8e01?v=f865787f598c4dec933cb6990c5719cd&pvs=4
-
-### 📐 ERD 설계도
+## 📐 ERD 설계도
 
 ![ERD 다이어그램](https://github.com/Novel-Ideas/gumeonggage-front/assets/106566223/5074a2e8-503f-48f6-9b48-dfd2a56f7938)
-
-<p align="right" dir="auto">
-<a href="https://github.com/Novel-Ideas/gumeonggage-front">TOP 🔼</a>
-</p>
-
-<br/>
-<br/>
-
-## 📋 메뉴 구조도
-
-### 🧑‍🤝‍🧑 사용자 메뉴 구조도
-
-![사용자 메뉴 구조도](https://github.com/Novel-Ideas/gumeonggage-front/assets/106566223/cf4b1b29-41a2-49b3-bd88-e5b296974160)
-
-### 👷‍♂️ 관리자 메뉴 구조도
-
-![관리자 메뉴 구조도](https://github.com/Novel-Ideas/gumeonggage-front/assets/106566223/8077db0a-0d1b-4ee8-87bb-4f4117c9f527)
 
 <p align="right" dir="auto">
 <a href="https://github.com/Novel-Ideas/gumeonggage-front">TOP 🔼</a>
