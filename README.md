@@ -437,7 +437,7 @@
 
 ## 📐 ERD 설계도
 
-![ERD 다이어그램](https://github.com/Novel-Ideas/gumeonggage-front/assets/106566223/5074a2e8-503f-48f6-9b48-dfd2a56f7938)
+![ERD 다이어그램](https://github.com/user-attachments/assets/474a90b5-e91f-4f14-b347-7925cea35ecf)
 
 <p align="right" dir="auto">
 <a href="https://github.com/Novel-Ideas/gumeonggage-front">TOP 🔼</a>
