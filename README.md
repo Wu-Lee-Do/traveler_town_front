@@ -1,6 +1,4 @@
-<div align="center">
-    <h1>Traveler Town</h1>
-</div>
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=300&section=header&text=Traveler%20Town&fontSize=100)
 
 # 🔖 목차
 
