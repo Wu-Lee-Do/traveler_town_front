@@ -24,12 +24,14 @@ import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../components/MainPage/alertComponent/AlertComponent";
 import { useQuery } from "react-query";
 import { getBoardsAll } from "../../apis/board/boardApi";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 function MainPage() {
     const navigate = useNavigate();
     const [searchCountry, setSearchCountry] = useState("");
     const [animatedText, setAnimatedText] = useState([]);
     const [togetherBoardList, setTogetherBoardList] = useState([]);
+    const [countryImgList, setCountryImgList] = useState([]);
     const [travelBoardList, setTravelBoardList] = useState([]);
     const [mustGoRestaurantBoardList, setMustGoRestaurantBoardList] = useState(
         []
@@ -185,6 +187,28 @@ function MainPage() {
         };
     }, [text]);
 
+    useEffect(() => {
+        const fetchImages = async () => {
+            const storage = getStorage();
+            const promises = togetherBoardList.map((data) =>
+                getDownloadURL(ref(storage, `country/${data?.countryCode}.gif`))
+            );
+
+            try {
+                const urls = await Promise.all(promises);
+                setCountryImgList(urls);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        if (togetherBoardList.length > 0) {
+            fetchImages();
+        }
+    }, [togetherBoardList]);
+
+    
+
     return (
         <div css={s.main}>
             <h1 css={s.mainTitle}>
@@ -285,7 +309,7 @@ function MainPage() {
                     modules={[FreeMode, Autoplay]}
                     className="mySwiper"
                 >
-                    {togetherBoardList?.map((data) => (
+                    {togetherBoardList?.map((data, index) => (
                         <SwiperSlide key={data?.boardId}>
                             <div
                                 css={s.togetherBox}
@@ -296,7 +320,7 @@ function MainPage() {
                                 }
                             >
                                 <div css={s.togetherImg}>
-                                    <img src={swiss} alt="" />
+                                    <img src={countryImgList[index]} alt="" />
                                 </div>
                                 <div css={s.togetherInfo}>
                                     <div>{data?.boardTitle}</div>

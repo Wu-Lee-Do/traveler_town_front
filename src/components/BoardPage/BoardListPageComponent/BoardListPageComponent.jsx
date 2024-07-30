@@ -135,7 +135,6 @@ function BoardListPageComponent({
             window.location.replace("/account/mypage/info");
         }
     };
-
     return (
         <div css={s.layout}>
             <div css={s.box}>
@@ -178,6 +177,7 @@ function BoardListPageComponent({
                                 profileImg={data.profileImg}
                                 nickname={data.nickname}
                                 countryNameKor={data.countryNameKor}
+                                countryCode={data.countryCode}
                                 boardBookmarkCount={data.boardBookmarkCount}
                                 boardCommentCount={data.boardCommentCount}
                                 boardLikeCount={data.boardLikeCount}
