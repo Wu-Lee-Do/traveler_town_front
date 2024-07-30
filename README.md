@@ -49,7 +49,7 @@
 
 ### 📆 제작 기간
 
--   2024.05.21 ~ 
+-   2024.05.21 ~
 
 ### 🔎 주요 기능
 
@@ -123,15 +123,14 @@
 ## 👥 팀원 소개
 
 <div align="center">
-<img src="https://github.com/Novel-Ideas/gumeonggage-front/assets/83110386/6339b2ff-101b-4316-98b1-fe5e53bda768" />
-<img src="https://github.com/Novel-Ideas/gumeonggage-front/assets/83110386/344a9254-8f2f-439e-af78-addcb748c4e9" />
+
+![header](https://github.com/Wu-Lee-Do/LeagueOfLegend/assets/106566223/25e9a5ae-f8a8-4ba0-8f1e-0efb9a009b97)
+
 <table >
     <thead>
         <tr>
-            <th align="center"><span>이동윤(팀장)</span></th>
-            <th align="center"><span>이지언</span></th>
-            <th align="center"><span>서현욱</span></th>
-            <th align="center"><span>김종현</span></th>
+            <th align="center"><span>이동윤</span></th>
+            <th align="center"><span>도경록</span></th>
         </tr>
     </thead>
     <tbody>
@@ -142,17 +141,7 @@
         </td>
         <td align="center">
             <a href="https://github.com/ez0603">
-                <img src="https://github.com/Novel-Ideas/gumeonggage-front/assets/83110386/37d1fc3b-f435-44d0-adb4-0404c1b71837" width="150" height="150" />
-            </a>
-        </td>
-        <td align="center">
-            <a href="https://github.com/seohyeonwook">
-                <img src="https://github.com/Novel-Ideas/gumeonggage-front/assets/83110386/b015e01d-1078-428e-a713-a92b23e4ff6a" width="150" height="150" />
-            </a>
-        </td>
-        <td align="center">
-            <a href="https://github.com/jayhyeon12">
-                <img src="https://github.com/Novel-Ideas/gumeonggage-front/assets/83110386/ffb0f7a2-6df1-4935-8b3f-036cf89e344b" width="150" height="150" />
+                <img src="https://github.com/Wu-Lee-Do/LeagueOfLegend/assets/118997608/4298e68c-1ef0-4be4-a0b1-59078108c0cf" width="150" height="150" />
             </a>
         </td>
     </tbody>
@@ -165,106 +154,27 @@
 
 ## 💼 역할 분담
 
-<h3> 🛩 팀장: 이동윤 </h3>
+<h3> 🛩 이동윤 </h3>
 
-### 🔧 Back-End
+-   회원가입 및 로그인 기능 구현
+-   로그인 및 회원가입 페이지 구현
+-   마이페이지 구현
+-   이메일 인증 기능 구현
+-   메인 페이지 구현
+-   국가 검색 기능 구현
+-   국가 상세 페이지 구현
+-   Google map API 연동 구현
+-   국가 관광지 및 음식점 상세 페이지 구현
+-   게시판 댓글 기능 구현
+-   국가 및 게시물 즐겨찾기 구현
 
--   관리자 회원가입
--   관리자 로그인
--   매출 전체 조회
--   제품별 매출 조회
--   메뉴 카테고리 조회
--   사용자 포인트 조회
--   사용자 포인트 적립 및 사용
--   점포 설정
+<h3> 🛩 도경록 </h3>
 
-### 🖥 Front-End
-
--   관리자 로그인 페이지
--   포인트 메인 페이지
--   포인트 적립 페이지
--   포인트 사용 페이지
--   메뉴 페이지
--   관리자 메인 페이지
--   관리자 점포 매출 페이지
--   관리자 메뉴 추가 페이지
--   관리자 결제 내역 페이지
--   관리자 점포 설정 페이지
-
-### etc.
-
--   프로젝트 최종 발표
-
-<h3> 👩‍💻 팀원: 이지언 </h3>
-
-### 🔧 Back-End
-
--   피드백 저장
--   피드백 조회
--   피드백 카운트
--   관리자 점포 로고 변경
--   관리자 비밀번호 확인
-
-### 🖥 Front-End
-
--   관리자 메뉴 선택 페이지
--   사용자 매장, 포장 선택 페이지
--   메뉴 페이지
--   피드백 메인 페이지
--   관광지 추천 메인 페이지
--   관광지 리스트 페이지
--   관리자 피드백 페이지
--   관리자 로고 변경 페이지
--   결제방법 선택 페이지
-
-<h3> 🧑‍💻 팀원: 서현욱 </h3>
-
-### 🔧 Back-End
-
--   메뉴 페이지
--   OAuth2 회원가입
--   OAuth2 계정통합
--   관리자 비밀번호 변경
--   사용자 회원가입
--   사용자 회원탈퇴
--   사용자 전체 조회
--   점포 이름 변경
-
-### 🖥 Front-End
-
--   사용자 메인 페이지
--   관리자 회원가입 페이지
--   관리자 비밀번호 변경 페이지
--   OAuth2 메인 페이지
--   OAuth2 로그인 페이지
--   OAuth2 회원가입 페이지
--   OAuth2 계정 통합 페이지
-
-<h3> 🧑‍💻 팀원: 김종현 </h3>
-
-### 🔧 Back-End
-
--   메뉴 추가
--   메뉴 전체 조회
--   메뉴 수정
--   메뉴 삭제
--   메뉴 주문
-
-### 🖥 Front-End
-
--   메뉴 페이지
--   피드백 작성 페이지
--   피드백 작성 완료 페이지
--   관리자 메뉴 관리 페이지
--   관리자 메뉴 수정 페이지
--   관리자 회원 관리 페이지
-
-> 공동 작업
-
--   디자인 도안 작업
--   Front 명세서 작성
--   API 명세서 작성
--   DB 설계
+-   게시판 CRUD API 구현
+-   게시판 조회 구현
+-   게시물 작성 구현
+-   게시물 수정 및 삭제 구현
+-   게시물 검색 기능 구현
 
 <p align="right" dir="auto">
 <a href="https://github.com/Novel-Ideas/gumeonggage-front">TOP 🔼</a>
