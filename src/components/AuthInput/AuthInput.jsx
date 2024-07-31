@@ -19,8 +19,10 @@ function AuthInput({ type, value, placeholder, onChange, message, maxLength }) {
                     <div css={s.inputIcon(message.type)}>
                         {message.type === "error" ? (
                             <MdError />
-                        ) : (
+                        ) : message.type === "success" ? (
                             <FaCheckCircle />
+                        ) : (
+                            <></>
                         )}
                     </div>
                     {message.text}
