@@ -11,7 +11,7 @@ export const layout = css`
 
 export const loginBox = css`
     width: 500px;
-    height: 500px;
+    height: 600px;
     margin-top: 30px;
     border: 1px solid #dbdbdb;
     border-radius: 15px;
@@ -23,7 +23,7 @@ export const loginBox = css`
 
 export const title = css`
     width: 100%;
-    height: 25%;
+    height: 100px;
     font-size: 35px;
     font-weight: 600;
     display: flex;
@@ -34,7 +34,7 @@ export const title = css`
 
 export const inputBox = css`
     width: 400px;
-    height: 50%;
+    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,20 +76,42 @@ export const inputBox = css`
 
 export const buttonBox = css`
     width: 100%;
-    height: 25%;
+    height: 46px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px;
 
-    & > button {
-        width: 321px;
-        height: 56px;
-        padding: 18px 24px;
-        border-radius: 28px;
-        background-color: black;
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
+    & > a {
+        text-decoration: none;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+`;
+
+export const button = (type) => css`
+    width: 400px;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    background-color: ${type === "login"
+        ? "black"
+        : type === "naver"
+        ? "#03c75a"
+        : "rgb(248,211,8)"};
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${type === "login"
+            ? "#000000d4"
+            : type === "naver"
+            ? "#17b75e"
+            : "rgb(237, 202, 0)"};
     }
 `;

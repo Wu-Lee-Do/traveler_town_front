@@ -5,6 +5,7 @@ import AuthInput from "../../../components/AuthInput/AuthInput";
 import { useInput } from "../../../hooks/useInput";
 import { useQueryClient } from "react-query";
 import { signinRequest } from "../../../apis/auth/authApi";
+import getServerAddress from "../../../constants/serverAddress";
 
 function SigninPage() {
     const navigate = useNavigate();
@@ -61,7 +62,23 @@ function SigninPage() {
                     <div onClick={handleSignupClick}>회원가입</div>
                 </div>
                 <div css={s.buttonBox}>
-                    <button onClick={handleSigninClick}>로그인</button>
+                    <button onClick={handleSigninClick} css={s.button("login")}>
+                        로그인
+                    </button>
+                </div>
+                <div css={s.buttonBox}>
+                    <a
+                        href={`${getServerAddress()}/oauth2/authorization/naver`}
+                    >
+                        <button css={s.button("naver")}>네이버 로그인</button>
+                    </a>
+                </div>
+                <div css={s.buttonBox}>
+                    <a
+                        href={`${getServerAddress()}/oauth2/authorization/kakao`}
+                    >
+                        <button css={s.button("kakao")}>카카오 로그인</button>
+                    </a>
                 </div>
             </div>
         </div>
