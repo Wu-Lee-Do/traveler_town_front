@@ -3,12 +3,31 @@ import { useState } from "react";
 import { BiSolidComment } from "react-icons/bi";
 import { FaHeart, FaBookmark } from "react-icons/fa";
 import * as s from "./style";
+import { useQuery } from "react-query";
+import { getBoardsByUserId } from "../../../apis/board/boardApi";
 
 function ProfileComponent({ principalData }) {
     const [categoryState, setCategoryState] = useState(1);
     const handleCategoryClick = (category) => {
         setCategoryState(category);
     };
+    const getBoardsByUserIdQuery = useQuery(
+        ["getBoardsByUserIdQuery"],
+        async () =>
+            await getBoardsByUserId({
+                userId: principalData?.data.userId,
+            }),
+        {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                console.log(response);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
     return (
         <div css={s.infoLayout}>
             <div css={s.infoBox}>
