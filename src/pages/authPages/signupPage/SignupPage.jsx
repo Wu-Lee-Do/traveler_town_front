@@ -146,7 +146,6 @@ function SignupPage() {
                                     maxLength={14}
                                 />
                             </div>
-
                             <div>
                                 <div>패스워드</div>
                                 <AuthInput
@@ -169,7 +168,6 @@ function SignupPage() {
                                     message={checkPasswordMessage}
                                 />
                             </div>
-                            <button onClick={handleNextClick}>다음</button>
                         </>
                     ) : next === 1 ? (
                         <>
@@ -196,20 +194,28 @@ function SignupPage() {
                                     message={emailMessage}
                                 />
                             </div>
-
-                            <div css={s.buttonBox}>
-                                <button onClick={handlePreviousClick}>
-                                    이전
-                                </button>
-                                <button onClick={handleSignupSubmit}>
-                                    회원가입
-                                </button>
-                            </div>
                         </>
                     ) : (
                         <></>
                     )}
                 </div>
+                {next === 0 ? (
+                    <div css={s.buttonBox}>
+                        <div></div>
+                        <button onClick={handleNextClick} css={s.button}>
+                            다음
+                        </button>
+                    </div>
+                ) : (
+                    <div css={s.buttonBox}>
+                        <button onClick={handlePreviousClick} css={s.button}>
+                            이전
+                        </button>
+                        <button onClick={handleSignupSubmit} css={s.button}>
+                            완료
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );

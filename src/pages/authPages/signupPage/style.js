@@ -12,9 +12,9 @@ export const layout = css`
 export const signinBox = css`
     width: 500px;
     height: 500px;
-    background-color: #fafafa;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
 `;
 
@@ -31,11 +31,9 @@ export const title = css`
 
 export const inputBox = css`
     width: 400px;
-    height: 400px;
-    background-color: #fafafa;
+    height: 340px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
     & > div {
@@ -50,21 +48,26 @@ export const inputBox = css`
 `;
 
 export const buttonBox = css`
-    width: 100%;
-    height: 100px;
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const button = css`
+    width: 80px;
+    height: 42px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: black;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
 
-    & > button {
-        width: 321px;
-        height: 56px;
-        padding: 18px 24px;
-        border-radius: 28px;
-        background-color: black;
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
+    &:hover {
+        background-color: #000000d4;
     }
 `;

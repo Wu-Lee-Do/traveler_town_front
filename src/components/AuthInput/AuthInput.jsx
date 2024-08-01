@@ -5,7 +5,7 @@ import { FaCheckCircle } from "react-icons/fa";
 
 function AuthInput({ type, value, placeholder, onChange, message, maxLength }) {
     return (
-        <>
+        <div css={s.inputLayout}>
             <input
                 css={s.input}
                 type={type}
@@ -28,7 +28,7 @@ function AuthInput({ type, value, placeholder, onChange, message, maxLength }) {
                     {message.text}
                 </div>
             )}
-        </>
+        </div>
     );
 }
 
