@@ -10,22 +10,35 @@ export const useInput = (property) => {
             setMessage(() => null);
             return;
         }
-        const regexEntries = Object.entries(REGEX);
-        for (let [k, v] of regexEntries) {
-            if (property === k) {
-                if (v.regexr.test(value)) {
-                    setMessage(() => {
-                        return {
-                            type: "success",
-                            text: "",
-                        };
+        // 특수한 검증 로직을 적용할 경우
+        if (property === "password") {
+            // 비밀번호 검증 로직
+            if (REGEX.password.regexr.test(value)) {
+                setMessage({
+                    type: "success",
+                    text: "",
+                });
+            } else {
+                setMessage({
+                    type: "error",
+                    text: REGEX.password.text,
+                });
+            }
+        } else {
+            // 일반적인 정규표현식 검증
+            const regex = REGEX[property]?.regexr;
+            const errorMessage = REGEX[property]?.text;
+
+            if (regex) {
+                if (regex.test(value)) {
+                    setMessage({
+                        type: "success",
+                        text: "",
                     });
                 } else {
-                    setMessage(() => {
-                        return {
-                            type: "error",
-                            text: v.text,
-                        };
+                    setMessage({
+                        type: "error",
+                        text: errorMessage,
                     });
                 }
             }
