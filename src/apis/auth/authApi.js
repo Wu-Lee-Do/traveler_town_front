@@ -18,3 +18,13 @@ export const signupRequest = async (data) => {
         return error.response;
     }
 };
+
+export const oauth2SignupRequest = async (data) => {
+    const response = instance.post("/auth/oauth2/signup", data);
+    return response;
+};
+
+export const oauth2MergeRequest = async (data) => {
+    const response = instance.post("/auth/oauth2/merge", data);
+    return response;
+};

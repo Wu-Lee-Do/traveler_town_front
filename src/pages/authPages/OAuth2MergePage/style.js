@@ -3,33 +3,18 @@ import { css } from "@emotion/react";
 export const layout = css`
     width: 100%;
     height: 90%;
-    padding-top: 68px;
+    padding-top: 38px;
     display: flex;
     justify-content: center;
     align-items: center;
-`;
 
-export const loginBox = css`
-    width: 500px;
-    height: 600px;
-    margin-top: 30px;
-    /* border: 1px solid #dbdbdb; */
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-`;
-
-export const title = css`
-    width: 100%;
-    height: 100px;
-    font-size: 35px;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: default;
+    & > div {
+        width: 1136px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 export const inputBox = css`
@@ -76,42 +61,24 @@ export const inputBox = css`
 
 export const buttonBox = css`
     width: 100%;
-    height: 46px;
+    display: flex;
+    justify-content: end;
+`;
+
+export const button = css`
+    width: 80px;
+    height: 42px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
-
-    & > a {
-        text-decoration: none;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-`;
-
-export const button = (type) => css`
-    width: 400px;
-    height: 100%;
-    border: none;
-    border-radius: 10px;
-    background-color: ${type === "login"
-        ? "black"
-        : type === "naver"
-        ? "#03c75a"
-        : "rgb(248,211,8)"};
-    color: white;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
+    background-color: black;
+    border-radius: 30px;
+    color: white;
     cursor: pointer;
 
     &:hover {
-        background-color: ${type === "login"
-            ? "#000000d4"
-            : type === "naver"
-            ? "#17b75e"
-            : "rgb(237, 202, 0)"};
+        background-color: #000000d4;
     }
 `;
