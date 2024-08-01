@@ -19,6 +19,12 @@ export const signupRequest = async (data) => {
     }
 };
 
-// signup, merge dto 확인 후 요청 로직 구현
-// merge페이지 구현
-// 로그인 로직 확인
+export const oauth2SignupRequest = async (data) => {
+    const response = instance.post("/auth/oauth2/signup", data);
+    return response;
+};
+
+export const oauth2MergeRequest = async (data) => {
+    const response = instance.post("/auth/oauth2/merge", data);
+    return response;
+};

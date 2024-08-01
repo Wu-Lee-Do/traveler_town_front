@@ -8,6 +8,8 @@ import CountryInfoPage from "../pages/countryPages/countryInfoPage/CountryInfoPa
 import TouristAttractionInfoPage from "../pages/countryPages/touristAttractionInfoPage/TouristAttractionInfoPage";
 import RestaurantInfoPage from "../pages/countryPages/restaurantInfoPage/RestaurantInfoPage";
 import OAuth2Page from "../pages/authPages/OAuth2Page/OAuth2Page";
+import OAuth2SigninPage from "../pages/authPages/OAuth2SigninPage/OAuth2SigninPage";
+import OAuth2MergePage from "../pages/authPages/OAuth2MergePage/OAuth2MergePage";
 
 function MainRoute() {
     return (
@@ -23,6 +25,8 @@ function MainRoute() {
                 <Route path="/board/*" element={<BoardRoute />} />
                 <Route path="/auth/*" element={<AuthRoute />} />
                 <Route path="/oauth2" element={<OAuth2Page />} />
+                <Route path="/oauth2/signin" element={<OAuth2SigninPage />} />
+                <Route path="/oauth2/merge" element={<OAuth2MergePage />} />
                 <Route path="/account/*" element={<AccountRoute />} />
             </Routes>
         </>

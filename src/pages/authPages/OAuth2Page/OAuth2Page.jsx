@@ -6,16 +6,26 @@ function OAuth2Page(props) {
     const [searchParams] = useSearchParams();
     const handleSignupClick = () => {
         window.location.replace(
-            `/auth/signup?id=${searchParams.get("id")}&provider=Naver`
+            `/auth/signup?id=${searchParams.get(
+                "id"
+            )}&provider=${searchParams.get("provider")}`
         );
     };
+    const handleMergeClick = () => {
+        window.location.replace(
+            `/oauth2/merge?id=${searchParams.get(
+                "id"
+            )}&provider=${searchParams.get("provider")}`
+        );
+    };
+
     return (
         <div css={s.layout}>
             <div>
                 <div css={s.selectLayout}>
                     <h1>반가워요 {searchParams.get("name").slice(-2)}님!</h1>
                     <div>
-                        <div css={s.optionBox}>
+                        <div css={s.optionBox} onClick={handleMergeClick}>
                             <div css={s.optionText}>
                                 <h2>계정 통합하기</h2>
                                 <p>기존 Traveler Town 회원이신가요?</p>

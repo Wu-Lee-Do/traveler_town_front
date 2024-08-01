@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { useInput } from "../../../hooks/useInput";
 import * as s from "./style";
 import AuthInput from "../../../components/AuthInput/AuthInput";
-import { signupRequest } from "../../../apis/auth/authApi";
+import { oauth2SignupRequest, signupRequest } from "../../../apis/auth/authApi";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useMutation } from "react-query";
 
 function SignupPage() {
     const navigate = useNavigate();
@@ -59,6 +60,20 @@ function SignupPage() {
         }
     }, [checkPassword, password]);
 
+    const oauth2SignupMutation = useMutation({
+        mutationKey: "oauth2SignupMutation",
+        mutationFn: oauth2SignupRequest,
+        onSuccess: (response) => {
+            if (response) {
+                alert("회원가입이 완료되었습니다.");
+                navigate("/auth/signin");
+            }
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
     const handleSignupSubmit = () => {
         if (
             username === "" ||
@@ -78,50 +93,61 @@ function SignupPage() {
             alert("정보를 다시 입력해주세요.");
             return;
         }
-        signupRequest({
-            username,
-            password,
-            nickname,
-            email,
-        })
-            .then((response) => {
-                console.log(response);
-                if (response.status === 201) {
-                    alert("회원가입이 완료되었습니다.");
-                    navigate("/auth/signin");
-                }
-            })
-            .catch((error) => {
-                if (error.response.status === 400) {
-                    if (error.response.data.hasOwnProperty("username")) {
-                        console.log(error.response.data.username);
-                        setUsernameMessage(() => {
-                            return {
-                                type: "error",
-                                text: error.response.data.username,
-                            };
-                        });
-                    }
-                    if (error.response.data.hasOwnProperty("nickname")) {
-                        console.log(error.response.data.nickname);
-                        setNicknameMessage(() => {
-                            return {
-                                type: "error",
-                                text: error.response.data.nickname,
-                            };
-                        });
-                    }
-                    if (error.response.data.hasOwnProperty("email")) {
-                        console.log(error.response.data.email);
-                        setEmailMessage(() => {
-                            return {
-                                type: "error",
-                                text: error.response.data.email,
-                            };
-                        });
-                    }
-                }
+        if (!!searchParams.get("id")) {
+            oauth2SignupMutation.mutate({
+                username: username,
+                password: password,
+                nickname: nickname,
+                email: email,
+                oauth2Name: searchParams.get("id"),
+                providerName: searchParams.get("provider"),
             });
+        } else {
+            signupRequest({
+                username,
+                password,
+                nickname,
+                email,
+            })
+                .then((response) => {
+                    console.log(response);
+                    if (response.status === 201) {
+                        alert("회원가입이 완료되었습니다.");
+                        navigate("/auth/signin");
+                    }
+                })
+                .catch((error) => {
+                    if (error.response.status === 400) {
+                        if (error.response.data.hasOwnProperty("username")) {
+                            console.log(error.response.data.username);
+                            setUsernameMessage(() => {
+                                return {
+                                    type: "error",
+                                    text: error.response.data.username,
+                                };
+                            });
+                        }
+                        if (error.response.data.hasOwnProperty("nickname")) {
+                            console.log(error.response.data.nickname);
+                            setNicknameMessage(() => {
+                                return {
+                                    type: "error",
+                                    text: error.response.data.nickname,
+                                };
+                            });
+                        }
+                        if (error.response.data.hasOwnProperty("email")) {
+                            console.log(error.response.data.email);
+                            setEmailMessage(() => {
+                                return {
+                                    type: "error",
+                                    text: error.response.data.email,
+                                };
+                            });
+                        }
+                    }
+                });
+        }
     };
 
     const handleNextClick = () => {
