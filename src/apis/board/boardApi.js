@@ -12,6 +12,10 @@ export const getBoardByBoardId = async (boardId) => {
     return await instance.get(`/board/${boardId}`);
 };
 
+export const getBoardsByUserId = async (params) => {
+    return await instance.get("/board/allByUserId", { params });
+};
+
 export const addNewBoard = async (data) => {
     return await instance.post("/board/new", data);
 };
