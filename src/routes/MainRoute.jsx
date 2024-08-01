@@ -7,6 +7,7 @@ import BoardRoute from "../routes/BoardRoute";
 import CountryInfoPage from "../pages/countryPages/countryInfoPage/CountryInfoPage";
 import TouristAttractionInfoPage from "../pages/countryPages/touristAttractionInfoPage/TouristAttractionInfoPage";
 import RestaurantInfoPage from "../pages/countryPages/restaurantInfoPage/RestaurantInfoPage";
+import OAuth2Page from "../pages/authPages/OAuth2Page/OAuth2Page";
 
 function MainRoute() {
     return (
@@ -21,6 +22,7 @@ function MainRoute() {
                 <Route path="/restaurant" element={<RestaurantInfoPage />} />
                 <Route path="/board/*" element={<BoardRoute />} />
                 <Route path="/auth/*" element={<AuthRoute />} />
+                <Route path="/oauth2" element={<OAuth2Page />} />
                 <Route path="/account/*" element={<AccountRoute />} />
             </Routes>
         </>

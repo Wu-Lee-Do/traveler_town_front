@@ -11,7 +11,7 @@ export const input = css`
     font-weight: 400;
     outline: none;
     margin-top: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 
     &:focus {
         border: 2px solid rgb(44, 89, 129);
@@ -19,8 +19,9 @@ export const input = css`
 `;
 
 export const messageBox = (type) => css`
+    /* position: relative;
+    right: -300px; */
     display: flex;
-    justify-content: center;
     padding: ${type === "error" ? "5px 0px" : 0};
     width: 100%;
     color: ${type === "error" ? "red" : "#00921b"};
@@ -33,10 +34,10 @@ export const messageBox = (type) => css`
 export const inputIcon = (type) => {
     if (type !== "error") {
         return css`
-            position: absolute;
+            position: relative;
             font-size: 20px;
             transform: translateY(-50%);
-            top: 55%;
+            top: 0;
             right: 15px;
             color: #00921b;
         `;
