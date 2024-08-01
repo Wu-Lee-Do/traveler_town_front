@@ -48,7 +48,7 @@ function ProfileComponent({ principalData }) {
                 </div>
                 <div css={s.profileInfo}>
                     <div>
-                        <div>8</div>
+                        <div>{boardData.length}</div>
                         <div>게시물</div>
                     </div>
                     <div>
@@ -69,7 +69,7 @@ function ProfileComponent({ principalData }) {
                     <div onClick={() => handleCategoryClick(3)}>좋아요</div>
                 </div>
                 <div css={s.contentLayout}>
-                    {boardData?.map((board) => (
+                    {boardData?.map((board, index) => (
                         <ContentComponent
                             boardBookmarkCount={board.boardBookmarkCount}
                             boardCommentCount={board.boardCommentCount}
@@ -79,6 +79,9 @@ function ProfileComponent({ principalData }) {
                             nickname={board.nickname}
                             profileImg={board.profileImg}
                             updateDate={board.updateDate}
+                            boardCategoryId={board.boardCategoryId}
+                            boardId={board.boardId}
+                            key={index}
                         />
                     ))}
                 </div>

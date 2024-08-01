@@ -12,6 +12,8 @@ function ContentComponent({
     boardBookmarkCount,
     boardLikeCount,
     updateDate,
+    boardCategoryId,
+    boardId,
 }) {
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -21,7 +23,20 @@ function ContentComponent({
         return `${year}년 ${month}월 ${day}일`;
     };
     return (
-        <div css={s.contentBox}>
+        <div
+            css={s.contentBox}
+            onClick={
+                boardCategoryId === 1
+                    ? () =>
+                          window.location.replace(
+                              `/board/mustgorestaurant/${boardId}`
+                          )
+                    : boardCategoryId === 2
+                    ? () => window.location.replace(`/board/travel/${boardId}`)
+                    : () =>
+                          window.location.replace(`/board/together/${boardId}`)
+            }
+        >
             <div css={s.contentHeader}>
                 <div css={s.contentProfile}>
                     <div>

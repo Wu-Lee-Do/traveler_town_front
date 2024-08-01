@@ -8,6 +8,7 @@ export const contentBox = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    cursor: pointer;
 `;
 
 export const contentHeader = css`
