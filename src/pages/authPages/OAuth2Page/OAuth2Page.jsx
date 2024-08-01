@@ -1,10 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
 function OAuth2Page(props) {
     const [searchParams] = useSearchParams();
+    const handleSignupClick = () => {
+        window.location.replace(
+            `/auth/signup?id=${searchParams.get("id")}&provider=Naver`
+        );
+    };
     return (
         <div css={s.layout}>
             <div>
@@ -18,7 +22,7 @@ function OAuth2Page(props) {
                             </div>
                             <h2>통합하기</h2>
                         </div>
-                        <div css={s.optionBox}>
+                        <div css={s.optionBox} onClick={handleSignupClick}>
                             <div css={s.optionText}>
                                 <h2>새로 가입하기</h2>
                                 <p>회원이 없으신가요? 새로 가입해보아요!</p>

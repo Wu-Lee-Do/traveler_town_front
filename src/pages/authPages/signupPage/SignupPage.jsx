@@ -4,10 +4,11 @@ import { useInput } from "../../../hooks/useInput";
 import * as s from "./style";
 import AuthInput from "../../../components/AuthInput/AuthInput";
 import { signupRequest } from "../../../apis/auth/authApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function SignupPage() {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [next, setNext] = useState(0);
     const [
         username,
@@ -77,10 +78,6 @@ function SignupPage() {
             alert("정보를 다시 입력해주세요.");
             return;
         }
-        // if (password !== checkPassword) {
-        //     alert("비밀번호가 일치하지 않습니다.");
-        //     return;
-        // }
         signupRequest({
             username,
             password,
@@ -134,8 +131,6 @@ function SignupPage() {
     const handlePreviousClick = () => {
         setNext(0);
     };
-
-    console.log(usernameMessage?.type);
 
     return (
         <div css={s.layout}>

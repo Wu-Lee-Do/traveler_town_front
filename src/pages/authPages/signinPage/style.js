@@ -13,7 +13,7 @@ export const loginBox = css`
     width: 500px;
     height: 600px;
     margin-top: 30px;
-    border: 1px solid #dbdbdb;
+    /* border: 1px solid #dbdbdb; */
     border-radius: 15px;
     display: flex;
     flex-direction: column;

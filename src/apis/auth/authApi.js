@@ -18,3 +18,7 @@ export const signupRequest = async (data) => {
         return error.response;
     }
 };
+
+// signup, merge dto 확인 후 요청 로직 구현
+// merge페이지 구현
+// 로그인 로직 확인
