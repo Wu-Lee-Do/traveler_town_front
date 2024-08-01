@@ -18,8 +18,14 @@ export const infoBox = css`
     width: 100%;
     height: 220px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #dbdbdb;
+
+    & > div {
+        display: flex;
+        align-items: center;
+    }
 `;
 
 export const profileBox = css`
@@ -96,4 +102,3 @@ export const contentLayout = css`
     width: 630px;
     height: auto;
 `;
-

@@ -38,26 +38,28 @@ function ProfileComponent({ principalData }) {
     return (
         <div css={s.infoLayout}>
             <div css={s.infoBox}>
-                <div css={s.profileBox}>
-                    <div css={s.profileImgBox}>
-                        <img src={principalData?.data.profileImg} alt="" />
+                <div>
+                    <div css={s.profileBox}>
+                        <div css={s.profileImgBox}>
+                            <img src={principalData?.data.profileImg} alt="" />
+                        </div>
+                        <div css={s.profileNickname}>
+                            {principalData?.data.nickname}
+                        </div>
                     </div>
-                    <div css={s.profileNickname}>
-                        {principalData?.data.nickname}
-                    </div>
-                </div>
-                <div css={s.profileInfo}>
-                    <div>
-                        <div>{boardData.length}</div>
-                        <div>게시물</div>
-                    </div>
-                    <div>
-                        <div>623</div>
-                        <div>팔로워</div>
-                    </div>
-                    <div>
-                        <div>523</div>
-                        <div>팔로잉</div>
+                    <div css={s.profileInfo}>
+                        <div>
+                            <div>{boardData.length}</div>
+                            <div>게시물</div>
+                        </div>
+                        <div>
+                            <div>623</div>
+                            <div>팔로워</div>
+                        </div>
+                        <div>
+                            <div>523</div>
+                            <div>팔로잉</div>
+                        </div>
                     </div>
                 </div>
                 <dir>setting</dir>
@@ -82,6 +84,8 @@ function ProfileComponent({ principalData }) {
                             boardCategoryId={board.boardCategoryId}
                             boardId={board.boardId}
                             key={index}
+                            principalData={principalData}
+                            userId={board.userId}
                         />
                     ))}
                 </div>

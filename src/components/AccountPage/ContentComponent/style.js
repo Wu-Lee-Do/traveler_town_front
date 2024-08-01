@@ -8,7 +8,6 @@ export const contentBox = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    cursor: pointer;
 `;
 
 export const contentHeader = css`
@@ -66,10 +65,55 @@ export const contentProfile = css`
     }
 `;
 
+export const headerButtonBox = css`
+    position: relative;
+    & > button {
+        font-size: 26px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        padding: 5px;
+        border-radius: 50px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #f2f2f2;
+        }
+    }
+`;
+
+export const dropdownMenu = (isDropdownVisible) => css`
+    position: absolute;
+    width: 60px;
+    height: ${isDropdownVisible ? "71px" : 0};
+    border-radius: 15px;
+    overflow: hidden;
+    top: 80%;
+    right: 0;
+    background: white;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    transition: 0.2s height ease-in-out, border 0.5s ease-in-out;
+
+    li {
+        padding: 8px 16px;
+        font-size: 16px;
+        cursor: pointer;
+        &:hover {
+            background: #f0f0f0;
+        }
+    }
+`;
+
 export const contentMain = css`
     max-height: 500px;
     padding: 20px;
     overflow: auto;
+    cursor: pointer;
 
     & > div > h3 {
         margin-top: 0px;
