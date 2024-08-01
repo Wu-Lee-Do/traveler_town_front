@@ -68,9 +68,19 @@ function SignupPage() {
             alert("정보를 입력해주세요.");
             return;
         }
-        if (password !== checkPassword) {
-            alert("비밀번호가 일치하지 않습니다.");
+        if (
+            usernameMessage?.type === "error" ||
+            emailMessage?.type === "error" ||
+            passwordMessage?.type === "error" ||
+            checkPasswordMessage?.type === "error"
+        ) {
+            alert("정보를 다시 입력해주세요.");
+            return;
         }
+        // if (password !== checkPassword) {
+        //     alert("비밀번호가 일치하지 않습니다.");
+        //     return;
+        // }
         signupRequest({
             username,
             password,
@@ -125,7 +135,7 @@ function SignupPage() {
         setNext(0);
     };
 
-    console.log(passwordMessage);
+    console.log(usernameMessage?.type);
 
     return (
         <div css={s.layout}>
