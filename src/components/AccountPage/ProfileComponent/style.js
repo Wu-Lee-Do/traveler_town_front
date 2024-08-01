@@ -3,9 +3,10 @@ import { css } from "@emotion/react";
 export const infoLayout = css`
     position: relative;
     width: 1136px;
-    height: 800px;
+    height: auto;
     top: -70px;
     display: flex;
+    flex-direction: column;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
@@ -13,6 +14,7 @@ export const infoLayout = css`
 `;
 
 export const infoBox = css`
+    box-sizing: border-box;
     width: 100%;
     height: 220px;
     display: flex;
@@ -59,6 +61,123 @@ export const profileInfo = css`
         & > div:nth-of-type(1) {
             font-size: 20px;
             font-weight: 600;
+        }
+    }
+`;
+
+export const mainBox = css`
+    width: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export const mainHeader = (categoryState) => css`
+    width: 300px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    & > div {
+        cursor: pointer;
+    }
+
+    & > div:nth-of-type(${categoryState}) {
+        text-decoration: underline;
+        text-underline-offset: 7px;
+    }
+`;
+
+export const contentLayout = css`
+    width: 630px;
+    height: auto;
+`;
+
+export const contentBox = css`
+    width: 630px;
+    height: 500px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
+export const contentHeader = css`
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div:nth-of-type(2) {
+        width: 80px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
+`;
+
+export const contentProfile = css`
+    padding-left: 20px;
+    width: 300px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+
+    & > div:nth-of-type(1) {
+        box-sizing: border-box;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 50px;
+        border: 1px solid #dbdbdb;
+
+        & > img {
+            width: 100%;
+        }
+    }
+
+    & > div:nth-of-type(2) {
+        font-size: 14px;
+        font-weight: 700;
+        margin-left: 10px;
+    }
+`;
+
+export const contentMain = css`
+    width: 100%;
+    height: 360px;
+    background-color: #eee;
+`;
+
+export const contentBottom = css`
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+        margin-left: 30px;
+
+        & > span {
+            font-size: 16px;
+            font-weight: 600;
+            margin-left: 5px;
         }
     }
 `;
