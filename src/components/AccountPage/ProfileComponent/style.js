@@ -2,22 +2,22 @@ import { css } from "@emotion/react";
 
 export const infoLayout = css`
     position: relative;
-    width: 100%;
+    width: 1136px;
+    height: 800px;
+    top: -70px;
     display: flex;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     justify-content: center;
 `;
 
 export const infoBox = css`
-    position: absolute;
-    z-index: 99;
-    top: -70px;
-    width: 1136px;
+    width: 100%;
     height: 220px;
     display: flex;
     align-items: center;
-    border-radius: 15px;
-    background-color: white;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid #dbdbdb;
 `;
 
 export const profileBox = css`
