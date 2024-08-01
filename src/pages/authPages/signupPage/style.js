@@ -11,7 +11,7 @@ export const layout = css`
 
 export const signinBox = css`
     width: 500px;
-    height: 500px;
+    height: 550px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -30,20 +30,37 @@ export const title = css`
 `;
 
 export const inputBox = css`
+    position: relative;
     width: 400px;
-    height: 340px;
+    height: 400px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+`;
+
+export const visibleLayout = (next) => css`
+    position: absolute;
+    left: ${next === 0 ? "0px" : "-400px"};
+    width: 800px;
+    height: 400px;
+    display: flex;
+    transition: 0.2s all ease-in-out;
 
     & > div {
-        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+`;
 
-        & > div {
-            font-size: 14px;
-            font-weight: 600;
-            cursor: default;
-        }
+export const inputLayout = css`
+    width: 100%;
+
+    & > div {
+        font-size: 14px;
+        font-weight: 600;
+        cursor: default;
     }
 `;
 

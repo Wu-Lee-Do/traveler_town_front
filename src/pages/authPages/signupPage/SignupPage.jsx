@@ -132,90 +132,98 @@ function SignupPage() {
             <div css={s.signinBox}>
                 <div css={s.title}>회원가입</div>
                 <div css={s.inputBox}>
-                    {next === 0 ? (
-                        <>
+                    <div css={s.visibleLayout(next)}>
+                        <div>
                             <div>
-                                <div>아이디</div>
-                                <AuthInput
-                                    type={"text"}
-                                    name={"username"}
-                                    placeholder={"아이디"}
-                                    value={username}
-                                    onChange={usernameChange}
-                                    message={usernameMessage}
-                                    maxLength={14}
-                                />
+                                <div css={s.inputLayout}>
+                                    <div>아이디</div>
+                                    <AuthInput
+                                        type={"text"}
+                                        name={"username"}
+                                        placeholder={"아이디"}
+                                        value={username}
+                                        onChange={usernameChange}
+                                        message={usernameMessage}
+                                        maxLength={14}
+                                    />
+                                </div>
+                                <div css={s.inputLayout}>
+                                    <div>패스워드</div>
+                                    <AuthInput
+                                        type={"password"}
+                                        name={"password"}
+                                        placeholder={"비밀번호"}
+                                        value={password}
+                                        onChange={passwordChange}
+                                        message={passwordMessage}
+                                    />
+                                </div>
+                                <div css={s.inputLayout}>
+                                    <div>패스워드 확인</div>
+                                    <AuthInput
+                                        type={"password"}
+                                        name={"checkPassword"}
+                                        placeholder={"비밀번호 확인"}
+                                        value={checkPassword}
+                                        onChange={checkPasswordChange}
+                                        message={checkPasswordMessage}
+                                    />
+                                </div>
                             </div>
+                            <div css={s.buttonBox}>
+                                <div></div>
+                                <button
+                                    onClick={handleNextClick}
+                                    css={s.button}
+                                >
+                                    다음
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
                             <div>
-                                <div>패스워드</div>
-                                <AuthInput
-                                    type={"password"}
-                                    name={"password"}
-                                    placeholder={"비밀번호"}
-                                    value={password}
-                                    onChange={passwordChange}
-                                    message={passwordMessage}
-                                />
+                                <div css={s.inputLayout}>
+                                    <div>닉네임</div>
+                                    <AuthInput
+                                        type={"text"}
+                                        name={"nickname"}
+                                        placeholder={"닉네임"}
+                                        value={nickname}
+                                        onChange={nicknameChange}
+                                        message={nicknameMessage}
+                                        maxLength={12}
+                                    />
+                                </div>
+                                <div css={s.inputLayout}>
+                                    <div>이메일</div>
+                                    <AuthInput
+                                        type={"text"}
+                                        name={"email"}
+                                        placeholder={"이메일"}
+                                        value={email}
+                                        onChange={emailChange}
+                                        message={emailMessage}
+                                    />
+                                </div>
                             </div>
-                            <div>
-                                <div>패스워드 확인</div>
-                                <AuthInput
-                                    type={"password"}
-                                    name={"checkPassword"}
-                                    placeholder={"비밀번호 확인"}
-                                    value={checkPassword}
-                                    onChange={checkPasswordChange}
-                                    message={checkPasswordMessage}
-                                />
+                            <div css={s.buttonBox}>
+                                <button
+                                    onClick={handlePreviousClick}
+                                    css={s.button}
+                                >
+                                    이전
+                                </button>
+                                <button
+                                    onClick={handleSignupSubmit}
+                                    css={s.button}
+                                >
+                                    완료
+                                </button>
                             </div>
-                        </>
-                    ) : next === 1 ? (
-                        <>
-                            <div>
-                                <div>닉네임</div>
-                                <AuthInput
-                                    type={"text"}
-                                    name={"nickname"}
-                                    placeholder={"닉네임"}
-                                    value={nickname}
-                                    onChange={nicknameChange}
-                                    message={nicknameMessage}
-                                    maxLength={12}
-                                />
-                            </div>
-                            <div>
-                                <div>이메일</div>
-                                <AuthInput
-                                    type={"text"}
-                                    name={"email"}
-                                    placeholder={"이메일"}
-                                    value={email}
-                                    onChange={emailChange}
-                                    message={emailMessage}
-                                />
-                            </div>
-                        </>
-                    ) : (
-                        <></>
-                    )}
+                        </div>
+                    </div>
                 </div>
-                {next === 0 ? (
-                    <div css={s.buttonBox}>
-                        <div></div>
-                        <button onClick={handleNextClick} css={s.button}>
-                            다음
-                        </button>
-                    </div>
-                ) : (
-                    <div css={s.buttonBox}>
-                        <button onClick={handlePreviousClick} css={s.button}>
-                            이전
-                        </button>
-                        <button onClick={handleSignupSubmit} css={s.button}>
-                            완료
-                        </button>
-                    </div>
-                )}
             </div>
         </div>
     );
