@@ -52,11 +52,35 @@ function ProfileComponent({ principalData }) {
                                         alt=""
                                     />
                                 </div>
-                                <div>{principalData?.data.nickname}</div>
+                                <div>
+                                    <div>{principalData?.data.nickname}</div>
+                                    <div>2024.03.33</div>
+                                </div>
                             </div>
                             <div>=</div>
                         </div>
-                        <div css={s.contentMain}></div>
+                        <div css={s.contentMain}>
+                            <div>
+                                <h3>아무거나 제목</h3>
+                                Lorem ipsum dolor sit, amet consectetur
+                                adipisicing elit. Similique itaque doloribus
+                                sunt a commodi culpa laborum nemo cumque libero
+                                officia dolorem, perspiciatis qui eius
+                                excepturi? Dicta laborum numquam consequatur
+                                tempora. Lorem ipsum dolor sit, amet consectetur
+                                adipisicing elit. Cumque sit beatae qui, aliquam
+                                dolorem dolorum aperiam necessitatibus libero
+                                atque cupiditate magni ullam nisi iusto
+                                voluptatibus quis quidem non labore nesciunt.
+                                Lorem, ipsum dolor sit amet consectetur
+                                adipisicing elit. Consectetur optio voluptate
+                                est minima tempore. Quis libero, sed
+                                consequuntur eveniet error ipsum perspiciatis
+                                vitae a animi quod similique praesentium ab
+                                quia? Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Vero eos deserunt at
+                            </div>
+                        </div>
                         <div css={s.contentBottom}>
                             <div>
                                 <BiSolidComment />

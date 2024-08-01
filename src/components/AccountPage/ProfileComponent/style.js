@@ -99,7 +99,6 @@ export const contentLayout = css`
 
 export const contentBox = css`
     width: 630px;
-    height: 500px;
     margin-top: 20px;
     margin-bottom: 20px;
     background-color: white;
@@ -149,16 +148,28 @@ export const contentProfile = css`
     }
 
     & > div:nth-of-type(2) {
-        font-size: 14px;
-        font-weight: 700;
-        margin-left: 10px;
+        & > div:nth-of-type(1) {
+            font-size: 14px;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        & > div:nth-of-type(2) {
+            font-size: 14px;
+            color: #333;
+            margin-left: 10px;
+        }
     }
 `;
 
 export const contentMain = css`
-    width: 100%;
-    height: 360px;
-    background-color: #eee;
+    max-height: 500px;
+    padding: 20px;
+    overflow: auto;
+
+    & > div > h3 {
+        margin-top: 0px;
+    }
 `;
 
 export const contentBottom = css`
