@@ -2,12 +2,14 @@
 import * as s from "./style";
 import logo from "../../../assets/logo.png";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import { FaHeart } from "react-icons/fa";
+import { instance } from "../../../apis/utils/instance";
 
 function Header() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [scrollPosition, setScrollPosition] = useState(0);
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
@@ -19,6 +21,17 @@ function Header() {
         window.addEventListener("scroll", updateScroll);
     });
 
+    const handleLogoutClick = () => {
+        localStorage.removeItem("AccessToken");
+        instance.interceptors.request.use((config) => {
+            config.headers.Authorization = null;
+            return config;
+        });
+        queryClient.refetchQueries("principalQuery");
+        alert("로그아웃 되었습니다.");
+        window.location.href = "/";
+    };
+
     const handleLogoClick = () => {
         navigate("/");
     };
@@ -28,7 +41,7 @@ function Header() {
     };
 
     const handleProfileClick = () => {
-        navigate("/account/mypage/info");
+        navigate("/account/mypage");
     };
 
     const handleTogetherClick = () => {
@@ -61,10 +74,16 @@ function Header() {
                     <div onClick={handleBookmarkClick}>즐겨찾기</div>
                 </div>
                 {!!principalData ? (
-                    <div css={s.profileBox} onClick={handleProfileClick}>
-                        <img src={principalData.data.profileImg} alt="" />
-                        {principalData.data.nickname}
-                    </div>
+                    location.pathname !== "/account/mypage" ? (
+                        <div css={s.profileBox} onClick={handleProfileClick}>
+                            <img src={principalData.data.profileImg} alt="" />
+                            {principalData.data.nickname}
+                        </div>
+                    ) : (
+                        <div css={s.login} onClick={handleLogoutClick}>
+                            로그아웃
+                        </div>
+                    )
                 ) : (
                     <div css={s.login} onClick={handleLoginClick}>
                         로그인
