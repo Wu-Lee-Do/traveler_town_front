@@ -6,8 +6,10 @@ import img from "../../assets/banner1.jpg";
 import ProfileComponent from "../../components/AccountPage/ProfileComponent/ProfileComponent";
 import { LuArrowUpToLine } from "react-icons/lu";
 import { getProfileByNickname } from "../../apis/account/accountApi";
+import { useSearchParams } from "react-router-dom";
 
 function ProfilePage(props) {
+    const [searchParams] = useSearchParams();
     const [scrollPosition, setScrollPosition] = useState(0);
     const [profileData, setProfileData] = useState();
 
@@ -17,10 +19,9 @@ function ProfilePage(props) {
     useEffect(() => {
         window.addEventListener("scroll", updateScroll);
     });
-
     const getProfileQuery = useQuery(
         ["getProfileQuery"],
-        async () => await getProfileByNickname("seowoo"),
+        async () => await getProfileByNickname(searchParams.get("profile")),
         {
             onSuccess: (response) => {
                 setProfileData(response);

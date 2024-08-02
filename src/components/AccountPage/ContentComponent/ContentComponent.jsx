@@ -78,11 +78,35 @@ function ContentComponent({
         <div css={s.contentBox}>
             <div css={s.contentHeader}>
                 <div css={s.contentProfile}>
-                    <div>
+                    <div
+                        onClick={
+                            userId === principalData?.data.userId
+                                ? () =>
+                                      window.location.replace(`/account/mypage`)
+                                : () =>
+                                      window.location.replace(
+                                          `/profile?profile=${nickname}`
+                                      )
+                        }
+                    >
                         <img src={profileImg} alt="" />
                     </div>
                     <div>
-                        <div>{nickname}</div>
+                        <div
+                            onClick={
+                                userId === principalData?.data.userId
+                                    ? () =>
+                                          window.location.replace(
+                                              `/account/mypage`
+                                          )
+                                    : () =>
+                                          window.location.replace(
+                                              `/profile?profile=${nickname}`
+                                          )
+                            }
+                        >
+                            {nickname}
+                        </div>
                         <div>{formatDate(updateDate)}</div>
                     </div>
                 </div>

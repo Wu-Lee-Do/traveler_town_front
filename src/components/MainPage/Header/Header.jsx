@@ -60,8 +60,6 @@ function Header() {
         navigate("/board/bookmark");
     };
 
-    console.log(location.pathname);
-
     return (
         <div css={s.header(scrollPosition)}>
             <div css={s.navBox}>

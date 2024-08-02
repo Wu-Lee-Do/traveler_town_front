@@ -45,6 +45,7 @@ export const contentProfile = css`
         overflow: hidden;
         border-radius: 50px;
         border: 1px solid #dbdbdb;
+        cursor: pointer;
 
         & > img {
             width: 100%;
@@ -56,6 +57,12 @@ export const contentProfile = css`
             font-size: 14px;
             font-weight: 700;
             margin-left: 10px;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+                text-underline-offset: 2px;
+            }
         }
 
         & > div:nth-of-type(2) {
