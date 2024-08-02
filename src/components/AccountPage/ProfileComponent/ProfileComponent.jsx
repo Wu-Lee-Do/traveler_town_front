@@ -5,8 +5,11 @@ import { useQuery } from "react-query";
 import { getBoardsByUserId } from "../../../apis/board/boardApi";
 import { IoMdSettings } from "react-icons/io";
 import ContentComponent from "../ContentComponent/ContentComponent";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import InfoComponent from "../InfoComponent/InfoComponent";
 
 function ProfileComponent({ principalData }) {
+    const navigate = useNavigate();
     const [categoryState, setCategoryState] = useState(1);
     const [boardData, setBoardData] = useState([]);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -18,6 +21,11 @@ function ProfileComponent({ principalData }) {
 
     const handleCategoryClick = (category) => {
         setCategoryState(category);
+    };
+
+    const handleAccountSettingClick = () => {
+        setIsDropdownVisible(!isDropdownVisible);
+        navigate("/account/mypage/info");
     };
 
     const getBoardsByUserIdQuery = useQuery(
@@ -52,22 +60,24 @@ function ProfileComponent({ principalData }) {
                         <div css={s.profileImgBox}>
                             <img src={principalData?.data.profileImg} alt="" />
                         </div>
+                    </div>
+                    <div css={s.profileInfo}>
                         <div css={s.profileNickname}>
                             {principalData?.data.nickname}
                         </div>
-                    </div>
-                    <div css={s.profileInfo}>
                         <div>
-                            <div>{boardData.length}</div>
-                            <div>게시물</div>
-                        </div>
-                        <div>
-                            <div>623</div>
-                            <div>팔로워</div>
-                        </div>
-                        <div>
-                            <div>523</div>
-                            <div>팔로잉</div>
+                            <div>
+                                <div>{boardData.length}</div>
+                                <div>게시물</div>
+                            </div>
+                            <div>
+                                <div>623</div>
+                                <div>팔로워</div>
+                            </div>
+                            <div>
+                                <div>523</div>
+                                <div>팔로잉</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,35 +87,62 @@ function ProfileComponent({ principalData }) {
                     </button>
                     <ul css={s.dropdownMenu(isDropdownVisible)}>
                         <li>배경화면 변경</li>
-                        <li>계정설정</li>
+                        <li onClick={handleAccountSettingClick}>계정설정</li>
                     </ul>
                 </div>
             </div>
             <div css={s.mainBox}>
-                <div css={s.mainHeader(categoryState)}>
-                    <div onClick={() => handleCategoryClick(1)}>게시물</div>
-                    <div onClick={() => handleCategoryClick(2)}>댓글</div>
-                    <div onClick={() => handleCategoryClick(3)}>좋아요</div>
-                </div>
-                <div css={s.contentLayout}>
-                    {boardData?.map((board, index) => (
-                        <ContentComponent
-                            boardBookmarkCount={board.boardBookmarkCount}
-                            boardCommentCount={board.boardCommentCount}
-                            boardContent={board.boardContent}
-                            boardLikeCount={board.boardLikeCount}
-                            boardTitle={board.boardTitle}
-                            nickname={board.nickname}
-                            profileImg={board.profileImg}
-                            updateDate={board.updateDate}
-                            boardCategoryId={board.boardCategoryId}
-                            boardId={board.boardId}
-                            key={index}
-                            principalData={principalData}
-                            userId={board.userId}
-                        />
-                    ))}
-                </div>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                <div css={s.mainHeader(categoryState)}>
+                                    <div onClick={() => handleCategoryClick(1)}>
+                                        게시물
+                                    </div>
+                                    <div onClick={() => handleCategoryClick(2)}>
+                                        댓글
+                                    </div>
+                                    <div onClick={() => handleCategoryClick(3)}>
+                                        좋아요
+                                    </div>
+                                </div>
+                                <div css={s.contentLayout}>
+                                    {boardData?.map((board, index) => (
+                                        <ContentComponent
+                                            boardBookmarkCount={
+                                                board.boardBookmarkCount
+                                            }
+                                            boardCommentCount={
+                                                board.boardCommentCount
+                                            }
+                                            boardContent={board.boardContent}
+                                            boardLikeCount={
+                                                board.boardLikeCount
+                                            }
+                                            boardTitle={board.boardTitle}
+                                            nickname={board.nickname}
+                                            profileImg={board.profileImg}
+                                            updateDate={board.updateDate}
+                                            boardCategoryId={
+                                                board.boardCategoryId
+                                            }
+                                            boardId={board.boardId}
+                                            key={index}
+                                            principalData={principalData}
+                                            userId={board.userId}
+                                        />
+                                    ))}
+                                </div>
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/info"
+                        element={<InfoComponent profileData={principalData} />}
+                    />
+                </Routes>
             </div>
         </div>
     );

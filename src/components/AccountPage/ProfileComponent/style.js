@@ -50,16 +50,21 @@ export const profileImgBox = css`
 `;
 
 export const profileNickname = css`
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 600;
+    padding-bottom: 40px;
 `;
 
 export const profileInfo = css`
-    width: 400px;
-    display: flex;
-    justify-content: space-around;
+    margin-left: 30px;
 
-    & > div {
+    & > div:nth-of-type(2) {
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    & > div > div {
         display: flex;
         flex-direction: column;
         align-items: center;
