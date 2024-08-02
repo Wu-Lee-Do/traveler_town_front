@@ -1,18 +1,28 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQueryClient } from "react-query";
-import { instance } from "../../../apis/utils/instance";
 import { useAuthCheck } from "../../../hooks/useAuthCheck";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import InfoComponent from "../../../components/AccountPage/InfoComponent/InfoComponent";
-import EditPasswordComponent from "../../../components/AccountPage/EditPasswordComponent/EditPasswordComponent";
 import img from "../../../assets/banner1.jpg";
 import ProfileComponent from "../../../components/AccountPage/ProfileComponent/ProfileComponent";
+import { useEffect, useState } from "react";
+import { LuArrowUpToLine } from "react-icons/lu";
 
 function AccountPage() {
     useAuthCheck();
+    const [scrollPosition, setScrollPosition] = useState(0);
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
+
+    const updateScroll = () => {
+        setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+    };
+    useEffect(() => {
+        window.addEventListener("scroll", updateScroll);
+    });
+
+    const handleUpButtonClick = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
     return (
         <div css={s.layout}>
@@ -20,6 +30,9 @@ function AccountPage() {
                 <img src={img} alt="" />
             </div>
             <ProfileComponent principalData={principalData} />
+            <div css={s.upButton(scrollPosition)} onClick={handleUpButtonClick}>
+                <LuArrowUpToLine />
+            </div>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as s from "./style";
 import { useMutation, useQuery } from "react-query";
 import { getBoardsByUserId } from "../../../apis/board/boardApi";
@@ -12,6 +12,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 import { storage } from "../../../apis/firebase/config/firebaseConfig";
 import { editImgRequest } from "../../../apis/account/accountApi";
+import EditPasswordComponent from "../EditPasswordComponent/EditPasswordComponent";
 
 function ProfileComponent({ principalData }) {
     const navigate = useNavigate();
@@ -73,6 +74,11 @@ function ProfileComponent({ principalData }) {
         navigate("/account/mypage/info");
     };
 
+    const handleEditPasswordClick = () => {
+        setIsDropdownVisible(!isDropdownVisible);
+        navigate("/account/mypage/editPassword");
+    };
+
     const getBoardsByUserIdQuery = useQuery(
         ["getBoardsByUserIdQuery"],
         async () =>
@@ -96,6 +102,22 @@ function ProfileComponent({ principalData }) {
             },
         }
     );
+
+    const handleClickOutside = (event) => {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
+            setIsDropdownVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     return (
         <div css={s.infoLayout}>
@@ -147,8 +169,8 @@ function ProfileComponent({ principalData }) {
                         <IoMdSettings />
                     </button>
                     <ul css={s.dropdownMenu(isDropdownVisible)}>
-                        <li>배경화면 변경</li>
                         <li onClick={handleAccountSettingClick}>계정설정</li>
+                        <li onClick={handleEditPasswordClick}>비밀번호 변경</li>
                     </ul>
                 </div>
             </div>
@@ -166,6 +188,10 @@ function ProfileComponent({ principalData }) {
                     <Route
                         path="/info"
                         element={<InfoComponent profileData={principalData} />}
+                    />
+                    <Route
+                        path="/editPassword"
+                        element={<EditPasswordComponent />}
                     />
                 </Routes>
             </div>
