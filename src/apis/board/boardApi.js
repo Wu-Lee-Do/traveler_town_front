@@ -62,6 +62,10 @@ export const getBoardLike = async (data) => {
     return await instance.get(`/like/all?boardId=${data}`);
 };
 
+export const getLikeBoardsByUserId = async (data) => {
+    return await instance.get(`/like/likeBoardAll?userId=${data}`);
+};
+
 export const removeBoardLike = async (data) => {
     return await instance.delete(`/like/remove?boardLikeId=${data}`);
 };

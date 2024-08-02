@@ -75,6 +75,7 @@ export const profileNickname = css`
     font-size: 22px;
     font-weight: 600;
     padding-bottom: 40px;
+    cursor: default;
 `;
 
 export const profileInfo = css`
@@ -90,6 +91,7 @@ export const profileInfo = css`
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: default;
 
         & > div:nth-of-type(1) {
             font-size: 20px;

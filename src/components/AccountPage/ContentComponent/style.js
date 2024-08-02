@@ -33,6 +33,7 @@ export const contentProfile = css`
     height: 80px;
     display: flex;
     align-items: center;
+    cursor: default;
 
     & > div:nth-of-type(1) {
         box-sizing: border-box;
