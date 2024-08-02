@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { editPasswordRequest } from "../../../apis/account/accountApi";
 import { instance } from "../../../apis/utils/instance";
+import { useNavigate } from "react-router-dom";
 
 function EditPasswordComponent() {
+    const navigate = useNavigate();
     const queryClient = useQueryClient();
     const [
         oldPassword,
@@ -100,41 +102,50 @@ function EditPasswordComponent() {
         });
     };
 
+    const handlePreviousClick = () => {
+        navigate("/account/mypage");
+    };
+
     return (
         <div css={s.layout}>
-            <h1>비밀번호 변경</h1>
-            <div css={s.editBox}>
-                <div css={s.inputBox}>
-                    <div>현재 비밀번호</div>
-                    <AuthInput
-                        type={"password"}
-                        name={"oldPassword"}
-                        placeholder={"현재 비밀번호"}
-                        value={oldPassword}
-                        onChange={oldPasswordChange}
-                        message={oldPasswordMessage}
-                    />
-                    <div>새로운 비밀번호</div>
-                    <AuthInput
-                        type={"password"}
-                        name={"newPassword"}
-                        placeholder={"새로운 비밀번호"}
-                        value={newPassword}
-                        onChange={newPasswordChange}
-                        message={newPasswordMessage}
-                    />
-                    <div>새로운 비밀번호 확인</div>
-                    <AuthInput
-                        type={"password"}
-                        name={"checkNewPassword"}
-                        placeholder={"새로운 비밀번호 확인"}
-                        value={checkNewPassword}
-                        onChange={checkNewPasswordChange}
-                        message={checkNewPasswordMessage}
-                    />
-                </div>
-                <div css={s.buttonBox}>
-                    <button onClick={handleEditPasswordSaveClick}>변경</button>
+            <div>
+                <h1>비밀번호 변경</h1>
+                <div css={s.editBox}>
+                    <div css={s.inputBox}>
+                        <div>현재 비밀번호</div>
+                        <AuthInput
+                            type={"password"}
+                            name={"oldPassword"}
+                            placeholder={"현재 비밀번호"}
+                            value={oldPassword}
+                            onChange={oldPasswordChange}
+                            message={oldPasswordMessage}
+                        />
+                        <div>새로운 비밀번호</div>
+                        <AuthInput
+                            type={"password"}
+                            name={"newPassword"}
+                            placeholder={"새로운 비밀번호"}
+                            value={newPassword}
+                            onChange={newPasswordChange}
+                            message={newPasswordMessage}
+                        />
+                        <div>새로운 비밀번호 확인</div>
+                        <AuthInput
+                            type={"password"}
+                            name={"checkNewPassword"}
+                            placeholder={"새로운 비밀번호 확인"}
+                            value={checkNewPassword}
+                            onChange={checkNewPasswordChange}
+                            message={checkNewPasswordMessage}
+                        />
+                    </div>
+                    <div css={s.buttonBox}>
+                        <button onClick={handlePreviousClick}>이전</button>
+                        <button onClick={handleEditPasswordSaveClick}>
+                            변경
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

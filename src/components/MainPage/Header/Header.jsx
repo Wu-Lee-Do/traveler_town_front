@@ -60,6 +60,8 @@ function Header() {
         navigate("/board/bookmark");
     };
 
+    console.log(location.pathname);
+
     return (
         <div css={s.header(scrollPosition)}>
             <div css={s.navBox}>
@@ -74,7 +76,7 @@ function Header() {
                     <div onClick={handleBookmarkClick}>즐겨찾기</div>
                 </div>
                 {!!principalData ? (
-                    location.pathname !== "/account/mypage" ? (
+                    !location.pathname.includes("/account/mypage") ? (
                         <div css={s.profileBox} onClick={handleProfileClick}>
                             <img src={principalData.data.profileImg} alt="" />
                             {principalData.data.nickname}
