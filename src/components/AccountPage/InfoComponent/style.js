@@ -1,57 +1,42 @@
 import { css } from "@emotion/react";
 
 export const infoLayout = css`
-    width: 90%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
 
-    & > h1 {
-        cursor: default;
-        font-size: 20px;
+    & > div {
+        padding: 30px;
+        width: 50%;
+
+        & > h1 {
+            margin: 0;
+            cursor: default;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
     }
 `;
 
 export const basicInfoBox = css`
-    width: 100%;
-    height: 40%;
     display: flex;
     justify-content: start;
     align-items: center;
 `;
 
-export const profileBox = css`
-    width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: default;
-
-    & > img {
-        box-sizing: border-box;
-        width: 140px;
-        height: 140px;
-        border-radius: 120px;
-        border: 1px solid #dbdbdb;
-        margin-bottom: 15px;
-        cursor: pointer;
-    }
-`;
-
 export const infoBox = css`
-    width: 65%;
-    height: 50%;
+    height: 60px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     cursor: default;
 
     & > div {
-        width: 100%;
         font-size: 16px;
+        color: #333;
         display: flex;
+        align-items: center;
         justify-content: space-between;
 
         & > button {
@@ -65,22 +50,18 @@ export const infoBox = css`
             }
         }
     }
-
-    & > div:nth-of-type(1) {
-        height: 40%;
-        box-sizing: border-box;
-        border-bottom: 1px solid #dbdbdb;
-    }
 `;
 
 export const mailCheck = css`
     color: green;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const additionalInfoBox = css`
     box-sizing: border-box;
-    width: 100%;
-    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -110,22 +91,24 @@ export const additionalInfoBox = css`
         display: flex;
         justify-content: end;
         align-items: center;
+        margin-top: 30px;
 
         & > button {
-            padding: 0px 16px;
-            height: 42px;
-            border-radius: 30px;
             border: none;
+            width: 73.52px;
+            height: 42px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: transparent;
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
+            background-color: black;
+            border-radius: 30px;
+            color: white;
             cursor: pointer;
 
             &:hover {
-                background-color: #f2f2f2;
+                background-color: #000000d4;
             }
         }
     }

@@ -155,89 +155,79 @@ function InfoComponent({ profileData }) {
 
     return (
         <div css={s.infoLayout}>
-            <h1>기본정보</h1>
-            <div css={s.basicInfoBox}>
-                <div css={s.profileBox}>
-                    <input
-                        type="file"
-                        ref={newImgRef}
-                        style={{ display: "none" }}
-                        onChange={handleImgChange}
-                    />
-                    <img
-                        src={profileData?.data.profileImg}
-                        alt=""
-                        onClick={() => newImgRef.current.click()}
-                    />
-                    {profileData?.data.nickname}
-                </div>
-                <div css={s.infoBox}>
-                    <div>
-                        <div>{profileData?.data.username}</div>
-                        <div></div>
-                    </div>
-                    <div>
-                        <div>{profileData?.data.email}</div>
-                        {profileData?.data.authorities.filter(
-                            (auth) => auth.authority === "ROLE_USER"
-                        ).length === 0 ? (
-                            <button onClick={handleSendMailClick}>
-                                인증하기
-                            </button>
-                        ) : (
-                            <div css={s.mailCheck}>
-                                <FaCheckCircle />
-                            </div>
-                        )}
+            <div>
+                <h1>기본정보</h1>
+                <div css={s.basicInfoBox}>
+                    <div css={s.infoBox}>
+                        <div>
+                            <div>{profileData?.data.username}</div>
+                        </div>
+                        <div>
+                            <div>{profileData?.data.email}</div>
+                            {profileData?.data.authorities.filter(
+                                (auth) => auth.authority === "ROLE_USER"
+                            ).length === 0 ? (
+                                <button onClick={handleSendMailClick}>
+                                    인증하기
+                                </button>
+                            ) : (
+                                <div css={s.mailCheck}>
+                                    <FaCheckCircle />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
-            <h1>추가정보</h1>
-            <div css={s.additionalInfoBox}>
-                <div>
+            <div>
+                <h1>추가정보</h1>
+                <div css={s.additionalInfoBox}>
                     <div>
-                        <div>성별</div>
                         <div>
-                            <Select
-                                placeholder="선택"
-                                styles={{
-                                    control: (baseStyles) => ({
-                                        ...baseStyles,
-                                        outline: "none",
-                                        fontSize: "16px",
-                                        border: "none",
-                                        backgroundColor: "transparent",
-                                    }),
-                                }}
-                                options={sexOptions}
-                                value={selectedSex.option}
-                                onChange={selectedSex.handleOnChange}
-                            />
+                            <div>성별</div>
+                            <div>
+                                <Select
+                                    placeholder="선택"
+                                    styles={{
+                                        control: (baseStyles) => ({
+                                            ...baseStyles,
+                                            outline: "none",
+                                            fontSize: "16px",
+                                            border: "none",
+                                            backgroundColor: "transparent",
+                                        }),
+                                    }}
+                                    options={sexOptions}
+                                    value={selectedSex.option}
+                                    onChange={selectedSex.handleOnChange}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <div>나이</div>
+                            <div>
+                                <Select
+                                    placeholder="선택"
+                                    styles={{
+                                        control: (baseStyles) => ({
+                                            ...baseStyles,
+                                            outline: "none",
+                                            fontSize: "16px",
+                                            border: "none",
+                                            backgroundColor: "transparent",
+                                        }),
+                                    }}
+                                    options={ageOptions}
+                                    value={selectedAge.option}
+                                    onChange={selectedAge.handleOnChange}
+                                    maxMenuHeight={180}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div>
-                        <div>나이</div>
-                        <div>
-                            <Select
-                                placeholder="선택"
-                                styles={{
-                                    control: (baseStyles) => ({
-                                        ...baseStyles,
-                                        outline: "none",
-                                        fontSize: "16px",
-                                        border: "none",
-                                        backgroundColor: "transparent",
-                                    }),
-                                }}
-                                options={ageOptions}
-                                value={selectedAge.option}
-                                onChange={selectedAge.handleOnChange}
-                            />
-                        </div>
+                        <button onClick={handleSaveClick}>저장</button>
                     </div>
-                </div>
-                <div>
-                    <button onClick={handleSaveClick}>저장</button>
                 </div>
             </div>
         </div>
