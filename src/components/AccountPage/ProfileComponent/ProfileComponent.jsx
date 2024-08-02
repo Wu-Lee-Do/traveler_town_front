@@ -1,16 +1,25 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { useRef, useState } from "react";
 import * as s from "./style";
 import { useQuery } from "react-query";
 import { getBoardsByUserId } from "../../../apis/board/boardApi";
+import { IoMdSettings } from "react-icons/io";
 import ContentComponent from "../ContentComponent/ContentComponent";
 
 function ProfileComponent({ principalData }) {
     const [categoryState, setCategoryState] = useState(1);
     const [boardData, setBoardData] = useState([]);
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const toggleDropdown = () => {
+        setIsDropdownVisible(!isDropdownVisible);
+    };
+
     const handleCategoryClick = (category) => {
         setCategoryState(category);
     };
+
     const getBoardsByUserIdQuery = useQuery(
         ["getBoardsByUserIdQuery"],
         async () =>
@@ -62,7 +71,15 @@ function ProfileComponent({ principalData }) {
                         </div>
                     </div>
                 </div>
-                <dir>setting</dir>
+                <div css={s.settingButtonBox} ref={dropdownRef}>
+                    <button onClick={toggleDropdown}>
+                        <IoMdSettings />
+                    </button>
+                    <ul css={s.dropdownMenu(isDropdownVisible)}>
+                        <li>배경화면 변경</li>
+                        <li>계정설정</li>
+                    </ul>
+                </div>
             </div>
             <div css={s.mainBox}>
                 <div css={s.mainHeader(categoryState)}>
