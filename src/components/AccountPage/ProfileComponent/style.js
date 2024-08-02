@@ -38,6 +38,10 @@ export const profileBox = css`
 `;
 
 export const profileImgBox = css`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 130px;
     height: 130px;
     overflow: hidden;
@@ -46,6 +50,24 @@ export const profileImgBox = css`
 
     & > img {
         width: 100%;
+    }
+`;
+
+export const imgSettingIcon = css`
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    background-color: #fafafa;
+    top: 140px;
+    left: 130px;
+    font-size: 25px;
+
+    &:hover {
+        background-color: #dbdbdb;
     }
 `;
 
@@ -128,28 +150,4 @@ export const mainBox = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
-export const mainHeader = (categoryState) => css`
-    width: 300px;
-    height: 50px;
-    font-size: 16px;
-    font-weight: 600;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    & > div {
-        cursor: pointer;
-    }
-
-    & > div:nth-of-type(${categoryState}) {
-        text-decoration: underline;
-        text-underline-offset: 7px;
-    }
-`;
-
-export const contentLayout = css`
-    width: 630px;
-    height: auto;
 `;

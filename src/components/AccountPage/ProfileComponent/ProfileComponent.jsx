@@ -1,16 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import { useRef, useState } from "react";
 import * as s from "./style";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { getBoardsByUserId } from "../../../apis/board/boardApi";
 import { IoMdSettings } from "react-icons/io";
-import ContentComponent from "../ContentComponent/ContentComponent";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { MdOutlineEdit } from "react-icons/md";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import InfoComponent from "../InfoComponent/InfoComponent";
+import MainContentComponent from "../MainContentComponent/MainContentComponent";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { v4 as uuid } from "uuid";
+import { storage } from "../../../apis/firebase/config/firebaseConfig";
+import { editImgRequest } from "../../../apis/account/accountApi";
 
 function ProfileComponent({ principalData }) {
     const navigate = useNavigate();
-    const [categoryState, setCategoryState] = useState(1);
+    const newImgRef = useRef();
+    const location = useLocation();
     const [boardData, setBoardData] = useState([]);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const dropdownRef = useRef(null);
@@ -19,8 +25,47 @@ function ProfileComponent({ principalData }) {
         setIsDropdownVisible(!isDropdownVisible);
     };
 
-    const handleCategoryClick = (category) => {
-        setCategoryState(category);
+    const editProfileImgMutation = useMutation({
+        mutationKey: "profileImgMutation",
+        mutationFn: editImgRequest,
+        onSuccess: (response) => {
+            console.log(response);
+            alert("프로필 이미지가 변경 되었습니다.");
+            window.location.replace("/account/mypage/info");
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const handleImgChange = (e) => {
+        const files = Array.from(e.target.files);
+        console.log(e.target.value);
+
+        if (files.length === 0) {
+            e.target.value = "";
+            return;
+        }
+
+        if (window.confirm("프로필 이미지를 변경 하시겠습니까?")) {
+            const storageRef = ref(
+                storage,
+                `user/profile_img/${uuid()}_${files[0].name}`
+            );
+            const uploadTask = uploadBytesResumable(storageRef, files[0]);
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {},
+                (error) => {},
+                () => {
+                    getDownloadURL(storageRef).then((url) => {
+                        editProfileImgMutation.mutate({
+                            profileImg: url,
+                        });
+                    });
+                }
+            );
+        }
     };
 
     const handleAccountSettingClick = () => {
@@ -59,7 +104,23 @@ function ProfileComponent({ principalData }) {
                     <div css={s.profileBox}>
                         <div css={s.profileImgBox}>
                             <img src={principalData?.data.profileImg} alt="" />
+                            <input
+                                type="file"
+                                ref={newImgRef}
+                                style={{ display: "none" }}
+                                onChange={handleImgChange}
+                            />
                         </div>
+                        {location.pathname === "/account/mypage/info" ? (
+                            <div
+                                css={s.imgSettingIcon}
+                                onClick={() => newImgRef.current.click()}
+                            >
+                                <MdOutlineEdit />
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <div css={s.profileInfo}>
                         <div css={s.profileNickname}>
@@ -96,46 +157,10 @@ function ProfileComponent({ principalData }) {
                     <Route
                         path="/"
                         element={
-                            <>
-                                <div css={s.mainHeader(categoryState)}>
-                                    <div onClick={() => handleCategoryClick(1)}>
-                                        게시물
-                                    </div>
-                                    <div onClick={() => handleCategoryClick(2)}>
-                                        댓글
-                                    </div>
-                                    <div onClick={() => handleCategoryClick(3)}>
-                                        좋아요
-                                    </div>
-                                </div>
-                                <div css={s.contentLayout}>
-                                    {boardData?.map((board, index) => (
-                                        <ContentComponent
-                                            boardBookmarkCount={
-                                                board.boardBookmarkCount
-                                            }
-                                            boardCommentCount={
-                                                board.boardCommentCount
-                                            }
-                                            boardContent={board.boardContent}
-                                            boardLikeCount={
-                                                board.boardLikeCount
-                                            }
-                                            boardTitle={board.boardTitle}
-                                            nickname={board.nickname}
-                                            profileImg={board.profileImg}
-                                            updateDate={board.updateDate}
-                                            boardCategoryId={
-                                                board.boardCategoryId
-                                            }
-                                            boardId={board.boardId}
-                                            key={index}
-                                            principalData={principalData}
-                                            userId={board.userId}
-                                        />
-                                    ))}
-                                </div>
-                            </>
+                            <MainContentComponent
+                                boardData={boardData}
+                                principalData={principalData}
+                            />
                         }
                     />
                     <Route
