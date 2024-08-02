@@ -2,7 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 import * as s from "./style";
 import { useMutation, useQuery } from "react-query";
-import { getBoardsByUserId } from "../../../apis/board/boardApi";
+import {
+    getBoardsByUserId,
+    getLikeBoardsByUserId,
+} from "../../../apis/board/boardApi";
 import { IoMdSettings } from "react-icons/io";
 import { MdOutlineEdit } from "react-icons/md";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
@@ -13,12 +16,18 @@ import { v4 as uuid } from "uuid";
 import { storage } from "../../../apis/firebase/config/firebaseConfig";
 import { editImgRequest } from "../../../apis/account/accountApi";
 import EditPasswordComponent from "../EditPasswordComponent/EditPasswordComponent";
+import { selectedProfileContentCategoryState } from "../../../atoms/selectedProfileContentCategoryAtom";
+import { useRecoilState } from "recoil";
 
 function ProfileComponent({ principalData }) {
     const navigate = useNavigate();
     const newImgRef = useRef();
     const location = useLocation();
+    const [categoryState, setCategoryState] = useRecoilState(
+        selectedProfileContentCategoryState
+    );
     const [boardData, setBoardData] = useState([]);
+    const [likeBoardData, setLikeBoardData] = useState([]);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -87,9 +96,32 @@ function ProfileComponent({ principalData }) {
             }),
         {
             retry: 0,
+            enabled: categoryState === 1,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
                 setBoardData(
+                    response.data.sort(
+                        (a, b) =>
+                            new Date(b.createDate) - new Date(a.createDate)
+                    )
+                );
+                console.log(response);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
+
+    const getLikeBoardsByUserIdQuery = useQuery(
+        ["getLikeBoardsByUserIdQuery"],
+        async () => await getLikeBoardsByUserId(principalData?.data.userId),
+        {
+            retry: 0,
+            enabled: categoryState === 2,
+            refetchOnWindowFocus: false,
+            onSuccess: (response) => {
+                setLikeBoardData(
                     response.data.sort(
                         (a, b) =>
                             new Date(b.createDate) - new Date(a.createDate)
@@ -180,7 +212,11 @@ function ProfileComponent({ principalData }) {
                         path="/"
                         element={
                             <MainContentComponent
-                                boardData={boardData}
+                                boardData={
+                                    categoryState === 1
+                                        ? boardData
+                                        : likeBoardData
+                                }
                                 principalData={principalData}
                             />
                         }

@@ -1,10 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
 import * as s from "./style";
 import ContentComponent from "../ContentComponent/ContentComponent";
+import { useRecoilState } from "recoil";
+import { selectedProfileContentCategoryState } from "../../../atoms/selectedProfileContentCategoryAtom";
 
 function MainContentComponent({ boardData, principalData }) {
-    const [categoryState, setCategoryState] = useState(1);
+    const [categoryState, setCategoryState] = useRecoilState(
+        selectedProfileContentCategoryState
+    );
 
     const handleCategoryClick = (category) => {
         setCategoryState(category);
@@ -14,8 +17,7 @@ function MainContentComponent({ boardData, principalData }) {
         <>
             <div css={s.mainHeader(categoryState)}>
                 <div onClick={() => handleCategoryClick(1)}>게시물</div>
-                <div onClick={() => handleCategoryClick(2)}>댓글</div>
-                <div onClick={() => handleCategoryClick(3)}>좋아요</div>
+                <div onClick={() => handleCategoryClick(2)}>좋아요</div>
             </div>
             <div css={s.contentLayout}>
                 {boardData.length === 0 ? (

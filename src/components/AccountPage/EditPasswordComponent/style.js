@@ -33,6 +33,7 @@ export const inputBox = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    cursor: default;
 `;
 
 export const buttonBox = css`

@@ -2,7 +2,7 @@
 import { FaBookmark, FaHeart } from "react-icons/fa";
 import * as s from "./style";
 import { BiSolidComment } from "react-icons/bi";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMutation } from "react-query";
 import { removeBoard } from "../../../apis/board/boardApi";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -57,6 +57,22 @@ function ContentComponent({
         const day = date.getDate();
         return `${year}년 ${month}월 ${day}일`;
     };
+
+    const handleClickOutside = (event) => {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
+            setIsDropdownVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     return (
         <div css={s.contentBox}>
             <div css={s.contentHeader}>

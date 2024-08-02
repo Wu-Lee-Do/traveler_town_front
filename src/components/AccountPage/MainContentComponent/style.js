@@ -25,4 +25,5 @@ export const contentLayout = css`
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: default;
 `;
