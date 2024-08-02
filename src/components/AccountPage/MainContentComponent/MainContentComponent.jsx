@@ -4,7 +4,7 @@ import ContentComponent from "../ContentComponent/ContentComponent";
 import { useRecoilState } from "recoil";
 import { selectedProfileContentCategoryState } from "../../../atoms/selectedProfileContentCategoryAtom";
 
-function MainContentComponent({ boardData, principalData }) {
+function MainContentComponent({ boardData, profileData }) {
     const [categoryState, setCategoryState] = useRecoilState(
         selectedProfileContentCategoryState
     );
@@ -36,7 +36,6 @@ function MainContentComponent({ boardData, principalData }) {
                             boardCategoryId={board.boardCategoryId}
                             boardId={board.boardId}
                             key={index}
-                            principalData={principalData}
                             userId={board.userId}
                         />
                     ))

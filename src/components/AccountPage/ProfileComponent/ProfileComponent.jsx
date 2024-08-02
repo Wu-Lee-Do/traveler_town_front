@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useRef, useState } from "react";
 import * as s from "./style";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
     getBoardsByUserId,
     getLikeBoardsByUserId,
@@ -19,7 +19,9 @@ import EditPasswordComponent from "../EditPasswordComponent/EditPasswordComponen
 import { selectedProfileContentCategoryState } from "../../../atoms/selectedProfileContentCategoryAtom";
 import { useRecoilState } from "recoil";
 
-function ProfileComponent({ principalData }) {
+function ProfileComponent({ profileData }) {
+    const queryClient = useQueryClient();
+    const principalData = queryClient.getQueryData("principalQuery");
     const navigate = useNavigate();
     const newImgRef = useRef();
     const location = useLocation();
@@ -92,11 +94,11 @@ function ProfileComponent({ principalData }) {
         ["getBoardsByUserIdQuery"],
         async () =>
             await getBoardsByUserId({
-                userId: principalData?.data.userId,
+                userId: profileData?.data?.userId,
             }),
         {
-            retry: 0,
-            enabled: categoryState === 1,
+            retry: 2,
+            enabled: !!profileData?.data?.userId && categoryState === 1,
             refetchOnWindowFocus: false,
             onSuccess: (response) => {
                 setBoardData(
@@ -115,7 +117,7 @@ function ProfileComponent({ principalData }) {
 
     const getLikeBoardsByUserIdQuery = useQuery(
         ["getLikeBoardsByUserIdQuery"],
-        async () => await getLikeBoardsByUserId(principalData?.data.userId),
+        async () => await getLikeBoardsByUserId(profileData?.data.userId),
         {
             retry: 0,
             enabled: categoryState === 2,
@@ -157,7 +159,7 @@ function ProfileComponent({ principalData }) {
                 <div>
                     <div css={s.profileBox}>
                         <div css={s.profileImgBox}>
-                            <img src={principalData?.data.profileImg} alt="" />
+                            <img src={profileData?.data.profileImg} alt="" />
                             <input
                                 type="file"
                                 ref={newImgRef}
@@ -178,7 +180,25 @@ function ProfileComponent({ principalData }) {
                     </div>
                     <div css={s.profileInfo}>
                         <div css={s.profileNickname}>
-                            {principalData?.data.nickname}
+                            <div>{profileData?.data.nickname}</div>
+                            <div>
+                                {profileData?.data.sex !== 0 ? (
+                                    profileData?.data.sex === 1 ? (
+                                        "남자"
+                                    ) : profileData?.data.sex === 2 ? (
+                                        "여자"
+                                    ) : (
+                                        <></>
+                                    )
+                                ) : (
+                                    <></>
+                                )}
+                                {principalData?.data.age !== 0 ? (
+                                    `${principalData?.data.age}대`
+                                ) : (
+                                    <></>
+                                )}
+                            </div>
                         </div>
                         <div>
                             <div>
@@ -196,15 +216,23 @@ function ProfileComponent({ principalData }) {
                         </div>
                     </div>
                 </div>
-                <div css={s.settingButtonBox} ref={dropdownRef}>
-                    <button onClick={toggleDropdown}>
-                        <IoMdSettings />
-                    </button>
-                    <ul css={s.dropdownMenu(isDropdownVisible)}>
-                        <li onClick={handleAccountSettingClick}>계정설정</li>
-                        <li onClick={handleEditPasswordClick}>비밀번호 변경</li>
-                    </ul>
-                </div>
+                {principalData?.data.userId === profileData?.data.userId ? (
+                    <div css={s.settingButtonBox} ref={dropdownRef}>
+                        <button onClick={toggleDropdown}>
+                            <IoMdSettings />
+                        </button>
+                        <ul css={s.dropdownMenu(isDropdownVisible)}>
+                            <li onClick={handleAccountSettingClick}>
+                                계정설정
+                            </li>
+                            <li onClick={handleEditPasswordClick}>
+                                비밀번호 변경
+                            </li>
+                        </ul>
+                    </div>
+                ) : (
+                    <></>
+                )}
             </div>
             <div css={s.mainBox}>
                 <Routes>
@@ -217,13 +245,13 @@ function ProfileComponent({ principalData }) {
                                         ? boardData
                                         : likeBoardData
                                 }
-                                principalData={principalData}
+                                profileData={profileData}
                             />
                         }
                     />
                     <Route
                         path="/info"
-                        element={<InfoComponent profileData={principalData} />}
+                        element={<InfoComponent profileData={profileData} />}
                     />
                     <Route
                         path="/editPassword"

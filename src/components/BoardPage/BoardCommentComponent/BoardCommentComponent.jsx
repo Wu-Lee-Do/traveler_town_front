@@ -88,7 +88,20 @@ function BoardCommentComponent({ boardId }) {
                 {commentData?.map((comment, index) => (
                     <div css={s.box} key={index}>
                         <div css={s.info}>
-                            <div>
+                            <div
+                                onClick={
+                                    comment?.userId ===
+                                    principalData?.data.userId
+                                        ? () =>
+                                              window.location.replace(
+                                                  `/account/mypage`
+                                              )
+                                        : () =>
+                                              window.location.replace(
+                                                  `/profile?profile=${comment?.nickname}`
+                                              )
+                                }
+                            >
                                 <img src={comment?.profileImg} alt="" />
                                 <div>{comment?.nickname}</div>
                             </div>
@@ -100,25 +113,40 @@ function BoardCommentComponent({ boardId }) {
             </div>
             <div css={s.commentWriteBox}>
                 <div css={s.profileBox}>
-                    <img src={principalData?.data.profileImg} alt="" />
-                    <div>{principalData?.data.nickname}</div>
+                    {!!principalData ? (
+                        <>
+                            <img src={principalData?.data.profileImg} alt="" />
+                            <div>{principalData?.data.nickname}</div>
+                        </>
+                    ) : (
+                        <h3>로그인 후 이용해주세요.</h3>
+                    )}
                 </div>
-                <div css={s.inputBox}>
-                    <textarea
-                        name=""
-                        id=""
-                        wrap="on"
-                        value={commentInputValue}
-                        onChange={handleCommentInputOnChange}
-                        placeholder="댓글을 입력해주세요"
-                    ></textarea>
-                    <button
-                        onClick={handleCommentSubmitClick}
-                        css={s.submitButton(commentInputValue)}
+                {!!principalData ? (
+                    <div css={s.inputBox}>
+                        <textarea
+                            name=""
+                            id=""
+                            wrap="on"
+                            value={commentInputValue}
+                            onChange={handleCommentInputOnChange}
+                            placeholder="댓글을 입력해주세요"
+                        ></textarea>
+                        <button
+                            onClick={handleCommentSubmitClick}
+                            css={s.submitButton(commentInputValue)}
+                        >
+                            <FaArrowCircleUp />
+                        </button>
+                    </div>
+                ) : (
+                    <div
+                        css={s.loginButton}
+                        onClick={() => window.location.replace("/auth/signin")}
                     >
-                        <FaArrowCircleUp />
-                    </button>
-                </div>
+                        로그인
+                    </div>
+                )}
             </div>
         </div>
     );

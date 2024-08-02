@@ -49,11 +49,11 @@ function BoardDetailPage({ title }) {
         () => getBoardBookmarkAll(boardId),
         {
             onSuccess: (response) => {
-                setUserBoardBookmarkData(response.data);
+                setUserBoardBookmarkData(response?.data);
                 if (
-                    !!response.data.filter(
+                    !!response?.data.filter(
                         (bookmark) =>
-                            bookmark.userId === principalData.data.userId
+                            bookmark.userId === principalData?.data.userId
                     )[0]
                 ) {
                     setUserBoardBookmarkState(() => true);
@@ -94,10 +94,10 @@ function BoardDetailPage({ title }) {
         () => getBoardLike(boardId),
         {
             onSuccess: (response) => {
-                setUserBoardLikeData(response.data);
+                setUserBoardLikeData(response?.data);
                 if (
                     !!response.data.filter(
-                        (like) => like.userId === principalData.data.userId
+                        (like) => like.userId === principalData?.data.userId
                     )[0]
                 ) {
                     setUserBoardLikeState(() => true);
@@ -134,32 +134,43 @@ function BoardDetailPage({ title }) {
     });
 
     const handleLikeOnClick = () => {
-        if (userBoardLikeState === false) {
-            addBoardLikeMutation.mutate({
-                boardId: boardData.boardId,
-                userId: principalData.data.userId,
-            });
+        if (!!principalData) {
+            if (userBoardLikeState === false) {
+                addBoardLikeMutation.mutate({
+                    boardId: boardData.boardId,
+                    userId: principalData.data.userId,
+                });
+            } else {
+                removeBoardLikeMutation.mutate(
+                    userBoardLikeData?.filter(
+                        (like) => like.userId === principalData?.data.userId
+                    )[0].boardLikeId
+                );
+            }
         } else {
-            removeBoardLikeMutation.mutate(
-                userBoardLikeData?.filter(
-                    (like) => like.userId === principalData?.data.userId
-                )[0].boardLikeId
-            );
+            alert("로그인 후 이용해주세요.");
+            window.location.replace("/auth/signin");
         }
     };
 
     const handleBookmarkOnClick = () => {
-        if (!!userBoardBookmarkState) {
-            removeBoardBookmarkMutation.mutate(
-                userBoardBookmarkData?.filter(
-                    (bookmark) => bookmark.userId === principalData?.data.userId
-                )[0].boardBookMarkId
-            );
+        if (!!principalData) {
+            if (!!userBoardBookmarkState) {
+                removeBoardBookmarkMutation.mutate(
+                    userBoardBookmarkData?.filter(
+                        (bookmark) =>
+                            bookmark.userId === principalData?.data.userId
+                    )[0].boardBookMarkId
+                );
+            } else {
+                addBoardBookmarkMutation.mutate({
+                    userId: principalData?.data.userId,
+                    boardId: boardId,
+                });
+            }
         } else {
-            addBoardBookmarkMutation.mutate({
-                userId: principalData.data.userId,
-                boardId: boardId,
-            });
+            alert("로그인 후 이용해주세요.");
+            window.location.replace("/auth/signin");
         }
     };
 
@@ -194,7 +205,20 @@ function BoardDetailPage({ title }) {
                 <div>
                     <div css={s.titleBox}>
                         <h1>{title}</h1>
-                        <div css={s.profileBox}>
+                        <div
+                            css={s.profileBox}
+                            onClick={
+                                boardData?.userId === principalData?.data.userId
+                                    ? () =>
+                                          window.location.replace(
+                                              `/account/mypage`
+                                          )
+                                    : () =>
+                                          window.location.replace(
+                                              `/profile?profile=${boardData?.nickname}`
+                                          )
+                            }
+                        >
                             <img src={boardData?.profileImg} alt="" />
                             {boardData?.nickname}
                         </div>

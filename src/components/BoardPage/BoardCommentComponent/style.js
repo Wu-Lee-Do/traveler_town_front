@@ -61,6 +61,7 @@ export const info = css`
         display: flex;
         align-items: center;
         padding: 10px;
+        cursor: pointer;
 
         & > div {
             font-size: 16px;
@@ -74,7 +75,8 @@ export const info = css`
 
     & > div > img {
         box-sizing: border-box;
-        width: 25px;
+        width: 30px;
+        height: 30px;
         border-radius: 15px;
         border: 1px solid #dbdbdb;
         margin-right: 5px;
@@ -97,10 +99,14 @@ export const commentWriteBox = css`
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: default;
 
     & > div > img {
         box-sizing: border-box;
-        width: 25px;
+        width: 30px;
+        height: 30px;
         border-radius: 15px;
         border: 1px solid #dbdbdb;
         margin-right: 5px;
@@ -123,13 +129,32 @@ export const inputBox = css`
     & > textarea {
         resize: none;
         width: 100%;
-        height: 60px;
+        height: 55px;
         border: none;
         border-top: 1px solid #dbdbdb;
         padding-top: 10px;
         &:focus {
             outline: none;
         }
+    }
+`;
+
+export const loginButton = css`
+    width: 65px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    background-color: black;
+    border-radius: 30px;
+    margin-left: 10px;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #000000d4;
     }
 `;
 

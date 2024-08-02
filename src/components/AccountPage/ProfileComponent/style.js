@@ -72,10 +72,11 @@ export const imgSettingIcon = css`
 `;
 
 export const profileNickname = css`
-    font-size: 22px;
-    font-weight: 600;
-    padding-bottom: 40px;
-    cursor: default;
+    & > div:nth-of-type(1) {
+        font-size: 22px;
+        font-weight: 600;
+        cursor: default;
+    }
 `;
 
 export const profileInfo = css`
