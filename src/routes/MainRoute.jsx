@@ -10,6 +10,7 @@ import RestaurantInfoPage from "../pages/countryPages/restaurantInfoPage/Restaur
 import OAuth2Page from "../pages/authPages/OAuth2Page/OAuth2Page";
 import OAuth2SigninPage from "../pages/authPages/OAuth2SigninPage/OAuth2SigninPage";
 import OAuth2MergePage from "../pages/authPages/OAuth2MergePage/OAuth2MergePage";
+import ProfilePage from "../pages/profilePage/ProfilePage";
 
 function MainRoute() {
     return (
@@ -28,6 +29,7 @@ function MainRoute() {
                 <Route path="/oauth2/signin" element={<OAuth2SigninPage />} />
                 <Route path="/oauth2/merge" element={<OAuth2MergePage />} />
                 <Route path="/account/*" element={<AccountRoute />} />
+                <Route path="/profile/*" element={<ProfilePage />} />
             </Routes>
         </>
     );

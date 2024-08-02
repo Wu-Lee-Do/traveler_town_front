@@ -19,3 +19,7 @@ export const sendMailRequest = async () => {
 export const editPasswordRequest = async (data) => {
     return await instance.put("/account/password", data);
 };
+
+export const getProfileByNickname = async (data) => {
+    return await instance.get(`/account/getProfile?nickname=${data}`);
+};

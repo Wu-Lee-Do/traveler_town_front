@@ -29,7 +29,7 @@ function AccountPage() {
             <div css={s.bgImgBox}>
                 <img src={img} alt="" />
             </div>
-            <ProfileComponent principalData={principalData} />
+            <ProfileComponent profileData={principalData} />
             <div css={s.upButton(scrollPosition)} onClick={handleUpButtonClick}>
                 <LuArrowUpToLine />
             </div>

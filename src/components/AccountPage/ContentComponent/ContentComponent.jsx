@@ -3,7 +3,7 @@ import { FaBookmark, FaHeart } from "react-icons/fa";
 import * as s from "./style";
 import { BiSolidComment } from "react-icons/bi";
 import { useEffect, useRef, useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { removeBoard } from "../../../apis/board/boardApi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
@@ -18,11 +18,12 @@ function ContentComponent({
     updateDate,
     boardCategoryId,
     boardId,
-    principalData,
     userId,
 }) {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const dropdownRef = useRef(null);
+    const queryClient = useQueryClient();
+    const principalData = queryClient.getQueryData("principalQuery");
 
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
