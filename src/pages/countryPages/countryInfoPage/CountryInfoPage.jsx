@@ -13,7 +13,7 @@ import {
     removeCountryBookmarkRequest,
     searchCountryRequest,
 } from "../../../apis/country/countryApi";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 import TouristAttractionComponent from "../../../components/CountryInfoPage/TouristAttractionComponent/TouristAttractionComponent";
@@ -31,10 +31,12 @@ function CountryInfoPage() {
     const [searchCountry, setSearchCountry] = useState("");
     const [countryImgUrl, setCountryImgUrl] = useState("");
     const [countryBookmarkList, setCountryBookmarkList] = useState([]);
-    const [bookmark, setBookmark] = useState();
+    const [bookmark, setBookmark] = useState(<FaRegBookmark />);
     const [touristAttractionData, setTouristAttractionData] = useState();
     const [restaurantData, setRestaurantData] = useState();
     const [embassyList, setEmbassyList] = useState();
+    const queryClient = useQueryClient();
+    const principalData = queryClient.getQueryData("principalQuery");
 
     const googleTouristAttractionSearchMutation = useMutation({
         mutationKey: "googleTouristAttractionSearchMutation",
@@ -140,22 +142,28 @@ function CountryInfoPage() {
     );
 
     const handleBookmarkButtonClick = () => {
-        if (
-            !!countryBookmarkList.filter(
-                (bookmark) =>
-                    bookmark.countryCode === searchCountryData?.countryCode
-            )[0]
-        ) {
-            removeCountryBookmarkMutation.mutate(
-                countryBookmarkList.filter(
+        if (!!principalData) {
+            if (
+                !!countryBookmarkList.filter(
                     (bookmark) =>
-                        bookmark.countryCode === searchCountryData.countryCode
-                )[0].countryBookmarkId
-            );
+                        bookmark.countryCode === searchCountryData?.countryCode
+                )[0]
+            ) {
+                removeCountryBookmarkMutation.mutate(
+                    countryBookmarkList.filter(
+                        (bookmark) =>
+                            bookmark.countryCode ===
+                            searchCountryData.countryCode
+                    )[0].countryBookmarkId
+                );
+            } else {
+                addCountryBookmarkMutation.mutate({
+                    countryCode: searchCountryData?.countryCode,
+                });
+            }
         } else {
-            addCountryBookmarkMutation.mutate({
-                countryCode: searchCountryData?.countryCode,
-            });
+            alert("로그인 후 이용해주세요.");
+            window.location.replace("/auth/signin");
         }
     };
 

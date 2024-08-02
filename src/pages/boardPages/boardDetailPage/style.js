@@ -33,6 +33,7 @@ export const stickyLayout = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 `;
 
 export const stickyBox = css`
@@ -90,11 +91,13 @@ export const profileBox = css`
     height: 38.5px;
     font-size: 1.3em;
     font-weight: 600;
+    cursor: pointer;
 
     & > img {
         box-sizing: border-box;
         margin: 0 10px;
-        width: 30px;
+        width: 35px;
+        height: 35px;
         border-radius: 50px;
         border: 1px solid #dbdbdb;
     }
