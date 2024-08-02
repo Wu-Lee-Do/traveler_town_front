@@ -40,13 +40,17 @@ export const infoBox = css`
         justify-content: space-between;
 
         & > button {
+            background-color: black;
             border: none;
-            background-color: transparent;
-            font-size: 15px;
+            border-radius: 5px;
+            padding: 5px 7px 5px 7px;
+            font-size: 12px;
+            color: white;
+            margin-left: 5px;
             cursor: pointer;
 
             &:hover {
-                font-weight: 600;
+                background-color: #000000d4;
             }
         }
     }
@@ -105,6 +109,7 @@ export const additionalInfoBox = css`
             background-color: black;
             border-radius: 30px;
             color: white;
+            margin-left: 10px;
             cursor: pointer;
 
             &:hover {

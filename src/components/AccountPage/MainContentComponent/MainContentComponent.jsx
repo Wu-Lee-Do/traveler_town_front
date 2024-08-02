@@ -18,23 +18,27 @@ function MainContentComponent({ boardData, principalData }) {
                 <div onClick={() => handleCategoryClick(3)}>좋아요</div>
             </div>
             <div css={s.contentLayout}>
-                {boardData?.map((board, index) => (
-                    <ContentComponent
-                        boardBookmarkCount={board.boardBookmarkCount}
-                        boardCommentCount={board.boardCommentCount}
-                        boardContent={board.boardContent}
-                        boardLikeCount={board.boardLikeCount}
-                        boardTitle={board.boardTitle}
-                        nickname={board.nickname}
-                        profileImg={board.profileImg}
-                        updateDate={board.updateDate}
-                        boardCategoryId={board.boardCategoryId}
-                        boardId={board.boardId}
-                        key={index}
-                        principalData={principalData}
-                        userId={board.userId}
-                    />
-                ))}
+                {boardData.length === 0 ? (
+                    <h3>아직 게시물이 없어요...</h3>
+                ) : (
+                    boardData?.map((board, index) => (
+                        <ContentComponent
+                            boardBookmarkCount={board.boardBookmarkCount}
+                            boardCommentCount={board.boardCommentCount}
+                            boardContent={board.boardContent}
+                            boardLikeCount={board.boardLikeCount}
+                            boardTitle={board.boardTitle}
+                            nickname={board.nickname}
+                            profileImg={board.profileImg}
+                            updateDate={board.updateDate}
+                            boardCategoryId={board.boardCategoryId}
+                            boardId={board.boardId}
+                            key={index}
+                            principalData={principalData}
+                            userId={board.userId}
+                        />
+                    ))
+                )}
             </div>
         </>
     );

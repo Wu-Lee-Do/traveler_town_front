@@ -146,6 +146,7 @@ export const dropdownMenu = (isDropdownVisible) => css`
 
 export const mainBox = css`
     width: 100%;
+    min-height: 250px;
     background-color: #f5f5f5;
     display: flex;
     flex-direction: column;

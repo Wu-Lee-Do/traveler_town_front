@@ -11,17 +11,8 @@ import ProfileComponent from "../../../components/AccountPage/ProfileComponent/P
 
 function AccountPage() {
     useAuthCheck();
-    const navigate = useNavigate();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
-
-    const handleInfoClick = () => {
-        navigate("/account/mypage/info");
-    };
-
-    const handleEditPasswordClick = () => {
-        navigate("/account/mypage/edit");
-    };
 
     return (
         <div css={s.layout}>

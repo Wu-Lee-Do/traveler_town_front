@@ -5,62 +5,15 @@ import { useReactSelect } from "../../../hooks/useReactSelect";
 import { useMutation } from "react-query";
 import {
     editAgeRequest,
-    editImgRequest,
     editSexRequest,
     sendMailRequest,
 } from "../../../apis/account/accountApi";
-import { useEffect, useRef } from "react";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "../../../apis/firebase/config/firebaseConfig";
-import { v4 as uuid } from "uuid";
+import { useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function InfoComponent({ profileData }) {
-    const newImgRef = useRef();
-    console.log(profileData);
-
-    const editProfileImgMutation = useMutation({
-        mutationKey: "profileImgMutation",
-        mutationFn: editImgRequest,
-        onSuccess: (response) => {
-            console.log(response);
-            alert("프로필 이미지가 변경 되었습니다.");
-            window.location.replace("/account/mypage/info");
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-
-    const handleImgChange = (e) => {
-        const files = Array.from(e.target.files);
-        console.log(e.target.value);
-
-        if (files.length === 0) {
-            e.target.value = "";
-            return;
-        }
-
-        if (window.confirm("프로필 이미지를 변경 하시겠습니까?")) {
-            const storageRef = ref(
-                storage,
-                `user/profile_img/${uuid()}_${files[0].name}`
-            );
-            const uploadTask = uploadBytesResumable(storageRef, files[0]);
-            uploadTask.on(
-                "state_changed",
-                (snapshot) => {},
-                (error) => {},
-                () => {
-                    getDownloadURL(storageRef).then((url) => {
-                        editProfileImgMutation.mutate({
-                            profileImg: url,
-                        });
-                    });
-                }
-            );
-        }
-    };
+    const navigate = useNavigate();
 
     const sendMailMutation = useMutation({
         mutationKey: "sendMailMutation",
@@ -118,16 +71,21 @@ function InfoComponent({ profileData }) {
     const selectedAge = useReactSelect();
 
     const handleSaveClick = () => {
-        if (
-            (selectedSex.option.value === 0) |
-            (selectedAge.option.value === 0)
-        ) {
-            alert("추가정보를 전부 기입해주세요");
-            return;
-        }
+        // if (
+        //     (selectedSex.option.value === 0) |
+        //     (selectedAge.option.value === 0)
+        // ) {
+        //     alert("추가정보를 전부 기입해주세요");
+        //     return;
+        // }
         editSexMutation.mutate({ sex: selectedSex?.option?.value });
         editAgeMutation.mutate({ age: selectedAge?.option?.value });
         alert("저장되었습니다");
+        navigate("/account/mypage");
+    };
+
+    const handlePreviousClick = () => {
+        navigate("/account/mypage");
     };
 
     const handleSendMailClick = () => {
@@ -226,6 +184,7 @@ function InfoComponent({ profileData }) {
                         </div>
                     </div>
                     <div>
+                        <button onClick={handlePreviousClick}>이전</button>
                         <button onClick={handleSaveClick}>저장</button>
                     </div>
                 </div>

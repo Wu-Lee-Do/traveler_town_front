@@ -21,5 +21,8 @@ export const mainHeader = (categoryState) => css`
 
 export const contentLayout = css`
     width: 630px;
-    height: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
