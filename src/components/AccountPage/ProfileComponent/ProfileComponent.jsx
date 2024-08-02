@@ -180,7 +180,25 @@ function ProfileComponent({ profileData }) {
                     </div>
                     <div css={s.profileInfo}>
                         <div css={s.profileNickname}>
-                            {profileData?.data.nickname}
+                            <div>{profileData?.data.nickname}</div>
+                            <div>
+                                {profileData?.data.sex !== 0 ? (
+                                    profileData?.data.sex === 1 ? (
+                                        "남자"
+                                    ) : profileData?.data.sex === 2 ? (
+                                        "여자"
+                                    ) : (
+                                        <></>
+                                    )
+                                ) : (
+                                    <></>
+                                )}
+                                {principalData?.data.age !== 0 ? (
+                                    `${principalData?.data.age}대`
+                                ) : (
+                                    <></>
+                                )}
+                            </div>
                         </div>
                         <div>
                             <div>
