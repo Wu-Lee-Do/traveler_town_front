@@ -39,6 +39,7 @@ function SignupPage() {
 
     useEffect(() => {
         if (!checkPassword || !password) {
+            setNext(() => 0);
             setCheckPasswordMessage(() => null);
             return;
         }
@@ -52,6 +53,7 @@ function SignupPage() {
             });
         } else {
             setCheckPasswordMessage(() => {
+                setNext(() => 0);
                 return {
                     type: "error",
                     text: "비밀번호가 일치하지 않습니다.",
@@ -78,20 +80,18 @@ function SignupPage() {
         if (
             username === "" ||
             password === "" ||
-            nickname === "" ||
-            email === ""
-        ) {
-            alert("정보를 입력해주세요.");
-            return;
-        }
-        if (
             usernameMessage?.type === "error" ||
             emailMessage?.type === "error" ||
             passwordMessage?.type === "error" ||
             checkPasswordMessage?.type === "error"
         ) {
+            setNext(() => 0);
             alert("정보를 다시 입력해주세요.");
             return;
+        }
+        if (nickname === "" || email === "") {
+            setNext(() => 1);
+            alert("정보를 입력해주세요.");
         }
         if (!!searchParams.get("id")) {
             oauth2SignupMutation.mutate({
@@ -120,6 +120,7 @@ function SignupPage() {
                     if (error.response.status === 400) {
                         if (error.response.data.hasOwnProperty("username")) {
                             console.log(error.response.data.username);
+                            setNext(() => 0);
                             setUsernameMessage(() => {
                                 return {
                                     type: "error",
