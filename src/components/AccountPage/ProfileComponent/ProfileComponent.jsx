@@ -193,6 +193,7 @@ function ProfileComponent({ profileData }) {
                                 ) : (
                                     <></>
                                 )}
+                                {"•"}
                                 {principalData?.data.age !== 0 ? (
                                     `${principalData?.data.age}대`
                                 ) : (

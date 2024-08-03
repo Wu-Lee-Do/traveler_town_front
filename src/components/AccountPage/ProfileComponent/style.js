@@ -72,15 +72,36 @@ export const imgSettingIcon = css`
 `;
 
 export const profileNickname = css`
+    display: flex;
+    align-items: center;
+
     & > div:nth-of-type(1) {
         font-size: 22px;
         font-weight: 600;
         cursor: default;
     }
+    & > div:nth-of-type(2) {
+        margin-left: 10px;
+        cursor: default;
+        padding: 5px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: rgb(154, 154, 154);
+        background-color: rgb(248, 248, 248);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+    }
 `;
 
 export const profileInfo = css`
     margin-left: 30px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     & > div:nth-of-type(2) {
         width: 300px;
