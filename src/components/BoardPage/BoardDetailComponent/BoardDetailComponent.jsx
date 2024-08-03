@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import * as s from "./style";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useMutation, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { removeBoard } from "../../../apis/board/boardApi";
 
 function BoardDetailComponent({
@@ -18,6 +18,7 @@ function BoardDetailComponent({
     const dropdownRef = useRef(null);
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
+    const location = useLocation();
     const navigate = useNavigate();
 
     const removeBoardMutation = useMutation({
@@ -26,7 +27,7 @@ function BoardDetailComponent({
         onSuccess: (response) => {
             if (response.data === 1) {
                 alert("삭제 되었습니다.");
-                navigate("/board/mustgorestaurant");
+                navigate(`/board/${location.pathname.split("/")[2]}`);
             }
         },
         onError: (error) => {
