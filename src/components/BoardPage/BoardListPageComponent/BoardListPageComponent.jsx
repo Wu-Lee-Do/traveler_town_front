@@ -12,6 +12,7 @@ import {
     getBoardsAll,
     getBoardsAllBySearch,
 } from "../../../apis/board/boardApi";
+import MainContentComponent from "../../AccountPage/MainContentComponent/MainContentComponent";
 
 function BoardListPageComponent({
     listTitle,
@@ -168,7 +169,9 @@ function BoardListPageComponent({
                                 </div>
                             </div>
                             <div css={s.boardCardBox}>
-
+                                <MainContentComponent
+                                    boardData={boardDataList}
+                                />
                             </div>
                         </div>
                         <div css={s.rightLayout}></div>

@@ -89,8 +89,9 @@ export const listWrap = css`
 
 export const boardCardLayout = css`
     width: 820px;
-    /* height: 500px; */
+    min-height: 400px;
     border-radius: 15px;
+    margin-bottom: 50px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
 `;
 
@@ -135,7 +136,10 @@ export const searchBox = css`
 
 export const boardCardBox = css`
     width: 100%;
-    background-color: #dbdbdb;
+    min-height: 330px;
+    display: flex;
+    justify-content: center;
+    background-color: #f5f5f5;
 `;
 
 export const rightLayout = css`
