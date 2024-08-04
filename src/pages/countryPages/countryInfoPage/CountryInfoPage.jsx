@@ -6,7 +6,7 @@ import { FaRegBookmark } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
     addCountryBookmarkRequest,
     getCountryBookmarkRequest,
@@ -24,8 +24,11 @@ import {
 import RestaurantComponent from "../../../components/CountryInfoPage/RestaurantComponent/RestaurantComponent";
 import EmbassyComponent from "../../../components/CountryInfoPage/EmbassyComponent/EmbassyComponent";
 import { getEmbassyRequest } from "../../../apis/country/embassyApi";
+import { useRecoilState } from "recoil";
+import { previousPathnameState } from "../../../atoms/previousPathnameAtom";
 
 function CountryInfoPage() {
+    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const [searchCountryData, setSearchCountryData] = useState();
     const [searchCountry, setSearchCountry] = useState("");
@@ -37,6 +40,10 @@ function CountryInfoPage() {
     const [embassyList, setEmbassyList] = useState();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
+    const { location, pathname, search } = useLocation();
+    const [pathnameState, setPathnameState] = useRecoilState(
+        previousPathnameState
+    );
 
     const googleTouristAttractionSearchMutation = useMutation({
         mutationKey: "googleTouristAttractionSearchMutation",
@@ -163,7 +170,8 @@ function CountryInfoPage() {
             }
         } else {
             alert("로그인 후 이용해주세요.");
-            window.location.replace("/auth/signin");
+            setPathnameState(pathname + search);
+            navigate("/auth/signin");
         }
     };
 

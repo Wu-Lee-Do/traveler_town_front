@@ -4,7 +4,7 @@ import * as s from "./style";
 import BoardDetailComponent from "../../../components/BoardPage/BoardDetailComponent/BoardDetailComponent";
 import BoardCommentComponent from "../../../components/BoardPage/BoardCommentComponent/BoardCommentComponent";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
     addBoardBookmark,
@@ -19,10 +19,13 @@ import {
 import { FaHeart, FaRegBookmark } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
+import { useRecoilState } from "recoil";
+import { previousPathnameState } from "../../../atoms/previousPathnameAtom";
 
 function BoardDetailPage({ title }) {
     const params = useParams();
     const boardId = parseInt(params.boardId);
+    const navigate = useNavigate();
     const [boardData, setBoardData] = useState();
     const [userBoardBookmarkState, setUserBoardBookmarkState] = useState();
     const [userBoardBookmarkData, setUserBoardBookmarkData] = useState();
@@ -30,6 +33,10 @@ function BoardDetailPage({ title }) {
     const [userBoardLikeState, setUserBoardLikeState] = useState();
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
+    const { location, pathname, search } = useLocation();
+    const [pathnameState, setPathnameState] = useRecoilState(
+        previousPathnameState
+    );
 
     const getBoardByBoardIdQuery = useQuery(
         ["getBoardByBoardIdQuery", boardId],
@@ -149,7 +156,8 @@ function BoardDetailPage({ title }) {
             }
         } else {
             alert("로그인 후 이용해주세요.");
-            window.location.replace("/auth/signin");
+            setPathnameState(pathname + search);
+            navigate("/auth/signin");
         }
     };
 
@@ -170,7 +178,8 @@ function BoardDetailPage({ title }) {
             }
         } else {
             alert("로그인 후 이용해주세요.");
-            window.location.replace("/auth/signin");
+            setPathnameState(pathname + search);
+            navigate("/auth/signin");
         }
     };
 

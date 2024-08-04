@@ -3,7 +3,15 @@ import { MdError } from "react-icons/md";
 import * as s from "./style";
 import { FaCheckCircle } from "react-icons/fa";
 
-function AuthInput({ type, value, placeholder, onChange, message, maxLength }) {
+function AuthInput({
+    type,
+    value,
+    placeholder,
+    onChange,
+    message,
+    maxLength,
+    onKeyDown,
+}) {
     return (
         <div css={s.inputLayout}>
             <input
@@ -13,6 +21,7 @@ function AuthInput({ type, value, placeholder, onChange, message, maxLength }) {
                 placeholder={placeholder}
                 onChange={onChange}
                 maxLength={maxLength}
+                onKeyDown={onKeyDown}
             />
             {!!message && (
                 <div css={s.messageBox(message.type)}>
