@@ -24,42 +24,6 @@ export const titleBox = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    & > div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        & > button {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-            border: none;
-            background-color: transparent;
-            font-size: 25px;
-            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50px;
-            transition: all 0.3s ease-in-out;
-
-            &:hover {
-                background-color: rgba(0, 0, 0, 0.1);
-            }
-        }
-    }
-`;
-
-export const searchBox = css`
-    width: 300px;
-    height: 48px;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
-    border-radius: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
 `;
 
 export const listHeader = (categoryState) => css`
@@ -119,9 +83,71 @@ export const listLayout = css`
 
 export const listWrap = css`
     width: 1136px;
-    display: grid;
-    grid-template-columns: repeat(3, calc(33.33% - 32px * 2 / 3));
-    grid-gap: 32px;
+    display: flex;
+    justify-content: space-between;
+`;
+
+export const boardCardLayout = css`
+    width: 820px;
+    min-height: 400px;
+    border-radius: 15px;
+    margin-bottom: 50px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+`;
+
+export const boardCardHeader = css`
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > button {
+        width: 50px;
+        height: 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: none;
+        background-color: transparent;
+        font-size: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        transition: all 0.1s ease-in-out;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+`;
+
+export const searchBox = css`
+    width: 300px;
+    height: 48px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 20px;
+`;
+
+export const boardCardBox = css`
+    width: 100%;
+    min-height: 330px;
+    display: flex;
+    justify-content: center;
+    background-color: #f5f5f5;
+`;
+
+export const rightLayout = css`
+    width: 300px;
+    height: 400px;
+    border-radius: 15px;
+
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
 `;
 
 export const boardCard = css`
@@ -204,4 +230,3 @@ export const profileBox = css`
 export const nickname = css`
     font-weight: 600;
 `;
-

@@ -246,7 +246,7 @@ function ProfileComponent({ profileData }) {
                                         ? boardData
                                         : likeBoardData
                                 }
-                                profileData={profileData}
+                                type={"mypage"}
                             />
                         }
                     />

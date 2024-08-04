@@ -4,7 +4,7 @@ import ContentComponent from "../ContentComponent/ContentComponent";
 import { useRecoilState } from "recoil";
 import { selectedProfileContentCategoryState } from "../../../atoms/selectedProfileContentCategoryAtom";
 
-function MainContentComponent({ boardData, profileData }) {
+function MainContentComponent({ boardData, type }) {
     const [categoryState, setCategoryState] = useRecoilState(
         selectedProfileContentCategoryState
     );
@@ -15,10 +15,17 @@ function MainContentComponent({ boardData, profileData }) {
 
     return (
         <>
-            <div css={s.mainHeader(categoryState)}>
-                <div onClick={() => handleCategoryClick(1)}>게시물</div>
-                <div onClick={() => handleCategoryClick(2)}>좋아요</div>
-            </div>
+            {type === "mypage" ? (
+                <>
+                    {" "}
+                    <div css={s.mainHeader(categoryState)}>
+                        <div onClick={() => handleCategoryClick(1)}>게시물</div>
+                        <div onClick={() => handleCategoryClick(2)}>좋아요</div>
+                    </div>
+                </>
+            ) : (
+                <></>
+            )}
             <div css={s.contentLayout}>
                 {boardData.length === 0 ? (
                     <h3>아직 게시물이 없어요...</h3>

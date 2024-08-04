@@ -12,6 +12,7 @@ import {
     getBoardsAll,
     getBoardsAllBySearch,
 } from "../../../apis/board/boardApi";
+import MainContentComponent from "../../AccountPage/MainContentComponent/MainContentComponent";
 
 function BoardListPageComponent({
     listTitle,
@@ -140,20 +141,6 @@ function BoardListPageComponent({
             <div css={s.box}>
                 <div css={s.titleBox}>
                     <h1>{listTitle}</h1>
-                    <div>
-                        <button onClick={handleResetClick}>
-                            <GrPowerReset />
-                        </button>
-                        <div css={s.searchBox}>
-                            <BoardSearchComponent
-                                searchText={searchText}
-                                setSearchText={setSearchText}
-                                onKeyDown={searchKeyDown}
-                                placeholder={"게시물 검색"}
-                                onClick={() => setSearchState(true)}
-                            />
-                        </div>
-                    </div>
                 </div>
                 <div css={s.listHeader(categoryState)}>
                     <div>
@@ -166,7 +153,39 @@ function BoardListPageComponent({
                 </div>
                 <div css={s.listLayout}>
                     <div css={s.listWrap}>
-                        {boardDataList.map((data) => (
+                        <div css={s.boardCardLayout}>
+                            <div css={s.boardCardHeader}>
+                                <button onClick={handleResetClick}>
+                                    <GrPowerReset />
+                                </button>
+                                <div css={s.searchBox}>
+                                    <BoardSearchComponent
+                                        searchText={searchText}
+                                        setSearchText={setSearchText}
+                                        onKeyDown={searchKeyDown}
+                                        placeholder={"검색"}
+                                        onClick={() => setSearchState(true)}
+                                    />
+                                </div>
+                            </div>
+                            <div css={s.boardCardBox}>
+                                <MainContentComponent
+                                    boardData={boardDataList}
+                                />
+                            </div>
+                        </div>
+                        <div css={s.rightLayout}></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default BoardListPageComponent;
+
+{
+    /* {boardDataList.map((data) => (
                             <BoardCardComponent
                                 key={data.boardId}
                                 boardId={data.boardId}
@@ -185,12 +204,5 @@ function BoardListPageComponent({
                                 sex={boardCategoryId === 3 ? data.sex : ""}
                                 age={boardCategoryId === 3 ? data.age : ""}
                             />
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+                        ))} */
 }
-
-export default BoardListPageComponent;
