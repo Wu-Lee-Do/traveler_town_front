@@ -52,6 +52,36 @@ export const profileImgBox = css`
     }
 `;
 
+export const followButton = css`
+    border: none;
+    padding: 6px 45px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: rgb(44, 133, 222);
+    transition: 0.1s all ease-in-out;
+
+    &:hover {
+        background-color: rgb(37, 112, 188);
+    }
+`;
+
+export const followingButton = css`
+    border: none;
+    padding: 6px 45px;
+    border-radius: 5px;
+    color: #1fb824;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #dbdbdb;
+    transition: 0.1s all ease-in-out;
+
+    &:hover {
+        background-color: #d2d1d1;
+    }
+`;
+
 export const imgSettingIcon = css`
     position: absolute;
     width: 40px;

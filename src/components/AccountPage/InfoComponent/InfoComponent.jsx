@@ -71,17 +71,10 @@ function InfoComponent({ profileData }) {
     const selectedAge = useReactSelect();
 
     const handleSaveClick = () => {
-        // if (
-        //     (selectedSex.option.value === 0) |
-        //     (selectedAge.option.value === 0)
-        // ) {
-        //     alert("추가정보를 전부 기입해주세요");
-        //     return;
-        // }
         editSexMutation.mutate({ sex: selectedSex?.option?.value });
         editAgeMutation.mutate({ age: selectedAge?.option?.value });
         alert("저장되었습니다");
-        navigate("/account/mypage");
+        window.location.replace("/account/mypage");
     };
 
     const handlePreviousClick = () => {

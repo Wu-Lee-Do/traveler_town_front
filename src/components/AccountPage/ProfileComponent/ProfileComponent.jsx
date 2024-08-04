@@ -18,6 +18,12 @@ import { editImgRequest } from "../../../apis/account/accountApi";
 import EditPasswordComponent from "../EditPasswordComponent/EditPasswordComponent";
 import { selectedProfileContentCategoryState } from "../../../atoms/selectedProfileContentCategoryAtom";
 import { useRecoilState } from "recoil";
+import {
+    followRequest,
+    getFollowersRequest,
+    getFollowingsReqest,
+    removeFollowRequest,
+} from "../../../apis/follow/followApi";
 
 function ProfileComponent({ profileData }) {
     const queryClient = useQueryClient();
@@ -30,6 +36,9 @@ function ProfileComponent({ profileData }) {
     );
     const [boardData, setBoardData] = useState([]);
     const [likeBoardData, setLikeBoardData] = useState([]);
+    const [followingList, setFollowingList] = useState([]);
+    const [profileFollowers, setProfileFollowers] = useState([]);
+    const [profileFollowings, setProfileFollowings] = useState([]);
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -137,6 +146,85 @@ function ProfileComponent({ profileData }) {
         }
     );
 
+    const getProfileFollowersQuery = useQuery(
+        ["getProfileFollowersQuery"],
+        async () => await getFollowersRequest(profileData?.data.userId),
+        {
+            enabled: !!profileData,
+            onSuccess: (response) => {
+                setProfileFollowers(response.data);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
+
+    const getProfileFollowingsQuery = useQuery(
+        ["getProfileFollowingsQuery"],
+        async () => await getFollowingsReqest(profileData?.data.userId),
+        {
+            enabled: !!profileData,
+            onSuccess: (response) => {
+                setProfileFollowings(response.data);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
+
+    const getFollowersQuery = useQuery(
+        ["getFollowersQuery"],
+        async () => await getFollowingsReqest(principalData?.data.userId),
+        {
+            onSuccess: (response) => {
+                setFollowingList(response.data);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        }
+    );
+
+    const followRequestMutation = useMutation({
+        mutationKey: "followRequestMutation",
+        mutationFn: followRequest,
+        onSuccess: (response) => {
+            getFollowersQuery.refetch();
+            getProfileFollowersQuery.refetch();
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const removeFollowMutation = useMutation({
+        mutationKey: "removeFollowMutation",
+        mutationFn: removeFollowRequest,
+        onSuccess: (response) => {
+            getFollowersQuery.refetch();
+            getProfileFollowersQuery.refetch();
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    });
+
+    const handleFollowClick = () => {
+        followRequestMutation.mutate({
+            followerId: principalData.data.userId,
+            followingId: profileData.data.userId,
+        });
+    };
+
+    const handleUnFollowClick = () => {
+        removeFollowMutation.mutate({
+            followerId: principalData.data.userId,
+            followingId: profileData.data.userId,
+        });
+    };
+
     const handleClickOutside = (event) => {
         if (
             dropdownRef.current &&
@@ -167,6 +255,26 @@ function ProfileComponent({ profileData }) {
                                 onChange={handleImgChange}
                             />
                         </div>
+                        {location.pathname.includes("/account/mypage") ? (
+                            <></>
+                        ) : !!followingList.filter(
+                              (follow) =>
+                                  follow.nickname === profileData?.data.nickname
+                          )[0] ? (
+                            <button
+                                css={s.followingButton}
+                                onClick={handleUnFollowClick}
+                            >
+                                팔로잉
+                            </button>
+                        ) : (
+                            <button
+                                css={s.followButton}
+                                onClick={handleFollowClick}
+                            >
+                                팔로우
+                            </button>
+                        )}
                         {location.pathname === "/account/mypage/info" ? (
                             <div
                                 css={s.imgSettingIcon}
@@ -193,8 +301,11 @@ function ProfileComponent({ profileData }) {
                                 ) : (
                                     <></>
                                 )}
-                                {"•"}
-                                {principalData?.data.age !== 0 ? (
+                                {profileData?.data.sex !== 0 &&
+                                profileData?.data.age !== 0
+                                    ? "•"
+                                    : ""}
+                                {profileData?.data.age !== 0 ? (
                                     `${principalData?.data.age}대`
                                 ) : (
                                     <></>
@@ -207,11 +318,11 @@ function ProfileComponent({ profileData }) {
                                 <div>게시물</div>
                             </div>
                             <div>
-                                <div>623</div>
+                                <div>{profileFollowers.length}</div>
                                 <div>팔로워</div>
                             </div>
                             <div>
-                                <div>523</div>
+                                <div>{profileFollowings.length}</div>
                                 <div>팔로잉</div>
                             </div>
                         </div>
