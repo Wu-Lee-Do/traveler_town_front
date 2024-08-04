@@ -1,24 +1,26 @@
 /** @jsxImportSource @emotion/react */
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as s from "./style";
 import AuthInput from "../../../components/AuthInput/AuthInput";
 import { useInput } from "../../../hooks/useInput";
 import { useQueryClient } from "react-query";
 import { signinRequest } from "../../../apis/auth/authApi";
 import getServerAddress from "../../../constants/serverAddress";
+import { useRecoilState } from "recoil";
+import { previousPathnameState } from "../../../atoms/previousPathnameAtom";
 
 function SigninPage() {
     const navigate = useNavigate();
     const [username, handleOnChangeUsername] = useInput("username");
     const [password, handleOnChangePassword] = useInput("password");
-    const queryClient = useQueryClient();
-    const principalData = queryClient.getQueryData("principalQuery");
-    console.log(principalData);
+    const [pathnameState, setPathnameState] = useRecoilState(
+        previousPathnameState
+    );
 
     const handleSignupClick = () => {
         navigate("/auth/signup");
     };
-
+    console.log(pathnameState);
     const handleSigninClick = () => {
         signinRequest({
             username,
@@ -27,11 +29,17 @@ function SigninPage() {
             .then((response) => {
                 const accessToken = response.data;
                 localStorage.setItem("AccessToken", accessToken);
-                window.location.href = "/";
+                window.location.replace(pathnameState);
             })
             .catch((error) => {
                 alert(error.response.data);
             });
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            handleSigninClick();
+        }
     };
 
     return (
@@ -47,6 +55,7 @@ function SigninPage() {
                             placeholder={"아이디를 입력하세요"}
                             value={username}
                             onChange={handleOnChangeUsername}
+                            onKeyDown={handleKeyPress}
                         />
                     </div>
                     <div>
@@ -57,6 +66,7 @@ function SigninPage() {
                             placeholder={"비밀번호를 입력하세요"}
                             value={password}
                             onChange={handleOnChangePassword}
+                            onKeyDown={handleKeyPress}
                         />
                     </div>
                     <div onClick={handleSignupClick}>회원가입</div>

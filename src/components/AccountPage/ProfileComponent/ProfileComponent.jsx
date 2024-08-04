@@ -24,15 +24,19 @@ import {
     getFollowingsReqest,
     removeFollowRequest,
 } from "../../../apis/follow/followApi";
+import { previousPathnameState } from "../../../atoms/previousPathnameAtom";
 
 function ProfileComponent({ profileData }) {
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
     const navigate = useNavigate();
     const newImgRef = useRef();
-    const location = useLocation();
     const [categoryState, setCategoryState] = useRecoilState(
         selectedProfileContentCategoryState
+    );
+    const { location, pathname, search } = useLocation();
+    const [pathnameState, setPathnameState] = useRecoilState(
+        previousPathnameState
     );
     const [boardData, setBoardData] = useState([]);
     const [likeBoardData, setLikeBoardData] = useState([]);
@@ -150,6 +154,7 @@ function ProfileComponent({ profileData }) {
         ["getProfileFollowersQuery"],
         async () => await getFollowersRequest(profileData?.data.userId),
         {
+            retry: 0,
             enabled: !!profileData,
             onSuccess: (response) => {
                 setProfileFollowers(response.data);
@@ -164,6 +169,7 @@ function ProfileComponent({ profileData }) {
         ["getProfileFollowingsQuery"],
         async () => await getFollowingsReqest(profileData?.data.userId),
         {
+            retry: 0,
             enabled: !!profileData,
             onSuccess: (response) => {
                 setProfileFollowings(response.data);
@@ -178,6 +184,7 @@ function ProfileComponent({ profileData }) {
         ["getFollowersQuery"],
         async () => await getFollowingsReqest(principalData?.data.userId),
         {
+            enabled: !!principalData,
             onSuccess: (response) => {
                 setFollowingList(response.data);
             },
@@ -212,10 +219,16 @@ function ProfileComponent({ profileData }) {
     });
 
     const handleFollowClick = () => {
-        followRequestMutation.mutate({
-            followerId: principalData.data.userId,
-            followingId: profileData.data.userId,
-        });
+        if (!!principalData) {
+            followRequestMutation.mutate({
+                followerId: principalData.data.userId,
+                followingId: profileData.data.userId,
+            });
+        } else {
+            alert("로그인 후 이용해주세요.");
+            setPathnameState(pathname + search);
+            navigate("/auth/signin");
+        }
     };
 
     const handleUnFollowClick = () => {
@@ -255,7 +268,7 @@ function ProfileComponent({ profileData }) {
                                 onChange={handleImgChange}
                             />
                         </div>
-                        {location.pathname.includes("/account/mypage") ? (
+                        {pathname.includes("/account/mypage") ? (
                             <></>
                         ) : !!followingList.filter(
                               (follow) =>
@@ -275,7 +288,7 @@ function ProfileComponent({ profileData }) {
                                 팔로우
                             </button>
                         )}
-                        {location.pathname === "/account/mypage/info" ? (
+                        {pathname === "/account/mypage/info" ? (
                             <div
                                 css={s.imgSettingIcon}
                                 onClick={() => newImgRef.current.click()}
@@ -306,7 +319,7 @@ function ProfileComponent({ profileData }) {
                                     ? "•"
                                     : ""}
                                 {profileData?.data.age !== 0 ? (
-                                    `${principalData?.data.age}대`
+                                    `${profileData?.data.age}대`
                                 ) : (
                                     <></>
                                 )}

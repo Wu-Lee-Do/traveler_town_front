@@ -5,21 +5,17 @@ import { useQuery, useQueryClient } from "react-query";
 import { FaPencilAlt } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import BoardSearchComponent from "../BoardSearchComponent/BoardSearchComponent";
-import BoardCardComponent from "../BoardCardComponent/BoardCardComponent";
 import {
     getBoardsAll,
     getBoardsAllBySearch,
 } from "../../../apis/board/boardApi";
 import MainContentComponent from "../../AccountPage/MainContentComponent/MainContentComponent";
+import { useRecoilState } from "recoil";
+import { previousPathnameState } from "../../../atoms/previousPathnameAtom";
 
-function BoardListPageComponent({
-    listTitle,
-    boardCategoryId,
-    writeUrl,
-    detailUrl,
-}) {
+function BoardListPageComponent({ listTitle, boardCategoryId, writeUrl }) {
     const [boardDataList, setBoardDataList] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [searchState, setSearchState] = useState(false);
@@ -27,6 +23,10 @@ function BoardListPageComponent({
     const queryClient = useQueryClient();
     const principalData = queryClient.getQueryData("principalQuery");
     const navigate = useNavigate();
+    const { location, pathname, search } = useLocation();
+    const [pathnameState, setPathnameState] = useRecoilState(
+        previousPathnameState
+    );
 
     const searchKeyDown = (e) => {
         if (e.key === "Enter") {
@@ -111,29 +111,35 @@ function BoardListPageComponent({
     };
 
     const handleWriteClick = () => {
-        if (
-            principalData?.data.authorities.filter(
-                (auth) => auth.authority === "ROLE_USER"
-            ).length === 1
-        ) {
-            if (boardCategoryId === 1 || boardCategoryId === 2) {
-                navigate(`/board/${writeUrl}/write`);
-            } else if (boardCategoryId === 3) {
-                if (
-                    principalData?.data.age === 0 ||
-                    principalData?.data.sex === 0
-                ) {
-                    alert(
-                        "동행 게시물은 추가 정보 입력을 해야 작성하실 수 있습니다."
-                    );
-                    window.location.replace("/account/mypage/info");
-                } else {
+        if (!!principalData) {
+            if (
+                principalData?.data.authorities.filter(
+                    (auth) => auth.authority === "ROLE_USER"
+                ).length === 1
+            ) {
+                if (boardCategoryId === 1 || boardCategoryId === 2) {
                     navigate(`/board/${writeUrl}/write`);
+                } else if (boardCategoryId === 3) {
+                    if (
+                        principalData?.data.age === 0 ||
+                        principalData?.data.sex === 0
+                    ) {
+                        alert(
+                            "동행 게시물은 추가 정보 입력을 해야 작성하실 수 있습니다."
+                        );
+                        window.location.replace("/account/mypage/info");
+                    } else {
+                        navigate(`/board/${writeUrl}/write`);
+                    }
                 }
+            } else {
+                alert("게시물을 작성하기 위해서는 이메일 인증이 필요합니다.");
+                window.location.replace("/account/mypage/info");
             }
         } else {
-            alert("게시물을 작성하기 위해서는 이메일 인증이 필요합니다.");
-            window.location.replace("/account/mypage/info");
+            alert("로그인 후 이용해주세요.");
+            setPathnameState(pathname + search);
+            navigate("/auth/signin");
         }
     };
     return (
